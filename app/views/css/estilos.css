@@ -1,0 +1,927 @@
+/* Importa las fuentes de google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Partes generales de los estilos */
+:root{
+    --fondoBlanco: #fcf6e8;
+    --fondoClaro: #f8e9ca;
+    --claro: #ECC26F;
+    --medio: #DA9B1D;
+    --oscuro: #7E5A10;
+    --fondoOscuro: #2D220D;
+    
+}
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    transition: 300ms;
+    font-family: "Roboto", sans-serif;
+}
+body{
+    background-color: var(--fondoBlanco);
+    color: var(--fondoOscuro);
+}
+.main-container{
+    width: 100%;
+    height: calc(100vh - 1.2rem);
+    min-width: 300px;
+    max-width: 1200px;
+    overflow: auto;
+    margin: auto;
+    background-color: var(--fondoClaro);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,1);
+}
+.content{
+    padding: 1rem;
+    padding-top: 0px;
+    width: 100%;
+}
+.contentControl{
+    padding: 1rem;
+}
+.ancho{
+    padding: 1rem;
+    margin: 0rem 1rem;
+}
+.centrar{
+    text-align: center;
+}
+.descripcion{
+    margin: 0rem 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    max-width: 576px;
+}
+@media screen and (min-width: 576px) {
+    .descripcion{
+        margin: auto;
+        margin-bottom: 1rem;
+    }
+}
+.oculto{
+    display: none;
+}
+.borderBottom{
+    border-bottom: 1px solid var(--oscuro);
+}
+.tituloPeque{
+    font-size: 0.8rem;
+    font-style: italic;
+}
+.cursiva{
+    font-style: italic;
+}
+.columns{
+    padding: 1rem;
+    width: 100%;
+    display: grid;
+    grid-gap: 1.25rem;
+}
+.column{
+    font-size: 1rem;
+}
+.notas{
+    font-size: 0.7rem;
+}
+
+#botonScroll{
+    position: fixed;
+    bottom: 1.875rem;
+    right: 0.9375rem;
+    z-index: 100;
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+    cursor: pointer;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 4px 4px 8px var(--fondoOscuro);
+    display: none;
+}
+#botonScroll:hover{
+    background-color: var(--medio);
+    color: var(--fondoOscuro);
+    box-shadow: none;
+}
+
+/* Tamaños de las media querys
+    --phone: 576px;
+    --tablet: 768px;
+    --desktop: 992px;
+    --large-desktop: 1200px;
+    --hd-desktop: 1400px;
+*/
+
+@media screen and (min-width: 768px) {
+    .columns{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .columns{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media screen and (min-width: 1800px) {
+    .main-container{
+        max-width: 80%;
+    }
+}
+
+/* MENÚ DE NAVEGACIÓN SUPERIOR */
+
+.topnav{
+    overflow: hidden;
+    background-color: var(--fondoOscuro);
+    width: 100%;
+}
+
+.topnav a{
+    float: left;
+    display: block;
+    color: var(--fondoBlanco);
+    text-align: center;
+    text-decoration: none;
+    padding: 0.890rem 1rem;
+    font-size: 1.0625em;
+}
+.active{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
+.topnav .icon{
+    display: none;
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+.dropdown{
+    float: right;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.dropdown .dropbtn{
+    cursor: pointer;
+    font-size: 1.0625em;
+    border: none;
+    outline: none;
+    color: var(--fondoBlanco);
+    padding: 0.85rem 1rem;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--fondoBlanco);
+    min-width: 10rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a{
+    float: none;
+    color: var(--fondoOscuro);
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.topnav a:hover,
+.dropdown:hover,
+.dropbtn{
+    background-color: var(--medio);
+    color: var(--fondoOscuro);
+}
+.dropdown-content a:hover{
+    background-color: var(--fondoClaro);
+    color: black;
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+/* Zona responsive del menú */
+
+.topnav a:not(:first-child),
+.dropdown,
+.dropbtn{
+    display: none;
+}
+.topnav a.icon {
+    float: right;
+    display: block;
+}
+
+@media screen and (min-width: 992px){
+    .topnav a:not(:first-child),
+    .dropdown,
+    .dropbtn{
+        display: block;
+    }
+    .topnav a.icon {
+        float: right;
+        display: none;
+    }
+}
+
+.topnav.responsive {
+        position: relative;
+        max-height: 80vh;
+        overflow: auto;
+}
+.topnav.responsive .icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.topnav.responsive a{
+    float: none;
+    display: block;
+    text-align: left;
+}
+.topnav.responsive .dropdown{
+    float: none;
+    display: block;
+}
+.topnav.responsive .dropdown-content{
+    position: relative;
+}
+.topnav.responsive .dropdown .dropbtn{
+    display: block;
+    text-align: left;
+}
+
+@media screen and (min-width: 992px){
+    .topnav.responsive {
+        position: absolute;
+    }
+    .topnav.responsive .icon{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a{
+        float: left;
+        display: block;
+        text-align: center;
+    }
+    .topnav.responsive .dropdown{
+        float: left;
+        display: none;
+    }
+    .topnav.responsive .dropdown-content{
+        position: relative;
+    }
+    .topnav.responsive .dropdown .dropbtn{
+        display: none;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .dropdown-content{
+        position: absolute;
+        right: unset;
+    }
+}
+
+/* Foto de la barra de navegación */
+.divFotoNav{
+    height: 1.3em;
+    aspect-ratio: 1/1;
+    float: left;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    margin-right: 0.5em;
+    border-radius: 50%;
+}
+.fotoNav{
+    width: 1.3em;
+    aspect-ratio: 1/1;
+}
+
+/* MENÚ DEL PANEL DE CONTROL */
+.subNav {
+    overflow: hidden;
+    background-color: var(--fondoOscuro);
+}
+
+.subNav a {
+    float: left;
+    display: block;
+    color: var(--fondoBlanco);
+    text-align: center;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.subNav a:hover {
+    background-color: var(--medio);
+    color: var(--fondoOscuro);
+}
+
+.subNav a.active {
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
+
+.subNav a:not(:first-child) {
+        display: none;
+    }
+
+.subNav a.icon {
+    float: right;
+    display: block;
+    cursor: pointer;
+}
+
+.navControl{
+    padding: 0em 1em;
+    width: 100%;
+}
+
+@media screen and (min-width: 1200px) {
+    .subNav a:not(:first-child) {
+        display: block;
+    }
+
+    .subNav a.icon {
+        display: none;
+    }
+}
+
+.subNav.responsive {
+    position: relative;
+}
+
+.subNav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.subNav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+}
+
+@media screen and (min-width: 1200px) {
+    .subNav.responsive {
+    position: unset;
+    }
+
+    .subNav.responsive .icon {
+        position: unset;
+        right: unset;
+        top: unset;
+        display: none;
+    }
+
+    .subNav.responsive a {
+        float: left;
+        display: block;
+        text-align: center;
+    }
+}
+
+/* Errores generales */
+.error{
+    background-color: white;
+    color: red;
+    text-align: center;
+    padding: 1em;
+    border: 0.4em solid red;
+}
+
+/* Títulos de las paginas */
+.tituloPagina{
+    color: var(--oscuro);
+    border-bottom: 2px solid var(--oscuro);
+    text-align: center;
+    padding: 1rem;
+    margin: 0rem 1rem;
+    margin-top: 0px;
+}
+
+/* Foto del Formulario de Usuario */
+
+@media  screen and (min-width: 576px) {
+    .seccionFoto{
+        width: fit-content;
+        margin: auto;
+        display: grid;
+        grid-column-gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:"quitar foto"
+                            "cambiar foto";
+    }
+    .seccionFoto .quitar,
+    .seccionFoto .cambiar{
+        margin: 0px !important;
+    }
+    .btnFoto{
+        width: 17.5rem !important;
+        margin: auto;
+    }
+}
+.seccionFoto .FormularioAjax{
+    display: flex;
+    flex-direction: column;
+}
+.seccionFoto .cambiar{
+    grid-area: cambiar;
+    align-self: flex-start;
+    margin: 1rem;
+}
+.seccionFoto .quitar{
+    grid-area: quitar;
+    align-self: center;
+    margin: 1rem;
+}
+.cambiar .btn, 
+.quitar .btn, 
+.quitar .botones{
+    margin: 0px;
+    width: 100%;
+}
+.fotoUsuario{
+    width: 15rem;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    margin: auto;
+    margin-top: 0.625rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    grid-area: foto;
+}
+.fotoForm{
+    width: 100%;
+}
+.btnFoto{
+    width: 100%;
+    margin: auto;
+}
+
+/* Formularios */
+.labelForm{
+    font-style: italic;
+}
+.input{
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+}
+.inputText{
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+    resize: none;
+}
+.filtrarTablas{
+    max-width: 500px;
+    margin: auto;
+}
+.verPass{
+    float: right;
+    color: var(--oscuro);
+    position: relative;
+    top: -1.7em;
+    right: 0.5em;
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+}
+.botones{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.botonesLista{
+    display: flex;
+    flex-direction: column;
+}
+.botonesLista .btn{
+    margin: 4px 0px;
+    width: 100%;
+}
+@media screen and (min-width: 576px) {
+    .botonesLista{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .botonesLista a{
+        margin: 10px;
+    }
+}
+.btn{
+    margin: 0.4em;
+    padding: 0.4em 0.8em;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.4em;
+    cursor: pointer;
+    background-color: var(--medio);
+    color: var(--fondoOscuro);
+}
+.btn:hover{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
+.btnAlerta{
+    background-color: #b30000;
+    color: var(--fondoClaro);
+}
+.labelFile{
+    float: left;
+    font-style: italic;
+}
+.file-input{
+    float: left;
+    padding: 0.3rem;
+    width:100%;
+    display: none;
+    cursor: pointer;
+}
+.btnFile{
+    float: left;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.divCheckbox{
+    padding: 0.5rem 0px;
+    font-style: italic;
+}
+.checkbox{
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid var(--medio);
+    background-color: var(--fondoBlanco);
+    cursor: pointer;
+    position: relative;
+    top: 0.2rem;
+    border-radius: 0.1rem;
+}
+.checkbox:checked{
+    background-color: var(--medio);
+}
+.formLogin{
+    width: 80%;
+    max-width: 25rem;
+    min-width: 18.75rem;
+    margin: auto;
+    margin-top: 6.25rem;
+    padding: 1.5rem;
+    border: 1px solid var(--fondoOscuro);
+    border-radius: 1rem;
+    box-shadow: 4px 4px 8px;
+}
+
+/* Lista de usuarios */
+.listaUsuarios{
+    padding: 1em 0em;
+    width: 100%;
+    overflow-x: auto;
+}
+.userList{
+    border-collapse: collapse;
+    margin: auto;
+    max-width: 990px;
+}
+.userList th{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+    padding: 0.5em;
+}
+
+th.headerUserTitle{
+    color: var(--oscuro);
+    background-color: var(--fondoClaro);
+}
+.userList .userOptions{
+    border-left: 2px solid var(--fondoClaro);
+}
+.userList td{
+    padding: 0.5em;
+}
+.peque{
+    width: 100%;
+}
+.fotoPeque{
+    max-width: 25px;
+}
+@media screen and (min-width: 450px) {
+    .peque{
+        width: unset;
+        min-width: 350px;
+    }
+}
+.userList tr:nth-child(even){
+    background-color: var(--medio);
+}
+.userList .userMail{
+    display: none;
+}
+.userList .userLink{
+    cursor: pointer;
+    text-align: center;
+}
+.userList .userData{
+    border-left: 2px solid var(--fondoClaro);
+}
+.userData a{
+    color: var(--oscuro);
+}
+.userList .userDel{
+    color: red;
+}
+.userList .userLink:hover{
+    background-color: var(--oscuro);
+    color: var(--fondoBlanco);
+}
+.btnIcon{
+    background-color: unset;
+    border: none;
+    padding: 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: -0.5em;
+}
+
+@media screen and (min-width: 992px){
+    .userList .userMail{
+        display: block;
+    }
+}
+
+/* Lista de alérgenos */
+.alergeno{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--oscuro);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+.fotoalergeno{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+}
+.fotoalergeno img{
+    width: 100%;
+}
+.tituloAlergeno{
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 1rem;
+    width: 100%;
+}
+.nombreAlergeno{
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+    resize: none;
+}
+.nombreAlergeno:disabled{
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: var(--fondoOscuro);
+}
+.opcionesAlergenos{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+}
+.opcionesAlergenos button{
+    padding: 0.5rem;
+    color: var(--oscuro);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+.opcionesAlergenos button:hover{
+    cursor: pointer;
+    background-color: var(--medio);
+    color: var(--oscuro);
+}
+.opcionesAlergenos button:disabled{
+    cursor: default;
+    background-color: unset;
+    color: lightgrey;
+}
+.desactivar:disabled{
+    color: lightgrey;
+}
+
+/* Lista de autores */
+.autor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.fotoautor{
+    width: 12.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.fotoautor img{
+    width: 100%;
+}
+.fotoAutorLista{
+    width: 2.1875rem;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.autorOcultar{
+    display: none;
+}
+.formAgregarAutor{
+    max-width: 500px;
+    margin: auto;
+    border-radius: 0.5rem;
+    box-shadow: 4px 4px 4px var(--fondoOscuro);
+    background-color: var(--fondoBlanco);
+    position: fixed;
+    top: 200px;
+}
+.cabeceraForm{
+    float: right;
+}
+.cabeceraForm button{
+    cursor: pointer;
+    background-color: unset;
+    padding: 0.5rem;
+    color: var(--oscuro);
+    border: none;
+    border-radius: 0.5rem;
+}
+.cabeceraForm button:hover{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
+@media screen and (min-width: 576px) {
+    .formAgregarAutor{
+        left: calc(50% - 250px);
+    }
+}
+.biografia{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+@media screen and (min-width: 768px) {
+    .fotoAutorLista{
+        display: flex;
+    }
+    .autorOcultar{
+        display: revert;
+    }   
+}
+.fotoAutorLista img{
+    width: 100%;
+}
+.banderaAutorLista{
+    height: 0.9375rem;
+    width: 1.375rem;
+    margin-right: 0.2rem;
+}
+.tituloAutor{
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 1rem;
+    width: 100%;
+}
+.tituloAutor label,
+.biografia label{
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+.origenAutor{
+    margin-left: 1rem;
+}
+.origenAutor img{
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+.paisAutor{
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+}
+.nombreAutor{
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+}
+.nombreAutor::placeholder{
+    color: var(--fondoOscuro);
+}
+.descripcionAutor{
+    padding: 0.5rem;
+    background-color: var(--fondoBlanco);   
+    border: 1px solid var(--claro);
+    border-radius: 0.4rem;
+    resize: none;
+    font-size: 0.8rem;
+}
+.opcionesAutores{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+    margin-bottom: 0.5rem;
+    float: right;
+}
+.opcionesAutores button{
+    padding: 0.5rem;
+    color: var(--oscuro);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+.opcionesAutores button:hover{
+    cursor: pointer;
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
+
+/* Pie de página */
+.footer{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+    position: sticky;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    min-width: 300px;
+    max-width: 1200px;
+    margin: auto;
+}
+@media screen and (min-width: 1800px) {
+    .footer{
+        max-width: 80%;
+        margin: auto;
+    }
+}
+
+/* Clases para las ventanas de sweetAlert2 */
+.botonCerrar{
+    border: 0px;
+    color: var(--medio);
+}
+.botonCerrar:hover{
+    color: var(--oscuro);
+    border: 0px;
+}
+.botonCerrar:focus{
+    border: 0px;
+}
+
