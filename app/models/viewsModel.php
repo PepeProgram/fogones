@@ -8,7 +8,7 @@
     class viewsModel{
         protected function obtenerVistasModelo($vista){
             /* Array que contiene todas las vistas que se van a permitir en la URL*/
-            $listaBlanca = ["principal"];
+            $listaBlanca = ["principal", "recetasFaciles", "aperitivos", "primerosPlatos", "segundosPlatos", "postres", "buscarRecetas", "login"];
 
             /* Comprueba si la vista está en la lista blanca */
             if (in_array($vista, $listaBlanca)) {
