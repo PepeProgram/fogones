@@ -1,4 +1,4 @@
-/* Establece las características comunes de una ventana de alerta */
+/* Establece las características comunes de las ventanas de alerta */
 const estiloVentana = Swal.mixin({
     background: "#f8e9ca",
     iconColor: "#7E5A10",
