@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-10-2025 a las 10:06:13
+-- Tiempo de generación: 16-10-2025 a las 22:22:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -707,14 +707,16 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usuario`, `login_usuario`, `clave_usuario`, `email_usuario`, `foto_usuario`, `sobre_usuario`, `creado_usuario`, `actualizado_usuario`) VALUES
-(1, 'José Manuel', 'Abelleira', 'López', 'pepe', '$2y$10$f2/F0rDKighrCLIke0NnD.HV5LSJoMEro7cx/p8hqURUCMwWtzKQy', 'elpatonegro@live.com', 'pepe_203.png', NULL, '2024-04-11 09:31:31', '2024-05-01 19:23:55'),
-(2, 'Juanito', 'Donald', 'Trump', 'juanito', '$2y$10$cI8/W6JquWMa0.GRO7hUyOWKQAATeBqSsbiU7z0ASr7SJXrZUgXoO', 'juanito@juanito.es', 'juanito_55.jpg', 'Premio Chuletón de Hormiga 2.024. Galardonado con la Filloa de Oro en la décimo quinta Feira da Empanada de Leiloio.', '2024-04-13 17:41:04', '2024-05-10 09:07:30'),
-(3, 'Jorgito', 'Donald', 'Trump', 'jorgito', '$2y$10$Wg2zQZd5Agaqx.HSVzgms.6TzAfgyPgLf4dD3I5WfG1lEfyM98Uwi', 'jorgito@jorgito.es', '', NULL, '2024-04-15 11:50:15', '2024-04-15 11:50:15'),
-(5, 'Juan Manuel', 'Pérez', 'Vázquez', 'juanma', '$2y$10$rJZ4px9J0WCEo3vH5rY7LeU.FFCOgoZWmykAYvjinIUx8XAKk9966', 'juanma@juanma.es', '', 'Freganchín en Pensión Pepita. No ha ganado nada, pero interés le pone y la comida está buena.', '2024-04-16 18:08:24', '2024-05-02 18:57:43'),
-(6, 'Nestor', 'Tilla', 'Paisana', 'nestor', '$2y$10$wpwZfw8ld7lrIgKic0YC5uesujtNhhscMBA33cF95f1mxTTRQKmEK', 'nestor@nestor.es', '', NULL, '2024-04-27 09:32:14', '2024-04-27 09:32:14'),
-(8, 'Gilito', 'Tio', 'de Donald Duck', 'gilito', '$2y$10$/khnLb0FfImjThFxiStGZuc9Vp78WIDUKR09NV5d6KUF.ICd6kRiq', 'gilito@tiogilito.es', 'gilito_38.jpg', NULL, '2024-04-27 10:13:34', '2024-05-02 09:22:27'),
-(13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_50.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2024-05-02 18:09:45', '2024-05-02 20:45:17'),
-(14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_90.jpg', '', '2024-05-02 18:11:38', '2024-05-02 20:39:02');
+(1, 'José Manuel', 'Abelleira', 'López', 'pepe', '$2y$10$f2/F0rDKighrCLIke0NnD.HV5LSJoMEro7cx/p8hqURUCMwWtzKQy', 'elpatonegro@live.com', 'pepe_203.png', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(2, 'Juanito', 'Donald', 'Trump', 'juanito', '$2y$10$cI8/W6JquWMa0.GRO7hUyOWKQAATeBqSsbiU7z0ASr7SJXrZUgXoO', 'juanito@juanito.es', 'juanito_55.jpg', 'Premio Chuletón de Hormiga 2.024. Galardonado con la Filloa de Oro en la décimo quinta Feira da Empanada de Leiloio.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(3, 'Jorgito', 'Donald', 'Trump', 'jorgito', '$2y$10$Wg2zQZd5Agaqx.HSVzgms.6TzAfgyPgLf4dD3I5WfG1lEfyM98Uwi', 'jorgito@jorgito.es', '', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(5, 'Juan Manuel', 'Pérez', 'Vázquez', 'juanma', '$2y$10$rJZ4px9J0WCEo3vH5rY7LeU.FFCOgoZWmykAYvjinIUx8XAKk9966', 'juanma@juanma.es', '', 'Freganchín en Pensión Pepita. No ha ganado nada, pero interés le pone y la comida está buena.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(6, 'Nestor', 'Tilla', 'Paisana', 'nestor', '$2y$10$wpwZfw8ld7lrIgKic0YC5uesujtNhhscMBA33cF95f1mxTTRQKmEK', 'nestor@nestor.es', '', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(8, 'Gilito', 'Tio', 'de Donald Duck', 'gilito', '$2y$10$/khnLb0FfImjThFxiStGZuc9Vp78WIDUKR09NV5d6KUF.ICd6kRiq', 'gilito@tiogilito.es', 'gilito_38.jpg', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_50.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_90.jpg', '', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(19, 'Wile E', 'Coyote', '', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-16 20:08:56'),
+(20, 'Road', 'Runner', '', 'correcaminos', '$2y$10$dRGRf4D5RLk873UBQ4KPGuWioyUnBfWLHx/3EGuOTEBO7F9xhZSne', 'roadrunner@correcaminos.es', 'correcaminos_5493.jpg', 'Me mola vacilar al coyote, jajajajajaja.', '2025-10-16 20:14:23', '2025-10-16 20:14:23');
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1099,7 @@ ALTER TABLE `tipos_plato`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `utensilios`

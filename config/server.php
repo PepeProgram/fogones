@@ -1,5 +1,5 @@
-/* Parámetros de conexión a la base de datos */
 <?php
+    /* Parámetros de conexión a la base de datos */
     /* Dirección del servidor */
     const DB_SERVER = "192.168.1.53";
     /* Nombre de la base de datos */ 
