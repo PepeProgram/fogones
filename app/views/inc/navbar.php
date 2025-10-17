@@ -3,11 +3,12 @@
         <i class="fa-solid fa-house" aria-label="Página de Inicio"></i>
         Inicio
     </a>
-    <a href="<?php echo APP_URL; ?>recetasFaciles">Recetas Fáciles</a>
     <a href="<?php echo APP_URL; ?>aperitivos">Aperitivos</a>
     <a href="<?php echo APP_URL; ?>primerosPlatos">Primeros Platos</a>
     <a href="<?php echo APP_URL; ?>segundosPlatos">Segundos Platos</a>
     <a href="<?php echo APP_URL; ?>postres">Postres</a>
+    <a href="<?php echo APP_URL; ?>salsas">Salsas</a>
+    <a href="<?php echo APP_URL; ?>complementos">Complementos</a>
     <a href="<?php echo APP_URL; ?>buscarRecetas">Buscar Recetas</a>
 
     <?php 
@@ -20,13 +21,13 @@
                 <div class="divFotoNav">
                     <figure>
                         <?php 
-                            if (is_file("./app/views/user_photos/".$_SESSION["foto"])) {
+                            if (is_file("./app/views/photos/user_photos/".$_SESSION["foto"])) {
                                 echo '
-                                    <img alt="Foto Usuario" class="fotoNav" src="'.APP_URL.'app/views/user_photos/'.$_SESSION['foto'].'">
+                                    <img alt="Foto Usuario" class="fotoNav" src="'.APP_URL.'app/views/photos/user_photos/'.$_SESSION['foto'].'">
                                 ';
                             } else {
                                 echo '
-                                    <img alt="Usuario sin foto" class="fotoNav" src="'.APP_URL.'app/views/user_photos/default.png">
+                                    <img alt="Usuario sin foto" class="fotoNav" src="'.APP_URL.'app/views/photos/user_photos/default.png">
                                 ';
                             }
                             

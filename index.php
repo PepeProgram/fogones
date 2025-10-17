@@ -35,9 +35,11 @@ if (isset($_GET['views'])) {
             <?php
                 /* Llama al controlador de las vistas y el de sesión, puesto que hereda de ellos */
                 use app\controllers\viewsController;
+                use app\controllers\loginController;
 
                 /* Crea una instancia del controlador de vistas y del de login */
                 $viewsController = new viewsController();
+                $insLogin = new loginController();
                 
                 /* Obtiene la url de la vista que se llame como lo que hay inmediatamente después de recetas en la url */
                 $vista = $viewsController->obtenerVistasControlador($url[0]);

@@ -24,7 +24,7 @@
         $insUsuario = new userController();
 
         /* LLama al controlador de login creando una instancia del controlador de login */
-        # $insLogin = new loginController();
+        $insLogin = new loginController();
         
         /* Comprueba de qué formulario viene el hidden */
         switch ($_POST['modulo_usuario']) {

@@ -18,6 +18,7 @@
         </div>
     </form>
 </section>
+<!-- Cuando los dos input tengan texto, ejecuta el controlador de login -->
 <?php
     if (isset($_POST['login_usuario']) && isset($_POST['login_clave'])) {
         $insLogin->iniciarSesionControlador();

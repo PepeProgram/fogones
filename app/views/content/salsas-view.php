@@ -1,3 +1,3 @@
 <header class="tituloPagina">
-    <h1>Recetas Fáciles</h1>
+    <h1>Salsas</h1>
 </header>
