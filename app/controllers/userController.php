@@ -513,7 +513,7 @@
                 exit();
             }
 
-            /* Verificar el usuario */
+            /* Verificar que el usuario existe */
             $datos=$this->ejecutarConsulta("SELECT * FROM usuarios WHERE id_usuario='$id'");
 
             if ($datos->rowCount()<=0) {
@@ -533,9 +533,9 @@
             $eliminarUsuario = $this->eliminarRegistro("usuarios", "id_usuario", $id);
 
             if ($eliminarUsuario->rowCount()==1) {
-                if (is_file("../views/user_photos/".$datos['foto_usuario'])) {
-                    chmod("../views/user_photos/".$datos['foto_usuario'], 0777);
-                    unlink("../views/user_photos/".$datos['foto_usuario']);
+                if (is_file("../views/photos/user_photos/".$datos['foto_usuario'])) {
+                    chmod("../views/photos/user_photos/".$datos['foto_usuario'], 0777);
+                    unlink("../views/photos/user_photos/".$datos['foto_usuario']);
                 }
                 $alerta = [
                     "tipo"=>"recargar",
@@ -654,6 +654,112 @@
                         "tipo"=>"simple",
                         "titulo"=>"ERROR",
                         "texto"=>"El usuario ".$datos['nombre_usuario']." ".$datos['ap1_usuario']." no ha podido ser añadido a redactores. Inténtelo más tarde",
+                        "icono"=>"error"
+                    ];
+                }
+                return json_encode($alerta);
+            }
+        }
+        
+        /* NOMBRAR O QUITAR REVISOR */
+        public function cambiarRevisorUsuarioControlador(){
+            
+            /* Comprobar que el usuario es administrador */
+            if (!$_SESSION['administrador']) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR GRAVE",
+                    "texto"=>"No puedes eliminar usuarios. No eres administrador del sistema",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            }
+            
+            /* Obtener el id que viene en el campo oculto del botón */
+            $id = $this->limpiarCadena($_POST['id_usuario']);
+            
+            /* Comprobar que no se está cambiando a si mismo */
+            if ($id==$_SESSION['id']) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR GRAVE",
+                    "texto"=>"No puedes cambiar tu propio rol. Solicita a otro administrador que lo haga",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            }
+
+            /* Verificar el usuario */
+            $datos=$this->ejecutarConsulta("SELECT * FROM usuarios WHERE id_usuario='$id'");
+
+            if ($datos->rowCount()<=0) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR GRAVE",
+                    "texto"=>"No existe el usuario en el sistema",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            } else {
+                $datos = $datos->fetch();
+            }
+            
+            /* Verificar si el usuario es revisor o no */
+            $check_revisor = $this->ejecutarConsulta("SELECT * FROM revisores WHERE id_usuario='$id'");
+
+            if ($check_revisor->rowCount()>0) {
+
+                /* Elimina el usuario de revisores */
+                $eliminarRevisor = $this->eliminarRegistro("revisores", "id_usuario", $id);
+
+                /* Comprueba que se ha eliminado correctamente */
+                if ($eliminarRevisor->rowCount()==1) {
+                    $alerta = [
+                        "tipo"=>"recargar",
+                        "titulo"=>"Usuario eliminado de revisores",
+                        "texto"=>"El usuario ".$datos['nombre_usuario']." ".$datos['ap1_usuario']." ha sido eliminado de revisores",
+                        "icono"=>"success"
+                    ];
+                } else {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"El usuario ".$datos['nombre_usuario']." ".$datos['ap1_usuario']." no ha podido ser eliminado de redactores. Inténtelo más tarde",
+                        "icono"=>"error"
+                    ];
+                }
+                return json_encode($alerta);
+                
+            } else {
+                
+                /* Crea el array para guardar los datos */
+                $revisor = [
+                    [
+                        "campo_nombre"=>"id_usuario",
+                        "campo_marcador"=>":Nombre",
+                        "campo_valor"=>$id
+                    ]
+                ];
+
+                /* Añade al usuario a revisores */
+                $agregarRevisor = $this->guardarDatos("revisores", $revisor);
+
+                /* Comprueba que se ha guardado correctamente */
+                if ($agregarRevisor->rowCount()==1) {
+                    $alerta = [
+                        "tipo"=>"recargar",
+                        "titulo"=>"Usuario añadido a revisores",
+                        "texto"=>"El usuario ".$datos['nombre_usuario']." ".$datos['ap1_usuario']." ha sido añadido a revisores",
+                        "icono"=>"success"
+                    ];
+                } else {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"El usuario ".$datos['nombre_usuario']." ".$datos['ap1_usuario']." no ha podido ser añadido a revisores. Inténtelo más tarde",
                         "icono"=>"error"
                     ];
                 }

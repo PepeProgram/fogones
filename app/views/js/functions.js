@@ -93,17 +93,38 @@ function limpiarFormulario(){
 /* Filtra una tabla por lo que se introduce en el input */
 function filtrarTablas(input, tabla){
     var input, filter, table, tr, td, i, txtValue;
+
+    /* Trae el input de la búsqueda */
     input = document.getElementById(input);
+
+    /* Convierte el texto del input a mayúsculas */
     filter = input.value.toUpperCase();
+
+    /* Trae el body de la tabla a filtrar. OJO: la variable tabla es el id del tbody, no el de la tabla.  */
     table = document.getElementById(tabla);
+
+    /* Trae las filas del body de la tabla */
     tr = table.querySelectorAll('tr');
 
+    /* Recorre cada fila de la tabla */
     for (let i = 0; i < tr.length; i++) {
+
+        /* Trae las celdas de cada fila */
         td = tr[i].getElementsByTagName('td');
+
+        /* Oculta la fila actual */
         tr[i].style.display = "none";
+
+        /* Comprueba si la fila actual tiene celdas */
         if (td) {
+
+            /* Recorre las celdas de la fila actual */
             for (let j = 0; j < td.length; j++) {
+
+                /* Extrae el texto de la celda actual */
                 txtValue = td[j].textContent || td[j].innerText;
+
+                /* Si el texto de la celda actual en mayúsculas contiene el texto del input, muestra la fila actual */
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";
                 }

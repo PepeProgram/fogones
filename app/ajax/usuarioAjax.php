@@ -43,6 +43,10 @@
             case 'cambiarRedactor':
                 echo $insUsuario->cambiarRedactorUsuarioControlador();
                 break;
+            
+            case 'cambiarRevisor':
+                echo $insUsuario->cambiarRevisorUsuarioControlador();
+                break;
                 
             case 'cambiarAdministrador':
                 echo $insUsuario->cambiarAdministradorUsuarioControlador();

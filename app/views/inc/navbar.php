@@ -50,6 +50,14 @@
                     }
                 ?>
                 <?php
+                    /* Comprueba si es revisor */
+                    if ($_SESSION['revisor']) {
+                ?>
+                    <a href="<?php echo APP_URL; ?>paraRevisar">Para revisar</a>
+                <?php
+                    }
+                ?>
+                <?php
                     /* Comprueba si es administrador */
                     if ($_SESSION['administrador']) {
                 ?>

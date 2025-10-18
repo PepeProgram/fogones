@@ -78,6 +78,14 @@
                                 $_SESSION['redactor'] = false;
                             }
 
+                            /* Comprueba si el usuario es revisor */
+                            $check_revisor = $this->ejecutarConsulta("SELECT * FROM revisores WHERE id_usuario = ".$check_usuario['id_usuario']);
+                            if ($check_revisor->rowCount()>0) {
+                                $_SESSION['revisor'] = true;
+                            } else {
+                                $_SESSION['revisor'] = false;
+                            }
+
                             /* Comprueba si el usuario es administrador */
                             $check_admin = $this->ejecutarConsulta("SELECT * FROM administradores WHERE id_usuario = ".$check_usuario['id_usuario']);
                             if ($check_admin->rowCount()>0) {

@@ -4,7 +4,8 @@
 ?>
 <section id="contenido">
     <header class="tituloPagina">
-        <h2>Gestionar Fogones Conectados</h2>
+        <h2>Administración del portal</h2>
+        <h4>Seleccione una opción del menú para gestionar su contenido</h4>
     </header>
     <div class="contentControl">
         

@@ -21,7 +21,7 @@
 
                 /* Comprueba si el usuario es administrador para permitir el acceso al panel de control */
                 if ($_SESSION['administrador']) {
-                    array_push($listaBlanca, "panelControl", "usuarios", "autores", "geografia", "alergenos", "gruposPlatos", "tiposPlatos");
+                    array_push($listaBlanca, "panelControl", "usuarios", "autores", "geografia", "alergenos", "gruposPlatos", "tiposPlatos", "usuarios");
                 }
             }
 
