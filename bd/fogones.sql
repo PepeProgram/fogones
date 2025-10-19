@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-10-2025 a las 22:22:56
+-- Tiempo de generación: 19-10-2025 a las 13:33:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,11 @@ CREATE TABLE `administradores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncar tablas antes de insertar `administradores`
+--
+
+TRUNCATE TABLE `administradores`;
+--
 -- Volcado de datos para la tabla `administradores`
 --
 
@@ -51,6 +56,11 @@ CREATE TABLE `alergenos` (
   `foto_alergeno` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `alergenos`
+--
+
+TRUNCATE TABLE `alergenos`;
 --
 -- Volcado de datos para la tabla `alergenos`
 --
@@ -87,6 +97,11 @@ CREATE TABLE `autores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncar tablas antes de insertar `autores`
+--
+
+TRUNCATE TABLE `autores`;
+--
 -- Volcado de datos para la tabla `autores`
 --
 
@@ -107,6 +122,11 @@ CREATE TABLE `editores` (
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `editores`
+--
+
+TRUNCATE TABLE `editores`;
 -- --------------------------------------------------------
 
 --
@@ -119,6 +139,11 @@ CREATE TABLE `estilos_cocina` (
   `activo_estilo` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `estilos_cocina`
+--
+
+TRUNCATE TABLE `estilos_cocina`;
 --
 -- Volcado de datos para la tabla `estilos_cocina`
 --
@@ -141,6 +166,11 @@ CREATE TABLE `favoritas` (
   `id_receta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `favoritas`
+--
+
+TRUNCATE TABLE `favoritas`;
 -- --------------------------------------------------------
 
 --
@@ -153,6 +183,11 @@ CREATE TABLE `grupos_plato` (
   `foto_grupo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `grupos_plato`
+--
+
+TRUNCATE TABLE `grupos_plato`;
 --
 -- Volcado de datos para la tabla `grupos_plato`
 --
@@ -178,6 +213,11 @@ CREATE TABLE `ingredientes` (
   `activo_ingrediente` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `ingredientes`
+--
+
+TRUNCATE TABLE `ingredientes`;
 -- --------------------------------------------------------
 
 --
@@ -190,6 +230,11 @@ CREATE TABLE `ingredientes_alergenos` (
   `id_alergeno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `ingredientes_alergenos`
+--
+
+TRUNCATE TABLE `ingredientes_alergenos`;
 -- --------------------------------------------------------
 
 --
@@ -207,6 +252,11 @@ CREATE TABLE `paises` (
   `id_zona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `paises`
+--
+
+TRUNCATE TABLE `paises`;
 --
 -- Volcado de datos para la tabla `paises`
 --
@@ -471,6 +521,11 @@ CREATE TABLE `propias` (
   `id_receta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `propias`
+--
+
+TRUNCATE TABLE `propias`;
 -- --------------------------------------------------------
 
 --
@@ -498,6 +553,11 @@ CREATE TABLE `recetas` (
   `activo_receta` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas`
+--
+
+TRUNCATE TABLE `recetas`;
 -- --------------------------------------------------------
 
 --
@@ -510,6 +570,11 @@ CREATE TABLE `recetas_alergenos` (
   `id_alergeno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_alergenos`
+--
+
+TRUNCATE TABLE `recetas_alergenos`;
 -- --------------------------------------------------------
 
 --
@@ -523,6 +588,11 @@ CREATE TABLE `recetas_componentes` (
   `cantidad` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_componentes`
+--
+
+TRUNCATE TABLE `recetas_componentes`;
 -- --------------------------------------------------------
 
 --
@@ -536,6 +606,11 @@ CREATE TABLE `recetas_ingredientes` (
   `cantidad` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_ingredientes`
+--
+
+TRUNCATE TABLE `recetas_ingredientes`;
 -- --------------------------------------------------------
 
 --
@@ -548,6 +623,11 @@ CREATE TABLE `recetas_tecnicas` (
   `id_tecnica` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_tecnicas`
+--
+
+TRUNCATE TABLE `recetas_tecnicas`;
 -- --------------------------------------------------------
 
 --
@@ -560,6 +640,11 @@ CREATE TABLE `recetas_tiposplato` (
   `id_tipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_tiposplato`
+--
+
+TRUNCATE TABLE `recetas_tiposplato`;
 -- --------------------------------------------------------
 
 --
@@ -572,6 +657,11 @@ CREATE TABLE `recetas_utensilios` (
   `id_utensilio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `recetas_utensilios`
+--
+
+TRUNCATE TABLE `recetas_utensilios`;
 -- --------------------------------------------------------
 
 --
@@ -583,6 +673,11 @@ CREATE TABLE `redactores` (
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `redactores`
+--
+
+TRUNCATE TABLE `redactores`;
 --
 -- Volcado de datos para la tabla `redactores`
 --
@@ -605,6 +700,11 @@ CREATE TABLE `regiones` (
   `activo_region` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `regiones`
+--
+
+TRUNCATE TABLE `regiones`;
 --
 -- Volcado de datos para la tabla `regiones`
 --
@@ -641,6 +741,19 @@ CREATE TABLE `revisores` (
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `revisores`
+--
+
+TRUNCATE TABLE `revisores`;
+--
+-- Volcado de datos para la tabla `revisores`
+--
+
+INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
+(5, 1),
+(6, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -653,6 +766,11 @@ CREATE TABLE `tecnicas` (
   `activo_tecnica` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `tecnicas`
+--
+
+TRUNCATE TABLE `tecnicas`;
 --
 -- Volcado de datos para la tabla `tecnicas`
 --
@@ -675,6 +793,11 @@ CREATE TABLE `tipos_plato` (
   `foto_tipo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `tipos_plato`
+--
+
+TRUNCATE TABLE `tipos_plato`;
 --
 -- Volcado de datos para la tabla `tipos_plato`
 --
@@ -703,20 +826,24 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncar tablas antes de insertar `usuarios`
+--
+
+TRUNCATE TABLE `usuarios`;
+--
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usuario`, `login_usuario`, `clave_usuario`, `email_usuario`, `foto_usuario`, `sobre_usuario`, `creado_usuario`, `actualizado_usuario`) VALUES
-(1, 'José Manuel', 'Abelleira', 'López', 'pepe', '$2y$10$f2/F0rDKighrCLIke0NnD.HV5LSJoMEro7cx/p8hqURUCMwWtzKQy', 'elpatonegro@live.com', 'pepe_203.png', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(2, 'Juanito', 'Donald', 'Trump', 'juanito', '$2y$10$cI8/W6JquWMa0.GRO7hUyOWKQAATeBqSsbiU7z0ASr7SJXrZUgXoO', 'juanito@juanito.es', 'juanito_55.jpg', 'Premio Chuletón de Hormiga 2.024. Galardonado con la Filloa de Oro en la décimo quinta Feira da Empanada de Leiloio.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(3, 'Jorgito', 'Donald', 'Trump', 'jorgito', '$2y$10$Wg2zQZd5Agaqx.HSVzgms.6TzAfgyPgLf4dD3I5WfG1lEfyM98Uwi', 'jorgito@jorgito.es', '', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
+(1, 'José Manuel', 'Abelleira', 'López', 'pepe', '$2y$10$f2/F0rDKighrCLIke0NnD.HV5LSJoMEro7cx/p8hqURUCMwWtzKQy', 'elpatonegro@live.com', 'pepe_31.png', NULL, '2025-10-09 18:08:24', '2025-10-19 09:42:31'),
+(2, 'Juanito', 'Donald', 'Trump', 'juanito', '$2y$10$cI8/W6JquWMa0.GRO7hUyOWKQAATeBqSsbiU7z0ASr7SJXrZUgXoO', 'juanito@juanito.es', 'juanito_58.jpg', 'Premio Chuletón de Hormiga 2.024. Galardonado con la Filloa de Oro en la décimo quinta Feira da Empanada de Leiloio.', '2025-10-09 18:08:24', '2025-10-19 09:46:45'),
+(3, 'Jorgito', 'Donald', 'Trump', 'jorgito', '$2y$10$Wg2zQZd5Agaqx.HSVzgms.6TzAfgyPgLf4dD3I5WfG1lEfyM98Uwi', 'jorgito@jorgito.es', 'jorgito_55.png', NULL, '2025-01-09 19:08:24', '2025-10-18 19:47:08'),
 (5, 'Juan Manuel', 'Pérez', 'Vázquez', 'juanma', '$2y$10$rJZ4px9J0WCEo3vH5rY7LeU.FFCOgoZWmykAYvjinIUx8XAKk9966', 'juanma@juanma.es', '', 'Freganchín en Pensión Pepita. No ha ganado nada, pero interés le pone y la comida está buena.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
 (6, 'Nestor', 'Tilla', 'Paisana', 'nestor', '$2y$10$wpwZfw8ld7lrIgKic0YC5uesujtNhhscMBA33cF95f1mxTTRQKmEK', 'nestor@nestor.es', '', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(8, 'Gilito', 'Tio', 'de Donald Duck', 'gilito', '$2y$10$/khnLb0FfImjThFxiStGZuc9Vp78WIDUKR09NV5d6KUF.ICd6kRiq', 'gilito@tiogilito.es', 'gilito_38.jpg', NULL, '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_50.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_90.jpg', '', '2025-10-09 18:08:24', '2025-10-09 18:57:43'),
-(19, 'Wile E', 'Coyote', '', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-16 20:08:56'),
-(20, 'Road', 'Runner', '', 'correcaminos', '$2y$10$dRGRf4D5RLk873UBQ4KPGuWioyUnBfWLHx/3EGuOTEBO7F9xhZSne', 'roadrunner@correcaminos.es', 'correcaminos_5493.jpg', 'Me mola vacilar al coyote, jajajajajaja.', '2025-10-16 20:14:23', '2025-10-16 20:14:23');
+(8, 'Gilito', 'Tio', 'de Donald Duck', 'gilito', '$2y$10$/khnLb0FfImjThFxiStGZuc9Vp78WIDUKR09NV5d6KUF.ICd6kRiq', 'gilito@tiogilito.es', 'gilito_38.jpg', NULL, '2025-10-09 18:08:24', '2025-10-19 09:45:16'),
+(13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_14.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2025-10-09 18:08:24', '2025-10-19 09:58:47'),
+(14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_92.png', '', '2025-10-09 18:08:24', '2025-10-19 10:06:43'),
+(19, 'Wile E', 'Coyote', 'Express', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-18 18:23:18');
 
 -- --------------------------------------------------------
 
@@ -730,6 +857,11 @@ CREATE TABLE `utensilios` (
   `activo_utensilio` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `utensilios`
+--
+
+TRUNCATE TABLE `utensilios`;
 -- --------------------------------------------------------
 
 --
@@ -741,6 +873,11 @@ CREATE TABLE `zonas` (
   `nombre_zona` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncar tablas antes de insertar `zonas`
+--
+
+TRUNCATE TABLE `zonas`;
 --
 -- Volcado de datos para la tabla `zonas`
 --
@@ -961,7 +1098,7 @@ ALTER TABLE `zonas`
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `alergenos`
@@ -1069,7 +1206,7 @@ ALTER TABLE `recetas_utensilios`
 -- AUTO_INCREMENT de la tabla `redactores`
 --
 ALTER TABLE `redactores`
-  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `regiones`
@@ -1081,7 +1218,7 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `revisores`
 --
 ALTER TABLE `revisores`
-  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tecnicas`

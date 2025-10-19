@@ -18,6 +18,11 @@
                 if ($_SESSION['redactor']) {
                     array_push($listaBlanca, "misRecetas", "enviarReceta");
                 }
+                
+                /* Comprueba si el usuario es revisor para permitir las vistas de revisor */
+                if ($_SESSION['revisor']) {
+                    array_push($listaBlanca, "paraRevisar");
+                }
 
                 /* Comprueba si el usuario es administrador para permitir el acceso al panel de control */
                 if ($_SESSION['administrador']) {

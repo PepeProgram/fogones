@@ -1,5 +1,5 @@
 <div class="subNav" id="subNav">
-    <a>Menú</a>
+    <a class="active">Menú</a>
     <a href=<?php echo APP_URL."usuarios" ?>>Usuarios</a>
     <a href=<?php echo APP_URL."recetas" ?>>Recetas</a>
     <a href=<?php echo APP_URL."estilosCocina" ?>>Estilos de Cocina</a>

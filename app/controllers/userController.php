@@ -1440,14 +1440,10 @@
                 }
             }
 
-            /* Define el nuevo nombre del archivo de imagen si no tenía foto o se queda con el mismo si ya la tenía */
-            if ($datos['foto_usuario']!="") {
-                $foto = explode(".", $datos['foto_usuario']);
-                $foto = $foto[0];
-            } else {
-                $foto = str_ireplace(" ", "_", $datos['login_usuario']);
-                $foto .= "_".rand(0,100);
-            }
+            /* Define el nuevo nombre del archivo de imagen */
+            $foto = str_ireplace(" ", "_", $datos['login_usuario']);
+            $foto .= "_".rand(0,100);
+            
 
             /* Pone la extensión al archivo de imagen */
             switch (mime_content_type($_FILES['foto_usuario']['tmp_name'])) {

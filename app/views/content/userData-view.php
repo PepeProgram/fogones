@@ -97,6 +97,7 @@
     <h1><?php echo $tituloPagina ?></h1>
     <h2 class="cursiva"><?php echo $usuario->getNombre_usuario()." ".$usuario->getAp1_usuario()." ".$usuario->getAp2_usuario(); ?></h2>
     <p><?php echo "Creado el ".strftime('%a. %d de %b. de %Y', strtotime($usuario->getCreado_usuario()))." - Última actualización el ".strftime('%a. %d de %b. de %Y', strtotime($usuario->getActualizado_usuario())) ?></p>
+    <?php include "./app/views/inc/btn_back.php"; ?>
 </header>
 <section id="fotoUsuario" class="seccionFoto">
     <figure class="fotoUsuario">
