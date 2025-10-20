@@ -10,6 +10,7 @@
 
 <header class="tituloPagina">
     <h1><?php echo $titulo; ?></h1>
+    <?php include "./app/views/inc/btn_back.php"; ?>
 </header>
 <div class="ancho borderBottom tituloPeque">
     Todos los campos marcados con * son obligatorios

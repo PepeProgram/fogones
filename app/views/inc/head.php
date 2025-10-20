@@ -13,3 +13,7 @@
 <!-- Carga las ventanas de alerta personalizadas -->
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/alertas.js"></script>
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/functions.js"></script>
+<!-- Carga las variables globales -->
+<script type="text/javascript">
+    window.APP_URL = "<?php echo APP_URL ?>";
+</script>

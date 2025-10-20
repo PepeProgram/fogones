@@ -18,11 +18,17 @@
             <a href=<?php echo APP_URL."usuarios/redactores/" ?>>
                 <button class="btn">Redactores</button>
             </a>
+            <a href=<?php echo APP_URL."usuarios/revisores/" ?>>
+                <button class="btn">Revisores</button>
+            </a>
             <a href=<?php echo APP_URL."usuarios/administradores/" ?>>
                 <button class="btn">Administradores</button>
             </a>
             <a href="<?php echo APP_URL; ?>userNew/add">
-                <button class="btn">Añadir Usuario</button>
+                <button class="btn" title="Añadir usuario" aria-label="Añadir usuario">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="oculto">Añadir</span>
+                </button>
             </a>
         </div>
         <div class="listaUsuarios">
@@ -56,7 +62,7 @@
                                 $colorRedactor = "green";
                                 $tituloRedactor = "Eliminar de redactores a ";
                             } else {
-                                $colorRedactor = "red";
+                                $colorRedactor = "grey";
                                 $tituloRedactor = "Agregar a redactores a ";
                             }
 
@@ -65,7 +71,7 @@
                                 $colorRevisor = "green";
                                 $tituloRevisor = "Eliminar de revisores a ";
                             } else {
-                                $colorRevisor = "red";
+                                $colorRevisor = "grey";
                                 $tituloRevisor = "Agregar a revisores a ";
                             }
                             
@@ -74,7 +80,7 @@
                                 $colorAdministrador = "green";
                                 $tituloAdministrador = "Eliminar de administradores a ";
                             } else {
-                                $colorAdministrador = "red";
+                                $colorAdministrador = "grey";
                                 $tituloAdministrador = "Agregar a administradores a ";
                             }
 
@@ -85,7 +91,7 @@
                                     <td>'.$usuario->getLogin_usuario().'</td>
                                     <td class="userMail">'.$usuario->getEmail_usuario().'</td>
                                     <td class="userData userLink">
-                                        <a href="'.APP_URL.'userData/'.$usuario->getId_usuario().'"><i class="fa-regular fa-eye" aria-label="Ver o editar datos de '.$usuario->getLogin_usuario().'" title="Ver o editar datos de '.$usuario->getLogin_usuario().'"></i><span style="display:none">Ver</span></a>
+                                        <a href="'.APP_URL.'userData/'.$usuario->getId_usuario().'"><i class="fa-regular fa-eye" aria-label="Ver o editar datos de '.$usuario->getLogin_usuario().'" title="Ver o editar datos de '.$usuario->getLogin_usuario().'"></i><span class="oculto">Ver</span></a>
                                     </td>
                                     <td class="userRedactor userLink" >
                                         <form class="FormularioAjax" action="'.APP_URL.'app/ajax/usuarioAjax.php" method="POST" autocomplete="off" name="'.$tituloRedactor.$usuario->getLogin_usuario().'?">

@@ -1,5 +1,4 @@
 <button id="botonScroll" title="Volver arriba" aria-label="Volver arriba" onclick="topFunction();">
-    <span class="oculto">Volver arriba</span>
     <i class="fa-solid fa-chevron-up"></i>
 </button>
 

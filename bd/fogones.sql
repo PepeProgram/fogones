@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-10-2025 a las 13:33:57
+-- Tiempo de generación: 20-10-2025 a las 23:07:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `fogones`
 --
+CREATE DATABASE IF NOT EXISTS `fogones` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `fogones`;
 
 -- --------------------------------------------------------
 
@@ -685,7 +687,9 @@ TRUNCATE TABLE `redactores`;
 INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 (1, 1),
 (4, 2),
-(18, 3);
+(18, 3),
+(23, 5),
+(24, 21);
 
 -- --------------------------------------------------------
 
@@ -803,7 +807,9 @@ TRUNCATE TABLE `tipos_plato`;
 --
 
 INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
-(1, 'Aperitivos', 'aperitivos.jpg');
+(1, 'Aperitivos', 'aperitivos.jpg'),
+(3, 'Primeros Platos', 'Primeros_Platos_7868.jpg'),
+(4, 'Postres', 'Postres_5632.jpg');
 
 -- --------------------------------------------------------
 
@@ -843,7 +849,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 (8, 'Gilito', 'Tio', 'de Donald Duck', 'gilito', '$2y$10$/khnLb0FfImjThFxiStGZuc9Vp78WIDUKR09NV5d6KUF.ICd6kRiq', 'gilito@tiogilito.es', 'gilito_38.jpg', NULL, '2025-10-09 18:08:24', '2025-10-19 09:45:16'),
 (13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_14.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2025-10-09 18:08:24', '2025-10-19 09:58:47'),
 (14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_92.png', '', '2025-10-09 18:08:24', '2025-10-19 10:06:43'),
-(19, 'Wile E', 'Coyote', 'Express', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-18 18:23:18');
+(19, 'Wile E', 'Coyote', 'Express', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-18 18:23:18'),
+(21, 'Road', 'Runner', '', 'correcaminos', '$2y$10$AE5HvOZV8ZuY5J8Y.KLnDuNo1u.qzEZ.IUUT/RgRfB4uL7R3CMpgi', 'roadrunner@correcaminos.es', 'correcaminos_6221.jpg', 'El coyote me quiere pillar, pero corro más que él.', '2025-10-20 17:57:19', '2025-10-20 17:57:19');
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1141,7 @@ ALTER TABLE `favoritas`
 -- AUTO_INCREMENT de la tabla `grupos_plato`
 --
 ALTER TABLE `grupos_plato`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
@@ -1206,7 +1213,7 @@ ALTER TABLE `recetas_utensilios`
 -- AUTO_INCREMENT de la tabla `redactores`
 --
 ALTER TABLE `redactores`
-  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `regiones`
@@ -1230,13 +1237,13 @@ ALTER TABLE `tecnicas`
 -- AUTO_INCREMENT de la tabla `tipos_plato`
 --
 ALTER TABLE `tipos_plato`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `utensilios`

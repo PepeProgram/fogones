@@ -406,6 +406,17 @@
                         /* Crea la búsqueda de los redactores */
                         $consulta = "SELECT * FROM usuarios WHERE id_usuario IN (SELECT id_usuario FROM redactores)";
                         break;
+
+                    case 'revisores':
+                        echo '
+                            <tr>
+                                <th class="headerUserTitle" colspan="7"><h3>Revisores</h3></th>
+                            </tr>
+                            ';
+
+                        /* Crea la búsqueda de los redactores */
+                        $consulta = "SELECT * FROM usuarios WHERE id_usuario IN (SELECT id_usuario FROM revisores)";
+                        break;
                     
                     case 'administradores':
                         echo '

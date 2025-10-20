@@ -134,7 +134,7 @@ function filtrarTablas(input, tabla){
 }
 
 function activarFormulario(modulo, idContainer, accion, datosActualizar){
-    
+        
     /* Enseña el formulario solicitado */
     document.querySelector('#'+idContainer).classList.toggle('oculto');
 
@@ -168,7 +168,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                         document.querySelector('.opcion-'+datosActualizar.id_pais).setAttribute('selected', true);
                     }
                     document.querySelector('#descripcionAutor').value = datosActualizar.descripcion_autor;
-                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/autor_photos/"+datosActualizar.foto_autor;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/autor_photos/"+datosActualizar.foto_autor;
                     
                     break;
                 
@@ -177,17 +177,16 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                     /* Rellena los datos del formulario con los del grupo a actualizar */
                     document.querySelector('#idForm').value = datosActualizar.id_grupo;
                     document.querySelector('#nombreGrupo').value = datosActualizar.nombre_grupo;
-                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/groups_photos/"+datosActualizar.foto_grupo;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/groups_photos/"+datosActualizar.foto_grupo;
 
                     break;
                     
                 case 'modulo_tipo':
                     
-                    console.log(datosActualizar);
                     /* Rellena los datos del formulario con los del tipo a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_grupo;
+                    document.querySelector('#idForm').value = datosActualizar.id_tipo;
                     document.querySelector('#nombreTipo').value = datosActualizar.nombre_tipo;
-                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/tipos_photos/"+datosActualizar.foto_tipo;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/tipos_photos/"+datosActualizar.foto_tipo;
 
                     break;
                     

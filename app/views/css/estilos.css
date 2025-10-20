@@ -774,6 +774,10 @@ th.headerUserTitle{
     border-radius: 50%;
     overflow: hidden;
 }
+.nombreAutorLista
+{
+    padding-left: 10px;
+}
 .autorOcultar{
     display: none;
 }
@@ -876,7 +880,6 @@ th.headerUserTitle{
     display: flex;
     flex-direction: row;
     align-self: end;
-    margin-bottom: 0.5rem;
     float: right;
 }
 .opcionesAutores button{
