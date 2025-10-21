@@ -738,6 +738,21 @@ th.headerUserTitle{
     background-color: unset;
     color: lightgrey;
 }
+.btnBorrarAlergeno{
+    color: red;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    left: 0.2rem;
+    top: -7.5rem;
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    background-color: transparent;
+}
+.btnBorrarAlergeno:hover{
+    background-color: var(--medio);
+}
 .desactivar:disabled{
     color: lightgrey;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-10-2025 a las 23:07:00
+-- Tiempo de generación: 21-10-2025 a las 22:00:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -195,12 +195,14 @@ TRUNCATE TABLE `grupos_plato`;
 --
 
 INSERT INTO `grupos_plato` (`id_grupo`, `nombre_grupo`, `foto_grupo`) VALUES
-(1, 'Carnes', 'Carnes_1523.jpg'),
-(2, 'Pescados', 'pescados.jpeg'),
-(3, 'Salsas', 'salsas.jpg'),
-(4, 'Dulces', 'dulces.jpg'),
-(5, 'Frutas', 'frutas.jpg'),
-(6, 'Bollería y pastelería', 'Bollera_6227.jpg');
+(1, 'Carnes', 'Carnes_8964.jpg'),
+(2, 'Pescados', 'Pescados_1447.jpg'),
+(3, 'Salsas', 'Salsas_7554.jpg'),
+(4, 'Dulces', 'Dulces_1829.jpg'),
+(5, 'Frutas', 'Frutas_622.jpg'),
+(6, 'Bollería y pastelería', 'Bollera_y_pastelera_1687.jpg'),
+(13, 'Masas', 'Masas_2454.jpg'),
+(14, 'Siropes', 'Siropes_1651.jpg');
 
 -- --------------------------------------------------------
 
@@ -809,7 +811,8 @@ TRUNCATE TABLE `tipos_plato`;
 INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 (1, 'Aperitivos', 'aperitivos.jpg'),
 (3, 'Primeros Platos', 'Primeros_Platos_7868.jpg'),
-(4, 'Postres', 'Postres_5632.jpg');
+(4, 'Postres', 'Postres_5632.jpg'),
+(7, 'Segundos platos', 'Segundos_platos_2673.jpg');
 
 -- --------------------------------------------------------
 
@@ -1105,13 +1108,13 @@ ALTER TABLE `zonas`
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `alergenos`
 --
 ALTER TABLE `alergenos`
-  MODIFY `id_alergeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_alergeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `autores`
@@ -1141,7 +1144,7 @@ ALTER TABLE `favoritas`
 -- AUTO_INCREMENT de la tabla `grupos_plato`
 --
 ALTER TABLE `grupos_plato`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
@@ -1237,7 +1240,7 @@ ALTER TABLE `tecnicas`
 -- AUTO_INCREMENT de la tabla `tipos_plato`
 --
 ALTER TABLE `tipos_plato`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

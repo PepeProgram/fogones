@@ -32,7 +32,7 @@
                         <button id="cambiarFotoGrupo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoGrupo-0').click();"></button>
                         <label for="fotoGrupo-0" class="oculto">Archivo Imagen</label>
                         <input type="file" name="foto_grupo" id="fotoGrupo-0" class="file-input" accept=".jpg, .jpeg, .png" onchange="previewImage(this, 'fotoGrupo', '<?php echo APP_URL; ?>app/views/photos/groups_photos/default.png');">
-                        <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Autor"></button>
+                        <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Grupo de Platos"></button>
                     </div>
                 </div>
             </form>
