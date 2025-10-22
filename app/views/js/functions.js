@@ -189,6 +189,15 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/tipos_photos/"+datosActualizar.foto_tipo;
 
                     break;
+
+                case 'modulo_metodo':
+                    
+                    /* Rellena los datos del formulario con los del método de cocción a actualizar */
+                    document.querySelector('#idForm').value = datosActualizar.id_metodo;
+                    document.querySelector('#nombreMetodo').value = datosActualizar.nombre_metodo;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/metodos_photos/"+datosActualizar.foto_metodo;
+
+                    break;
                     
                 default:
                     let textoAlerta = {

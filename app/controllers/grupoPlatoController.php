@@ -319,7 +319,7 @@
             if ($_FILES['foto_grupo']['name'] != "" && $_FILES['foto_grupo']['size']>0) {
                 
                 /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_grupo']['tmp_name']) != "png") {
+                if (mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/png") {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen.",

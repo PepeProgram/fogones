@@ -4,47 +4,55 @@
     /* Trae el modelo principal para utilizar sus funciones */
     use app\models\mainModel;
 
-    /* Trae el modelo de tipo de plato para crear los objetos tipo */
-    use app\models\tipoPlatoModel;
+    /* Trae el modelo de grupo de platos para crear los objetos grupo */
+    use app\models\metodoModel;
 
     /* Crea la clase hija de la clase principal */
-    class tipoPLatoController extends mainModel{
+    class metodoController extends mainModel{
 
-        /* LISTAR LOS TIPOS DE PLATO */
-        public function listarTiposPlatoControlador(){
+        /*
+        ******************* OJO: *************************************
+        RECORDAR QUE LA TABLA DE MÉTODOS DE COCCIÓN SE LLAMA tecnicas
+        LOS CAMPOS SON id_tecnica, nombre_tecnica y foto_tecnica
+        **************************************************************
 
-            /* Ejecuta la búsqueda de tipos de plato */
-            $tipos = $this->ejecutarConsulta("SELECT * FROM tipos_plato ORDER BY nombre_tipo");
+        */
+
+        /* LISTAR LOS MÉTODOS DE COCCIÓN */
+        public function listarMetodosControlador(){
+
+            /* Ejecuta la búsqueda de Metodos de cocción */
+            $metodos = $this->ejecutarConsulta("SELECT * FROM tecnicas ORDER BY nombre_tecnica");
 
             /* Convierte el resultado a array */
-            if ($tipos->rowCount()>0) {
-                $tipos = $tipos->fetchAll();
+            if ($metodos->rowCount()>0) {
+                $metodos = $metodos->fetchAll();
             }
 
-            /* Crea un array para ir guardando los tipos */
-            $lista_tipos = array();
+            /* Crea un array para ir guardando los métodos de cocción */
+            $lista_metodos = array();
 
-            /* Reorre el array de datos para ir creando objetos e insertándolos en la lista de tipos */
-            foreach ($tipos as $fila) {
-                /* Crea una nueva instancia de tipo */
-                $tipo = new tipoPlatoModel($fila['id_tipo']);
+            /* Reorre el array de datos para ir creando objetos e insertándolos en la lista de metodos de cocción */
+            foreach ($metodos as $fila) {
+                /* Crea una nueva instancia de metodo */
+                $metodo = new metodoModel($fila['id_tecnica']);
 
-                /* Añade el tipo a la lista */
-                array_push($lista_tipos, $tipo);
+                /* Añade el metodos a la lista */
+                array_push($lista_metodos, $metodo);
             }
-            /* Devuelve la lista de tipos */
-            return $lista_tipos;
+            /* Devuelve la lista de metodos de cocción */
+            return $lista_metodos;
         }
 
-        /* GUARDAR UN TIPO DE PLATO */
-        public function guardarTipoPlatoControlador(){
+        /* GUARDAR UN MÉTODO DE COCCIÓN */
+        public function guardarMetodoControlador(){
 
             /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
             if (!isset($_SESSION['id'])) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR",
-                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un tipo de platos",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un método de cocción",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -56,7 +64,7 @@
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"ERROR",
-                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un tipo de platos",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un método de cocción",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -66,54 +74,54 @@
                         $alerta=[
                             "tipo"=>"simple",
                             "titulo"=>"ERROR",
-                            "texto"=>"No puede añadir tipos de platos si no es administrador del sistema",
+                            "texto"=>"No puede añadir métodos de cocción si no es administrador del sistema",
                             "icono"=>"error"
                         ];
                         return json_encode($alerta);
                         exit();
                     }
                 }
-                
-            }
 
-            /* Recupera el nombre del tipo de platos */
-            if ($_POST['nombre_tipo']) {
-                $nombre_tipo = $this->limpiarCadena($_POST['nombre_tipo']);
+                /* Recupera el nombre del método de cocción */
+                if ($_POST['nombre_metodo']) {
+                    $nombre_metodo = $this->limpiarCadena($_POST['nombre_metodo']);
 
-                /* Comprueba si el nombre del tipo ya existe */
-                if ($this->ejecutarConsulta("SELECT * FROM tipos_plato WHERE nombre_tipo='$nombre_tipo'")->rowCount()>0) {
+                    /* Comprueba si el nombre del método ya existe */
+                    if ($this->ejecutarConsulta("SELECT * FROM tecnicas WHERE nombre_tecnica='$nombre_metodo'")->rowCount()>0) {
+                        $alerta=[
+                            "tipo"=>"simple",
+                            "titulo"=>"Error!!!",
+                            "texto"=>"El método de cocción $nombre_metodo ya existe",
+                            "icono"=>"error"
+                        ];
+                        return json_encode($alerta);
+                        exit();
+                    }
+
+
+                } else {
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"Error!!!",
-                        "texto"=>"El tipo de platos $nombre_tipo ya existe",
+                        "texto"=>"El nombre del método de cocción no puede estar vacío",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
                     exit();
                 }
-
-
-            } else {
-                $alerta=[
-                    "tipo"=>"simple",
-                    "titulo"=>"Error!!!",
-                    "texto"=>"El nombre del tipo de platos no puede estar vacío",
-                    "icono"=>"error"
-                ];
-                return json_encode($alerta);
-                exit();
+                
             }
-            
-            /* FOTO DEL TIPO DE PLATOS */
+
+            /* FOTO DEL MÉTODO DE COCCIÓN */
 
             /* Establece el directorio de imágenes */
-            $img_dir = "../views/photos/tipos_photos/";
+            $img_dir = "../views/photos/metodos_photos/";
 
             /* Comprueba si hay imágenes en el input */
-            if ($_FILES['foto_tipo']['name'] != "" && $_FILES['foto_tipo']['size']>0) {
-                
+            if ($_FILES['foto_metodo']['name'] != "" && $_FILES['foto_metodo']['size'] >0 ) {
+
                 /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_tipo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_tipo']['tmp_name']) != "image/png") {
+                if (mime_content_type($_FILES['foto_metodo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_metodo']['tmp_name']) != "image/png") {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen.",
@@ -125,7 +133,7 @@
                 }
 
                 /* Verifica el tamaño de la imagen */
-                if ($_FILES['foto_tipo']['size']/1024 > 5120) {
+                if ($_FILES['foto_metodo']['size']/1024 > 5120) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen",
@@ -137,18 +145,18 @@
                 }
 
                 /* Establece el nombre de la nueva imagen */
-                $foto_tipo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_tipo);
-                $foto_tipo = str_ireplace(" ", "_", $foto_tipo);
-                $foto_tipo .= "_".rand(0, 10000);
+                $foto_metodo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_metodo);
+                $foto_metodo = str_ireplace(" ", "_", $foto_metodo);
+                $foto_metodo .= "_".rand(0, 10000);
 
                 /* Establece la extensión de la nueva imagen */
-                switch (mime_content_type($_FILES['foto_tipo']['tmp_name'])) {
+                switch (mime_content_type($_FILES['foto_metodo']['tmp_name'])) {
                     case 'image/jpeg':
-                        $foto_tipo .= ".jpg";
+                        $foto_metodo .= ".jpg";
                         break;
                     
                     case 'image/png':
-                        $foto_tipo .= ".png";
+                        $foto_metodo .= ".png";
                         break;
                 }
 
@@ -172,7 +180,7 @@
                 chmod($img_dir, 0777);
 
                 /* Sube la imagen al directorio de imágenes */
-                if (!move_uploaded_file($_FILES['foto_tipo']['tmp_name'], $img_dir.$foto_tipo)) {
+                if (!move_uploaded_file($_FILES['foto_metodo']['tmp_name'], $img_dir.$foto_metodo)) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al actualizar la foto",
@@ -183,72 +191,68 @@
                     exit();
                 }
 
-            } else {
-                $foto_tipo = null;
+
+                
+            }
+            else {
+                $foto_metodo = null;
             }
             
             /* Actualiza la base de datos */
-            $tipo_datos_reg = [
+            $metodo_datos_reg = [
                 [
-                    "campo_nombre"=>"nombre_tipo",
+                    "campo_nombre"=>"nombre_tecnica",
                     "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre_tipo
+                    "campo_valor"=>$nombre_metodo
                 ],
                 [
-                    "campo_nombre"=>"foto_tipo",
+                    "campo_nombre"=>"foto_tecnica",
                     "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto_tipo
+                    "campo_valor"=>$foto_metodo
                 ]
             ];
 
-            $registrar_tipo = $this->guardarDatos("tipos_plato", $tipo_datos_reg);
+            $registrar_metodo = $this->guardarDatos("tecnicas", $metodo_datos_reg);
 
-            if ($registrar_tipo->rowCount() == 1) {
+            /* Comprobar que se ha guardado correctamente */
+            if ($registrar_metodo->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
-                    "texto" => "El tipo ".$nombre_tipo." ha sido registrado correctamente.",
+                    "texto" => "El método de cocción ".$nombre_metodo." ha sido registrado correctamente.",
                     "icono" => "success"
                 ];
             } else {
-                if (is_file($img_dir.$foto_tipo)) {
-                    chmod($img_dir.$foto_tipo, 777);
-                    unlink($img_dir.$foto_tipo);
+                if (is_file($img_dir.$foto_metodo)) {
+                    chmod($img_dir.$foto_metodo, 777);
+                    unlink($img_dir.$foto_metodo);
                 }
 
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error",
-                    "texto"=>"No se ha podido guardar el grupo de platos en este momento. Inténtelo de nuevo más tarde",
+                    "texto"=>"No se ha podido guardar el método de cocción en este momento. Inténtelo de nuevo más tarde",
                     "icono"=>"error"
                 ];
             }
+            
             return json_encode($alerta);
 
-            /* Comprobar que el controlador va funcionando */
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Funciona",
-                "texto"=>"vas a guardar el tipo $nombre_tipo con la foto $foto_tipo",
-                "icono"=>"success"
-            ];
-            return json_encode($alerta);
-            exit();
         }
 
-        /* ACTUALIZAR UN TIPO DE PLATO */
-        public function actualizarTipoPlatoControlador(){
-            
-            /* Recupera el id del tipo */
+        /* ACTUALIZAR UN MÉTODO DE COCCIÓN */
+        public function actualizarMetodoControlador(){
+
+            /* Recupera el id del método de cocción */
             $id = $this->limpiarCadena($_POST['id_Form']);
 
-            /* Verifica que el tipo existe */
-            $datos = $this->ejecutarConsulta("SELECT * FROM tipos_plato WHERE id_tipo='$id'");
+            /* Verifica que el método de cocción existe */
+            $datos = $this->ejecutarConsulta("SELECT * FROM tecnicas WHERE id_tecnica='$id'");
             if ($datos->rowCount()<=0) {
                 $alerta = [
                     "tipo"=>"simple",
                     "titulo"=>"Error al intentar actualizar",
-                    "texto"=>"El tipo de platos no existe",
+                    "texto"=>"El método de cocción no existe",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -256,13 +260,13 @@
             } else {
                 $datos = $datos->fetch();
             }
-            
+
             /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
             if (!isset($_SESSION['id'])) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR",
-                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder realizar cambios",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder cambiar los datos de un método de cocción",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -274,7 +278,7 @@
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"ERROR",
-                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder realizar cambios",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder cambiar los datos de un método de cocción",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -284,7 +288,7 @@
                         $alerta=[
                             "tipo"=>"simple",
                             "titulo"=>"ERROR",
-                            "texto"=>"No puede realizar cambios si no es administrador del sistema",
+                            "texto"=>"No puede cambiar los datos de un método de cocción si no es administrador del sistema",
                             "icono"=>"error"
                         ];
                         return json_encode($alerta);
@@ -293,16 +297,16 @@
                 }
             }
 
-            /* Recupera el nombre del tipo */
-            if ($_POST['nombre_tipo']) {
-                $nombre_tipo = $this->limpiarCadena($_POST['nombre_tipo']);
+            /* Recupera el nombre del método de cocción */
+            if ($_POST['nombre_metodo']) {
+                $nombre_metodo = $this->limpiarCadena($_POST['nombre_metodo']);
 
-                /* Comprueba si el nombre del tipo ya existe */
-                if ($this->ejecutarConsulta("SELECT * FROM tipos_plato WHERE nombre_tipo='$nombre_tipo' AND id_tipo !='$id'")->rowCount()>0) {
+                /* Comprueba si el nombre del método de cocción ya existe */
+                if ($this->ejecutarConsulta("SELECT * FROM tecnicas WHERE nombre_tecnica='$nombre_metodo' AND id_tecnica !='$id'")->rowCount()>0) {
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"Error!!!",
-                        "texto"=>"El tipo de platos $nombre_tipo ya existe",
+                        "texto"=>"El método de cocción $nombre_metodo ya existe",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -312,27 +316,27 @@
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error!!!",
-                    "texto"=>"El nombre del tipo de platos no puede estar vacío",
+                    "texto"=>"El nombre del metodo de cocción no puede estar vacío",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
                 exit();
             }
-                
-            /* FOTO DEL TIPO DE PLATOS */
+
+            /* FOTO DEL MÉTODO DE COCCIÓN */
 
             /* Establece el directorio de imágenes */
-            $img_dir = "../views/photos/tipos_photos/";
+            $img_dir = "../views/photos/metodos_photos/";
 
             /* Comrueba si hay imágenes en el input */
-            if ($_FILES['foto_tipo']['name'] != "" && $_FILES['foto_tipo']['size']>0) {
+            if ($_FILES['foto_metodo']['name'] != "" && $_FILES['foto_metodo']['size']>0) {
                 
                 /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_tipo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_tipo']['tmp_name']) != "image/png") {
+                if (mime_content_type($_FILES['foto_metodo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_metodo']['tmp_name']) != "image/png") {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen.",
-                        "texto"=>"El formato de archivo no está permitido. Debe seleccionar una imagen en formato jpg o png",
+                        "texto"=>"El formato de archivo no está permitido. Debe seleccionar una imagen en formato jpg o png".mime_content_type($_FILES['foto_metodo']['tmp_name']),
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -340,7 +344,7 @@
                 }
 
                 /* Verifica el tamaño de la imagen */
-                if ($_FILES['foto_tipo']['size']/1024 > 5120) {
+                if ($_FILES['foto_metodo']['size']/1024 > 5120) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen",
@@ -352,18 +356,18 @@
                 }
 
                 /* Establece el nombre de la nueva imagen */
-                $foto_tipo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_tipo);
-                $foto_tipo = str_ireplace(" ", "_", $foto_tipo);
-                $foto_tipo .= "_".rand(0, 10000);
+                $foto_metodo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_metodo);
+                $foto_metodo = str_ireplace(" ", "_", $foto_metodo);
+                $foto_metodo .= "_".rand(0, 10000);
 
                 /* Establece la extensión de la nueva imagen */
-                switch (mime_content_type($_FILES['foto_tipo']['tmp_name'])) {
+                switch (mime_content_type($_FILES['foto_metodo']['tmp_name'])) {
                     case 'image/jpeg':
-                        $foto_tipo .= ".jpg";
+                        $foto_metodo .= ".jpg";
                         break;
                     
                     case 'image/png':
-                        $foto_tipo .= ".png";
+                        $foto_metodo .= ".png";
                         break;
                 }
 
@@ -387,13 +391,13 @@
                 chmod($img_dir, 0777);
 
                 /* Borra la foto anterior si existe */
-                if (is_file($img_dir.$datos['foto_tipo'])) {
-                    chmod($img_dir.$datos['foto_tipo'], 0777);
-                    unlink($img_dir.$datos['foto_tipo']);
+                if (is_file($img_dir.$datos['foto_tecnica'])) {
+                    chmod($img_dir.$datos['foto_tecnica'], 0777);
+                    unlink($img_dir.$datos['foto_tecnica']);
                 }
 
                 /* Sube la nueva imagen al directorio de imágenes */
-                if (!move_uploaded_file($_FILES['foto_tipo']['tmp_name'], $img_dir.$foto_tipo)) {
+                if (!move_uploaded_file($_FILES['foto_metodo']['tmp_name'], $img_dir.$foto_metodo)) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al actualizar la foto",
@@ -405,41 +409,41 @@
                 }
                 
             } else {
-                $foto_tipo = $datos['foto_tipo'];
+                $foto_metodo = $datos['foto_tecnica'];
             }
-           
+
             /* Actualiza la base de datos */
-            $tipo_datos_up = [
+            $metodo_datos_up = [
                 [
-                    "campo_nombre"=>"nombre_tipo",
+                    "campo_nombre"=>"nombre_tecnica",
                     "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre_tipo
+                    "campo_valor"=>$nombre_metodo
                 ],
                 [
-                    "campo_nombre"=>"foto_tipo",
+                    "campo_nombre"=>"foto_tecnica",
                     "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto_tipo
+                    "campo_valor"=>$foto_metodo
                 ]
             ];
 
             $condicion = [
-                "condicion_campo"=>"id_tipo",
+                "condicion_campo"=>"id_tecnica",
                 "condicion_marcador"=>":ID",
                 "condicion_valor"=>$id
             ];
 
             /* Comprueba si se han insertado los datos */
-            if ($this->actualizarDatos("tipos_plato", $tipo_datos_up, $condicion)) {
+            if ($this->actualizarDatos("tecnicas", $metodo_datos_up, $condicion)) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
-                    "texto" => "El tipo ".$nombre_tipo." ha sido atualizado correctamente.",
+                    "texto" => "El método de cocción ".$nombre_metodo." ha sido atualizado correctamente.",
                     "icono" => "success"
                 ];
             } else {
-                if (is_file($img_dir.$foto_tipo)) {
-                    chmod($img_dir.$foto_tipo, 777);
-                    unlink($img_dir.$foto_tipo);
+                if (is_file($img_dir.$foto_metodo)) {
+                    chmod($img_dir.$foto_metodo, 777);
+                    unlink($img_dir.$foto_metodo);
                 }
 
                 $alerta=[
@@ -451,28 +455,64 @@
             }
             return json_encode($alerta);
 
+
+            $mensaje = $foto_metodo;
+            /* Comprobar que el controlador va funcionando */
+            $alerta=[
+                "tipo"=>"simple",
+                "titulo"=>"Funciona",
+                "texto"=>"vas a actualizar el método con la foto ".$mensaje,
+                "icono"=>"success"
+            ];
+            return json_encode($alerta);
+            exit();            
+
         }
 
-        /* ELIMINAR UN TIPO DE PLATOS */
-        public function eliminarTipoPlatoControlador(){
+        /* ELIMINAR UN MÉTODO DE COCCIÓN */
+        public function eliminarMetodoControlador(){
 
-            /* Comprobar que el usuario es administrador */
-            if (!$_SESSION['administrador']) {
+            /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
+            if (!isset($_SESSION['id'])) {
                 $alerta=[
                     "tipo"=>"simple",
-                    "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No puedes eliminar tipos de plato. No eres administrador del sistema",
+                    "titulo"=>"ERROR",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un método de cocción",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
                 exit();
+            } else {
+                $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
+
+                if ($check_user->rowCount()<=0) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un método de cocción",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                } else {
+                    if (!$_SESSION['administrador']) {
+                        $alerta=[
+                            "tipo"=>"simple",
+                            "titulo"=>"ERROR",
+                            "texto"=>"No puede añadir tipos de platos si no es administrador del sistema",
+                            "icono"=>"error"
+                        ];
+                        return json_encode($alerta);
+                        exit();
+                    }
+                }
             }
 
             /* Obtener el id que viene en el campo oculto del botón */
-            $id = $this->limpiarCadena($_POST['id_tipo']);
+            $id = $this->limpiarCadena($_POST['id_metodo']);
 
             /* Verificar que el tipo existe */
-            $datos=$this->ejecutarConsulta("SELECT * FROM tipos_plato WHERE id_tipo='$id'");
+            $datos=$this->ejecutarConsulta("SELECT * FROM tecnicas WHERE id_tecnica='$id'");
 
             if ($datos->rowCount()<=0) {
                 $alerta=[
@@ -487,29 +527,43 @@
                 $datos = $datos->fetch();
             }
 
-            /* Elimina el tipo de platos del sistema */
-            $eliminarTipo = $this->eliminarRegistro("tipos_plato", "id_tipo", $id);
+            /* Elimina el método de cocción del sistema */
+            $eliminarMetodo = $this->eliminarRegistro("tecnicas", "id_tecnica", $id);
 
-            if ($eliminarTipo->rowCount()==1) {
-                if (is_file("../views/photos/tipos_photos/".$datos['foto_tipo'])) {
-                    chmod("../views/photos/tipos_photos/".$datos['foto_tipo'], 0777);
-                    unlink("../views/photos/tipos_photos/".$datos['foto_tipo']);
+            if ($eliminarMetodo->rowCount()==1) {
+                if (is_file("../views/photos/metodos_photos/".$datos['foto_tecnica'])) {
+                    chmod("../views/photos/metodos_photos/".$datos['foto_tecnica'], 0777);
+                    unlink("../views/photos/metodos_photos/".$datos['foto_tecnica']);
                 }
                 $alerta = [
                     "tipo"=>"recargar",
-                    "titulo"=>"Tipo de platos eliminado",
-                    "texto"=>"El tipo ".$datos['nombre_tipo']." ha sido eliminado",
+                    "titulo"=>"Método de cocción eliminado",
+                    "texto"=>"El método de cocción ".$datos['nombre_tecnica']." ha sido eliminado",
                     "icono"=>"success"
                 ];
             } else {
                 $alerta = [
                     "tipo"=>"simple",
                     "titulo"=>"ERROR",
-                    "texto"=>"El tipo ".$datos['nombre_tipo']." no ha podido ser eliminado",
+                    "texto"=>"El método de cocción ".$datos['nombre_tecnica']." no ha podido ser eliminado",
                     "icono"=>"error"
                 ];
             }
             return json_encode($alerta);
+
+
+            /* Comprobar que el controlador va funcionando */
+
+            $mensaje = $datos['nombre_tecnica'];
+
+            $alerta=[
+                "tipo"=>"simple",
+                "titulo"=>"Funciona",
+                "texto"=>"vas a eliminar el método con la foto ".$mensaje,
+                "icono"=>"success"
+            ];
+            return json_encode($alerta);
+            exit();
 
         }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-10-2025 a las 22:00:54
+-- Tiempo de generación: 22-10-2025 a las 21:54:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -769,7 +769,7 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 CREATE TABLE `tecnicas` (
   `id_tecnica` int(11) NOT NULL,
   `nombre_tecnica` varchar(50) NOT NULL,
-  `activo_tecnica` tinyint(1) NOT NULL DEFAULT 0
+  `foto_tecnica` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -781,11 +781,10 @@ TRUNCATE TABLE `tecnicas`;
 -- Volcado de datos para la tabla `tecnicas`
 --
 
-INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `activo_tecnica`) VALUES
-(1, 'Horno', 0),
-(2, 'Vacío', 0),
-(3, 'Esferificación', 0),
-(4, 'Parrilla', 0);
+INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `foto_tecnica`) VALUES
+(11, 'Papillote', 'Papillote_8681.jpg'),
+(12, 'Fritos', 'Fritos_3425.jpg'),
+(13, 'Hervir', 'Hervir_3088.png');
 
 -- --------------------------------------------------------
 
@@ -1234,13 +1233,13 @@ ALTER TABLE `revisores`
 -- AUTO_INCREMENT de la tabla `tecnicas`
 --
 ALTER TABLE `tecnicas`
-  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_plato`
 --
 ALTER TABLE `tipos_plato`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
