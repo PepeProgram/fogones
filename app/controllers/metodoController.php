@@ -84,6 +84,27 @@
 
                 /* Recupera el nombre del método de cocción */
                 if ($_POST['nombre_metodo']) {
+
+                    /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                    /* Nombre */
+                    if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_metodo'])) {
+                        /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                        $alerta = [
+                            "tipo" => "simple",
+                            "titulo" => "Error en el formulario",
+                            "texto" => "El nombre del método de cocción sólo puede contener letras, números, .,-,_ y espacios",
+                            "icono" => "error"
+                        ];
+
+                        /* Codifica la variable como datos JSON */
+                        return json_encode($alerta);
+
+                        /* Detiene la ejecución del script */
+                        exit();
+                    }
+
+                    /* Limpia los datos para evitar SQL Injection */
                     $nombre_metodo = $this->limpiarCadena($_POST['nombre_metodo']);
 
                     /* Comprueba si el nombre del método ya existe */
@@ -299,6 +320,27 @@
 
             /* Recupera el nombre del método de cocción */
             if ($_POST['nombre_metodo']) {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                    /* Nombre */
+                    if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_metodo'])) {
+                        /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                        $alerta = [
+                            "tipo" => "simple",
+                            "titulo" => "Error en el formulario",
+                            "texto" => "El nombre del método de cocción sólo puede contener letras, números, .,-,_ y espacios",
+                            "icono" => "error"
+                        ];
+
+                        /* Codifica la variable como datos JSON */
+                        return json_encode($alerta);
+
+                        /* Detiene la ejecución del script */
+                        exit();
+                    }
+
+                    /* Limpia los datos para evitar SQL Injection */
                 $nombre_metodo = $this->limpiarCadena($_POST['nombre_metodo']);
 
                 /* Comprueba si el nombre del método de cocción ya existe */

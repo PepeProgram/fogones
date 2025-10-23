@@ -26,7 +26,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreGrupo">Nombre del Grupo:</label>
-                        <input type="text" id="nombreGrupo" class="nombreAutor" name="nombre_grupo" maxlength="80" required value="" placeholder="Nombre del Grupo de Platos" title="Introduzca el nombre del Grupo de Platos">
+                        <input type="text" id="nombreGrupo" class="nombreAutor" name="nombre_grupo" maxlength="80" required value="" placeholder="Nombre del Grupo de Platos" title="Introduzca el nombre del Grupo de Platos. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoGrupo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoGrupo-0').click();"></button>

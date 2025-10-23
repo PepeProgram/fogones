@@ -78,6 +78,27 @@
 
             /* Recupera el nombre del tipo de platos */
             if ($_POST['nombre_tipo']) {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_tipo'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del tipo de plato sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia los datos para evitar SQL Injection */
                 $nombre_tipo = $this->limpiarCadena($_POST['nombre_tipo']);
 
                 /* Comprueba si el nombre del tipo ya existe */
@@ -295,6 +316,27 @@
 
             /* Recupera el nombre del tipo */
             if ($_POST['nombre_tipo']) {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_tipo'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del tipo de plato sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia los datos para evitar SQL Injection */
                 $nombre_tipo = $this->limpiarCadena($_POST['nombre_tipo']);
 
                 /* Comprueba si el nombre del tipo ya existe */

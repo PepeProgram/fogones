@@ -24,7 +24,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreMetodo">Nombre del método de cocción:</label>
-                        <input type="text" id="nombreMetodo" class="nombreAutor" name="nombre_metodo" maxlength="80" required value="" placeholder="Nombre del Método de cocción" title="Introduzca el nombre del Método de coción">
+                        <input type="text" id="nombreMetodo" class="nombreAutor" name="nombre_metodo" maxlength="80" required value="" placeholder="Nombre del Método de cocción" title="Introduzca el nombre del Método de cocción. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoMetodo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoMetodo-0').click();"></button>

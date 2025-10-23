@@ -99,6 +99,27 @@
 
             /* Recupera el nombre del alérgeno */
             if ($_POST['nombre_alergeno'] != "") {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia los datos para evitar SQL Injection */
                 $nombre_alergeno = $this->limpiarCadena($_POST['nombre_alergeno']);
             } else {
                 $alerta=[
@@ -268,6 +289,27 @@
 
             /* Recupera el nombre del alérgeno */
             if ($_POST['nombre_alergeno'] != "") {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia el nombre para evitar SQL Injection */
                 $nombre_alergeno = $this->limpiarCadena($_POST['nombre_alergeno']);
             } else {
                 $alerta=[

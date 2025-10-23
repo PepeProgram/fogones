@@ -24,7 +24,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreTipo">Nombre del tipo de plato:</label>
-                        <input type="text" id="nombreTipo" class="nombreAutor" name="nombre_tipo" maxlength="80" required value="" placeholder="Nombre del Tipo de platos" title="Introduzca el nombre del Tipo de platos">
+                        <input type="text" id="nombreTipo" class="nombreAutor" name="nombre_tipo" maxlength="80" required value="" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}" placeholder="Nombre del Tipo de platos" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,_ y espacios">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoTipo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoTipo-0').click();"></button>

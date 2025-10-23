@@ -78,6 +78,27 @@
 
             /* Recupera el nombre del grupo */
             if ($_POST['nombre_grupo']) {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_grupo'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia los datos para evitar SQL Injection */
                 $nombre_grupo = $this->limpiarCadena($_POST['nombre_grupo']);
 
                 /* Comprueba si el nombre del grupo ya existe */
@@ -286,6 +307,27 @@
 
             /* Recupera el nombre del grupo */
             if ($_POST['nombre_grupo']) {
+
+                /* VERIFICA LOS PATRONES DE LOS DATOS */
+            
+                /* Nombre */
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_grupo'])) {
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
+                /* Limpia los datos para evitar SQL Injection */
                 $nombre_grupo = $this->limpiarCadena($_POST['nombre_grupo']);
 
                 /* Comprueba si el nombre del grupo ya existe */

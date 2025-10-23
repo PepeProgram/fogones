@@ -1,7 +1,7 @@
 <?php
 /* Configuración de la aplicación */
     /* URL de la aplicación */
-    const APP_URL = "http://192.168.1.53/fogones/";
+    const APP_URL = "http://localhost/fogones/";
     /* NOMBRE de la APLICACIÓN */
     const APP_NAME = "Fogones Conectados";
     /* NOMBRE de la SESIÓN DE LA APLICACIÓN */
