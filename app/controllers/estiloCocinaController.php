@@ -4,47 +4,47 @@
     /* Trae el modelo principal para utilizar sus funciones */
     use app\models\mainModel;
 
-    /* Trae el modelo de grupo de platos para crear los objetos grupo */
-    use app\models\grupoPlatoModel;
+    /* Trae el modelo de estilos de cocina para crear los objetos estilo */
+    use app\models\estiloCocinaModel;
 
     /* Crea la clase hija de la clase principal */
-    class grupoPlatoController extends mainModel{
+    class estiloCocinaController extends mainModel{
 
-        /* LISTAR LOS GRUPOS DE PLATOS */
-        public function listarGruposPlatosControlador(){
+        /* LISTAR LOS ESTILOS DE COCINA */
+        public function listarEstilosCocinaControlador(){
 
-            /* Ejecuta a búsqueda de grupos de plato */
-            $grupos = $this->ejecutarConsulta("SELECT * FROM grupos_plato ORDER BY nombre_grupo");
+            /* Ejecuta a búsqueda de estilos de cocina */
+            $estilos = $this->ejecutarConsulta("SELECT * FROM estilos_cocina ORDER BY nombre_estilo");
 
             /* Convierte el resultado a array */
-            if ($grupos->rowCount()>0) {
-                $grupos = $grupos->fetchAll();
+            if ($estilos->rowCount()>0) {
+                $estilos = $estilos->fetchAll();
             }
 
-            /* Crea un array para ir guardando los grupos */
-            $lista_grupos = array();
+            /* Crea un array para ir guardando los estilos */
+            $lista_estilos = array();
 
-            /* Recorre el array de datos para ir creando objetos e insertándolos en la lista de grupos */
-            foreach ($grupos as $fila) {
-                /* Crea una nueva instancia de grupo */
-                $grupo = new grupoPlatoModel($fila['id_grupo']);
+            /* Recorre el array de datos para ir creando objetos e insertándolos en la lista de estilos */
+            foreach ($estilos as $fila) {
+                /* Crea una nueva instancia de estilo */
+                $estilo = new estiloCocinaModel($fila['id_estilo']);
 
-                /* Añade el grupo a la lista */
-                array_push($lista_grupos, $grupo);
+                /* Añade el estilo a la lista */
+                array_push($lista_estilos, $estilo);
             }
-            /* Devuelve la lista de grupos */
-            return $lista_grupos;
+            /* Devuelve la lista de estilos */
+            return $lista_estilos;
 
         }
 
-        /* GUARDAR UN GRUPO DE PLATOS */
-        public function guardarGrupoPlatosControlador(){
+        /* GUARDAR UN ESTILO DE COCINA */
+        public function guardarEstiloCocinaControlador(){
             /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
             if (!isset($_SESSION['id'])) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR",
-                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un grupo de platos",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un estilo de cocina",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -56,7 +56,7 @@
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"ERROR",
-                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un grupo de platos",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder añadir un estilo de cocina",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -66,7 +66,7 @@
                         $alerta=[
                             "tipo"=>"simple",
                             "titulo"=>"ERROR",
-                            "texto"=>"No puede añadir grupos de platos si no es administrador del sistema",
+                            "texto"=>"No puede añadir estilos de cocina si no es administrador del sistema",
                             "icono"=>"error"
                         ];
                         return json_encode($alerta);
@@ -76,18 +76,18 @@
                 
             }
 
-            /* Recupera el nombre del grupo */
-            if ($_POST['nombre_grupo']) {
+            /* Recupera el nombre del estilo */
+            if ($_POST['nombre_estilo']) {
 
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_grupo'])) {
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_estilo'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del estilo de cocina sólo puede contener letras, números, .,-,_ y espacios",
                         "icono" => "error"
                     ];
 
@@ -99,14 +99,14 @@
                 }
 
                 /* Limpia los datos para evitar SQL Injection */
-                $nombre_grupo = $this->limpiarCadena($_POST['nombre_grupo']);
+                $nombre_estilo = $this->limpiarCadena($_POST['nombre_estilo']);
 
-                /* Comprueba si el nombre del grupo ya existe */
-                if ($this->ejecutarConsulta("SELECT * FROM grupos_plato WHERE nombre_grupo = '$nombre_grupo' ")->rowCount()>0) {
+                /* Comprueba si el nombre del estilo ya existe */
+                if ($this->ejecutarConsulta("SELECT * FROM estilos_cocina WHERE nombre_estilo = '$nombre_estilo' ")->rowCount()>0) {
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"Error!!!",
-                        "texto"=>"El grupo de platos $nombre_grupo ya existe",
+                        "texto"=>"El Estilo de Cocina $nombre_estilo ya existe",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -116,23 +116,23 @@
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error!!!",
-                    "texto"=>"El nombre del grupo de platos no puede estar vacío",
+                    "texto"=>"El nombre del estilo de cocina no puede estar vacío",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
                 exit();
             }
 
-            /* FOTO DEL GRUPO DE PLATOS */
+            /* FOTO DEL ESTILO DE COCINA */
 
             /* Establece el directorio de imágenes */
-            $img_dir = "../views/photos/groups_photos/";
+            $img_dir = "../views/photos/styles_photos/";
 
-            /* Comrueba si hay imágenes en el input */
-            if ($_FILES['foto_grupo']['name'] != "" && $_FILES['foto_grupo']['size']>0) {
+            /* Comprueba si hay imágenes en el input */
+            if ($_FILES['foto_estilo']['name'] != "" && $_FILES['foto_estilo']['size']>0) {
                 
                 /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/png") {
+                if (mime_content_type($_FILES['foto_estilo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_estilo']['tmp_name']) != "image/png") {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen.",
@@ -144,7 +144,7 @@
                 }
 
                 /* Verifica el tamaño de la imagen */
-                if ($_FILES['foto_grupo']['size']/1024 > 5120) {
+                if ($_FILES['foto_estilo']['size']/1024 > 5120) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen",
@@ -156,18 +156,18 @@
                 }
 
                 /* Establece el nombre de la nueva imagen */
-                $foto_grupo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_grupo);
-                $foto_grupo = str_ireplace(" ", "_", $foto_grupo);
-                $foto_grupo .= "_".rand(0, 10000);
+                $foto_estilo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_estilo);
+                $foto_estilo = str_ireplace(" ", "_", $foto_estilo);
+                $foto_estilo .= "_".rand(0, 10000);
 
                 /* Establece la extensión de la nueva imagen */
-                switch (mime_content_type($_FILES['foto_grupo']['tmp_name'])) {
+                switch (mime_content_type($_FILES['foto_estilo']['tmp_name'])) {
                     case 'image/jpeg':
-                        $foto_grupo .= ".jpg";
+                        $foto_estilo .= ".jpg";
                         break;
                     
                     case 'image/png':
-                        $foto_grupo .= ".png";
+                        $foto_estilo .= ".png";
                         break;
                 }
 
@@ -191,7 +191,7 @@
                 chmod($img_dir, 0777);
 
                 /* Sube la imagen al directorio de imágenes */
-                if (!move_uploaded_file($_FILES['foto_grupo']['tmp_name'], $img_dir.$foto_grupo)) {
+                if (!move_uploaded_file($_FILES['foto_estilo']['tmp_name'], $img_dir.$foto_estilo)) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al actualizar la foto",
@@ -204,42 +204,42 @@
 
                 
             } else {
-                $foto_grupo = null;
+                $foto_estilo = null;
             }
             
             /* Actualiza la base de datos */
-            $grupo_datos_reg = [
+            $estilo_datos_reg = [
                 [
-                    "campo_nombre"=>"nombre_grupo",
+                    "campo_nombre"=>"nombre_estilo",
                     "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre_grupo
+                    "campo_valor"=>$nombre_estilo
                 ],
                 [
-                    "campo_nombre"=>"foto_grupo",
+                    "campo_nombre"=>"foto_estilo",
                     "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto_grupo
+                    "campo_valor"=>$foto_estilo
                 ]
             ];
 
-            $registrar_grupo = $this->guardarDatos("grupos_plato", $grupo_datos_reg);
+            $registrar_estilo = $this->guardarDatos("estilos_cocina", $estilo_datos_reg);
 
-            if ($registrar_grupo->rowCount() == 1) {
+            if ($registrar_estilo->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
-                    "texto" => "El grupo ".$nombre_grupo." ha sido registrado correctamente.",
+                    "texto" => "El grupo ".$nombre_estilo." ha sido registrado correctamente.",
                     "icono" => "success"
                 ];
             } else {
-                if (is_file($img_dir.$foto_grupo)) {
-                    chmod($img_dir.$foto_grupo, 777);
-                    unlink($img_dir.$foto_grupo);
+                if (is_file($img_dir.$foto_estilo)) {
+                    chmod($img_dir.$foto_estilo, 777);
+                    unlink($img_dir.$foto_estilo);
                 }
 
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error",
-                    "texto"=>"No se ha podido guardar el grupo de platos en este momento. Inténtelo de nuevo más tarde",
+                    "texto"=>"No se ha podido guardar el estilo de cocina en este momento. Inténtelo de nuevo más tarde",
                     "icono"=>"error"
                 ];
             }
@@ -247,19 +247,19 @@
             
         }
 
-        /* ACTUALIZAR UN GRUPO DE PLATOS */
-        public function actualizarGrupoPlatosControlador(){
+        /* ACTUALIZAR UN ESTILO DE COCINA */
+        public function actualizarEstiloCocinaControlador(){
 
-            /* Recupera el id del grupo */
+            /* Recupera el id del estilo */
             $id = $this->limpiarCadena($_POST['id_Form']);
 
-            /* Verifica que el grupo existe */
-            $datos = $this->ejecutarConsulta("SELECT * FROM grupos_plato WHERE id_grupo='$id'");
+            /* Verifica que el estilo existe */
+            $datos = $this->ejecutarConsulta("SELECT * FROM estilos_cocina WHERE id_estilo='$id'");
             if ($datos->rowCount()<=0) {
                 $alerta = [
                     "tipo"=>"simple",
                     "titulo"=>"Error al intentar actualizar",
-                    "texto"=>"El grupo de platos no existe",
+                    "texto"=>"El estilo de cocina no existe",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -305,13 +305,13 @@
                 
             }
 
-            /* Recupera el nombre del grupo */
-            if ($_POST['nombre_grupo']) {
+            /* Recupera el nombre del estilo */
+            if ($_POST['nombre_estilo']) {
 
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_grupo'])) {
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_estilo'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
@@ -328,14 +328,14 @@
                 }
 
                 /* Limpia los datos para evitar SQL Injection */
-                $nombre_grupo = $this->limpiarCadena($_POST['nombre_grupo']);
+                $nombre_estilo = $this->limpiarCadena($_POST['nombre_estilo']);
 
-                /* Comprueba si el nombre del grupo ya existe */
-                if ($this->ejecutarConsulta("SELECT * FROM grupos_plato WHERE nombre_grupo='$nombre_grupo' AND id_grupo !='$id'")->rowCount()>0) {
+                /* Comprueba si el nombre del estilo ya existe */
+                if ($this->ejecutarConsulta("SELECT * FROM estilos_cocina WHERE nombre_estilo='$nombre_estilo' AND id_estilo !='$id'")->rowCount()>0) {
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"Error!!!",
-                        "texto"=>"El grupo de platos $nombre_grupo ya existe",
+                        "texto"=>"El estilo de cocina $nombre_estilo ya existe",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -345,23 +345,23 @@
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error!!!",
-                    "texto"=>"El nombre del grupo de platos no puede estar vacío",
+                    "texto"=>"El nombre del estilo de cocina no puede estar vacío",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
                 exit();
             }
 
-            /* FOTO DEL GRUPO DE PLATOS */
+            /* FOTO DEL ESTILO DE COCINA */
 
             /* Establece el directorio de imágenes */
-            $img_dir = "../views/photos/groups_photos/";
+            $img_dir = "../views/photos/styles_photos/";
 
             /* Comrueba si hay imágenes en el input */
-            if ($_FILES['foto_grupo']['name'] != "" && $_FILES['foto_grupo']['size']>0) {
+            if ($_FILES['foto_estilo']['name'] != "" && $_FILES['foto_estilo']['size']>0) {
                 
                 /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_grupo']['tmp_name']) != "image/png") {
+                if (mime_content_type($_FILES['foto_estilo']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_estilo']['tmp_name']) != "image/png") {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen.",
@@ -373,7 +373,7 @@
                 }
 
                 /* Verifica el tamaño de la imagen */
-                if ($_FILES['foto_grupo']['size']/1024 > 5120) {
+                if ($_FILES['foto_estilo']['size']/1024 > 5120) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al guardar la imagen",
@@ -385,18 +385,18 @@
                 }
 
                 /* Establece el nombre de la nueva imagen */
-                $foto_grupo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_grupo);
-                $foto_grupo = str_ireplace(" ", "_", $foto_grupo);
-                $foto_grupo .= "_".rand(0, 10000);
+                $foto_estilo = iconv('UTF-8', 'ASCII//IGNORE', $nombre_estilo);
+                $foto_estilo = str_ireplace(" ", "_", $foto_estilo);
+                $foto_estilo .= "_".rand(0, 10000);
 
                 /* Establece la extensión de la nueva imagen */
-                switch (mime_content_type($_FILES['foto_grupo']['tmp_name'])) {
+                switch (mime_content_type($_FILES['foto_estilo']['tmp_name'])) {
                     case 'image/jpeg':
-                        $foto_grupo .= ".jpg";
+                        $foto_estilo .= ".jpg";
                         break;
                     
                     case 'image/png':
-                        $foto_grupo .= ".png";
+                        $foto_estilo .= ".png";
                         break;
                 }
 
@@ -420,13 +420,13 @@
                 chmod($img_dir, 0777);
 
                 /* Borra la foto anterior si existe */
-                if (is_file($img_dir.$datos['foto_grupo'])) {
-                    chmod($img_dir.$datos['foto_grupo'], 0777);
-                    unlink($img_dir.$datos['foto_grupo']);
+                if (is_file($img_dir.$datos['foto_estilo'])) {
+                    chmod($img_dir.$datos['foto_estilo'], 0777);
+                    unlink($img_dir.$datos['foto_estilo']);
                 }
 
                 /* Sube la nueva imagen al directorio de imágenes */
-                if (!move_uploaded_file($_FILES['foto_grupo']['tmp_name'], $img_dir.$foto_grupo)) {
+                if (!move_uploaded_file($_FILES['foto_estilo']['tmp_name'], $img_dir.$foto_estilo)) {
                     $alerta=[
                         "tipo"=>"recargar",
                         "titulo"=>"Error al actualizar la foto",
@@ -438,41 +438,41 @@
                 }
                 
             } else {
-                $foto_grupo = $datos['foto_grupo'];
+                $foto_estilo = $datos['foto_estilo'];
             }
             
             /* Actualiza la base de datos */
-            $grupo_datos_up = [
+            $estilo_datos_up = [
                 [
-                    "campo_nombre"=>"nombre_grupo",
+                    "campo_nombre"=>"nombre_estilo",
                     "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre_grupo
+                    "campo_valor"=>$nombre_estilo
                 ],
                 [
-                    "campo_nombre"=>"foto_grupo",
+                    "campo_nombre"=>"foto_estilo",
                     "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto_grupo
+                    "campo_valor"=>$foto_estilo
                 ]
             ];
 
             $condicion = [
-                "condicion_campo"=>"id_grupo",
+                "condicion_campo"=>"id_estilo",
                 "condicion_marcador"=>":ID",
                 "condicion_valor"=>$id
             ];
 
             /* Comprueba si se han insertado los datos */
-            if ($this->actualizarDatos("grupos_plato", $grupo_datos_up, $condicion)) {
+            if ($this->actualizarDatos("estilos_cocina", $estilo_datos_up, $condicion)) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
-                    "texto" => "El grupo ".$nombre_grupo." ha sido atualizado correctamente.",
+                    "texto" => "El estilo de cocina ".$nombre_estilo." ha sido atualizado correctamente.",
                     "icono" => "success"
                 ];
             } else {
-                if (is_file($img_dir.$foto_grupo)) {
-                    chmod($img_dir.$foto_grupo, 777);
-                    unlink($img_dir.$foto_grupo);
+                if (is_file($img_dir.$foto_estilo)) {
+                    chmod($img_dir.$foto_estilo, 777);
+                    unlink($img_dir.$foto_estilo);
                 }
 
                 $alerta=[
@@ -487,14 +487,14 @@
         }
         
         /* ELIMINAR UN GRUPO DE PLATOS */
-        public function eliminarGrupoPlatosControlador(){
+        public function eliminarEstiloCocinaControlador(){
 
             /* Comprobar que el usuario es administrador */
             if (!$_SESSION['administrador']) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No puedes eliminar usuarios. No eres administrador del sistema",
+                    "texto"=>"No puedes eliminar estilos de cocina. No eres administrador del sistema",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -502,16 +502,16 @@
             }
 
             /* Obtener el id que viene en el campo oculto del botón */
-            $id = $this->limpiarCadena($_POST['id_grupo']);
+            $id = $this->limpiarCadena($_POST['id_estilo']);
 
-            /* Verificar que el grupo existe */
-            $datos=$this->ejecutarConsulta("SELECT * FROM grupos_plato WHERE id_grupo='$id'");
+            /* Verificar que el estilo de cocina existe */
+            $datos=$this->ejecutarConsulta("SELECT * FROM estilos_cocina WHERE id_estilo='$id'");
 
             if ($datos->rowCount()<=0) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No existe el Grupo de Platos en el sistema",
+                    "texto"=>"No existe el estilo de cocina en el sistema",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -520,25 +520,25 @@
                 $datos = $datos->fetch();
             }
 
-            /* Elimina el grupo de platos del sistema */
-            $eliminarGrupo = $this->eliminarRegistro("grupos_plato", "id_grupo", $id);
+            /* Elimina el estilo de cocina del sistema */
+            $eliminarEstilo = $this->eliminarRegistro("estilos_cocina", "id_estilo", $id);
 
-            if ($eliminarGrupo->rowCount()==1) {
-                if (is_file("../views/photos/groups_photos/".$datos['foto_grupo'])) {
-                    chmod("../views/photos/groups_photos/".$datos['foto_grupo'], 0777);
-                    unlink("../views/photos/groups_photos/".$datos['foto_grupo']);
+            if ($eliminarEstilo->rowCount()==1) {
+                if (is_file("../views/photos/styles_photos/".$datos['foto_estilo'])) {
+                    chmod("../views/photos/styles_photos/".$datos['foto_estilo'], 0777);
+                    unlink("../views/photos/styles_photos/".$datos['foto_estilo']);
                 }
                 $alerta = [
                     "tipo"=>"recargar",
-                    "titulo"=>"Grupo de platos eliminado",
-                    "texto"=>"El grupo ".$datos['nombre_grupo']." ha sido eliminado",
+                    "titulo"=>"Estilo de cocina eliminado",
+                    "texto"=>"El estilo ".$datos['nombre_estilo']." ha sido eliminado",
                     "icono"=>"success"
                 ];
             } else {
                 $alerta = [
                     "tipo"=>"simple",
                     "titulo"=>"ERROR",
-                    "texto"=>"El grupo ".$datos['nombre_grupo']." no ha podido ser eliminado",
+                    "texto"=>"El estilo de cocina ".$datos['nombre_estilo']." no ha podido ser eliminado",
                     "icono"=>"error"
                 ];
             }

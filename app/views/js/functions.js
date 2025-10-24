@@ -172,6 +172,15 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                     
                     break;
                 
+                case 'modulo_estilo':
+                    
+                    /* Rellena los datos del formulario con los del estilo a actualizar */
+                    document.querySelector('#idForm').value = datosActualizar.id_estilo;
+                    document.querySelector('#nombreEstilo').value = datosActualizar.nombre_estilo;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/styles_photos/"+datosActualizar.foto_estilo;
+
+                    break;
+                    
                 case 'modulo_grupo':
                     
                     /* Rellena los datos del formulario con los del grupo a actualizar */
