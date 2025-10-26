@@ -8,26 +8,30 @@
     /* Llama al autoload para cargar las clases cuando se llaman */
     require_once "../../autoload.php";
 
-    /* Usa el controlador de estilos de cicina */
-    use app\controllers\estiloCocinaController;
+    /* Usa el controlador de utensilios de cocina */
+    use app\controllers\utensilioController;
 
-    /* Comprueba si viene del módulo de estilos de cocina */
-    if (isset($_POST['modulo_estilo'])) {
+    /* Comprueba si viene del módulo de utensilios de cocina */
+    if (isset($_POST['modulo_utensilio'])) {
 
-        /* Llama al controlador de estilos de cocina */
-        $insEstilo = new estiloCocinaController();
+        /* Llama al controlador de utensilios de cocina */
+        $insUtensilio = new utensilioController();
 
         /* Comprueba de qué formulario viene el hidden */
-        switch ($_POST['modulo_estilo']) {
+        switch ($_POST['modulo_utensilio']) {
             case 'guardar':
-                echo $insEstilo->guardarEstiloCocinaControlador();
+                echo $insUtensilio->guardarUtensilioControlador();
                 break;
             case 'actualizar':
-                echo $insEstilo->actualizarEstiloCocinaControlador();
+                echo $insUtensilio->actualizarUtensilioControlador();
                 break;
             
             case 'eliminar':
-                echo $insEstilo->eliminarEstiloCocinaControlador();
+                echo $insUtensilio->eliminarUtensilioControlador();
+                break;
+            
+            case 'cambiarActivo':
+                echo $insUtensilio->cambiarActivoUtensilioControlador();
                 break;
             
             default:

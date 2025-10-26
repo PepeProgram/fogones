@@ -26,7 +26,7 @@
 
                 /* Comprueba si el usuario es administrador para permitir el acceso al panel de control */
                 if ($_SESSION['administrador']) {
-                    array_push($listaBlanca, "panelControl", "usuarios", "recetas", "estilosCocina", "gruposPlatos", "tiposPlatos", "metodos", "alergenos");
+                    array_push($listaBlanca, "panelControl", "usuarios", "recetas", "estilosCocina", "gruposPlatos", "tiposPlatos", "metodos", "utensilios", "alergenos");
                 }
             }
 

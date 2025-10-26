@@ -208,6 +208,15 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
 
                     break;
                     
+                case 'modulo_utensilio':
+                    
+                    /* Rellena los datos del formulario con los del utensilio a actualizar */
+                    document.querySelector('#idForm').value = datosActualizar.id_utensilio;
+                    document.querySelector('#nombreUtensilio').value = datosActualizar.nombre_utensilio;
+                    document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/utensilios_photos/"+datosActualizar.foto_utensilio;
+
+                    break;
+                    
                 default:
                     let textoAlerta = {
                         tipo: 'recargar',

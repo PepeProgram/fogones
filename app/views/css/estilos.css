@@ -631,7 +631,7 @@ th.headerUserTitle{
     width: 100%;
 }
 .fotoPeque{
-    max-width: 25px;
+    max-width: 1.875rem;
 }
 @media screen and (min-width: 450px) {
     .peque{

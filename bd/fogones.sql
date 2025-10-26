@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-10-2025 a las 21:54:40
+-- Tiempo de generación: 26-10-2025 a las 21:45:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,6 +29,7 @@ USE `fogones`;
 -- Estructura de tabla para la tabla `administradores`
 --
 
+DROP TABLE IF EXISTS `administradores`;
 CREATE TABLE `administradores` (
   `id_administrador` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -44,7 +45,10 @@ TRUNCATE TABLE `administradores`;
 --
 
 INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
-(1, 1);
+(1, 1),
+(13, 8),
+(14, 13),
+(15, 23);
 
 -- --------------------------------------------------------
 
@@ -52,6 +56,7 @@ INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `alergenos`
 --
 
+DROP TABLE IF EXISTS `alergenos`;
 CREATE TABLE `alergenos` (
   `id_alergeno` int(11) NOT NULL,
   `nombre_alergeno` varchar(200) NOT NULL,
@@ -79,7 +84,7 @@ INSERT INTO `alergenos` (`id_alergeno`, `nombre_alergeno`, `foto_alergeno`) VALU
 (9, 'Apio y productos derivados', 'Apio_y_productos_derivados.png'),
 (10, 'Mostaza y productos a base de mostaza', 'Mostaza_y_productos_a_base_de_mostaza.png'),
 (11, 'Granos o semillas de sésamo y productos a base de sésamo', 'Granos_o_semillas_de_ssamo_y_productos_a_base_de_ssamo.png'),
-(12, 'Dióxido de azufre y sulfitos', 'Dixido_de_azufre_y_sulfitos.png'),
+(12, 'Sulfitos y Dióxido de azufre', 'Dixido_de_azufre_y_sulfitos.png'),
 (13, 'Altramuces y productos a base de altramuces', 'Altramuces_y_productos_a_base_de_altramuces.png'),
 (14, 'Moluscos y crustáceos y productos a base de estos', 'Moluscos_y_crustceos_y_productos_a_base_de_estos.png');
 
@@ -89,6 +94,7 @@ INSERT INTO `alergenos` (`id_alergeno`, `nombre_alergeno`, `foto_alergeno`) VALU
 -- Estructura de tabla para la tabla `autores`
 --
 
+DROP TABLE IF EXISTS `autores`;
 CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL,
   `nombre_autor` varchar(80) NOT NULL,
@@ -119,6 +125,7 @@ INSERT INTO `autores` (`id_autor`, `nombre_autor`, `foto_autor`, `id_pais`, `des
 -- Estructura de tabla para la tabla `editores`
 --
 
+DROP TABLE IF EXISTS `editores`;
 CREATE TABLE `editores` (
   `id_editor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -135,10 +142,11 @@ TRUNCATE TABLE `editores`;
 -- Estructura de tabla para la tabla `estilos_cocina`
 --
 
+DROP TABLE IF EXISTS `estilos_cocina`;
 CREATE TABLE `estilos_cocina` (
   `id_estilo` int(11) NOT NULL,
   `nombre_estilo` varchar(50) NOT NULL,
-  `activo_estilo` tinyint(1) NOT NULL DEFAULT 0
+  `foto_estilo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -150,11 +158,11 @@ TRUNCATE TABLE `estilos_cocina`;
 -- Volcado de datos para la tabla `estilos_cocina`
 --
 
-INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `activo_estilo`) VALUES
-(1, 'Mediterránea', 0),
-(2, 'de Autor', 0),
-(3, 'Internacional', 0),
-(4, 'Molecular', 0);
+INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `foto_estilo`) VALUES
+(1, 'Mediterránea', NULL),
+(3, 'Internacional', NULL),
+(4, 'Molecular', NULL),
+(8, 'De Autor', NULL);
 
 -- --------------------------------------------------------
 
@@ -162,6 +170,7 @@ INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `activo_estilo`) VAL
 -- Estructura de tabla para la tabla `favoritas`
 --
 
+DROP TABLE IF EXISTS `favoritas`;
 CREATE TABLE `favoritas` (
   `id_favoritas` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -179,6 +188,7 @@ TRUNCATE TABLE `favoritas`;
 -- Estructura de tabla para la tabla `grupos_plato`
 --
 
+DROP TABLE IF EXISTS `grupos_plato`;
 CREATE TABLE `grupos_plato` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(50) NOT NULL,
@@ -210,6 +220,7 @@ INSERT INTO `grupos_plato` (`id_grupo`, `nombre_grupo`, `foto_grupo`) VALUES
 -- Estructura de tabla para la tabla `ingredientes`
 --
 
+DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE `ingredientes` (
   `id_ingrediente` int(11) NOT NULL,
   `nombre_ingrediente` varchar(50) NOT NULL,
@@ -228,6 +239,7 @@ TRUNCATE TABLE `ingredientes`;
 -- Estructura de tabla para la tabla `ingredientes_alergenos`
 --
 
+DROP TABLE IF EXISTS `ingredientes_alergenos`;
 CREATE TABLE `ingredientes_alergenos` (
   `id_ing_ale` int(11) NOT NULL,
   `id_ingrediente` int(11) NOT NULL,
@@ -245,6 +257,7 @@ TRUNCATE TABLE `ingredientes_alergenos`;
 -- Estructura de tabla para la tabla `paises`
 --
 
+DROP TABLE IF EXISTS `paises`;
 CREATE TABLE `paises` (
   `id_pais` int(11) NOT NULL,
   `esp_pais` varchar(50) NOT NULL,
@@ -519,6 +532,7 @@ INSERT INTO `paises` (`id_pais`, `esp_pais`, `eng_pais`, `fra_pais`, `iso2_pais`
 -- Estructura de tabla para la tabla `propias`
 --
 
+DROP TABLE IF EXISTS `propias`;
 CREATE TABLE `propias` (
   `id_propias` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -536,6 +550,7 @@ TRUNCATE TABLE `propias`;
 -- Estructura de tabla para la tabla `recetas`
 --
 
+DROP TABLE IF EXISTS `recetas`;
 CREATE TABLE `recetas` (
   `id_receta` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -568,6 +583,7 @@ TRUNCATE TABLE `recetas`;
 -- Estructura de tabla para la tabla `recetas_alergenos`
 --
 
+DROP TABLE IF EXISTS `recetas_alergenos`;
 CREATE TABLE `recetas_alergenos` (
   `id_recetas_alergenos` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -582,32 +598,16 @@ TRUNCATE TABLE `recetas_alergenos`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recetas_componentes`
---
-
-CREATE TABLE `recetas_componentes` (
-  `id_recetas_componentes` int(11) NOT NULL,
-  `id_receta` int(11) NOT NULL,
-  `id_comp_receta` int(11) NOT NULL,
-  `cantidad` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Truncar tablas antes de insertar `recetas_componentes`
---
-
-TRUNCATE TABLE `recetas_componentes`;
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `recetas_ingredientes`
 --
 
+DROP TABLE IF EXISTS `recetas_ingredientes`;
 CREATE TABLE `recetas_ingredientes` (
   `id_recetas_ingredientes` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
   `id_ingrediente` int(11) NOT NULL,
-  `cantidad` decimal(10,0) NOT NULL
+  `cantidad` decimal(10,0) NOT NULL,
+  `id_unidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -621,6 +621,7 @@ TRUNCATE TABLE `recetas_ingredientes`;
 -- Estructura de tabla para la tabla `recetas_tecnicas`
 --
 
+DROP TABLE IF EXISTS `recetas_tecnicas`;
 CREATE TABLE `recetas_tecnicas` (
   `id_recetas_tecnicas` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -638,6 +639,7 @@ TRUNCATE TABLE `recetas_tecnicas`;
 -- Estructura de tabla para la tabla `recetas_tiposplato`
 --
 
+DROP TABLE IF EXISTS `recetas_tiposplato`;
 CREATE TABLE `recetas_tiposplato` (
   `id_recetas_tiposplato` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -655,6 +657,7 @@ TRUNCATE TABLE `recetas_tiposplato`;
 -- Estructura de tabla para la tabla `recetas_utensilios`
 --
 
+DROP TABLE IF EXISTS `recetas_utensilios`;
 CREATE TABLE `recetas_utensilios` (
   `id_recetas_utensilios` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -672,6 +675,7 @@ TRUNCATE TABLE `recetas_utensilios`;
 -- Estructura de tabla para la tabla `redactores`
 --
 
+DROP TABLE IF EXISTS `redactores`;
 CREATE TABLE `redactores` (
   `id_redactor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -690,8 +694,8 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 (1, 1),
 (4, 2),
 (18, 3),
-(23, 5),
-(24, 21);
+(26, 8),
+(27, 23);
 
 -- --------------------------------------------------------
 
@@ -699,6 +703,7 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `regiones`
 --
 
+DROP TABLE IF EXISTS `regiones`;
 CREATE TABLE `regiones` (
   `id_region` int(11) NOT NULL,
   `id_pais` int(11) NOT NULL,
@@ -742,6 +747,7 @@ INSERT INTO `regiones` (`id_region`, `id_pais`, `nombre_region`, `activo_region`
 -- Estructura de tabla para la tabla `revisores`
 --
 
+DROP TABLE IF EXISTS `revisores`;
 CREATE TABLE `revisores` (
   `id_revisor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -758,7 +764,10 @@ TRUNCATE TABLE `revisores`;
 
 INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 (5, 1),
-(6, 2);
+(6, 2),
+(8, 5),
+(9, 13),
+(10, 23);
 
 -- --------------------------------------------------------
 
@@ -766,6 +775,7 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `tecnicas`
 --
 
+DROP TABLE IF EXISTS `tecnicas`;
 CREATE TABLE `tecnicas` (
   `id_tecnica` int(11) NOT NULL,
   `nombre_tecnica` varchar(50) NOT NULL,
@@ -792,6 +802,7 @@ INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `foto_tecnica`) VALUES
 -- Estructura de tabla para la tabla `tipos_plato`
 --
 
+DROP TABLE IF EXISTS `tipos_plato`;
 CREATE TABLE `tipos_plato` (
   `id_tipo` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -816,9 +827,27 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `unidades_medida`
+--
+
+DROP TABLE IF EXISTS `unidades_medida`;
+CREATE TABLE `unidades_medida` (
+  `id_unidad` int(11) NOT NULL,
+  `nombre_unidad` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncar tablas antes de insertar `unidades_medida`
+--
+
+TRUNCATE TABLE `unidades_medida`;
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
@@ -852,7 +881,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 (13, 'Daysy', 'Donald', 'Trump', 'daysy', '$2y$10$/1xNGm5nSS9CZjPC4WUo6.1.wHNgde5E/9ARvcIQdte25C.AbgeY.', 'daysy@daysy.es', 'daysy_14.jpg', 'Jefa de cocina del restaurante Golfos Apandadores. 1º premio Cocineros sin Fronteras.', '2025-10-09 18:08:24', '2025-10-19 09:58:47'),
 (14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_92.png', '', '2025-10-09 18:08:24', '2025-10-19 10:06:43'),
 (19, 'Wile E', 'Coyote', 'Express', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-18 18:23:18'),
-(21, 'Road', 'Runner', '', 'correcaminos', '$2y$10$AE5HvOZV8ZuY5J8Y.KLnDuNo1u.qzEZ.IUUT/RgRfB4uL7R3CMpgi', 'roadrunner@correcaminos.es', 'correcaminos_6221.jpg', 'El coyote me quiere pillar, pero corro más que él.', '2025-10-20 17:57:19', '2025-10-20 17:57:19');
+(21, 'Road', 'Runner', '', 'correcaminos', '$2y$10$AE5HvOZV8ZuY5J8Y.KLnDuNo1u.qzEZ.IUUT/RgRfB4uL7R3CMpgi', 'roadrunner@correcaminos.es', 'correcaminos_6221.jpg', 'El coyote me quiere pillar, pero corro más que él.', '2025-10-20 17:57:19', '2025-10-20 17:57:19'),
+(23, 'Loly', 'soto', 'Roca', 'Soto', '$2y$10$cPl1jtqs0dccTjzIjulxnu6Plt/Zs8lFcwefSKKDlk2kuhQlHEq3i', 'lolysotor@gmail.com', 'Soto_34.jpg', '', '2025-10-26 10:50:55', '2025-10-26 20:44:03');
 
 -- --------------------------------------------------------
 
@@ -860,9 +890,11 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 -- Estructura de tabla para la tabla `utensilios`
 --
 
+DROP TABLE IF EXISTS `utensilios`;
 CREATE TABLE `utensilios` (
   `id_utensilio` int(11) NOT NULL,
   `nombre_utensilio` varchar(50) NOT NULL,
+  `foto_utensilio` varchar(100) DEFAULT NULL,
   `activo_utensilio` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -871,12 +903,23 @@ CREATE TABLE `utensilios` (
 --
 
 TRUNCATE TABLE `utensilios`;
+--
+-- Volcado de datos para la tabla `utensilios`
+--
+
+INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, `activo_utensilio`) VALUES
+(1, 'Kitchen Aid', 'Kitchen_Aid_5407.jpg', 1),
+(2, 'Sous Vide', 'Sous_Vide_6223.png', 0),
+(4, 'Pasapurés', 'Colador_470.jpg', 1),
+(5, 'Olla Express', 'Olla_Express_3483.jpg', 0);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `zonas`
 --
 
+DROP TABLE IF EXISTS `zonas`;
 CREATE TABLE `zonas` (
   `id_zona` int(11) NOT NULL,
   `nombre_zona` varchar(50) NOT NULL
@@ -1007,20 +1050,13 @@ ALTER TABLE `recetas_alergenos`
   ADD KEY `recetas_alergenos_ibfk_1` (`id_alergeno`);
 
 --
--- Indices de la tabla `recetas_componentes`
---
-ALTER TABLE `recetas_componentes`
-  ADD PRIMARY KEY (`id_recetas_componentes`),
-  ADD UNIQUE KEY `id_receta` (`id_receta`,`id_comp_receta`),
-  ADD KEY `id_comp_receta` (`id_comp_receta`);
-
---
 -- Indices de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
   ADD PRIMARY KEY (`id_recetas_ingredientes`),
   ADD UNIQUE KEY `recetas_ingredientes` (`id_receta`,`id_ingrediente`),
-  ADD KEY `id_ingrediente` (`id_ingrediente`);
+  ADD KEY `id_ingrediente` (`id_ingrediente`),
+  ADD KEY `recetas_ingredientes_ibfk_3` (`id_unidad`);
 
 --
 -- Indices de la tabla `recetas_tecnicas`
@@ -1081,6 +1117,12 @@ ALTER TABLE `tipos_plato`
   ADD PRIMARY KEY (`id_tipo`);
 
 --
+-- Indices de la tabla `unidades_medida`
+--
+ALTER TABLE `unidades_medida`
+  ADD PRIMARY KEY (`id_unidad`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -1107,13 +1149,13 @@ ALTER TABLE `zonas`
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `alergenos`
 --
 ALTER TABLE `alergenos`
-  MODIFY `id_alergeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_alergeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `autores`
@@ -1131,7 +1173,7 @@ ALTER TABLE `editores`
 -- AUTO_INCREMENT de la tabla `estilos_cocina`
 --
 ALTER TABLE `estilos_cocina`
-  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `favoritas`
@@ -1182,12 +1224,6 @@ ALTER TABLE `recetas_alergenos`
   MODIFY `id_recetas_alergenos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `recetas_componentes`
---
-ALTER TABLE `recetas_componentes`
-  MODIFY `id_recetas_componentes` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
@@ -1215,7 +1251,7 @@ ALTER TABLE `recetas_utensilios`
 -- AUTO_INCREMENT de la tabla `redactores`
 --
 ALTER TABLE `redactores`
-  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `regiones`
@@ -1227,13 +1263,13 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `revisores`
 --
 ALTER TABLE `revisores`
-  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tecnicas`
 --
 ALTER TABLE `tecnicas`
-  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_plato`
@@ -1242,16 +1278,22 @@ ALTER TABLE `tipos_plato`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `unidades_medida`
+--
+ALTER TABLE `unidades_medida`
+  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
@@ -1328,18 +1370,12 @@ ALTER TABLE `recetas_alergenos`
   ADD CONSTRAINT `recetas_alergenos_ibfk_2` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `recetas_componentes`
---
-ALTER TABLE `recetas_componentes`
-  ADD CONSTRAINT `recetas_componentes_ibfk_1` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recetas_componentes_ibfk_2` FOREIGN KEY (`id_comp_receta`) REFERENCES `recetas` (`id_receta`) ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  ADD CONSTRAINT `recetas_ingredientes_ibfk_1` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recetas_ingredientes_ibfk_2` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `recetas_ingredientes_ibfk_1` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `recetas_ingredientes_ibfk_2` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `recetas_ingredientes_ibfk_3` FOREIGN KEY (`id_unidad`) REFERENCES `unidades_medida` (`id_unidad`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `recetas_tecnicas`
