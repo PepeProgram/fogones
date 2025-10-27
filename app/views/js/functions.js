@@ -217,6 +217,14 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
 
                     break;
                     
+                case 'modulo_ingrediente':
+                    
+                    /* Rellena los datos del formulario con los del ingrediente a actualizar */
+                    document.querySelector('#idForm').value = datosActualizar.id_ingrediente;
+                    document.querySelector('#nombreIngrediente').value = datosActualizar.nombre_ingrediente;
+
+                    break;
+                    
                 default:
                     let textoAlerta = {
                         tipo: 'recargar',

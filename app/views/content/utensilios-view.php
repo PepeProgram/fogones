@@ -42,8 +42,32 @@
             <input type="text" name="busquedaUtensilios" id="busquedaUtensilios" class="input" onkeyup="filtrarTablas(this.id, 'utensilioList');">
         </form>
         <div class="botonesLista">
+
+            <!-- Botón para ver todos los utensilios -->
+            <a href=<?php echo APP_URL."utensilios" ?>>
+                <button class="btn">Todos</button>
+            </a>
+
+            
+            <!-- Comprueba si hay utensilios pendientes de revisión -->
+            <?php 
+                $utensiliosPendientes = new utensilioController();
+                if ($utensiliosPendientes->revisarUtensiliosControlador()) {
+                    $ocultar = "";
+                }
+                else{
+                    $ocultar = "oculto";
+                }
+            ?>
+
+            <!-- Botón para añadir un utensilio de cocina -->
             <a href="#formAgregarUtensilio">
                 <button class="btn" type="button" onclick="activarFormulario('modulo_utensilio', 'formAgregarUtensilio', 'guardar', '');">Añadir Utensilio de Cocina</button>
+            </a>
+
+            <!-- Botón para ver los utensilios pendientes de revisión -->
+            <a href=<?php echo APP_URL."utensilios/paraRevisar/" ?> class="<?php echo $ocultar ?>">
+                <button class="btn btnAlerta">Pendientes de revisión!!!</button>
             </a>
         </div>
         <div class="listaUsuarios">

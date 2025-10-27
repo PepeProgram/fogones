@@ -5,18 +5,18 @@
     use app\models\mainModel;
 
     /* Trae el modelo de utensilios de cocina para crear los objetos utensilio */
-    use app\models\utensilioModel;
+    use app\models\ingredienteModel;
 
     /* Crea la clase hija de la clase principal */
-    class utensilioController extends mainModel{
+    class ingredienteController extends mainModel{
 
-        /* CHEQUEAR SI HAY UTENSILIOS PENDIENTES DE REVISIÓN */
-        public function revisarUtensiliosControlador(){
+        /* CHEQUEAR SI HAY INGREDIENTES PENDIENTES DE REVISIÓN */
+        public function revisarIngredientesControlador(){
             /* Ejecuta la búsqueda para comprobar si hay pendientes de revisión */
-            $utensiliosRevisar = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo_utensilio = 0 ORDER BY nombre_utensilio");
+            $ingredientesRevisar = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo_ingrediente = 0");
 
             /* Devuelve true o false */
-            if ($utensiliosRevisar->rowCount()>0) {
+            if ($ingredientesRevisar->rowCount()>0) {
                 return true;
             }
             else{
@@ -25,46 +25,46 @@
 
         }
 
-        /* LISTAR LOS UTENSILIOS DE COCINA */
-        public function listarUtensiliosControlador(){
+        /* LISTAR LOS INGREDIENTES */
+        public function listarIngredientesControlador(){
 
             $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
 
             if (isset($vista_actual[3]) && $vista_actual[3] == "paraRevisar"){
 
-                /* Ejecuta la búsqueda de los utensilios de cocina pendientes de revisión */
-                $utensilios = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo_utensilio = 0 ORDER BY nombre_utensilio");
+                /* Ejecuta la búsqueda de los ingredientes pendientes de revisión */
+                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo_ingrediente = 0 ORDER BY nombre_ingrediente");
             }
             else{
 
-                /* Ejecuta la búsqueda de todos los utensilios de cocina */
-                $utensilios = $this->ejecutarConsulta("SELECT * FROM utensilios ORDER BY nombre_utensilio");
+                /* Ejecuta la búsqueda de todos los ingredientes */
+                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes ORDER BY nombre_ingrediente");
             }
 
 
             /* Convierte el resultado a array */
-            if ($utensilios->rowCount()>0) {
-                $utensilios = $utensilios->fetchAll();
+            if ($ingredientes->rowCount()>0) {
+                $ingredientes = $ingredientes->fetchAll();
             }
 
-            /* Crea un array para ir guardando los utensilios */
-            $lista_utensilios = array();
+            /* Crea un array para ir guardando los ingredientes */
+            $lista_ingredientes = array();
 
-            /* Recorre el array de datos para ir creando objetos e insertándolos en la lista de utensilios */
-            foreach ($utensilios as $fila) {
-                /* Crea una nueva instancia de utensilio */
-                $utensilio = new utensilioModel($fila['id_utensilio']);
+            /* Recorre el array de datos para ir creando objetos e insertándolos en la lista de ingredientes */
+            foreach ($ingredientes as $fila) {
+                /* Crea una nueva instancia de ingrediente */
+                $ingrediente = new ingredienteModel($fila['id_ingrediente']);
 
-                /* Añade el utensilio a la lista */
-                array_push($lista_utensilios, $utensilio);
+                /* Añade el ingrediente a la lista */
+                array_push($lista_ingredientes, $ingrediente);
             }
-            /* Devuelve la lista de utensilios */
-            return $lista_utensilios;
+            /* Devuelve la lista de ingredientes */
+            return $lista_ingredientes;
 
         }
 
         /* GUARDAR UN UTENSILIO DE COCINA */
-        public function guardarUtensilioControlador(){
+        public function guardarIngredienteControlador(){
             /* Verifica que el usuario ha iniciado sesión, existe y es redactor o administrador */
             if (!isset($_SESSION['id'])) {
                 $alerta=[
@@ -274,7 +274,7 @@
         }
 
         /* ACTUALIZAR UN UTENSILIO DE COCINA */
-        public function actualizarUtensilioControlador(){
+        public function actualizarIngredienteControlador(){
 
             /* Recupera el id del utensilio */
             $id = $this->limpiarCadena($_POST['id_Form']);
@@ -513,7 +513,7 @@
         }
         
         /* ELIMINAR UN UTENSILIO DE COCINA */
-        public function eliminarUtensilioControlador(){
+        public function eliminarIngredienteControlador(){
 
             /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
             if (!isset($_SESSION['id'])) {
@@ -597,15 +597,15 @@
 
         }
 
-        /* ACTIVAR O DESACTIVAR UN UTENSILIO DE COCINA */
-        public function cambiarActivoUtensilioControlador(){
+        /* ACTIVAR O DESACTIVAR UN INGREDIENTE */
+        public function cambiarActivoIngredienteControlador(){
             
             /* Comprobar que el usuario es administrador */
             if (!$_SESSION['administrador']) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                    "texto"=>"No puedes cambiar el estado de los ingredientes. No eres administrador del sistema",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -613,16 +613,16 @@
             }
             
             /* Obtener el id que viene en el campo oculto del botón */
-            $id = $this->limpiarCadena($_POST['id_utensilio']);
+            $id = $this->limpiarCadena($_POST['id_ingrediente']);
             
-            /* Verificar el utensilio de cocina */
-            $datos=$this->ejecutarConsulta("SELECT * FROM utensilios WHERE id_utensilio='$id'");
+            /* Verificar el ingrediente */
+            $datos=$this->ejecutarConsulta("SELECT * FROM ingredientes WHERE id_ingrediente='$id'");
 
             if ($datos->rowCount()<=0) {
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No existe el utensilio de cocina en el sistema",
+                    "texto"=>"No existe el ingrediente en el sistema",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
@@ -631,35 +631,35 @@
                 $datos = $datos->fetch();
             }
             
-            /* Recupera los datos del utensilio */
-            $activo_utensilio = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE id_utensilio='$id'");
-            $activo_utensilio = $activo_utensilio->fetch();
+            /* Recupera los datos del ingrediente */
+            $activo_ingrediente = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE id_ingrediente='$id'");
+            $activo_ingrediente = $activo_ingrediente->fetch();
             
-            /* Verificar si el utensilio está activo o no */
-            if ($activo_utensilio['activo_utensilio'] == 0) {
+            /* Verificar si el ingrediente está activo o no */
+            if ($activo_ingrediente['activo_ingrediente'] == 0) {
 
-                /* Desactiva el utensilio */
+                /* Activa el ingrediente */
                 /* Crea el array para guardar los datos */
-                $utensilio_datos_up = [
+                $ingrediente_datos_up = [
                     [
-                        "campo_nombre"=>"activo_utensilio",
+                        "campo_nombre"=>"activo_ingrediente",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>1
                     ]
                 ];
 
                 $condicion = [
-                    "condicion_campo"=>"id_utensilio",
+                    "condicion_campo"=>"id_ingrediente",
                     "condicion_marcador"=>":ID",
                     "condicion_valor"=>$id
                 ];
 
                 /* Comprueba si se han insertado los datos */
-                if ($this->actualizarDatos("utensilios", $utensilio_datos_up, $condicion)) {
+                if ($this->actualizarDatos("ingredientes", $ingrediente_datos_up, $condicion)) {
                     $alerta = [
                         "tipo" => "recargar",
                         "titulo" => "Felicidades!!!",
-                        "texto" => "El utensilio de cocina ".$activo_utensilio['nombre_utensilio']." ha sido activado.",
+                        "texto" => "El ingrediente ".$activo_ingrediente['nombre_ingrediente']." ha sido activado.",
                         "icono" => "success"
                     ];
                 } else {
@@ -673,28 +673,28 @@
                 }
             }
             else{
-                /* Desactiva el utensilio */
+                /* Desactiva el ingrediente */
                 /* Crea el array para guardar los datos */
-                $utensilio_datos_up = [
+                $ingrediente_datos_up = [
                     [
-                        "campo_nombre"=>"activo_utensilio",
+                        "campo_nombre"=>"activo_ingrediente",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>0
                     ]
                 ];
 
                 $condicion = [
-                    "condicion_campo"=>"id_utensilio",
+                    "condicion_campo"=>"id_ingrediente",
                     "condicion_marcador"=>":ID",
                     "condicion_valor"=>$id
                 ];
 
                 /* Comprueba si se han insertado los datos */
-                if ($this->actualizarDatos("utensilios", $utensilio_datos_up, $condicion)) {
+                if ($this->actualizarDatos("ingredientes", $ingrediente_datos_up, $condicion)) {
                     $alerta = [
                         "tipo" => "recargar",
                         "titulo" => "Felicidades!!!",
-                        "texto" => "El utensilio de cocina ".$activo_utensilio['nombre_utensilio']." ha sido desactivado.",
+                        "texto" => "El ingrediente ".$activo_ingrediente['nombre_ingrediente']." ha sido desactivado.",
                         "icono" => "success"
                     ];
                 } else {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-10-2025 a las 21:45:54
+-- Tiempo de generación: 27-10-2025 a las 23:30:35
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -224,7 +224,6 @@ DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE `ingredientes` (
   `id_ingrediente` int(11) NOT NULL,
   `nombre_ingrediente` varchar(50) NOT NULL,
-  `un_medida` varchar(10) NOT NULL,
   `activo_ingrediente` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -233,6 +232,16 @@ CREATE TABLE `ingredientes` (
 --
 
 TRUNCATE TABLE `ingredientes`;
+--
+-- Volcado de datos para la tabla `ingredientes`
+--
+
+INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo_ingrediente`) VALUES
+(1, 'Mantequilla', 1),
+(2, 'Harina de trigo', 1),
+(3, 'Vino', 0),
+(4, 'Pescado azul que no sea sardina ni caballa', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -251,6 +260,16 @@ CREATE TABLE `ingredientes_alergenos` (
 --
 
 TRUNCATE TABLE `ingredientes_alergenos`;
+--
+-- Volcado de datos para la tabla `ingredientes_alergenos`
+--
+
+INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alergeno`) VALUES
+(2, 1, 2),
+(1, 2, 3),
+(4, 3, 7),
+(3, 3, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -841,6 +860,20 @@ CREATE TABLE `unidades_medida` (
 --
 
 TRUNCATE TABLE `unidades_medida`;
+--
+-- Volcado de datos para la tabla `unidades_medida`
+--
+
+INSERT INTO `unidades_medida` (`id_unidad`, `nombre_unidad`) VALUES
+(1, 'Kg.'),
+(2, 'gr.'),
+(3, 'l.'),
+(4, 'ml.'),
+(5, 'c./s.'),
+(6, 'al gusto'),
+(7, 'taza'),
+(8, 'cucharada');
+
 -- --------------------------------------------------------
 
 --
@@ -909,9 +942,9 @@ TRUNCATE TABLE `utensilios`;
 
 INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, `activo_utensilio`) VALUES
 (1, 'Kitchen Aid', 'Kitchen_Aid_5407.jpg', 1),
-(2, 'Sous Vide', 'Sous_Vide_6223.png', 0),
+(2, 'Sous Vide', 'Sous_Vide_6223.png', 1),
 (4, 'Pasapurés', 'Colador_470.jpg', 1),
-(5, 'Olla Express', 'Olla_Express_3483.jpg', 0);
+(5, 'Olla Express', 'Olla_Express_3483.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1191,13 +1224,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -1281,7 +1314,7 @@ ALTER TABLE `tipos_plato`
 -- AUTO_INCREMENT de la tabla `unidades_medida`
 --
 ALTER TABLE `unidades_medida`
-  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

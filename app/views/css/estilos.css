@@ -930,6 +930,26 @@ th.headerUserTitle{
     }
 }
 
+/* Formulario de ingredientes */
+.formAgregarIngrediente{
+    max-width: 500px;
+    margin: auto;
+    border-radius: 0.5rem;
+    box-shadow: 4px 4px 4px var(--fondoOscuro);
+    background-color: var(--fondoBlanco);
+    top: 50px;
+    position: relative;
+    padding-bottom: 0.625rem;
+}
+
+.iconoAlergenoLista{
+    height: 2.5rem;
+    aspect-ratio: 1/1;
+}
+.iconoAlergenoLista img{
+    height: 100%;
+}
+
 /* Clases para las ventanas de sweetAlert2 */
 .botonCerrar{
     border: 0px;
