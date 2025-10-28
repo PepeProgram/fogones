@@ -49,10 +49,21 @@
             <a href="#formAgregarIngrediente">
                 <button class="btn" type="button" onclick="activarFormulario('modulo_ingrediente', 'formAgregarIngrediente', 'guardar', '');">Añadir Ingrediente</button>
             </a>
+
+            <!-- Comprueba si hay utensilios pendientes de revisión -->
+            <?php 
+                $ingredientesPendientes = new ingredienteController();
+                if ($ingredientesPendientes->revisaringredientesControlador()) {
+                    $ocultar = "";
+                }
+                else{
+                    $ocultar = "oculto";
+                }
+            ?>
             
             <!-- Botón para ver los ingredientes pendientes de revisión -->
-            <a href=<?php echo APP_URL."ingredientes/paraRevisar/" ?>>
-                <button class="btn">Pendientes de Revisión</button>
+            <a href=<?php echo APP_URL."ingredientes/paraRevisar/" ?> class="<?php echo $ocultar ?>">
+                <button class="btn btnAlerta">Pendientes de Revisión!!!</button>
             </a>
         </div>
         <div class="listaUsuarios">
@@ -113,7 +124,7 @@
                                             /* Convierte a array los datos del alérgeno */
                                             $datos_alergeno = $datos_alergeno->fetch();
                                             
-                                            /* Obtiene la foto del alérgeno */
+                                            /* Obtiene el icono del alérgeno */
                                             $fotoAlergeno = $datos_alergeno['foto_alergeno'];
                                             
                                             /* Concatena la ruta y el nombre de la foto */
@@ -123,13 +134,18 @@
                                             $nombreAlergeno = $datos_alergeno['nombre_alergeno'];
                                     ?>
                                     <div class="iconoAlergenoLista">
-                                        <img src="<?php echo $fotoAlergeno?>" alt="<?php echo $nombreAlergeno ?>" title="<?php echo $nombreAlergeno ?>">    
+                                        <img src="<?php echo $fotoAlergeno?>" alt="<?php echo $nombreAlergeno ?>" title="<?php echo $nombreAlergeno ?>">
+                                        
+                                        <button class="fa-regular fa-circle-xmark btnQuitarAlergeno userDel" title="Quitar <?php echo $nombreAlergeno ?> a <?php echo $ingrediente->getNombre_ingrediente(); ?>"></button>
 
                                     </div>    
                                         
                                     <?php
                                         }
                                     ?>
+                                    <button class="btnAlergenoLista">
+                                        <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>" title="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>">  
+                                    </button>
 
                                 </div>
                             </td>

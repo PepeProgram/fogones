@@ -76,6 +76,7 @@
                 return json_encode($alerta);
                 exit();
             } else {
+                /* Verificar que el usuario es quien dice ser */
                 $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
 
                 if ($check_user->rowCount()<=0) {
@@ -88,32 +89,35 @@
                     return json_encode($alerta);
                     exit();
                 } else {
-                    if (!$_SESSION['administrador'] || !$_SESSION['redactor']) {
-                        $alerta=[
-                            "tipo"=>"simple",
-                            "titulo"=>"ERROR",
-                            "texto"=>"No puede añadir estilos de cocina si no es redactor o administrador del sistema",
-                            "icono"=>"error"
-                        ];
-                        return json_encode($alerta);
-                        exit();
-                    }
+                    /* Comprobar que el usuario es administrador o revisor */
+                        if (!$_SESSION['administrador']) {
+                            if (!$_SESSION['revisor']) {
+                                $alerta=[
+                                    "tipo"=>"simple",
+                                    "titulo"=>"ERROR GRAVE",
+                                    "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                                    "icono"=>"error"
+                                ];
+                            }
+                            return json_encode($alerta);
+                            exit();
+                        }
                 }
                 
             }
 
-            /* Recupera el nombre del utensilio */
-            if ($_POST['nombre_utensilio']) {
+            /* Recupera el nombre del ingrediente */
+            if ($_POST['nombre_ingrediente']) {
 
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_utensilio'])) {
+                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_ingrediente'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del utensilio de cocina sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del ingrediente sólo puede contener letras, números, .,-,_ y espacios",
                         "icono" => "error"
                     ];
 
@@ -125,14 +129,14 @@
                 }
 
                 /* Limpia los datos para evitar SQL Injection */
-                $nombre_utensilio = $this->limpiarCadena($_POST['nombre_utensilio']);
+                $nombre_ingrediente = $this->limpiarCadena($_POST['nombre_ingrediente']);
 
-                /* Comprueba si el nombre del utensilio ya existe */
-                if ($this->ejecutarConsulta("SELECT * FROM utensilios WHERE nombre_utensilio = '$nombre_utensilio' ")->rowCount()>0) {
+                /* Comprueba si el nombre del ingrediente ya existe */
+                if ($this->ejecutarConsulta("SELECT * FROM ingredientes WHERE nombre_ingrediente = '$nombre_ingrediente' ")->rowCount()>0) {
                     $alerta=[
                         "tipo"=>"simple",
                         "titulo"=>"Error!!!",
-                        "texto"=>"El Utensilio de Cocina $nombre_utensilio ya existe",
+                        "texto"=>"El Ingrediente $nombre_ingrediente ya existe",
                         "icono"=>"error"
                     ];
                     return json_encode($alerta);
@@ -142,130 +146,36 @@
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error!!!",
-                    "texto"=>"El nombre del utensilio de cocina no puede estar vacío",
+                    "texto"=>"El nombre del ingrediente no puede estar vacío",
                     "icono"=>"error"
                 ];
                 return json_encode($alerta);
                 exit();
             }
-
-            /* FOTO DEL UTENSILIO DE COCINA */
-
-            /* Establece el directorio de imágenes */
-            $img_dir = "../views/photos/utensilios_photos/";
-
-            /* Comprueba si hay imágenes en el input */
-            if ($_FILES['foto_utensilio']['name'] != "" && $_FILES['foto_utensilio']['size']>0) {
-                
-                /* Verifica el formato de imagen */
-                if (mime_content_type($_FILES['foto_utensilio']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_utensilio']['tmp_name']) != "image/png") {
-                    $alerta=[
-                        "tipo"=>"recargar",
-                        "titulo"=>"Error al guardar la imagen.",
-                        "texto"=>"El formato de archivo no está permitido. Debe seleccionar una imagen en formato jpg o png",
-                        "icono"=>"error"
-                    ];
-                    return json_encode($alerta);
-                    exit();
-                }
-
-                /* Verifica el tamaño de la imagen */
-                if ($_FILES['foto_utensilio']['size']/1024 > 5120) {
-                    $alerta=[
-                        "tipo"=>"recargar",
-                        "titulo"=>"Error al guardar la imagen",
-                        "texto"=>"El tamaño del archivo de imagen es mayor que el permitido (5 Mb)",
-                        "icono"=>"error"
-                    ];
-                    return json_encode($alerta);
-                    exit();
-                }
-
-                /* Establece el nombre de la nueva imagen */
-                $foto_utensilio = iconv('UTF-8', 'ASCII//IGNORE', $nombre_utensilio);
-                $foto_utensilio = str_ireplace(" ", "_", $foto_utensilio);
-                $foto_utensilio .= "_".rand(0, 10000);
-
-                /* Establece la extensión de la nueva imagen */
-                switch (mime_content_type($_FILES['foto_utensilio']['tmp_name'])) {
-                    case 'image/jpeg':
-                        $foto_utensilio .= ".jpg";
-                        break;
-                    
-                    case 'image/png':
-                        $foto_utensilio .= ".png";
-                        break;
-                }
-
-                /* Crea el directorio si no está creado */
-                if (!file_exists($img_dir)) {
-                    
-                    /* Comprueba si se ha podido crear y asignarle permisos */
-                    if (!mkdir($img_dir, 0777)) {
-                        $alerta = [
-                            "tipo" => "simple",
-                            "titulo" => "Error inesperado.",
-                            "texto" => "No se ha podido crear la carpeta de imágenes",
-                            "icono" => "error"
-                        ];
-                        return json_encode($alerta);
-                        exit();
-                    }
-                }
-
-                /* Permisos del directorio de imágenes por si acaso */
-                chmod($img_dir, 0777);
-
-                /* Sube la imagen al directorio de imágenes */
-                if (!move_uploaded_file($_FILES['foto_utensilio']['tmp_name'], $img_dir.$foto_utensilio)) {
-                    $alerta=[
-                        "tipo"=>"recargar",
-                        "titulo"=>"Error al actualizar la foto",
-                        "texto"=>"No se ha podido guardar la imagen. Inténtelo de nuevo más tarde",
-                        "icono"=>"error"
-                    ];
-                    return json_encode($alerta);
-                    exit();
-                }
-
-                
-            } else {
-                $foto_utensilio = null;
-            }
             
             /* Actualiza la base de datos */
-            $utensilio_datos_reg = [
+            $ingrediente_datos_reg = [
                 [
-                    "campo_nombre"=>"nombre_utensilio",
+                    "campo_nombre"=>"nombre_ingrediente",
                     "campo_marcador"=>":Nombre",
-                    "campo_valor"=>$nombre_utensilio
-                ],
-                [
-                    "campo_nombre"=>"foto_utensilio",
-                    "campo_marcador"=>":Foto",
-                    "campo_valor"=>$foto_utensilio
+                    "campo_valor"=>$nombre_ingrediente
                 ]
             ];
 
-            $registrar_utensilio = $this->guardarDatos("utensilios", $utensilio_datos_reg);
+            $registrar_ingrediente = $this->guardarDatos("ingredientes", $ingrediente_datos_reg);
 
-            if ($registrar_utensilio->rowCount() == 1) {
+            if ($registrar_ingrediente->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
-                    "titulo" => "Felicidades!!!",
-                    "texto" => "El Utensilio de Cocina ".$nombre_utensilio." ha sido registrado correctamente.",
+                    "titulo" => "Ingrediente guardado!!!",
+                    "texto" => "El Ingrediente ".$nombre_ingrediente." ha sido registrado correctamente.",
                     "icono" => "success"
                 ];
             } else {
-                if (is_file($img_dir.$foto_utensilio)) {
-                    chmod($img_dir.$foto_utensilio, 777);
-                    unlink($img_dir.$foto_utensilio);
-                }
-
                 $alerta=[
                     "tipo"=>"simple",
                     "titulo"=>"Error",
-                    "texto"=>"No se ha podido guardar el utensilio de cocina en este momento. Inténtelo de nuevo más tarde",
+                    "texto"=>"No se ha podido guardar el ingrediente en este momento. Inténtelo de nuevo más tarde",
                     "icono"=>"error"
                 ];
             }
@@ -600,14 +510,16 @@
         /* ACTIVAR O DESACTIVAR UN INGREDIENTE */
         public function cambiarActivoIngredienteControlador(){
             
-            /* Comprobar que el usuario es administrador */
+            /* Comprobar que el usuario es administrador o revisor */
             if (!$_SESSION['administrador']) {
-                $alerta=[
-                    "tipo"=>"simple",
-                    "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No puedes cambiar el estado de los ingredientes. No eres administrador del sistema",
-                    "icono"=>"error"
-                ];
+                if (!$_SESSION['revisor']) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR GRAVE",
+                        "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                        "icono"=>"error"
+                    ];
+                }
                 return json_encode($alerta);
                 exit();
             }

@@ -605,6 +605,7 @@ body{
     padding: 1em 0em;
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .userList{
     border-collapse: collapse;
@@ -946,7 +947,18 @@ th.headerUserTitle{
     height: 2.5rem;
     aspect-ratio: 1/1;
 }
-.iconoAlergenoLista img{
+.btnAlergenoLista{
+    height: 2.5rem;
+    aspect-ratio: 1/1;
+    padding: 0.1rem !important;
+}
+.btnQuitarAlergeno{
+    position: relative;
+    top: -3.5rem;
+    left: -1rem;
+}
+.iconoAlergenoLista img,
+.btnAlergenoLista img{
     height: 100%;
 }
 

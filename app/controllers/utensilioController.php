@@ -22,7 +22,6 @@
             else{
                 return false;
             }
-
         }
 
         /* LISTAR LOS UTENSILIOS DE COCINA */
@@ -76,6 +75,8 @@
                 return json_encode($alerta);
                 exit();
             } else {
+
+                /* Comprobar que el usuario es quien dice ser */
                 $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
 
                 if ($check_user->rowCount()<=0) {
@@ -88,13 +89,16 @@
                     return json_encode($alerta);
                     exit();
                 } else {
-                    if (!$_SESSION['administrador'] || !$_SESSION['redactor']) {
-                        $alerta=[
-                            "tipo"=>"simple",
-                            "titulo"=>"ERROR",
-                            "texto"=>"No puede añadir estilos de cocina si no es redactor o administrador del sistema",
-                            "icono"=>"error"
-                        ];
+                    /* Comprobar que el usuario es administrador o revisor */
+                    if (!$_SESSION['administrador']) {
+                        if (!$_SESSION['revisor']) {
+                            $alerta=[
+                                "tipo"=>"simple",
+                                "titulo"=>"ERROR GRAVE",
+                                "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador ni revisor",
+                                "icono"=>"error"
+                            ];
+                        }
                         return json_encode($alerta);
                         exit();
                     }
@@ -600,14 +604,16 @@
         /* ACTIVAR O DESACTIVAR UN UTENSILIO DE COCINA */
         public function cambiarActivoUtensilioControlador(){
             
-            /* Comprobar que el usuario es administrador */
+            /* Comprobar que el usuario es administrador o revisor */
             if (!$_SESSION['administrador']) {
-                $alerta=[
-                    "tipo"=>"simple",
-                    "titulo"=>"ERROR GRAVE",
-                    "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
-                    "icono"=>"error"
-                ];
+                if (!$_SESSION['revisor']) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR GRAVE",
+                        "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                        "icono"=>"error"
+                    ];
+                }
                 return json_encode($alerta);
                 exit();
             }
