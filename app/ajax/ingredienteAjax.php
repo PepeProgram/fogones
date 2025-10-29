@@ -23,7 +23,31 @@
                 echo $insIngrediente->guardarIngredienteControlador();
                 break;
             case 'actualizar':
-                echo $insIngrediente->actualizarIngredienteControlador();
+
+                /* Comprueba si va a actualizar los datos o los alérgenos */
+                if (isset($_POST['alergenos'])) {
+
+                    /* Comprueba si va a agregar o quitar un alérgeno al ingrediente */
+                    if ($_POST['alergenos'] == 'agregarAlergeno') {
+                        echo $insIngrediente->agregarAlergenoIngredienteControlador();
+                    } elseif($_POST['alergenos'] == 'quitarAlergeno') {
+                        echo $insIngrediente->quitarAlergenoIngredienteControlador();
+
+                    } else{
+                        $alerta=[
+                        "tipo"=>"recargar",
+                        "titulo"=>"Error al guardar los datos",
+                        "texto"=>"Se ha producido un errorcito inesperado. Inténtelo de nuevo",
+                        "icono"=>"error"
+                        ];
+                        echo json_encode($alerta);
+                        exit();
+                    }
+                    
+                }
+                else{
+                    echo $insIngrediente->actualizarIngredienteControlador();
+                }
                 break;
             
             case 'eliminar':
@@ -38,7 +62,7 @@
                 $alerta=[
                     "tipo"=>"recargar",
                     "titulo"=>"Error al guardar los datos",
-                    "texto"=>"Se ha producido un error inesperado. Inténtelo de nuevo",
+                    "texto"=>"Se ha producido un errorcito inesperado. Inténtelo de nuevo",
                     "icono"=>"error"
                 ];
                 echo json_encode($alerta);

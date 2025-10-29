@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-10-2025 a las 23:30:35
+-- Tiempo de generación: 29-10-2025 a las 22:03:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -237,10 +237,13 @@ TRUNCATE TABLE `ingredientes`;
 --
 
 INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo_ingrediente`) VALUES
-(1, 'Mantequilla', 1),
 (2, 'Harina de trigo', 1),
-(3, 'Vino', 0),
-(4, 'Pescado azul que no sea sardina ni caballa', 1);
+(3, 'Vino', 1),
+(4, 'Sardinas', 1),
+(6, 'Mantequilla de Cacahuete', 1),
+(7, 'Leche de Vaca', 1),
+(8, 'Mantequilla de vaca', 1),
+(9, 'Azúcar blanco refinado', 1);
 
 -- --------------------------------------------------------
 
@@ -265,10 +268,13 @@ TRUNCATE TABLE `ingredientes_alergenos`;
 --
 
 INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alergeno`) VALUES
-(2, 1, 2),
 (1, 2, 3),
-(4, 3, 7),
-(3, 3, 12);
+(3, 3, 12),
+(21, 4, 5),
+(6, 6, 6),
+(10, 7, 7),
+(5, 8, 2),
+(19, 9, 9);
 
 -- --------------------------------------------------------
 
@@ -872,7 +878,8 @@ INSERT INTO `unidades_medida` (`id_unidad`, `nombre_unidad`) VALUES
 (5, 'c./s.'),
 (6, 'al gusto'),
 (7, 'taza'),
-(8, 'cucharada');
+(8, 'cucharada'),
+(9, 'ud.');
 
 -- --------------------------------------------------------
 
@@ -1224,13 +1231,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -1314,7 +1321,7 @@ ALTER TABLE `tipos_plato`
 -- AUTO_INCREMENT de la tabla `unidades_medida`
 --
 ALTER TABLE `unidades_medida`
-  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -1367,7 +1374,7 @@ ALTER TABLE `favoritas`
 -- Filtros para la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  ADD CONSTRAINT `ingredientes_alergenos_ibfk_1` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `ingredientes_alergenos_ibfk_1` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `ingredientes_alergenos_ibfk_2` FOREIGN KEY (`id_alergeno`) REFERENCES `alergenos` (`id_alergeno`) ON UPDATE CASCADE;
 
 --

@@ -933,14 +933,16 @@ th.headerUserTitle{
 
 /* Formulario de ingredientes */
 .formAgregarIngrediente{
-    max-width: 500px;
+    max-width: 576px;
+    min-width: 300px;
+    width: 94%;
     margin: auto;
     border-radius: 0.5rem;
     box-shadow: 4px 4px 4px var(--fondoOscuro);
     background-color: var(--fondoBlanco);
-    top: 50px;
-    position: relative;
-    padding-bottom: 0.625rem;
+    top: 200px;
+    position: fixed;
+    z-index: 10;
 }
 
 .iconoAlergenoLista{
@@ -960,6 +962,18 @@ th.headerUserTitle{
 .iconoAlergenoLista img,
 .btnAlergenoLista img{
     height: 100%;
+}
+
+@media screen and (min-width:576px) {
+    .formAgregarIngrediente{
+        left: calc(50% - 285px);
+    }
+}
+
+/* Select de alérgenos en ingredientes */
+.verDesplegable form{
+    display: flex;
+    flex-direction: column;
 }
 
 /* Clases para las ventanas de sweetAlert2 */

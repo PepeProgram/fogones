@@ -664,7 +664,7 @@
                 if ($this->actualizarDatos("utensilios", $utensilio_datos_up, $condicion)) {
                     $alerta = [
                         "tipo" => "recargar",
-                        "titulo" => "Felicidades!!!",
+                        "titulo" => "Activado!!!",
                         "texto" => "El utensilio de cocina ".$activo_utensilio['nombre_utensilio']." ha sido activado.",
                         "icono" => "success"
                     ];
@@ -699,7 +699,7 @@
                 if ($this->actualizarDatos("utensilios", $utensilio_datos_up, $condicion)) {
                     $alerta = [
                         "tipo" => "recargar",
-                        "titulo" => "Felicidades!!!",
+                        "titulo" => "Desactivado!!!",
                         "texto" => "El utensilio de cocina ".$activo_utensilio['nombre_utensilio']." ha sido desactivado.",
                         "icono" => "success"
                     ];

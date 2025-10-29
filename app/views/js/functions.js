@@ -218,10 +218,29 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                     break;
                     
                 case 'modulo_ingrediente':
+
+                    /* Comprueba si estoy actualizando datos o agregando alérgenos */
+                    if (form.alergenos) {
+
+                        /* Establece el nombre del módulo y el id del ingrediente porque al haber dos formularios ocultos, hay dos id diferentes */
+                        
+                        form.accionFormAgregar.name = modulo;
+                        form.accionFormAgregar.value = accion;
+                        form.idFormAgregar.value = datosActualizar.id_ingrediente;
+
+                        /* Detecta cuándo cambia la opción seleccionada para cambiar el nombre del formulario y ponerlo en la ventana emergente */
+                        form.alergeno.addEventListener("change", function(){
+                            console.log(this.options[this.selectedIndex].text);
+                            form.name = "Agregar " + this.options[this.selectedIndex].text + " a " + datosActualizar.nombre_ingrediente;
+                        });
+
+                    }
+                    else{
+                        /* Rellena los datos del formulario con los del ingrediente a actualizar */
+                        document.querySelector('#idForm').value = datosActualizar.id_ingrediente;
+                        document.querySelector('#nombreIngrediente').value = datosActualizar.nombre_ingrediente;
+                    }
                     
-                    /* Rellena los datos del formulario con los del ingrediente a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_ingrediente;
-                    document.querySelector('#nombreIngrediente').value = datosActualizar.nombre_ingrediente;
 
                     break;
                     

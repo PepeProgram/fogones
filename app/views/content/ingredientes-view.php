@@ -5,6 +5,9 @@
     /* Carga el controlador de ingredientes */
     use app\controllers\ingredienteController;
 
+    /* Carga el controlador de alérgenos */
+    use app\controllers\alergenoController;
+
 ?>
 <section name="contenido">
     <header class="tituloPagina">
@@ -29,6 +32,40 @@
                     </div>
                     <div class="opcionesAutores">
                         <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Ingrediente"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Select para seleccionar un ingrediente para añadir al alérgeno -->
+        <div id="selectAgregarAlergeno" class="formAgregarIngrediente oculto">
+            <div class="cabeceraForm">
+                <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="desactivarFormulario('selectAgregarAlergeno');"></button>
+            </div>
+            <form action="<?php echo APP_URL; ?>app/ajax/ingredienteAjax.php" class="FormularioAjax" method="POST" name="">
+                <input type="hidden" id="accionFormAgregar" name="" value="">
+                <input type="hidden" id="idFormAgregar" name="id_Form" value="">
+                <input type="hidden" id="alergenos" name="alergenos" value="agregarAlergeno">
+                <div class="autor">
+                    <div class="tituloAutor">
+                        <label for="agregarAlergeno" class="labelForm">Seleccione un alérgeno</label>
+                        <select name="agregarAlergeno" id="alergeno" size="5" required>
+
+                            <!-- Crea una instancia del controlador de alérgenos para obtener la lista -->
+                            <?php
+                                $listaAlergenos = new alergenoController();
+                                $listaAlergenos = $listaAlergenos->listarAlergenosControlador();
+                                
+                                /* Recorre la lista para poner los alérgenos en las opciones */
+                                foreach ($listaAlergenos as $alergeno) {
+                                    echo "<option value='".$alergeno->getId_alergeno()."'>".$alergeno->getNombre_alergeno()."</option>";
+                                }
+                            ?>
+
+                        </select>
+                    </div>
+                    <div class="opcionesAutores">
+                        <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Agregar alérgeno"></button>
                     </div>
                 </div>
             </form>
@@ -135,18 +172,29 @@
                                     ?>
                                     <div class="iconoAlergenoLista">
                                         <img src="<?php echo $fotoAlergeno?>" alt="<?php echo $nombreAlergeno ?>" title="<?php echo $nombreAlergeno ?>">
+
+                                        <!-- Botón para eliminar un alérgeno de un ingrediente -->
+                                        <form class="FormularioAjax" action="<?php echo APP_URL ?>app/ajax/ingredienteAjax.php" method="POST" autocomplete="off" name="Quitar <?php echo $datos_alergeno['nombre_alergeno']?> a <?php echo $ingrediente->getNombre_ingrediente()?>">
+                                            <input type="hidden" name="modulo_ingrediente" value="actualizar">
+                                            <input type="hidden" name="id_ingrediente" value="<?php echo $ingrediente->getId_ingrediente() ?>">
+                                            <input type="hidden" name="id_alergeno" value="<?php echo $datos_alergeno['id_alergeno'] ?>">
+                                            <input type="hidden" id="alergenos" name="alergenos" value="quitarAlergeno">
+
+
+                                            <button class='fa-regular fa-circle-xmark btnQuitarAlergeno userDel' title='Quitar <?php echo $nombreAlergeno ?> a <?php echo $ingrediente->getNombre_ingrediente(); ?>' type="submit"></button>
+                                        </form>
                                         
-                                        <button class="fa-regular fa-circle-xmark btnQuitarAlergeno userDel" title="Quitar <?php echo $nombreAlergeno ?> a <?php echo $ingrediente->getNombre_ingrediente(); ?>"></button>
 
                                     </div>    
                                         
                                     <?php
                                         }
                                     ?>
-                                    <button class="btnAlergenoLista">
+
+                                    <!-- Botón para agregar alérgenos a un ingrediente -->
+                                    <button class="btnAlergenoLista" title='Actualizar datos de ' onclick='activarFormulario("modulo_ingrediente", "selectAgregarAlergeno", "actualizar", <?php echo json_encode($ingrediente); ?>);'>
                                         <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>" title="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>">  
                                     </button>
-
                                 </div>
                             </td>
                             <td>
