@@ -45,7 +45,7 @@
                     if ($_SESSION['redactor']) {
                 ?>
                     <a href="<?php echo APP_URL; ?>misRecetas">Mis recetas</a>
-                    <a href="<?php echo APP_URL; ?>enviarReceta">Enviar receta</a>
+                    <a href="<?php echo APP_URL; ?>recetaData">Enviar receta</a>
                 <?php
                     }
                 ?>

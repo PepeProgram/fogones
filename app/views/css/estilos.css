@@ -474,7 +474,10 @@ body{
 
 /* Formularios */
 .labelForm{
+    font-size: 0.8rem;
+    font-weight: bold;
     font-style: italic;
+    color: var(--oscuro);
 }
 .input{
     width: 100%;
@@ -490,6 +493,9 @@ body{
     border: 1px solid var(--claro);
     border-radius: 0.4rem;
     resize: none;
+}
+select{
+    cursor: pointer;
 }
 .filtrarTablas{
     max-width: 500px;
@@ -841,6 +847,8 @@ th.headerUserTitle{
 }
 .fotoAutorLista img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .banderaAutorLista{
     height: 0.9375rem;
@@ -859,6 +867,7 @@ th.headerUserTitle{
     margin-left: 0.5rem;
     margin-top: 0.5rem;
     font-style: italic;
+    font-weight: bold;
 }
 .origenAutor{
     margin-left: 1rem;
@@ -976,6 +985,12 @@ th.headerUserTitle{
     flex-direction: column;
 }
 
+/* RECETAS */
+/* ENVIAR receta */
+.fotoCabeceraEnviarReceta img{
+    box-shadow: 4px 4px 4px;
+}
+
 /* Clases para las ventanas de sweetAlert2 */
 .botonCerrar{
     border: 0px;
@@ -989,3 +1004,85 @@ th.headerUserTitle{
     border: 0px;
 }
 
+/* Cuadrículas */
+.col-25, .col-33, .col-50, .col-66, .col-75{
+    width: 100%;
+}
+.medio, .izquierda, .derecha, .centro{
+    padding: 0px;
+}
+.top, .bottom, .medio, .derecha, .izquierda, .centro, .vertical{
+    padding-top: 0.5rem;
+}
+.total{
+    padding: 0.5rem;
+}
+.horizontal{
+    flex-direction: column;
+}
+
+.vertical{
+    display: flex;
+    flex-direction: column;
+}
+.foto{
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+.foto img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+@media screen and (min-width:768px) {
+    
+    .col-25{
+        width: 25%;
+    }
+    .col-33{
+        width: 33%;
+    }
+    .col-50{
+        width: 50%;
+    }
+    .col-66{
+        width: 66%;
+    }
+    .col-75{
+        width: 75%;
+    }
+    .col-100{
+        width: 100%;
+    }
+    div:has(.col-33), div:has(.col-66){
+        justify-content: space-between;
+    }
+    .total{
+        padding: 1rem;
+    }
+    .medio{
+        padding: 0.5rem;
+    }
+    .izquierda{
+        padding-left: 0px;
+    }
+    .derecha{
+        padding-right: 0px;
+    }
+    .centro{
+        padding: 0.5rem;
+    }
+    .top{
+        padding-top: 0px;
+    }
+    .bottom{
+        padding-bottom: 0px;
+    }
+    .horizontal{
+        display: flex;
+        flex-direction: row;
+    }
+
+}

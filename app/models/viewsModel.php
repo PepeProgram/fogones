@@ -16,7 +16,7 @@
 
                 /* Comprueba si el usuario es redactor para permitir las vistas de redactor */
                 if ($_SESSION['redactor']) {
-                    array_push($listaBlanca, "misRecetas", "enviarReceta");
+                    array_push($listaBlanca, "misRecetas", "recetaData");
                 }
                 
                 /* Comprueba si el usuario es revisor para permitir las vistas de revisor */

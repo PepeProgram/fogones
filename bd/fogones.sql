@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-10-2025 a las 22:03:28
+-- Tiempo de generación: 30-10-2025 a las 22:27:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -162,7 +162,8 @@ INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `foto_estilo`) VALUE
 (1, 'Mediterránea', NULL),
 (3, 'Internacional', NULL),
 (4, 'Molecular', NULL),
-(8, 'De Autor', NULL);
+(8, 'De Autor', NULL),
+(9, 'Vegana', NULL);
 
 -- --------------------------------------------------------
 
@@ -847,7 +848,8 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 (1, 'Aperitivos', 'aperitivos.jpg'),
 (3, 'Primeros Platos', 'Primeros_Platos_7868.jpg'),
 (4, 'Postres', 'Postres_5632.jpg'),
-(7, 'Segundos platos', 'Segundos_platos_2673.jpg');
+(7, 'Segundos platos', 'Segundos_platos_2673.jpg'),
+(9, 'Para picar', 'Para_picar_9448.jpg');
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1215,7 @@ ALTER TABLE `editores`
 -- AUTO_INCREMENT de la tabla `estilos_cocina`
 --
 ALTER TABLE `estilos_cocina`
-  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `favoritas`
@@ -1315,7 +1317,7 @@ ALTER TABLE `tecnicas`
 -- AUTO_INCREMENT de la tabla `tipos_plato`
 --
 ALTER TABLE `tipos_plato`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `unidades_medida`

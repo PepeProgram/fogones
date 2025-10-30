@@ -1,4 +1,4 @@
-<button id="btn-back" class="btn" title="Volver" aria-label="Volver">
+<button id="btn-back" class="btn" aria-label="Volver">
     <i class="fa-solid fa-chevron-left"></i>
     <span class="">Volver</span>
 </button>
