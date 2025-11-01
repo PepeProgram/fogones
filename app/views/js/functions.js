@@ -133,6 +133,8 @@ function filtrarTablas(input, tabla){
     }
 }
 
+
+/* Activa un formulario en pantalla */
 function activarFormulario(modulo, idContainer, accion, datosActualizar){
         
     /* Enseña el formulario solicitado */
@@ -276,4 +278,125 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
 function desactivarFormulario(idContainer){
     window.location.reload();
     
+}
+
+/* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
+function agregarElementoLista(evento, idCampoSelect, idLista){
+
+    /* Anula la acción del botón */
+    evento.preventDefault();
+    
+    /* Recupera la lista donde hay que agregar elementos */
+    let lista = document.querySelector('#'+idLista);
+    
+    
+    /* Recupera el select con los elementos */
+    let campoSelect = document.querySelector('#' + idCampoSelect);
+    
+    /* Solo se ejecuta si hay algo seleccionado */
+    if (campoSelect.options.selectedIndex != -1) {
+
+        /* Id del elemento a agregar */
+        let id_elemento = campoSelect.value;
+
+        /* Recupera los elementos que están en la lista */
+        let elementos_lista = lista.childNodes;
+
+        /* Crea un array con los id de los elementos que ya están en la lista */
+        let id_elementos_lista = [];
+        
+        for (let i = 1; i < elementos_lista.length; i++) {
+            id_elementos_lista.push(elementos_lista[i].id.split('-')[1])
+        }
+        
+        /* Texto del elemento a agregar */
+        let texto_elemento = campoSelect.options[campoSelect.options.selectedIndex].text;
+
+        /* Comprueba que el elemento no esté ya en la lista */
+        if (!id_elementos_lista.includes(id_elemento)) {
+
+            /* Quita los espacios del texto para ponerlo como id y nombre del input */
+            let id_input = texto_elemento.replace(/ /g, "");
+    
+            /* Crea la linea de la lista */
+            let linea = document.createElement("li");
+            linea.setAttribute('id', 'lu-'+id_elemento);
+    
+            /* Crea el button para eliminar el elemento de la lista */
+            let button = document.createElement('button');
+            button.setAttribute('class', 'fa-solid fa-square-xmark btnIcon userDel');
+            button.setAttribute('title', 'Eliminar '+texto_elemento+' de la lista');
+            button.setAttribute('onclick', 'quitarElementoLista(this, event);');
+    
+            /* Añade el button a la linea */
+            linea.appendChild(button);
+    
+            /* Crea el label para el input hidden oculto */
+            let labelHidden = document.createElement('label');
+            labelHidden.setAttribute('for', id_input+'Oculto');
+            labelHidden.setAttribute('class', 'oculto');
+            labelHidden.textContent = id_input+'Oculto';
+
+            /* Añade el label a la linea */
+            linea.appendChild(labelHidden);
+
+            /* Crea el input oculto para guardar el id del elemento */
+            let inputIdElemento = document.createElement('input');
+            inputIdElemento.setAttribute('type', 'hidden');
+            inputIdElemento.setAttribute('name', id_input+'Oculto');
+            inputIdElemento.setAttribute('Id', id_input+'Oculto');
+            inputIdElemento.setAttribute('value', id_elemento);
+    
+            /* Añade el hidden a la lista */
+            linea.appendChild(inputIdElemento);
+
+             /* Crea el label para el input del texto */
+            let label = document.createElement('label');
+            label.setAttribute('for', id_input);
+            label.setAttribute('class', 'oculto');
+            label.textContent = texto_elemento;
+    
+            /* Añade el label a la linea */
+            linea.appendChild(label);
+    
+            /* Crea el input para colocar el texto del elemento */
+            let inputTextoElemento = document.createElement('input');
+            inputTextoElemento.setAttribute('type', 'text');
+            inputTextoElemento.setAttribute('name', id_input);
+            inputTextoElemento.setAttribute('id', id_input);
+            inputTextoElemento.setAttribute('value', ' '+texto_elemento);
+            inputTextoElemento.setAttribute('disabled','');
+            inputTextoElemento.setAttribute('class', 'listaUtensiliosEnviarReceta inputListas');
+    
+            /* Añade el input a la lista */
+            linea.appendChild(inputTextoElemento);
+    
+            /* Añade la linea a la lista */
+            lista.appendChild(linea);
+            
+        }
+        else{
+            textoAlerta = {
+                tipo: 'simple',
+                icono: 'error',
+                titulo: 'Elemento repetido',
+                texto: texto_elemento+' ya está en la lista',
+                confirmButtonText: 'Aceptar',
+                colorIcono: 'red'};
+            ventanaModal(textoAlerta);
+    
+        }
+
+
+
+
+
+    }
+    
+}
+
+/* Elimina una linea de una lista */
+function quitarElementoLista(linea, evento){
+    evento.preventDefault();
+    linea.parentNode.remove();
 }
