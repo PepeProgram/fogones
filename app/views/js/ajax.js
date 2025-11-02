@@ -62,11 +62,18 @@ formularios_ajax.forEach(formularios => {
                     "body": data
                 };
 
+                /* Comprueba si viene del módulo receta y desactiva el formulario sin recargar la página */
+                if (data.has('modulo_receta')) {
+                    ocultarFormulario(this.parentNode.getAttribute('id'));
+                }
+
                 /* Realiza la petición al action del formulario */
                 fetch(action, config)
 
                 /* Convierte la respuesta a json */
-                .then(respuesta => respuesta.json())
+                .then(respuesta => {
+                    return respuesta.json();
+                })
 
                 /* Devuelve la respuesta */
                 .then(respuesta => {

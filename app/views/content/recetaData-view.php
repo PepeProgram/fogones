@@ -3,8 +3,38 @@
     <?php include "./app/views/inc/btn_back.php"; ?>
 </header>
 
+<!-- Formulario para añadir un utensilio -->
+
+<div id="formAgregarUtensilio" class="formAgregarAutor oculto">
+    <div class="cabeceraForm">
+        <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="ocultarFormulario('formAgregarUtensilio');"></button>
+    </div>
+    <form action="<?php echo APP_URL; ?>app/ajax/utensilioAjax.php" class="FormularioAjax" method="POST" enctype="multipart/form-data" name="">
+        <input type="hidden" id="accionForm" name="" value="">
+        <input type="hidden" id="idForm" name="id_Form" value="">
+        <div class="autor">
+            <div class="fotoautor">
+                <img src="<?php echo APP_URL; ?>app/views/photos/utensilios_photos/default.png" alt="Foto del Utensilio de Cocina" id="fotoUtensilio">
+            </div>
+            <div class="tituloAutor">
+                <label for="nombreUtensilio">Nombre del Utensilio de Cocina:</label>
+                <input type="text" id="nombreUtensilio" class="nombreAutor" name="nombre_utensilio" maxlength="80" required value="" placeholder="Nombre del Utensilio de Cocina" title="Introduzca el nombre del Utensilio de Cocina. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+            </div>
+            <div class="opcionesAutores">
+                <button id="cambiarFotoUtensilio" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoUtensilio-0').click();"></button>
+                <label for="fotoUtensilio-0" class="oculto">Archivo Imagen</label>
+                <input type="file" name="foto_utensilio" id="fotoUtensilio-0" class="file-input" accept=".jpg, .jpeg, .png" onchange="previewImage(this, 'fotoUtensilio', '<?php echo APP_URL; ?>app/views/photos/utensilios_photos/default.png');">
+                <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Utensilio de Cocina"></button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <!-- Cabecera de la receta con la foto -->
 <form action="#" id="formEnviarReceta" class="EnviarReceta">
+
+    
+
     <section name="resumen" id="cabeceraEnviarReceta" class="cabeceraEnviarReceta col-100 horizontal total">
         <div id="fotoCabeceraEnviarReceta" class="fotoCabeceraEnviarReceta foto col-25 total izquierda">
             <img src="<?php echo APP_URL.'app/views/photos/recetas_photos/tiramisu.jpg' ?>" alt="Receta Sin Foto">
@@ -156,11 +186,22 @@
                     </select>
                 </div>
                 <div class="selectEnviarReceta col-100 horizontal top">
-                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn col-66" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta');">Seleccionar</button>
-                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn col-33">Añadir</button>
+
+                    <!-- Botón para agregar un utensilio a la lista -->
+                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn col-66" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Seleccionar</button>
+
+                    <!-- Botón para añadir un nuevo utensilio de cocina -->
+                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn col-33" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Añadir</button>
+
                 </div>
             </div>
             <div id="containerListaUtensiliosEnviarReceta" class="containerListaUtensiliosEnviarReceta vertical col-50 static listasEnviarReceta">
+                
+                <!-- Crea el input oculto para ir guardando los id de los utensilios -->
+                <label for="arrayUtensilios" class="oculto">Lista de utensilios</label>
+                <input type="hidden" name="arrayUtensilios" id="arrayUtensilios" class="arrayUtensilios">
+
+                <!-- Lista de los utensilios que se van añadiendo a la receta -->
                 <ul id="listaUtensiliosEnviarReceta">
                     
                 </ul>
@@ -168,7 +209,7 @@
         </div>
 
         <!-- Ingredientes -->
-         <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta col-40 derecha vertical top">
+        <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta col-40 derecha vertical top">
             <div class="selectEnviarReceta col-100 medio derecha vertical top">
                 <label for="ingredientesEnviarReceta" class="labelForm">Ingredientes</label>
                 <select name="ingredientesEnviarReceta" id="ingredientesEnviarReceta" class="ingredientesEnviarReceta input" size="5">
@@ -182,41 +223,9 @@
                 </select>
 
             </div>
-         </div>
+        </div>
 
     </section>
-    <!-- <section name="utensilios e ingredientes" id="utensiliosIngredientesEnviarReceta" class="utensiliosIngredientesEnviarReceta total horizontal top">
-        <div id="ContainerUtensiliosEnviarReceta" class="ContainerUtensiliosEnviarReceta col-50 horizontal">
-            <div class="selectEnviarReceta col-50 medio vertical">
-                <ul>
-                    <li>Utensilio 1</li>
-                    <li>Utensilio 2</li>
-                    <li>Utensilio 3</li>
-                    <li>Utensilio 4</li>
-                    <li>Utensilio 5</li>
-                    <li>Utensilio 6</li>
-                    <li>Utensilio 7</li>
-                    <li>Utensilio 8</li>
-                </ul>
-            </div>
-            
-        </div>
-        <div id="ContainerIngredientesEnviarReceta" class="ContainerIngredientesEnviarReceta col-50 horizontal">
-            <div class="selectEnviarReceta col-66 medio vertical">
-                <ul>
-                    <li>Ingrediente 1</li>
-                    <li>Ingrediente 2</li>
-                    <li>Ingrediente 3</li>
-                    <li>Ingrediente 4</li>
-                    <li>Ingrediente 5</li>
-                    <li>Ingrediente 6</li>
-                    <li>Ingrediente 7</li>
-                    <li>Ingrediente 8</li>
-                </ul>
-            </div>
-            
-        </div>
-    </section> -->
     <section name="elaboracion y emplatado" id="elaboracionEmplatadoEnviarReceta" class="elaboracionEmplatadoEnviarReceta total horizontal top">
         <div class="elaboracionEnviarReceta col-50 medio izquierda vertical">
             <label for="elaboracionEnviarReceta" class="labelForm">Elaboración:</label>

@@ -280,17 +280,26 @@ function desactivarFormulario(idContainer){
     
 }
 
+/* Oculta un formulario en pantalla sin recargar la página */
+function ocultarFormulario(idContainer){
+    document.querySelector('#'+idContainer).classList.add('oculto');
+    document.querySelector('#'+idContainer).querySelector('form').reset();
+}
+
 /* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
-function agregarElementoLista(evento, idCampoSelect, idLista){
+function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
 
     /* Anula la acción del botón */
     evento.preventDefault();
     
     /* Recupera la lista donde hay que agregar elementos */
     let lista = document.querySelector('#'+idLista);
+
+    /* Recupera el campo para agregar los id de los elementos */
+    idArray = document.querySelector('#'+idArray);
     
     
-    /* Recupera el select con los elementos */
+    /* Recupera el select con el elemento */
     let campoSelect = document.querySelector('#' + idCampoSelect);
     
     /* Solo se ejecuta si hay algo seleccionado */
@@ -315,9 +324,12 @@ function agregarElementoLista(evento, idCampoSelect, idLista){
         /* Comprueba que el elemento no esté ya en la lista */
         if (!id_elementos_lista.includes(id_elemento)) {
 
-            /* Quita los espacios del texto para ponerlo como id y nombre del input */
-            let id_input = texto_elemento.replace(/ /g, "");
-    
+            /* Añade el id del elemento al array de elementos */
+            id_elementos_lista.push(id_elemento);
+
+            /* Guarda los elementos en el input */
+            idArray.value = id_elementos_lista.toString();
+
             /* Crea la linea de la lista */
             let linea = document.createElement("li");
             linea.setAttribute('id', 'lu-'+id_elemento);
@@ -330,49 +342,18 @@ function agregarElementoLista(evento, idCampoSelect, idLista){
     
             /* Añade el button a la linea */
             linea.appendChild(button);
-    
-            /* Crea el label para el input hidden oculto */
-            let labelHidden = document.createElement('label');
-            labelHidden.setAttribute('for', id_input+'Oculto');
-            labelHidden.setAttribute('class', 'oculto');
-            labelHidden.textContent = id_input+'Oculto';
 
-            /* Añade el label a la linea */
-            linea.appendChild(labelHidden);
+            /* Crea el texto de la linea */
+            let texto_linea = document.createElement('span');
+            texto_linea.append(' '+texto_elemento);
 
-            /* Crea el input oculto para guardar el id del elemento */
-            let inputIdElemento = document.createElement('input');
-            inputIdElemento.setAttribute('type', 'hidden');
-            inputIdElemento.setAttribute('name', id_input+'Oculto');
-            inputIdElemento.setAttribute('Id', id_input+'Oculto');
-            inputIdElemento.setAttribute('value', id_elemento);
-    
-            /* Añade el hidden a la lista */
-            linea.appendChild(inputIdElemento);
-
-             /* Crea el label para el input del texto */
-            let label = document.createElement('label');
-            label.setAttribute('for', id_input);
-            label.setAttribute('class', 'oculto');
-            label.textContent = texto_elemento;
-    
-            /* Añade el label a la linea */
-            linea.appendChild(label);
-    
-            /* Crea el input para colocar el texto del elemento */
-            let inputTextoElemento = document.createElement('input');
-            inputTextoElemento.setAttribute('type', 'text');
-            inputTextoElemento.setAttribute('name', id_input);
-            inputTextoElemento.setAttribute('id', id_input);
-            inputTextoElemento.setAttribute('value', ' '+texto_elemento);
-            inputTextoElemento.setAttribute('disabled','');
-            inputTextoElemento.setAttribute('class', 'listaUtensiliosEnviarReceta inputListas');
-    
-            /* Añade el input a la lista */
-            linea.appendChild(inputTextoElemento);
+            /* Añade el texto a la linea */
+            linea.appendChild(texto_linea);
     
             /* Añade la linea a la lista */
             lista.appendChild(linea);
+
+            console.log(idArray.value);
             
         }
         else{
@@ -386,10 +367,6 @@ function agregarElementoLista(evento, idCampoSelect, idLista){
             ventanaModal(textoAlerta);
     
         }
-
-
-
-
 
     }
     

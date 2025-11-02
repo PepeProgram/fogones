@@ -12,8 +12,9 @@
 <script src="<?php echo APP_URL; ?>app/views/js/sweetalert2.all.min.js"></script>
 <!-- Carga las ventanas de alerta personalizadas -->
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/alertas.js"></script>
+<!-- Carga mis funciones -->
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/functions.js"></script>
-<!-- Carga las variables globales -->
+<!-- Carga las variables globales de JavaScript -->
 <script type="text/javascript">
     window.APP_URL = "<?php echo APP_URL ?>";
 </script>

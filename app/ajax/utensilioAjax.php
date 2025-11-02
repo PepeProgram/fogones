@@ -11,7 +11,7 @@
     /* Usa el controlador de utensilios de cocina */
     use app\controllers\utensilioController;
 
-    /* Comprueba si viene del módulo de utensilios de cocina */
+    /* Comprueba si viene del módulo de utensilios de cocina o del de añadir recetas */
     if (isset($_POST['modulo_utensilio'])) {
 
         /* Llama al controlador de utensilios de cocina */
@@ -46,7 +46,45 @@
                 break;
         }
 
-    } else {
+    } elseif (isset($_POST['modulo_receta'])) {
+
+        /* Llama al controlador de utensilios de cocina */
+        $insUtensilio = new utensilioController();
+
+        /* Comprueba lo que tiene que hacer con los datos */
+        switch ($_POST['modulo_receta']) {
+            case 'guardar':
+
+                /* Recupera la respuesta del controlador */
+                $alerta = $insUtensilio->guardarUtensilioControlador();
+
+                /* Convierte la respuesta a un array */
+                $arrayAlerta = json_decode($alerta, true);
+
+                /* Cambia el tipo de ventana de recargar a simple */
+                $arrayAlerta['tipo'] = 'simple';
+
+                /* Añade la clave formulario para indicar que viene del formulario utensilio */
+                $arrayAlerta['formulario'] = 'utensilio';
+
+                /* Vuelve a convertir la respuesta en string json y la devuelve */
+                echo json_encode($arrayAlerta);
+                break;
+            
+            default:
+                $alerta=[
+                    "tipo"=>"recargar",
+                    "titulo"=>"Error al guardar los datos",
+                    "texto"=>"Se ha producido un error inesperado. Inténtelo de nuevo",
+                    "icono"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+                break;
+        }
+    }
+    
+    else {
         session_destroy();
         header("Location: ".APP_URL."principal/");
     }

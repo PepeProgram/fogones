@@ -12,6 +12,8 @@
     </header>
     <div class="contentControl">
 
+
+        <!-- Formulario para Añadir un utensilio -->
         <div id="formAgregarUtensilio" class="formAgregarAutor oculto">
             <div class="cabeceraForm">
                 <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="desactivarFormulario('formAgregarUtensilio');"></button>
