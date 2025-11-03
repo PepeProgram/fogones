@@ -62,17 +62,30 @@ formularios_ajax.forEach(formularios => {
                     "body": data
                 };
 
-                /* Comprueba si viene del módulo receta y desactiva el formulario sin recargar la página */
-                if (data.has('modulo_receta')) {
-                    ocultarFormulario(this.parentNode.getAttribute('id'));
-                }
-
                 /* Realiza la petición al action del formulario */
                 fetch(action, config)
 
                 /* Convierte la respuesta a json */
                 .then(respuesta => {
-                    return respuesta.json();
+                    return respuesta.json()
+                    
+                    .then(respuestaJson =>{
+                        
+                        /* Comprueba si viene del módulo receta y desactiva el formulario sin recargar la página y ejecuta la función nuevoElementoEnLista para añadir una opción nueva en el select y un elemento nuevo en la lista */
+                        if (data.has('modulo_receta')) {
+
+                            /* Oculta y resetea el formulario que da de alta nuevos elementos */
+                            ocultarFormulario(this.parentNode.getAttribute('id'));
+
+                            /* Obtiene el array donde se guardan los elementos de la lista */
+                            let idArrayElementos = this.parentNode.firstElementChild.getAttribute('id');
+
+                            /* Pone el nuevo elemento en el select de elementos y en la lista de elementos */
+                            nuevoElementoEnLista(data.get('selectForm'), data.get('listaForm'), respuestaJson.id, respuestaJson.nombre, idArrayElementos);
+                        }
+
+                        return respuestaJson;
+                    })
                 })
 
                 /* Devuelve la respuesta */

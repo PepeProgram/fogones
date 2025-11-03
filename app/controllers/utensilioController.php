@@ -253,12 +253,20 @@
 
             $registrar_utensilio = $this->guardarDatos("utensilios", $utensilio_datos_reg);
 
+            /* Recupera el id y el nombre del último utensilio añadido */
+            $ultimoInsert = $this->ejecutarConsulta("SELECT * FROM utensilios ORDER BY id_utensilio DESC LIMIT 1");
+            $ultimoInsert = $ultimoInsert->fetch();
+            $ultimoId = $ultimoInsert['id_utensilio'];
+            $ultimoNombre = $ultimoInsert['nombre_utensilio'];
+
             if ($registrar_utensilio->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
                     "texto" => "El Utensilio de Cocina ".$nombre_utensilio." ha sido registrado correctamente.",
-                    "icono" => "success"
+                    "icono" => "success",
+                    "id" => $ultimoId,
+                    "nombre" => $ultimoNombre 
                 ];
             } else {
                 if (is_file($img_dir.$foto_utensilio)) {

@@ -11,7 +11,7 @@
     /* Usa el controlador de utensilios de cocina */
     use app\controllers\utensilioController;
 
-    /* Comprueba si viene del módulo de utensilios de cocina o del de añadir recetas */
+    /* Comprueba si viene del módulo de utensilios de cocina */
     if (isset($_POST['modulo_utensilio'])) {
 
         /* Llama al controlador de utensilios de cocina */
@@ -46,6 +46,8 @@
                 break;
         }
 
+
+    /* Comprueba si viene del módulo receta */
     } elseif (isset($_POST['modulo_receta'])) {
 
         /* Llama al controlador de utensilios de cocina */

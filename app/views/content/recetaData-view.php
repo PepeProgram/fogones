@@ -6,12 +6,20 @@
 <!-- Formulario para añadir un utensilio -->
 
 <div id="formAgregarUtensilio" class="formAgregarAutor oculto">
+
+    <!-- Crea el input oculto para ir guardando los id de los utensilios que hay en la lista de utensilios -->
+    <input type="hidden" name="arrayUtensilios" id="arrayUtensilios" class="arrayUtensilios">
+    <label for="arrayUtensilios" class="oculto">Lista de utensilios</label>
+    
+    <!-- Div que contiene el formulario de agregar utensilios nuevos -->
     <div class="cabeceraForm">
         <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="ocultarFormulario('formAgregarUtensilio');"></button>
     </div>
     <form action="<?php echo APP_URL; ?>app/ajax/utensilioAjax.php" class="FormularioAjax" method="POST" enctype="multipart/form-data" name="">
         <input type="hidden" id="accionForm" name="" value="">
         <input type="hidden" id="idForm" name="id_Form" value="">
+        <input type="hidden" id="listaForm" name="listaForm" value="listaUtensiliosEnviarReceta">
+        <input type="hidden" id="selectForm" name="selectForm" value="selectUtensiliosEnviarReceta">
         <div class="autor">
             <div class="fotoautor">
                 <img src="<?php echo APP_URL; ?>app/views/photos/utensilios_photos/default.png" alt="Foto del Utensilio de Cocina" id="fotoUtensilio">
@@ -178,33 +186,26 @@
                         <option value="4" class="optionUtensiliosEnviarReceta">Pasapurés</option>
                         <option value="5" class="optionUtensiliosEnviarReceta">Olla Express</option>
                         <option value="6" class="optionUtensiliosEnviarReceta">Thermomix</option>
-                        <option value="1" class="optionUtensiliosEnviarReceta">Kitchen Aid</option>
-                        <option value="2" class="optionUtensiliosEnviarReceta">Sous Vide</option>
-                        <option value="4" class="optionUtensiliosEnviarReceta">Pasapurés</option>
-                        <option value="5" class="optionUtensiliosEnviarReceta">Olla Express</option>
-                        <option value="6" class="optionUtensiliosEnviarReceta">Thermomix</option>
                     </select>
                 </div>
                 <div class="selectEnviarReceta col-100 horizontal top">
 
                     <!-- Botón para agregar un utensilio a la lista -->
-                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn col-66" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Seleccionar</button>
+                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn col-50" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Seleccionar</button>
 
                     <!-- Botón para añadir un nuevo utensilio de cocina -->
-                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn col-33" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Añadir</button>
+                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Nuevo</button>
 
                 </div>
             </div>
             <div id="containerListaUtensiliosEnviarReceta" class="containerListaUtensiliosEnviarReceta vertical col-50 static listasEnviarReceta">
                 
-                <!-- Crea el input oculto para ir guardando los id de los utensilios -->
-                <label for="arrayUtensilios" class="oculto">Lista de utensilios</label>
-                <input type="hidden" name="arrayUtensilios" id="arrayUtensilios" class="arrayUtensilios">
-
                 <!-- Lista de los utensilios que se van añadiendo a la receta -->
                 <ul id="listaUtensiliosEnviarReceta">
                     
                 </ul>
+                <!-- ¡¡¡NOTA!!!: El array donde se guardan los id de los utensilios de la lista está junto al formulario de agregar nuevos utensiliosj para poder seleccionarlo de forma más fácil al añadir un nuevo utensilio -->
+
             </div>
         </div>
 

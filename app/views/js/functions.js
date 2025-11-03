@@ -286,18 +286,52 @@ function ocultarFormulario(idContainer){
     document.querySelector('#'+idContainer).querySelector('form').reset();
 }
 
+/* Agrega un elemento recién guardado a un select y su lista asociada */
+function nuevoElementoEnLista(idSelect, idLista, idElemento, nombreElemento, idArrayElementos){
+    
+    /* Recupera el select de los elementos */
+    let selectElementos = document.querySelector('#'+idSelect);
+
+    /* Recupera la clase que tienen las options */
+    let claseOptions = selectElementos.querySelector('option').classList.toString();
+
+    /* Crea la option para añadir al select */
+    let option = document.createElement('option');
+
+    /* Añade la clase de la option */
+    option.setAttribute('class', claseOptions);
+
+    /* Añade el value a la option */
+    option.setAttribute('value', idElemento);
+
+    /* Selecciona la opción */
+    option.setAttribute('selected', '');
+
+    /* Añade el texto a la option */
+    option.innerText = nombreElemento;
+
+    /* Añade la option al select */
+    selectElementos.appendChild(option);
+
+    /* Añade el elemento a la lista */
+    agregarElementoLista('', idSelect, idLista, idArrayElementos);
+
+}
+
 /* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
 function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
 
-    /* Anula la acción del botón */
-    evento.preventDefault();
-    
+    /* Comprueba si llamo a la función desde el botón seleccionar elemento o desde añadir un elemento nuevo */
+    if (evento != '') {
+        /* Anula la acción del botón */
+        evento.preventDefault();
+    }
+
     /* Recupera la lista donde hay que agregar elementos */
     let lista = document.querySelector('#'+idLista);
 
     /* Recupera el campo para agregar los id de los elementos */
     idArray = document.querySelector('#'+idArray);
-    
     
     /* Recupera el select con el elemento */
     let campoSelect = document.querySelector('#' + idCampoSelect);
