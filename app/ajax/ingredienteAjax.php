@@ -68,9 +68,45 @@
                 echo json_encode($alerta);
                 exit();
                 break;
-        }
+        } 
+    } elseif (isset($_POST['modulo_receta'])) {
+        
+        /* Llama al controlador de ingredientes */
+        $insIngrediente = new ingredienteController();
 
+        /* Comprueba lo que tiene que hacer con los datos */
+        switch ($_POST['modulo_receta']) {
+            case 'guardar':
+                
+                /* Recupera la respuesta del controlador */
+                $alerta = $insIngrediente->guardarIngredienteControlador();
+
+                /* Convierte la respuesta a array */
+                $arrayAlerta = json_decode($alerta, true);
+
+                /* Cambia el tipo de ventana de recargar a simple */
+                $arrayAlerta['tipo'] = 'simple';
+
+                /* Añade la clave formulario para indicar que viene del formulario ingrediente */
+                $arrayAlerta['formulario'] = 'ingrediente';
+
+                /* Vuelve a convertir la respuesta en string json y la devuelve */
+                echo json_encode($arrayAlerta);
+                break;
+            
+            default:
+                $alerta=[
+                    "tipo"=>"recargar",
+                    "titulo"=>"Error al guardar los datos",
+                    "texto"=>"Se ha producido un error inesperado. Inténtelo de nuevo",
+                    "icono"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+                break;
+        }
+    
     } else {
-        session_destroy();
-        header("Location: ".APP_URL."principal/");
+        /* session_destroy();
+        header("Location: ".APP_URL."principal/"); */
     }

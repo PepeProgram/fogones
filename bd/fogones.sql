@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-10-2025 a las 22:27:05
+-- Tiempo de generación: 04-11-2025 a las 23:13:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -793,6 +793,7 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 (6, 2),
 (8, 5),
 (9, 13),
+(11, 19),
 (10, 23);
 
 -- --------------------------------------------------------
@@ -953,7 +954,10 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (1, 'Kitchen Aid', 'Kitchen_Aid_5407.jpg', 1),
 (2, 'Sous Vide', 'Sous_Vide_6223.png', 1),
 (4, 'Pasapurés', 'Colador_470.jpg', 1),
-(5, 'Olla Express', 'Olla_Express_3483.jpg', 1);
+(5, 'Olla Express', 'Olla_Express_3483.jpg', 1),
+(6, 'Thermomix', 'Thermomix_2984.jpg', 1),
+(148, 'Cuchara de madera', 'Cuchara_de_madera_5105.jpg', 1),
+(149, 'Cucharilla de café', 'Cucharilla_de_postre_9316.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1237,7 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
@@ -1305,13 +1309,13 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `revisores`
 --
 ALTER TABLE `revisores`
-  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tecnicas`
 --
 ALTER TABLE `tecnicas`
-  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_tecnica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_plato`
@@ -1335,7 +1339,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`

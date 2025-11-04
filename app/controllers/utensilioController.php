@@ -262,7 +262,7 @@
             if ($registrar_utensilio->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
-                    "titulo" => "Felicidades!!!",
+                    "titulo" => "Utensilio guardado!!!",
                     "texto" => "El Utensilio de Cocina ".$nombre_utensilio." ha sido registrado correctamente.",
                     "icono" => "success",
                     "id" => $ultimoId,

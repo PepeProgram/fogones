@@ -1,3 +1,18 @@
+<script type="text/javascript">
+    window.addEventListener('load', function(){
+        console.log('Ejecuta la función');
+
+        /* Rellena el select de zonas geográficas */
+        rellenarSelect('', 'zonaEnviarReceta', 'zonas', '');
+
+        /* Rellena el select de utensilios */
+        rellenarSelect('', 'selectUtensiliosEnviarReceta', 'utensilios', '' );
+
+        /* Rellena el select de ingredientes */
+        rellenarSelect('', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
+    });
+</script>
+
 <header class="tituloPagina">
     <h1>Enviar una nueva receta</h1>
     <?php include "./app/views/inc/btn_back.php"; ?>
@@ -16,8 +31,8 @@
         <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="ocultarFormulario('formAgregarUtensilio');"></button>
     </div>
     <form action="<?php echo APP_URL; ?>app/ajax/utensilioAjax.php" class="FormularioAjax" method="POST" enctype="multipart/form-data" name="">
-        <input type="hidden" id="accionForm" name="" value="">
-        <input type="hidden" id="idForm" name="id_Form" value="">
+        <input type="hidden" id="accionForm_formAgregarUtensilio" name="" value="">
+        <input type="hidden" id="idForm_formAgregarUtensilio" name="id_Form" value="">
         <input type="hidden" id="listaForm" name="listaForm" value="listaUtensiliosEnviarReceta">
         <input type="hidden" id="selectForm" name="selectForm" value="selectUtensiliosEnviarReceta">
         <div class="autor">
@@ -38,14 +53,41 @@
     </form>
 </div>
 
+<!-- Formulario para añadir un ingrediente -->
+
+<div id="formAgregarIngrediente" class="formAgregarIngrediente oculto">
+
+    <!-- Crea el input oculto para ir guardando los id de los ingredientes que hay en la lista de ingredientes -->
+    <input type="hidden" name="arrayIngredientes" id="arrayIngredientes" class="arrayIngredientes">
+    <label for="arrayIngredientes" class="oculto">Lista de ingredientes</label>
+
+    <!-- Div que contiene el formulario de agregar ingredientes nuevos -->
+    <div class="cabeceraForm">
+        <button class="fa-solid fa-xmark" title="Cerrar Formulario" onclick="ocultarFormulario('formAgregarIngrediente');"></button>
+    </div>
+    <form action="<?php echo APP_URL; ?>app/ajax/ingredienteAjax.php" class="FormularioAjax" method="POST" enctype="multipart/form-data" name="">
+        <input type="hidden" id="accionForm_formAgregarIngrediente" name="" value="">
+        <input type="hidden" id="idForm_formAgregarIngrediente" name="id_Form" value="">
+        <input type="hidden" id="listaForm" name="listaForm" value="listaIngredientesEnviarReceta">
+        <input type="hidden" id="selectForm" name="selectForm" value="selectIngredientesEnviarReceta">
+        <div class="autor">
+            <div class="tituloAutor">
+                <label for="nombreIngrediente">Nombre del Ingrediente:</label>
+                <input type="text" id="nombreIngrediente" class="nombreAutor" name="nombre_ingrediente" maxlength="80" required value="" placeholder="Nombre del Ingrediente" title="Introduzca el nombre del Ingrediente. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+            </div>
+            <div class="opcionesAutores">
+                <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Ingrediente"></button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <!-- Cabecera de la receta con la foto -->
 <form action="#" id="formEnviarReceta" class="EnviarReceta">
 
-    
-
     <section name="resumen" id="cabeceraEnviarReceta" class="cabeceraEnviarReceta col-100 horizontal total">
         <div id="fotoCabeceraEnviarReceta" class="fotoCabeceraEnviarReceta foto col-25 total izquierda">
-            <img src="<?php echo APP_URL.'app/views/photos/recetas_photos/tiramisu.jpg' ?>" alt="Receta Sin Foto">
+            <img src="<?php echo APP_URL.'app/views/photos/recetas_photos/default.png' ?>" alt="Receta Sin Foto">
         </div>
 
         <!-- Ficha corta de la receta -->
@@ -141,36 +183,29 @@
 
         <!-- Área geográfica, país, region -->
         <div id="geografiaEnviarReceta" class="geografiaEnviarReceta vertical col-20 izquierda top">
+
             <div class="selectEnviarReceta col-100 medio izquierda vertical top">
                 <label for="zonaEnviarReceta" class="labelForm">Zona Geográfica</label>
-                <select name="zonaEnviarReceta" id="zonaEnviarReceta" class="zonaEnviarReceta input">
-                    <option value="1" class="selectZonaEnviarReceta">Europa</option>
-                    <option value="2" class="selectZonaEnviarReceta">Asia</option>
-                    <option value="3" class="selectZonaEnviarReceta">África</option>
-                    <option value="4" class="selectZonaEnviarReceta">América</option>
-                    <option value="5" class="selectZonaEnviarReceta">Antártida</option>
-                    <option value="6" class="selectZonaEnviarReceta">Australia y Oceanía</option>
+                <select name="zonaEnviarReceta" id="zonaEnviarReceta" class="zonaEnviarReceta input" onchange="rellenarSelect(this.value, 'paisEnviarReceta', 'paises', 'id_zona');">
+                    <option value="0" class="selectZonaEnviarReceta">Seleccione uno</option>
+
+
                 </select>
             </div>
             <div class="selectEnviarReceta col-100 medio izquierda vertical top">
                 <label for="paisEnviarReceta" class="labelForm">País</label>
-                <select name="paisEnviarReceta" id="paisEnviarReceta" class="paisEnviarReceta input">
-                    <option value="1" class="selectPaisEnviarReceta">Afganistán</option>
-                    <option value="24" class="selectPaisEnviarReceta">Benin</option>
-                    <option value="31" class="selectPaisEnviarReceta">Brasil</option>
-                    <option value="64" class="selectPaisEnviarReceta">España</option>
-                    <option value="98" class="selectPaisEnviarReceta">Isla Bouvet</option>
+                <select name="paisEnviarReceta" id="paisEnviarReceta" class="paisEnviarReceta input" onchange="rellenarSelect(this.value, 'regionEnviarReceta', 'regiones', 'id_pais');">
+                    <option value="0" class="selectPaisEnviarReceta">Seleccione uno</option>
+
+
                 </select>
             </div>
             <div class="selectEnviarReceta col-100 medio izquierda vertical top">
-                <label for="regionEnviarReceta" class="labelForm">Región</label>
+                <label for="regionEnviarReceta" class="labelForm">Región o estado</label>
                 <select name="regionEnviarReceta" id="regionEnviarReceta" class="regionEnviarReceta input">
-                    <option value="1" class="selectRegionEnviarReceta">Andalucía</option>
-                    <option value="3" class="selectRegionEnviarReceta">Islas Baleares</option>
-                    <option value="5" class="selectRegionEnviarReceta">Cantabria</option>
-                    <option value="13" class="selectRegionEnviarReceta">Galicia</option>
-                    <option value="15" class="selectRegionEnviarReceta">Principado de Asturias</option>
-                    <option value="18" class="selectRegionEnviarReceta">Ceuta</option>
+                    <option value="0" class="selectRegionEnviarReceta">Seleccione uno</option>
+
+
                 </select>
             </div>
         </div>
@@ -181,20 +216,17 @@
                 <div class="selectEnviarReceta col-100 medio vertical top bottom">
                     <label for="selectUtensiliosEnviarReceta" class="labelForm">Utensilios Necesarios</label>
                     <select name="selectUtensiliosEnviarReceta" id="selectUtensiliosEnviarReceta" class="selectUtensiliosEnviarReceta input" size="5">
-                        <option value="1" class="optionUtensiliosEnviarReceta">Kitchen Aid</option>
-                        <option value="2" class="optionUtensiliosEnviarReceta">Sous Vide</option>
-                        <option value="4" class="optionUtensiliosEnviarReceta">Pasapurés</option>
-                        <option value="5" class="optionUtensiliosEnviarReceta">Olla Express</option>
-                        <option value="6" class="optionUtensiliosEnviarReceta">Thermomix</option>
+                        <option value="0" class="optionUtensiliosEnviarReceta oculto" disabled>Añada utensilios a la lista</option>
+                    
                     </select>
                 </div>
                 <div class="selectEnviarReceta col-100 horizontal top">
 
                     <!-- Botón para agregar un utensilio a la lista -->
-                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn col-50" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Seleccionar</button>
+                    <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Añadir a lista</button>
 
                     <!-- Botón para añadir un nuevo utensilio de cocina -->
-                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Nuevo</button>
+                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Añadir Nuevo</button>
 
                 </div>
             </div>
@@ -210,18 +242,32 @@
         </div>
 
         <!-- Ingredientes -->
-        <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta col-40 derecha vertical top">
-            <div class="selectEnviarReceta col-100 medio derecha vertical top">
-                <label for="ingredientesEnviarReceta" class="labelForm">Ingredientes</label>
-                <select name="ingredientesEnviarReceta" id="ingredientesEnviarReceta" class="ingredientesEnviarReceta input" size="5">
-                    <option value="2" class="selectIngredientesEnviarReceta">Harina de trigo</option>
-                    <option value="3" class="selectIngredientesEnviarReceta">Vino</option>
-                    <option value="4" class="selectIngredientesEnviarReceta">Sardinas</option>
-                    <option value="6" class="selectIngredientesEnviarReceta">Mantequilla de cacahuete</option>
-                    <option value="7" class="selectIngredientesEnviarReceta">Leche de vaca</option>
-                    <option value="8" class="selectIngredientesEnviarReceta">Mantequilla de vaca</option>
-                    <option value="8" class="selectIngredientesEnviarReceta">Azúcar blanco refinado</option>
-                </select>
+
+        <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta horizontal static col-40 top">
+            <div id="agregarIngredientesEnviarReceta" class="agregarIngredientesEnviarReceta vertical col-50 static top">
+                <div class="selectEnviarReceta col-100 medio vertical top bottom">
+                    <label for="selectIngredientsEnviarReceta" class="labelForm">Ingredientes</label>
+                    <select name="selectIngredientesEnviarReceta" id="selectIngredientesEnviarReceta" class="selectIngredientesEnviarReceta input" size="5">
+                        <option value="0" class="optionIngredientesEnviarReceta oculto">Añadir a la lista</option>
+                    </select>
+                </div>
+                <div class="selectEnviarReceta col-100 horizontal top">
+
+                    <!-- Botón para agregar un ingrediente a la lista -->
+                    <button id="btnSeleccionarIngredientesEnviarReceta" class="btnSeleccionarIngredientesEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectIngredientesEnviarReceta', 'listaIngredientesEnviarReceta', 'arrayIngredientes');">Añadir a lista</button>
+
+                    <!-- Botón para añadir un nuevo ingrediente -->
+                    <button id="btnAgregarIngredientesEnviarReceta" class="btnAgregarIngredientesEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarIngrediente', 'guardar', '');">Añadir Nuevo</button>
+
+                </div>
+            </div>
+            <div id="containerListaIngredientesEnviarReceta" class="containerListaIngredientesEnviarReceta vertical col-50 static listasEnviarReceta">
+                
+                <!-- Lista de los utensilios que se van añadiendo a la receta -->
+                <ul id="listaIngredientesEnviarReceta">
+                    
+                </ul>
+                <!-- ¡¡¡NOTA!!!: El array donde se guardan los id de los ingredientes de la lista está junto al formulario de agregar nuevos ingredientes para poder seleccionarlo de forma más fácil al añadir un nuevo ingrediente -->
 
             </div>
         </div>

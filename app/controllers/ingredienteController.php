@@ -166,13 +166,22 @@
             ];
 
             $registrar_ingrediente = $this->guardarDatos("ingredientes", $ingrediente_datos_reg);
+            
+            /* Recupera el id y el nombre del último ingrediente añadido */
+            $ultimoInsert = $this->ejecutarConsulta("SELECT * FROM ingredientes ORDER BY id_ingrediente DESC LIMIT 1");
+            $ultimoInsert = $ultimoInsert->fetch();
+            $ultimoId = $ultimoInsert['id_ingrediente'];
+            $ultimoNombre = $ultimoInsert['nombre_ingrediente'];
+
 
             if ($registrar_ingrediente->rowCount() == 1) {
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Ingrediente guardado!!!",
                     "texto" => "El Ingrediente ".$nombre_ingrediente." ha sido registrado correctamente.",
-                    "icono" => "success"
+                    "icono" => "success",
+                    "id" => $ultimoId,
+                    "nombre" => $ultimoNombre
                 ];
             } else {
                 $alerta=[

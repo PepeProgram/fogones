@@ -143,11 +143,20 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
     /* Obtiene el formulario solicitado completo */
     let form = document.querySelector('#'+idContainer+' > form');
 
+    /* Comprueba si viene del módulo receta */
+    if (modulo == 'modulo_receta') {
+        $accionForm = '#accionForm_'+idContainer;
+        $idForm = '#idForm_'+idContainer;
+    } else {
+        $accionForm = '#accionForm';
+        $idForm = '#idForm'
+    }
+
     /* Establece en el formulario el nombre del módulo */
-    document.querySelector('#accionForm').name = modulo;
+    document.querySelector($accionForm).name = modulo;
 
     /* Establece en el formulario la acción a realizar (guardar, actualizar, etc.) */
-    document.querySelector('#accionForm').value = accion;
+    document.querySelector($accionForm).value = accion;
 
     /* Verifica la acción a realizar */
     switch (accion) {
@@ -164,7 +173,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_autor':
                     
                     /* Rellena los datos del formulario con los del autor a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_autor;
+                    document.querySelector($idForm).value = datosActualizar.id_autor;
                     document.querySelector('#nombreAutor').value = datosActualizar.nombre_autor;
                     if (datosActualizar.id_pais) {
                         document.querySelector('.opcion-'+datosActualizar.id_pais).setAttribute('selected', true);
@@ -177,7 +186,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_estilo':
                     
                     /* Rellena los datos del formulario con los del estilo a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_estilo;
+                    document.querySelector($idForm).value = datosActualizar.id_estilo;
                     document.querySelector('#nombreEstilo').value = datosActualizar.nombre_estilo;
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/styles_photos/"+datosActualizar.foto_estilo;
 
@@ -186,7 +195,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_grupo':
                     
                     /* Rellena los datos del formulario con los del grupo a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_grupo;
+                    document.querySelector($idForm).value = datosActualizar.id_grupo;
                     document.querySelector('#nombreGrupo').value = datosActualizar.nombre_grupo;
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/groups_photos/"+datosActualizar.foto_grupo;
 
@@ -195,7 +204,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_tipo':
                     
                     /* Rellena los datos del formulario con los del tipo a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_tipo;
+                    document.querySelector($idForm).value = datosActualizar.id_tipo;
                     document.querySelector('#nombreTipo').value = datosActualizar.nombre_tipo;
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/tipos_photos/"+datosActualizar.foto_tipo;
 
@@ -204,7 +213,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_metodo':
                     
                     /* Rellena los datos del formulario con los del método de cocción a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_metodo;
+                    document.querySelector($idForm).value = datosActualizar.id_metodo;
                     document.querySelector('#nombreMetodo').value = datosActualizar.nombre_metodo;
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/metodos_photos/"+datosActualizar.foto_metodo;
 
@@ -213,7 +222,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
                 case 'modulo_utensilio':
                     
                     /* Rellena los datos del formulario con los del utensilio a actualizar */
-                    document.querySelector('#idForm').value = datosActualizar.id_utensilio;
+                    document.querySelector($idForm).value = datosActualizar.id_utensilio;
                     document.querySelector('#nombreUtensilio').value = datosActualizar.nombre_utensilio;
                     document.querySelector('.fotoautor > img').src = APP_URL+"app/views/photos/utensilios_photos/"+datosActualizar.foto_utensilio;
 
@@ -232,14 +241,13 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
 
                         /* Detecta cuándo cambia la opción seleccionada para cambiar el nombre del formulario y ponerlo en la ventana emergente */
                         form.alergeno.addEventListener("change", function(){
-                            console.log(this.options[this.selectedIndex].text);
                             form.name = "Agregar " + this.options[this.selectedIndex].text + " a " + datosActualizar.nombre_ingrediente;
                         });
 
                     }
                     else{
                         /* Rellena los datos del formulario con los del ingrediente a actualizar */
-                        document.querySelector('#idForm').value = datosActualizar.id_ingrediente;
+                        document.querySelector($idForm).value = datosActualizar.id_ingrediente;
                         document.querySelector('#nombreIngrediente').value = datosActualizar.nombre_ingrediente;
                     }
                     
@@ -387,8 +395,6 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
             /* Añade la linea a la lista */
             lista.appendChild(linea);
 
-            console.log(idArray.value);
-            
         }
         else{
             textoAlerta = {

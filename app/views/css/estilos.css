@@ -951,7 +951,7 @@ th.headerUserTitle{
 .formAgregarIngrediente{
     max-width: 576px;
     min-width: 300px;
-    width: 94%;
+    width: 99%;
     margin: auto;
     border-radius: 0.5rem;
     box-shadow: 4px 4px 4px var(--fondoOscuro);
@@ -1012,7 +1012,7 @@ th.headerUserTitle{
     width: 80%;
 }
 .btnListas{
-    margin: 0px;
+    font-size: 0.7rem;
 }
 li{
     list-style-position: inside;

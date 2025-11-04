@@ -80,8 +80,13 @@ formularios_ajax.forEach(formularios => {
                             /* Obtiene el array donde se guardan los elementos de la lista */
                             let idArrayElementos = this.parentNode.firstElementChild.getAttribute('id');
 
-                            /* Pone el nuevo elemento en el select de elementos y en la lista de elementos */
-                            nuevoElementoEnLista(data.get('selectForm'), data.get('listaForm'), respuestaJson.id, respuestaJson.nombre, idArrayElementos);
+                            /* Comprueba si ha guardado un nuevo elemento o ha habido un error mirando si existe el id en la respuesta */
+                            if (respuestaJson.id !== undefined) {
+                                
+                                /* Pone el nuevo elemento en el select de elementos y en la lista de elementos */
+                                nuevoElementoEnLista(data.get('selectForm'), data.get('listaForm'), respuestaJson.id, respuestaJson.nombre, idArrayElementos);
+                            }
+
                         }
 
                         return respuestaJson;
