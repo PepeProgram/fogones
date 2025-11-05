@@ -72,7 +72,7 @@ formularios_ajax.forEach(formularios => {
                     .then(respuestaJson =>{
                         
                         /* Comprueba si viene del módulo receta y desactiva el formulario sin recargar la página y ejecuta la función nuevoElementoEnLista para añadir una opción nueva en el select y un elemento nuevo en la lista */
-                        if (data.has('modulo_receta')) {
+                        if (data.has('subform_modulo_receta')) {
 
                             /* Oculta y resetea el formulario que da de alta nuevos elementos */
                             ocultarFormulario(this.parentNode.getAttribute('id'));

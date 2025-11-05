@@ -13,7 +13,7 @@
         /* CHEQUEAR SI HAY UTENSILIOS PENDIENTES DE REVISIÓN */
         public function revisarUtensiliosControlador(){
             /* Ejecuta la búsqueda para comprobar si hay pendientes de revisión */
-            $utensiliosRevisar = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo_utensilio = 0 ORDER BY nombre_utensilio");
+            $utensiliosRevisar = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo = 0 ORDER BY nombre_utensilio");
 
             /* Devuelve true o false */
             if ($utensiliosRevisar->rowCount()>0) {
@@ -32,7 +32,7 @@
             if (isset($vista_actual[3]) && $vista_actual[3] == "paraRevisar"){
 
                 /* Ejecuta la búsqueda de los utensilios de cocina pendientes de revisión */
-                $utensilios = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo_utensilio = 0 ORDER BY nombre_utensilio");
+                $utensilios = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE activo = 0 ORDER BY nombre_utensilio");
             }
             else{
 
@@ -650,13 +650,13 @@
             $activo_utensilio = $activo_utensilio->fetch();
             
             /* Verificar si el utensilio está activo o no */
-            if ($activo_utensilio['activo_utensilio'] == 0) {
+            if ($activo_utensilio['activo'] == 0) {
 
                 /* Desactiva el utensilio */
                 /* Crea el array para guardar los datos */
                 $utensilio_datos_up = [
                     [
-                        "campo_nombre"=>"activo_utensilio",
+                        "campo_nombre"=>"activo",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>1
                     ]
@@ -691,7 +691,7 @@
                 /* Crea el array para guardar los datos */
                 $utensilio_datos_up = [
                     [
-                        "campo_nombre"=>"activo_utensilio",
+                        "campo_nombre"=>"activo",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>0
                     ]

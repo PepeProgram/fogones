@@ -1,15 +1,14 @@
 <script type="text/javascript">
     window.addEventListener('load', function(){
-        console.log('Ejecuta la función');
 
         /* Rellena el select de zonas geográficas */
         rellenarSelect('', 'zonaEnviarReceta', 'zonas', '');
 
         /* Rellena el select de utensilios */
-        rellenarSelect('', 'selectUtensiliosEnviarReceta', 'utensilios', '' );
+        rellenarSelect('activable', 'selectUtensiliosEnviarReceta', 'utensilios', '' );
 
         /* Rellena el select de ingredientes */
-        rellenarSelect('', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
+        rellenarSelect('activable', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
     });
 </script>
 
@@ -95,13 +94,17 @@
             
             <!-- Nombre, nº de personas, dificultad -->
             <div class="nombrePrincipalesInput medio izquierda derecha top horizontal">
-                <div class="vertical col-60 medio izquierda top">
+                <div class="vertical col-40 medio izquierda top">
                     <label for="nombreReceta" class="labelForm">Nombre del plato:</label>
                     <input type="text" name="nombreReceta" id="nombreReceta" class="input nombreReceta">
                 </div>
                 <div class="vertical col-20 medio top">
-                    <label for="numeroPersonasEnviarReceta" class="labelForm">Nº Personas</label>
+                    <label for="numeroPersonasEnviarReceta" class="labelForm">Pax.</label>
                     <input type="number" name="numeroPersonasEnviarReceta" id="numeroPersonasEnviarReceta" class="input numeroPersonasEnviarReceta">
+                </div>
+                <div class="vertical col-20 medio top">
+                    <label for="tiempoElaboracionEnviarReceta" class="labelForm">Tiempo</label>
+                    <input type="time" name="tiempoElaboracionEnviarReceta" id="tiempoElaboracionEnviarReceta" class="input tiempoElaboracionEnviarReceta">
                 </div>
                 <div class="vertical col-20 medio derecha top">
                     <label for="dificultadEnviarReceta" class="labelForm">Dificultad</label>
@@ -158,7 +161,7 @@
                     </select>
                 </div>
 
-                <div class="selectEnviarReceta col-25 medio vertical">
+                <div class="selectEnviarReceta col-25 medio vertical derecha">
                     <label for="grupoPlatosEnviarReceta" class="labelForm">Grupo de Platos<span class="notas"><br>Seleccione uno</span></label>
                     <select name="grupoPlatosEnviarReceta" id="grupoPlatosEnviarReceta" class="input grupoPlatosEnviarReceta">
                         <option value="6" class="selectGrupoPlatosEnviarReceta">Bollería y pastelería</option>
@@ -226,12 +229,12 @@
                     <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Añadir a lista</button>
 
                     <!-- Botón para añadir un nuevo utensilio de cocina -->
-                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Añadir Nuevo</button>
+                    <button id="btnAgregarUtensiliosEnviarReceta" class="btnAgregarUtensiliosEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('subform_modulo_receta', 'formAgregarUtensilio', 'guardar', '');">Añadir Nuevo</button>
 
                 </div>
             </div>
             <div id="containerListaUtensiliosEnviarReceta" class="containerListaUtensiliosEnviarReceta vertical col-50 static listasEnviarReceta">
-                
+                <p class="tituloListas">Lista de utensilios:</p>
                 <!-- Lista de los utensilios que se van añadiendo a la receta -->
                 <ul id="listaUtensiliosEnviarReceta">
                     
@@ -257,12 +260,12 @@
                     <button id="btnSeleccionarIngredientesEnviarReceta" class="btnSeleccionarIngredientesEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectIngredientesEnviarReceta', 'listaIngredientesEnviarReceta', 'arrayIngredientes');">Añadir a lista</button>
 
                     <!-- Botón para añadir un nuevo ingrediente -->
-                    <button id="btnAgregarIngredientesEnviarReceta" class="btnAgregarIngredientesEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('modulo_receta', 'formAgregarIngrediente', 'guardar', '');">Añadir Nuevo</button>
+                    <button id="btnAgregarIngredientesEnviarReceta" class="btnAgregarIngredientesEnviarReceta btn btnListas col-50" type="button" onclick="activarFormulario('subform_modulo_receta', 'formAgregarIngrediente', 'guardar', '');">Añadir Nuevo</button>
 
                 </div>
             </div>
             <div id="containerListaIngredientesEnviarReceta" class="containerListaIngredientesEnviarReceta vertical col-50 static listasEnviarReceta">
-                
+                <p class="tituloListas">Lista de Ingredientes:</p>
                 <!-- Lista de los utensilios que se van añadiendo a la receta -->
                 <ul id="listaIngredientesEnviarReceta">
                     
@@ -273,6 +276,8 @@
         </div>
 
     </section>
+
+    <!-- Elaboración y emplatado -->
     <section name="elaboracion y emplatado" id="elaboracionEmplatadoEnviarReceta" class="elaboracionEmplatadoEnviarReceta total horizontal top">
         <div class="elaboracionEnviarReceta col-50 medio izquierda vertical">
             <label for="elaboracionEnviarReceta" class="labelForm">Elaboración:</label>
@@ -282,5 +287,10 @@
             <label for="emplatadoEnviarReceta" class="labelForm">Emplatado Recomendado:</label>
             <textarea name="emplatadoEnviarReceta" id="emplatadoEnviarReceta" rows="12" class="emplatadoEnviarReceta inputText"></textarea>
         </div>
+    </section>
+
+    <!-- Enviar receta -->
+    <section name='Enviar receta' id="enviarReceta" class="enviarReceta total horizontal">
+        <button type="submit" class="btn col-100">Guardar Receta</button>
     </section>
 </form>

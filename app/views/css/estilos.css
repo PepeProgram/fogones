@@ -1014,16 +1014,51 @@ th.headerUserTitle{
 .btnListas{
     font-size: 0.7rem;
 }
+.tituloListas{
+    color: var(--oscuro);
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
 li{
     list-style-position: inside;
     list-style-type: none;
 }
+li > span{
+    font-size: 0.8rem;
+}
+
+/* Quita las flechas de los input number y select */
+.inputCantidad,
+.inputUnidad{
+    border: none;
+    margin-left: 0.5rem;
+    background-color: transparent;
+    border-bottom: 1px solid var(--oscuro);
+}
+.inputCantidad::-webkit-outer-spin-button,
+.inputCantidad::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.inputCantidad[type=number]{
+    -moz-appearance: textfield;
+}
+.inputCantidad,
+.inputUnidad{
+    appearance: none;
+}
+
 @media screen and (min-width:768px) {
     .listasEnviarReceta{
         margin: 0px;
     }
     .inputListas{
         width: auto;
+    }
+    li > span{
+        font-size: 1rem;
     }
 }
 /* Clases para las ventanas de sweetAlert2 */
@@ -1040,11 +1075,23 @@ li{
 }
 
 /* Cuadrículas */
+.col-10 {
+    width: 10%;
+}
 .col-20, .col-25, .col-33, .col-40, .col-50, .col-60, .col-66, .col-75, .col-80{
     width: 100%;
 }
+.col-10.static{
+    width: 10%;
+}
+.col-20.static{
+    width: 20%;
+}
 .col-50.static{
     width: 50%;
+}
+.col-60.static{
+    width: 60%;
 }
 .medio, .izquierda, .derecha, .centro{
     padding: 0px;

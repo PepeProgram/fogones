@@ -69,13 +69,13 @@
                 exit();
                 break;
         } 
-    } elseif (isset($_POST['modulo_receta'])) {
+    } elseif (isset($_POST['subform_modulo_receta'])) {
         
         /* Llama al controlador de ingredientes */
         $insIngrediente = new ingredienteController();
 
         /* Comprueba lo que tiene que hacer con los datos */
-        switch ($_POST['modulo_receta']) {
+        switch ($_POST['subform_modulo_receta']) {
             case 'guardar':
                 
                 /* Recupera la respuesta del controlador */

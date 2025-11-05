@@ -45,7 +45,6 @@ function activarBotonesAlergenos(boton){
     }
 }
 
-
 /* Pone el nombre del archivo en el input file cuando se elige un archivo */
 function ponerNombreArchivo(){
     let nombre = document.querySelector('#foto_usuario').value;
@@ -133,7 +132,6 @@ function filtrarTablas(input, tabla){
     }
 }
 
-
 /* Activa un formulario en pantalla */
 function activarFormulario(modulo, idContainer, accion, datosActualizar){
         
@@ -144,7 +142,7 @@ function activarFormulario(modulo, idContainer, accion, datosActualizar){
     let form = document.querySelector('#'+idContainer+' > form');
 
     /* Comprueba si viene del módulo receta */
-    if (modulo == 'modulo_receta') {
+    if (modulo == 'subform_modulo_receta') {
         $accionForm = '#accionForm_'+idContainer;
         $idForm = '#idForm_'+idContainer;
     } else {
@@ -300,8 +298,12 @@ function nuevoElementoEnLista(idSelect, idLista, idElemento, nombreElemento, idA
     /* Recupera el select de los elementos */
     let selectElementos = document.querySelector('#'+idSelect);
 
-    /* Recupera la clase que tienen las options */
+    /* Recupera la lista de clases que tienen las options del primer elemento que está oculto */
     let claseOptions = selectElementos.querySelector('option').classList.toString();
+
+    /* Quita el oculto de la lista de clases */
+    claseOptions = claseOptions.toString().split(' ');
+    claseOptions.pop();
 
     /* Crea la option para añadir al select */
     let option = document.createElement('option');
@@ -324,6 +326,7 @@ function nuevoElementoEnLista(idSelect, idLista, idElemento, nombreElemento, idA
     /* Añade el elemento a la lista */
     agregarElementoLista('', idSelect, idLista, idArrayElementos);
 
+
 }
 
 /* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
@@ -335,9 +338,10 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
         evento.preventDefault();
     }
 
+    
     /* Recupera la lista donde hay que agregar elementos */
     let lista = document.querySelector('#'+idLista);
-
+    
     /* Recupera el campo para agregar los id de los elementos */
     idArray = document.querySelector('#'+idArray);
     
@@ -346,13 +350,13 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
     
     /* Solo se ejecuta si hay algo seleccionado */
     if (campoSelect.options.selectedIndex != -1) {
-
+        
         /* Id del elemento a agregar */
         let id_elemento = campoSelect.value;
-
+        
         /* Recupera los elementos que están en la lista */
         let elementos_lista = lista.childNodes;
-
+        
         /* Crea un array con los id de los elementos que ya están en la lista */
         let id_elementos_lista = [];
         
@@ -362,39 +366,80 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
         
         /* Texto del elemento a agregar */
         let texto_elemento = campoSelect.options[campoSelect.options.selectedIndex].text;
-
+        
         /* Comprueba que el elemento no esté ya en la lista */
         if (!id_elementos_lista.includes(id_elemento)) {
-
+            
             /* Añade el id del elemento al array de elementos */
             id_elementos_lista.push(id_elemento);
-
+            
             /* Guarda los elementos en el input */
             idArray.value = id_elementos_lista.toString();
-
+            
             /* Crea la linea de la lista */
             let linea = document.createElement("li");
             linea.setAttribute('id', 'lu-'+id_elemento);
-    
+            
             /* Crea el button para eliminar el elemento de la lista */
             let button = document.createElement('button');
             button.setAttribute('class', 'fa-solid fa-square-xmark btnIcon userDel');
             button.setAttribute('title', 'Eliminar '+texto_elemento+' de la lista');
             button.setAttribute('onclick', 'quitarElementoLista(this, event);');
-    
+            
             /* Añade el button a la linea */
             linea.appendChild(button);
-
+            
+            /* Comprueba si el elemento es un ingrediente */
+            if (idLista == 'listaIngredientesEnviarReceta') {
+                
+                /* Crea input para la cantidad */
+                input_cantidad = document.createElement('input');
+                input_cantidad.setAttribute('type', 'number');
+                input_cantidad.setAttribute('name', 'cant-'+id_elemento);
+                input_cantidad.setAttribute('id', 'cant-'+id_elemento);
+                input_cantidad.setAttribute('class', 'inputCantidad col-20 static');
+                input_cantidad.setAttribute('placeholder', 'cant.');
+                
+                /* Añade el input a la linea */
+                linea.appendChild(input_cantidad);
+                
+                /* Crea el input para las unidades */
+                input_unidad = document.createElement('select');
+                input_unidad.setAttribute('name', 'unid-'+id_elemento);
+                input_unidad.setAttribute('id', 'unid-'+id_elemento);
+                input_unidad.setAttribute('class', 'inputUnidad col-20 static');
+                
+                /* Establece las options con las unidades. Las acaba de rellenar al final */
+                
+                select0 = document.createElement('option');
+                select0.setAttribute('value', 0);
+                select0.append('Unidad');
+                select0.setAttribute('disabled', '');
+                select0.setAttribute('selected', '');
+                input_unidad.append(select0);
+                
+                /* Añade el select a la linea */
+                linea.appendChild(input_unidad);
+                
+            }
+            
             /* Crea el texto de la linea */
             let texto_linea = document.createElement('span');
             texto_linea.append(' '+texto_elemento);
-
+            
             /* Añade el texto a la linea */
             linea.appendChild(texto_linea);
-    
+            
             /* Añade la linea a la lista */
             lista.appendChild(linea);
+            
+            /* Rellena el select de las unidades con las unidades de medida */
+            if (idLista == 'listaIngredientesEnviarReceta') {
+                rellenarSelect('', 'unid-'+id_elemento, 'unidades_medida', '');
+            }
 
+            /* Elimina la selección del select tras haber añadido un elemento a la lista */
+            campoSelect.selectedIndex = -1;
         }
         else{
             textoAlerta = {
@@ -404,8 +449,8 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
                 texto: texto_elemento+' ya está en la lista',
                 confirmButtonText: 'Aceptar',
                 colorIcono: 'red'};
-            ventanaModal(textoAlerta);
-    
+                ventanaModal(textoAlerta);
+                
         }
 
     }

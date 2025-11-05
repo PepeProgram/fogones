@@ -13,7 +13,7 @@
         /* CHEQUEAR SI HAY INGREDIENTES PENDIENTES DE REVISIÓN */
         public function revisarIngredientesControlador(){
             /* Ejecuta la búsqueda para comprobar si hay pendientes de revisión */
-            $ingredientesRevisar = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo_ingrediente = 0");
+            $ingredientesRevisar = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo = 0");
 
             /* Devuelve true o false */
             if ($ingredientesRevisar->rowCount()>0) {
@@ -33,7 +33,7 @@
             if (isset($vista_actual[3]) && $vista_actual[3] == "paraRevisar"){
 
                 /* Ejecuta la búsqueda de los ingredientes pendientes de revisión */
-                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo_ingrediente = 0 ORDER BY nombre_ingrediente");
+                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE activo = 0 ORDER BY nombre_ingrediente");
             }
             else{
 
@@ -731,13 +731,13 @@
             $activo_ingrediente = $activo_ingrediente->fetch();
             
             /* Verificar si el ingrediente está activo o no */
-            if ($activo_ingrediente['activo_ingrediente'] == 0) {
+            if ($activo_ingrediente['activo'] == 0) {
 
                 /* Activa el ingrediente */
                 /* Crea el array para guardar los datos */
                 $ingrediente_datos_up = [
                     [
-                        "campo_nombre"=>"activo_ingrediente",
+                        "campo_nombre"=>"activo",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>1
                     ]
@@ -772,7 +772,7 @@
                 /* Crea el array para guardar los datos */
                 $ingrediente_datos_up = [
                     [
-                        "campo_nombre"=>"activo_ingrediente",
+                        "campo_nombre"=>"activo",
                         "campo_marcador"=>":Activo",
                         "campo_valor"=>0
                     ]

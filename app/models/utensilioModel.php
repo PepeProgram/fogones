@@ -38,7 +38,7 @@
         private function checkActivo(){
             $activo = $this->ejecutarConsulta("SELECT * FROM utensilios WHERE id_utensilio='$this->id_utensilio'");
             $activo = $activo->fetch();
-            return $activo['activo_utensilio'];
+            return $activo['activo'];
             
             
         }

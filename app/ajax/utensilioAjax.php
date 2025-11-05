@@ -48,13 +48,13 @@
 
 
     /* Comprueba si viene del módulo receta */
-    } elseif (isset($_POST['modulo_receta'])) {
+    } elseif (isset($_POST['subform_modulo_receta'])) {
 
         /* Llama al controlador de utensilios de cocina */
         $insUtensilio = new utensilioController();
 
         /* Comprueba lo que tiene que hacer con los datos */
-        switch ($_POST['modulo_receta']) {
+        switch ($_POST['subform_modulo_receta']) {
             case 'guardar':
 
                 /* Recupera la respuesta del controlador */

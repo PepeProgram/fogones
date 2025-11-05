@@ -38,7 +38,7 @@
         private function checkActivo(){
             $activo = $this->ejecutarConsulta("SELECT * FROM ingredientes WHERE id_ingrediente='$this->id_ingrediente'");
             $activo = $activo->fetch();
-            return $activo['activo_ingrediente'];
+            return $activo['activo'];
             
         }
 

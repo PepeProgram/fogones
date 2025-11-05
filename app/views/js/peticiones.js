@@ -80,6 +80,9 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                         clasesOptions = clasesOptions.toString().split(' ');
                         clasesOptions.pop();
                     break;
+                case 'unidades_medida':
+                        id_tabla = 'id_unidad';
+                        nombre = 'nombre_unidad';
 
                 default:
                     break;
@@ -101,7 +104,6 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
 
                 /* Añade la opción al select */
                 campoSelect.append(option);
-                
             }
             
         } catch (error) {
@@ -109,7 +111,7 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 tipo: 'recargar',
                 icono: 'error',
                 titulo: 'Error Fatal!!!',
-                texto: 'Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
+                texto: error+' Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
                 confirmButtonText: 'Aceptar',
                 colorIcono: 'red'};
             ventanaModal(textoAlerta);
