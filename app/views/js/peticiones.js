@@ -65,6 +65,38 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                         id_tabla = 'id_region';
                         nombre = 'nombre_region';
                     break;
+                
+                case 'estilos_cocina':
+                        id_tabla = 'id_estilo';
+                        nombre = 'nombre_estilo';
+
+                        clasesOptions = clasesOptions.toString().split(' ');
+                        clasesOptions.pop();
+                    break;
+
+                case 'tipos_plato':
+                        id_tabla = 'id_tipo';
+                        nombre = 'nombre_tipo';
+
+                        clasesOptions = clasesOptions.toString().split(' ');
+                        clasesOptions.pop();
+                    break;
+                
+                case 'tecnicas':
+                        id_tabla = 'id_tecnica';
+                        nombre = 'nombre_tecnica';
+
+                        clasesOptions = clasesOptions.toString().split(' ');
+                        clasesOptions.pop();
+                    break;
+                
+                case 'grupos_plato':
+                        id_tabla = 'id_grupo';
+                        nombre = 'nombre_grupo';
+
+                        clasesOptions = clasesOptions.toString().split(' ');
+                        clasesOptions.pop();
+                    break;
 
                 case 'utensilios':
                         id_tabla = 'id_utensilio';
@@ -83,6 +115,7 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 case 'unidades_medida':
                         id_tabla = 'id_unidad';
                         nombre = 'nombre_unidad';
+                    break;
 
                 default:
                     break;

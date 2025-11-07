@@ -30,6 +30,19 @@
                 case 'unidades_medida';
                     $nombre = 'nombre_unidad';
                     break;
+                case 'estilos_cocina':
+                    $nombre = 'nombre_estilo';
+                    break;
+                case 'tipos_plato':
+                    $nombre = 'nombre_tipo';
+                    break;
+                case 'grupos_plato':
+                    $nombre = 'nombre_grupo';
+                    break;
+                case 'tecnicas':
+                    $nombre = 'nombre_tecnica';
+                    break;
+
                 default:
                     $nombre = 'nombre_'.substr($tabla, 0, -1);
                     break;

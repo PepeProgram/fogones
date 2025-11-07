@@ -395,25 +395,29 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
                 /* Crea input para la cantidad */
                 input_cantidad = document.createElement('input');
                 input_cantidad.setAttribute('type', 'number');
-                input_cantidad.setAttribute('name', 'cant-'+id_elemento);
+                input_cantidad.setAttribute('name', 'cant['+id_elemento+']');
                 input_cantidad.setAttribute('id', 'cant-'+id_elemento);
                 input_cantidad.setAttribute('class', 'inputCantidad col-20 static');
+                input_cantidad.setAttribute('step', '0.01');
+                input_cantidad.setAttribute('min', '0.01');
                 input_cantidad.setAttribute('placeholder', 'cant.');
+                input_cantidad.setAttribute('title', 'Cantidad de '+texto_elemento);
                 
                 /* Añade el input a la linea */
                 linea.appendChild(input_cantidad);
                 
                 /* Crea el input para las unidades */
                 input_unidad = document.createElement('select');
-                input_unidad.setAttribute('name', 'unid-'+id_elemento);
+                input_unidad.setAttribute('name', 'unid['+id_elemento+']');
                 input_unidad.setAttribute('id', 'unid-'+id_elemento);
                 input_unidad.setAttribute('class', 'inputUnidad col-20 static');
+                input_unidad.setAttribute('title', 'Seleccione unidad de medida')
                 
                 /* Establece las options con las unidades. Las acaba de rellenar al final */
                 
                 select0 = document.createElement('option');
                 select0.setAttribute('value', 0);
-                select0.append('Unidad');
+                select0.append('un./med.');
                 select0.setAttribute('disabled', '');
                 select0.setAttribute('selected', '');
                 input_unidad.append(select0);

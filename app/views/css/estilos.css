@@ -1000,6 +1000,12 @@ th.headerUserTitle{
 .border{
     border: 1px solid;
 }
+.containerListaIngredientesEnviarReceta,
+.containerListaUtensiliosEnviarReceta{
+    min-height: 8rem;
+    border: 1px solid var(--medio);
+    border-radius: 0.4rem;
+}
 .listasEnviarReceta{
     padding-left: 0.5rem;
     margin-top: 1.5rem;
@@ -1016,7 +1022,6 @@ th.headerUserTitle{
 }
 .tituloListas{
     color: var(--oscuro);
-    text-decoration: underline;
     font-style: italic;
     font-weight: bold;
     font-size: 0.8rem;
@@ -1026,7 +1031,7 @@ li{
     list-style-type: none;
 }
 li > span{
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
 /* Quita las flechas de los input number y select */
@@ -1035,18 +1040,14 @@ li > span{
     border: none;
     margin-left: 0.5rem;
     background-color: transparent;
-    border-bottom: 1px solid var(--oscuro);
 }
-.inputCantidad::-webkit-outer-spin-button,
-.inputCantidad::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
+.inputCantidad{
+    border-bottom: 1px solid var(--oscuro);
 }
 .inputCantidad[type=number]{
     -moz-appearance: textfield;
 }
-.inputCantidad,
-.inputUnidad{
+.inputCantidad{
     appearance: none;
 }
 
@@ -1057,9 +1058,9 @@ li > span{
     .inputListas{
         width: auto;
     }
-    li > span{
+    /* li > span{
         font-size: 1rem;
-    }
+    } */
 }
 /* Clases para las ventanas de sweetAlert2 */
 .botonCerrar{
