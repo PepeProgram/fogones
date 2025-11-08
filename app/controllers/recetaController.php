@@ -10,6 +10,48 @@
         /* GUARDAR RECETA */
         public function guardarRecetaControlador(){
 
+            /* Verifica que el usuario ha iniciado sesión, existe y es redactor */
+            if (!isset($_SESSION['id'])) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder enviar una receta",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            } else {
+
+                /* Comprobar que el usuario es quien dice ser */
+                $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
+
+                if ($check_user->rowCount()<=0) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder enviar una receta",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                } else {
+                    /* Comprobar que el usuario es administrador o redactor */
+                    if (!$_SESSION['administrador']) {
+                        if (!$_SESSION['redactor']) {
+                            $alerta=[
+                                "tipo"=>"simple",
+                                "titulo"=>"ERROR GRAVE",
+                                "texto"=>"No puedes enviar recetas. No eres administrador ni redactor",
+                                "icono"=>"error"
+                            ];
+                        }
+                        return json_encode($alerta);
+                        exit();
+                    }
+                }
+                
+            }
+
             /* Función que devuelve el texto de las alertas modificado en función de quién las envía */
             function errorGuardar($campo){
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
@@ -75,7 +117,7 @@
 
             }
 
-            /* Comprueba haya ESTILO DE COCINA seleccionado */
+            /* Comprueba si hay ESTILOS DE COCINA seleccionados */
             if (isset($_POST['estiloCocinaEnviarReceta'])) {
 
                 $estilo_cocina = [];
@@ -114,10 +156,7 @@
                 }
             }
             else{
-                $campo = "métodos de cocción";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
-                exit();
+                $metodo_receta = [""];
 
             }
             
@@ -203,14 +242,19 @@
             /* Recupera el array asociativo de cantidades de ingredientes */
             if (isset($_POST['cant'])) {
                 $cantidad_ingredientes = $_POST['cant'];
+                $correcto = true;
                 foreach ($cantidad_ingredientes as $ingrediente => $cantidad) {
                     if ($cantidad == "" || $cantidad == null || $cantidad <= 0) {
-                        $campo = "cantidad en los ingredientes";
-                        echo errorGuardar($campo);
-                        exit();
+                        $correcto = false;
                     }
+                    $cantidad = $this->limpiarCadena($cantidad);
                 }
-                /* RECORDAR HACER OTRO FOREACH PARA LIMPIAR LAS CADENAS DE LAS CANTIDADES */
+                if (!$correcto) {
+                    $campo = "cantidad en los ingredientes";
+                    echo errorGuardar($campo);
+                    exit();
+                }
+
             } else {
                 $campo = "cantidad en los ingredientes";
                 echo errorGuardar($campo);
@@ -227,8 +271,6 @@
                         exit();
                     }
                 }
-                /* RECORDAR HACER OTRO FOREACH PARA LIMPIAR LAS CADENAS DE LAS UNIDADES */
-                echo json_encode($cantidad_ingredientes);
             } else {
                 $campo = "unidad de medida en los ingredientes";
                 echo errorGuardar($campo);
@@ -258,7 +300,220 @@
                 exit();
             }
 
-            echo 'Nombre: '.$nombre_receta;
+            /* Verificar que cada una de las variables coincide con los patrones de los datos */
+
+            /* Nombre de la receta */
+            if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}", $nombre_receta)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre de la receta sólo puede contener letras, números, .,/,-,_ y espacios. Al menos 3 caracteres y máximo 255",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Número de personas */
+            if ($this->verificarDatos("[0-9]+", $numero_personas)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El número de personas debe ser un número entero positivo",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Tiempo de elaboración */
+            if ($this->verificarDatos("[01]\d|[02][0-3]:[0-5]\d", $tiempo_elaboracion)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El tiempo de elaboración debe ser de la forma hh:mm",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Dificultad de la receta */
+            if ($this->verificarDatos("[1-5]", $dificultad_receta)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El nombre de la receta sólo puede contener letras, números, .,/,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Estilo de cocina */
+            foreach ($estilo_cocina as $estilo) {
+                if ($this->verificarDatos('[0-9]*', $estilo)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el apartado estilo de cocina",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* tipo de plato */
+            foreach ($tipo_plato as $tipo) {
+                if ($this->verificarDatos('[0-9]+', $tipo)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el apartado tipo de plato",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+            
+            /* Método de cocción */
+            foreach ($metodo_receta as $metodo) {
+                if ($this->verificarDatos('[0-9]*', $metodo)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el apartado métodos de cocción",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* Grupo de platos */
+            if ($this->verificarDatos("[0-9]+", $grupo_plato)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el apartado grupo de platos",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Descripción corta */
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}", $_POST['descripcionCorta'])) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "La descripción corta la receta sólo puede contener letras, números, .,/,-,_ y espacios. Máximo 255 caracteres",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Zona geográfica */
+            if ($this->verificarDatos("[0-9]*", $zona_receta)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe la zona geográfica",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+            
+            /* País */
+            if ($this->verificarDatos("[0-9]*", $pais_receta)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el país",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+            
+            /* Región */
+            if ($this->verificarDatos("[0-9]*", $region_receta)) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe la región",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+
+
+
+
+            /* echo 'Nombre: '.$nombre_receta;
             echo 'Personas: '.$numero_personas;
             echo 'Tiempo '.$tiempo_elaboracion;
             echo 'Dificultad '.$dificultad_receta;
@@ -275,9 +530,23 @@
             echo 'Cantidades '.json_encode($cantidad_ingredientes);
             echo 'Unidades '.json_encode($unidad_ingredientes);
             echo 'Elaboración '.$elaboracion_receta;
-            echo 'Emplatado '.$emplatado_receta;
+            echo 'Emplatado '.$emplatado_receta; */
 
 
+
+
+
+
+
+            /* Comprobar que el controlador va funcionando */
+            $alerta=[
+                "tipo"=>"simple",
+                "titulo"=>"Funciona",
+                "texto"=>"Nombre: ".$nombre_receta." Pax: ".$numero_personas." Tiempo: ".$tiempo_elaboracion." Dificultad: ".$dificultad_receta." Estilo:  ".json_encode($estilo_cocina)." Tipo Plato: ".json_encode($tipo_plato)." Método: ".json_encode($metodo_receta)." Grupo Plato: ".$grupo_plato." Descripción: ".$descripcion_receta." Zona: ".$zona_receta." País: ".$pais_receta." Región: ".$region_receta." Utensilios: ".json_encode($utensilios_receta)." Ingredientes: ".json_encode($ingredientes_receta)." Cantidades: ".json_encode($cantidad_ingredientes)." Unidades: ".json_encode($unidad_ingredientes)." Elaboración: ".$elaboracion_receta." Emplatado: ".$emplatado_receta,
+                "icono"=>"success"
+            ];
+            return json_encode($alerta);
+            exit();
 
 
         /* Fin guardarRecetaControlador */

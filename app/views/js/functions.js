@@ -288,8 +288,8 @@ function desactivarFormulario(idContainer){
 
 /* Oculta un formulario en pantalla sin recargar la página */
 function ocultarFormulario(idContainer){
-    document.querySelector('#'+idContainer).classList.add('oculto');
     document.querySelector('#'+idContainer).querySelector('form').reset();
+    document.querySelector('#'+idContainer).classList.add('oculto');
 }
 
 /* Agrega un elemento recién guardado a un select y su lista asociada */
@@ -338,6 +338,7 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
         evento.preventDefault();
     }
 
+    const array = idArray;
     
     /* Recupera la lista donde hay que agregar elementos */
     let lista = document.querySelector('#'+idLista);
@@ -384,7 +385,7 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
             let button = document.createElement('button');
             button.setAttribute('class', 'fa-solid fa-square-xmark btnIcon userDel');
             button.setAttribute('title', 'Eliminar '+texto_elemento+' de la lista');
-            button.setAttribute('onclick', 'quitarElementoLista(this, event);');
+            button.setAttribute('onclick', 'quitarElementoLista(this, event, '+array+');');
             
             /* Añade el button a la linea */
             linea.appendChild(button);
@@ -411,14 +412,14 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
                 input_unidad.setAttribute('name', 'unid['+id_elemento+']');
                 input_unidad.setAttribute('id', 'unid-'+id_elemento);
                 input_unidad.setAttribute('class', 'inputUnidad col-20 static');
-                input_unidad.setAttribute('title', 'Seleccione unidad de medida')
+                input_unidad.setAttribute('title', 'Seleccione unidad de medida para '+texto_elemento);
                 
                 /* Establece las options con las unidades. Las acaba de rellenar al final */
                 
                 select0 = document.createElement('option');
                 select0.setAttribute('value', 0);
                 select0.append('un./med.');
-                select0.setAttribute('disabled', '');
+                select0.setAttribute('class', 'unaCualquiera oculto');
                 select0.setAttribute('selected', '');
                 input_unidad.append(select0);
                 
@@ -462,7 +463,24 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
 }
 
 /* Elimina una linea de una lista */
-function quitarElementoLista(linea, evento){
+function quitarElementoLista(linea, evento, array){
     evento.preventDefault();
+
+    /* Recupera el id del elemento */
+    id_elemento = linea.parentNode.id.split('-')[1];
+
+    /* Convierte el input de los elementos a array */
+    array_elementos = array.value.split(',');
+
+    /* Busca el index del elemento en el array */
+    indexElement = array_elementos.indexOf(id_elemento);
+
+    /* Elimina el elemento del array */
+    array_elementos.splice(indexElement, 1);
+
+    /* Devuelve al input el array con el elemento borrado */
+    array.value = array_elementos;
+
+    /* Elimina la línea de la lista de elementos */
     linea.parentNode.remove();
 }

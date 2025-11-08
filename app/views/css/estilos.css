@@ -1002,7 +1002,9 @@ th.headerUserTitle{
 }
 .containerListaIngredientesEnviarReceta,
 .containerListaUtensiliosEnviarReceta{
-    min-height: 8rem;
+    height: 8rem;
+    overflow: hidden;
+    overflow-y: auto;
     border: 1px solid var(--medio);
     border-radius: 0.4rem;
 }

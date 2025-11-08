@@ -16,7 +16,7 @@
             ";
     } 
 
-    /* Comprueba si el usuario es administrador */
+    /* Comprueba si el usuario es administrador o redactor */
     if (!isset($_SESSION['administrador'])) {
 
         /* Comprueba si el usuario es redactor */
@@ -95,7 +95,7 @@
             </div>
             <div class="tituloAutor">
                 <label for="nombreUtensilio">Nombre del Utensilio de Cocina:</label>
-                <input type="text" id="nombreUtensilio" class="nombreAutor" name="nombre_utensilio" maxlength="80" required value="" placeholder="Nombre del Utensilio de Cocina" title="Introduzca el nombre del Utensilio de Cocina. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                <input type="text" id="nombreUtensilio" class="nombreAutor" name="nombre_utensilio" maxlength="80" required value="" placeholder="Nombre del Utensilio de Cocina" maxlength="80" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,80}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,/,_ y espacios. Máximo 80 caracteres">
             </div>
             <div class="opcionesAutores">
                 <button id="cambiarFotoUtensilio" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoUtensilio-0').click();"></button>
@@ -126,7 +126,7 @@
         <div class="autor">
             <div class="tituloAutor">
                 <label for="nombreIngrediente">Nombre del Ingrediente:</label>
-                <input type="text" id="nombreIngrediente" class="nombreAutor" name="nombre_ingrediente" maxlength="80" required value="" placeholder="Nombre del Ingrediente" title="Introduzca el nombre del Ingrediente. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                <input type="text" id="nombreIngrediente" class="nombreAutor" name="nombre_ingrediente" maxlength="80" required value="" placeholder="Nombre del Ingrediente" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,80}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,/,_ y espacios. Máximo 80 caracteres">
             </div>
             <div class="opcionesAutores">
                 <button id="guardarCambios" type="submit" class="fa-solid fa-floppy-disk desactivar" title="Guardar Ingrediente"></button>
@@ -135,8 +135,9 @@
     </form>
 </div>
 <p class="notas centrar">Los campos con * son obligatorios</p>
+
 <!-- Cabecera de la receta con la foto -->
-<form action="<?php echo APP_URL; ?>app/ajax/recetaAjax.php" id="formEnviarReceta" method="POST" class="" name="Guardar Receta?">
+<form action="<?php echo APP_URL; ?>app/ajax/recetaAjax.php" id="formEnviarReceta" method="POST" class="FormularioAjax" name="Guardar Receta?">
 
     <!-- Campo que indica que viene del módulo recetas y la acción que tiene que realizar -->
     <input type="hidden" name="modulo_receta" value="guardar">
@@ -153,7 +154,7 @@
             <div class="nombrePrincipalesInput medio izquierda derecha top horizontal">
                 <div class="vertical col-40 medio izquierda top">
                     <label for="nombreReceta" class="labelForm">Nombre del plato*</label>
-                    <input type="text" name="nombreReceta" id="nombreReceta" class="input  nombreReceta" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,255}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,_ y espacios">
+                    <input type="text" name="nombreReceta" id="nombreReceta" class="input  nombreReceta" maxlength="255" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,/,_ y espacios. Máximo 255 caracteres">
                 </div>
                 <div class="vertical col-20 medio top">
                     <label for="numeroPersonasEnviarReceta" class="labelForm">Pax.*</label>
@@ -208,7 +209,7 @@
                 
                 <!-- Método de cocción -->
                 <div class="selectEnviarReceta col-25 medio vertical">
-                    <label for="metodoEnviarReceta" class="labelForm">Métodos de Cocción*<span class="notas"><br>Ctrl-click para más de uno</span></label>
+                    <label for="metodoEnviarReceta" class="labelForm">Métodos de Cocción<span class="notas"><br>Ctrl-click para más de uno</span></label>
                     <select name="metodoEnviarReceta[]" id="metodoEnviarReceta" class="input metodoEnviarReceta" multiple>
                         <option value="0" class="selectMetodoEnviarReceta oculto" selected disabled>Seleccione métodos de cocción</option>
                         
@@ -228,7 +229,7 @@
             <!-- Descripción Corta de la receta -->
             <div id="descripcionEnviarReceta" class="descripcionEnviarReceta col-100 vertical">
                 <label for="descripcionCorta" class="labelForm">Descripción Corta de la Receta*</label>
-                <textarea name="descripcionCorta" rows="4" id="descripcionCorta" class="descripcionCorta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,255}" title="Introduzca una descripción corta. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
+                <textarea name="descripcionCorta" rows="4" id="descripcionCorta" class="descripcionCorta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}" maxlength="255" title="Introduzca una descripción corta. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
             </div>
         </div>
     </section>
@@ -342,11 +343,11 @@
     <section name="elaboracion y emplatado" id="elaboracionEmplatadoEnviarReceta" class="elaboracionEmplatadoEnviarReceta total horizontal top">
         <div class="elaboracionEnviarReceta col-50 medio izquierda vertical">
             <label for="elaboracionEnviarReceta" class="labelForm">Elaboración:*</label>
-            <textarea name="elaboracionEnviarReceta" id="elaboracionEnviarReceta" rows="12" class="elaboracionEnviarReceta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3, }" title="Explique la elaboración de la receta. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
+            <textarea name="elaboracionEnviarReceta" id="elaboracionEnviarReceta" rows="12" class="elaboracionEnviarReceta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3, }" title="Explique la elaboración de la receta. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
         </div>
         <div class="emplatadoEnviarReceta col-50 medio derecha vertical">
             <label for="emplatadoEnviarReceta" class="labelForm">Sugerncias de emplatado:</label>
-            <textarea name="emplatadoEnviarReceta" id="emplatadoEnviarReceta" rows="12" class="emplatadoEnviarReceta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3, }" title="Describa una o más sugerencias de emplatado. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
+            <textarea name="emplatadoEnviarReceta" id="emplatadoEnviarReceta" rows="12" class="emplatadoEnviarReceta inputText" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3, }" title="Describa una o más sugerencias de emplatado. Sólo puede contener letras, números, .,-,_ y espacios"></textarea>
         </div>
     </section>
 

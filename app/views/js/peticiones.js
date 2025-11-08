@@ -115,6 +115,9 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 case 'unidades_medida':
                         id_tabla = 'id_unidad';
                         nombre = 'nombre_unidad';
+
+                        clasesOptions = clasesOptions.toString().split(' ');
+                        clasesOptions.pop();
                     break;
 
                 default:
