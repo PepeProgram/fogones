@@ -209,7 +209,7 @@
                 
                 <!-- Método de cocción -->
                 <div class="selectEnviarReceta col-25 medio vertical">
-                    <label for="metodoEnviarReceta" class="labelForm">Métodos de Cocción<span class="notas"><br>Ctrl-click para más de uno</span></label>
+                    <label for="metodoEnviarReceta" class="labelForm">Métodos<span class="notas"><br>Ctrl-click para más de uno</span></label>
                     <select name="metodoEnviarReceta[]" id="metodoEnviarReceta" class="input metodoEnviarReceta" multiple>
                         <option value="0" class="selectMetodoEnviarReceta oculto" selected disabled>Seleccione métodos de cocción</option>
                         

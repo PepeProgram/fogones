@@ -141,6 +141,10 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 /* Añade la opción al select */
                 campoSelect.append(option);
             }
+
+            if (tabla == 'paises') {
+                rellenarSelect(0, 'regionEnviarReceta', 'regiones', 'id_region');
+            }
             
         } catch (error) {
             textoAlerta = {

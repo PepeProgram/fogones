@@ -160,7 +160,8 @@ function alertas_ajax(alerta){
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                document.querySelector(".FormularioAjax").reset();
+                let formularios = document.querySelectorAll(".FormularioAjax");
+                formularios.forEach(formulario => formulario.reset());
                 limpiarFormulario();
             }
         });

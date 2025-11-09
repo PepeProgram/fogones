@@ -127,7 +127,7 @@
                 }
             }
             else{
-                $estilo_cocina = [""];
+                $estilo_cocina = [];
             }
 
             /* Comprueba si hay array con TIPOS DE PLATO */
@@ -156,7 +156,7 @@
                 }
             }
             else{
-                $metodo_receta = [""];
+                $metodo_receta = [];
 
             }
             
@@ -509,6 +509,334 @@
                     exit();
             }
 
+            /* Utensilios */
+            foreach ($utensilios_receta as $utensilio) {
+                if ($this->verificarDatos('[0-9]*', $utensilio)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe la lista de utensilios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* Lista de ingredientes */
+            foreach ($ingredientes_receta as $ingrediente) {
+                if ($this->verificarDatos('[0-9]+', $ingrediente)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe el apartado de ingredientes",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* Cantidades de ingredientes */
+            foreach ($cantidad_ingredientes as $ingrediente => $cantidad) {
+                if ($this->verificarDatos('(\d+(\.\d*)?|\.\d+)', $cantidad)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe las cantidades en la lista de ingredientes",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* Unidades en los ingredientes */
+            foreach ($unidad_ingredientes as $unidad) {
+                if ($this->verificarDatos('[0-9]+', $unidad)) {
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "Compruebe las unidades en la lista de ingredientes",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+            }
+
+            /* Elaboración */
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\*\/\-_ ]{3,}", $_POST['elaboracionEnviarReceta'])) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "La elaboración de la receta debe tener al menos 3 caracteres y sólo puede contener letras, números, *, .,/,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* Emplatado */
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                    $alerta = [
+                        "tipo" => "simple",
+                        "titulo" => "Error en el formulario",
+                        "texto" => "El emplatado sólo puede contener letras, números, *, .,/,-,_ y espacios",
+                        "icono" => "error"
+                    ];
+
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+
+                    /* Detiene la ejecución del script */
+                    exit();
+            }
+
+            /* GUARDAR LA RECETA */
+
+            /* Establece los campos para guardar la receta */
+            $receta_datos_reg = [
+                /* Id usuario */
+                [
+                    "campo_nombre"=>"id_usuario",
+                    "campo_marcador"=>":Usuario",
+                    "campo_valor"=>$_SESSION['id']
+                ],
+                /* Nombre de la receta */
+                [
+                    "campo_nombre"=>"nombre_receta",
+                    "campo_marcador"=>":Nombre",
+                    "campo_valor"=>$nombre_receta
+                ],
+                /* Número de personas */
+                [
+                    "campo_nombre"=>"n_personas",
+                    "campo_marcador"=>":Personas",
+                    "campo_valor"=>$numero_personas
+                ],
+                /* Tiempo de elaboración */
+                [
+                    "campo_nombre"=>"tiempo_receta",
+                    "campo_marcador"=>":Tiempo",
+                    "campo_valor"=>$tiempo_elaboracion
+                ],
+                /* Dificultad */
+                [
+                    "campo_nombre"=>"dificultad",
+                    "campo_marcador"=>":Dificultad",
+                    "campo_valor"=>$dificultad_receta
+                ],
+                /* Grupo de platos */
+                [
+                    "campo_nombre"=>"id_grupo",
+                    "campo_marcador"=>":Grupo",
+                    "campo_valor"=>$grupo_plato
+                ],
+                /* Descripción corta */
+                [
+                    "campo_nombre"=>"descripcion_receta",
+                    "campo_marcador"=>":Descripcion",
+                    "campo_valor"=>$descripcion_receta
+                ],
+                /* Zona geográfica */
+                [
+                    "campo_nombre"=>"id_zona",
+                    "campo_marcador"=>":Zona",
+                    "campo_valor"=>$zona_receta
+                ],
+                /* País */
+                [
+                    "campo_nombre"=>"id_pais",
+                    "campo_marcador"=>":Pais",
+                    "campo_valor"=>$pais_receta
+                ],
+                /* Región */
+                [
+                    "campo_nombre"=>"id_region",
+                    "campo_marcador"=>":Region",
+                    "campo_valor"=>$region_receta
+                ],
+                /* Elaboracion */
+                [
+                    "campo_nombre"=>"elaboracion",
+                    "campo_marcador"=>":Elaboracion",
+                    "campo_valor"=>$elaboracion_receta
+                ],
+                /* Emplatado */
+                [
+                    "campo_nombre"=>"emplatado",
+                    "campo_marcador"=>":Emplatado",
+                    "campo_valor"=>$emplatado_receta
+                ],
+                /* Fecha de creación */
+                [
+                    "campo_nombre"=>"creado_receta",
+                    "campo_marcador"=>":Creado",
+                    "campo_valor"=>date("Y-m-d H:i:s")
+                ],
+                /* Fecha de actualización */
+                [
+                    "campo_nombre"=>"actualizado_receta",
+                    "campo_marcador"=>":Actualizado",
+                    "campo_valor"=>date("Y-m-d H:i:s")
+                ]
+            ];
+
+            /* Guarda la receta llamando al método del mainModel */
+            $registrar_receta = $this->guardarDatos("recetas", $receta_datos_reg);
+
+            /* Comprueba si se han insertado los datos */
+            if ($registrar_receta->rowCount() == 1) {
+
+                /* Recupera el id de la receta guardada */
+                $ultimaGuardada = $this->ejecutarConsulta("SELECT * FROM recetas ORDER BY id_receta DESC LIMIT 1");
+                $ultimaGuardada = $ultimaGuardada->fetch();
+                $id_receta = $ultimaGuardada['id_receta'];
+
+                /* Recorre el array de los estilos de cocina */
+                foreach ($estilo_cocina as $estilo) {
+                    /* Establece la variable para guardar cada estilo en la tabla recetas_estilos */
+                    $guardar_estilo = [
+                        /* Id receta */
+                        [
+                            "campo_nombre"=>"id_receta",
+                            "campo_marcador"=>":Receta",
+                            "campo_valor"=>$id_receta
+                        ],
+                        /* Id estilo */
+                        [
+                            "campo_nombre"=>"id_estilo",
+                            "campo_marcador"=>":Estilo",
+                            "campo_valor"=>$estilo
+                        ]
+                    ];
+
+                    /* Guarda los estilos llamando al método del mainModel */
+                    $registrar_estilo = $this->guardarDatos("recetas_estilos", $guardar_estilo);
+                    if (!$registrar_estilo->rowCount() == 1 ) {
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                    }
+
+                }
+
+                /* Recorre el array de los tipos de plato */
+                foreach ($tipo_plato as $tipo) {
+                    /* Establece la variable para guardar cada estilo en la tabla recetas_estilos */
+                    $guardar_tipo = [
+                        /* Id receta */
+                        [
+                            "campo_nombre"=>"id_receta",
+                            "campo_marcador"=>":Receta",
+                            "campo_valor"=>$id_receta
+                        ],
+                        /* Id tipo */
+                        [
+                            "campo_nombre"=>"id_tipo",
+                            "campo_marcador"=>":Tipo",
+                            "campo_valor"=>$tipo
+                        ]
+                    ];
+
+                    /* Guarda los tipos de plato llamando al método del mainModel */
+                    $registrar_tipo = $this->guardarDatos("recetas_tiposplato", $guardar_tipo);
+                    if (!$registrar_tipo->rowCount() == 1 ) {
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                    }
+
+                }
+
+                /* Recorre el array de los métodos */
+                foreach ($metodo_receta as $metodo) {
+                    /* Establece la variable para guardar cada estilo en la tabla recetas_estilos */
+                    $guardar_metodo = [
+                        /* Id receta */
+                        [
+                            "campo_nombre"=>"id_receta",
+                            "campo_marcador"=>":Receta",
+                            "campo_valor"=>$id_receta
+                        ],
+                        /* Id tipo */
+                        [
+                            "campo_nombre"=>"id_tecnica",
+                            "campo_marcador"=>":Tecnica",
+                            "campo_valor"=>$metodo
+                        ]
+                    ];
+
+                    /* Guarda los métodos llamando al método del mainModel */
+                    $registrar_metodo = $this->guardarDatos("recetas_tecnicas", $guardar_metodo);
+                    if (!$registrar_metodo->rowCount() == 1 ) {
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                    }
+
+                }
+
+
+
+
+
+                /* Ventana de Éxito y limpia el formulario */
+                $alerta = [
+                    "tipo" => "limpiarRegistro",
+                    "titulo" => "Felicidades!!!",
+                    "texto" => "La receta ".$nombre_receta." ha sido guardada correctamente por el usuario ".$_SESSION['id']." con el id ".$id_receta,
+                    "icono" => "success"
+                ];
+
+            } else {
+
+                /* Muestra la ventana de error */
+                $alerta = [
+                    "tipo"=>"simple",
+                    "titulo"=>"Error inesperado",
+                    "texto"=>"No hemos podido guardar la receta. Por favor, inténtelo de nuevo más tarde.",
+                    "icono"=>"error"
+                ];
+            }
+            
+            /* Devuelve la ventana de información */
+            return json_encode($alerta);
 
 
 
@@ -542,8 +870,9 @@
             $alerta=[
                 "tipo"=>"simple",
                 "titulo"=>"Funciona",
-                "texto"=>"Nombre: ".$nombre_receta." Pax: ".$numero_personas." Tiempo: ".$tiempo_elaboracion." Dificultad: ".$dificultad_receta." Estilo:  ".json_encode($estilo_cocina)." Tipo Plato: ".json_encode($tipo_plato)." Método: ".json_encode($metodo_receta)." Grupo Plato: ".$grupo_plato." Descripción: ".$descripcion_receta." Zona: ".$zona_receta." País: ".$pais_receta." Región: ".$region_receta." Utensilios: ".json_encode($utensilios_receta)." Ingredientes: ".json_encode($ingredientes_receta)." Cantidades: ".json_encode($cantidad_ingredientes)." Unidades: ".json_encode($unidad_ingredientes)." Elaboración: ".$elaboracion_receta." Emplatado: ".$emplatado_receta,
-                "icono"=>"success"
+                "texto"=>json_encode($receta_datos_reg)
+                /* "texto"=>"Nombre: ".$nombre_receta." Pax: ".$numero_personas." Tiempo: ".$tiempo_elaboracion." Dificultad: ".$dificultad_receta." Estilo:  ".json_encode($estilo_cocina)." Tipo Plato: ".json_encode($tipo_plato)." Método: ".json_encode($metodo_receta)." Grupo Plato: ".$grupo_plato." Descripción: ".$descripcion_receta." Zona: ".$zona_receta." País: ".$pais_receta." Región: ".$region_receta." Utensilios: ".json_encode($utensilios_receta)." Ingredientes: ".json_encode($ingredientes_receta)." Cantidades: ".json_encode($cantidad_ingredientes)." Unidades: ".json_encode($unidad_ingredientes)." Elaboración: ".$elaboracion_receta." Emplatado: ".$emplatado_receta,
+                "icono"=>"success" */
             ];
             return json_encode($alerta);
             exit();

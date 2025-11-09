@@ -84,9 +84,24 @@ function quitarFoto(){
     document.querySelector('#btnFile').innerHTML = "Seleccionar Archivo";
 }
 
-/* Limpia el botón de un formulario que lleve foto */
+/* Limpia elementos accesorios de un formulario, como el botón de un formulario que lleve foto y otros elementos */
 function limpiarFormulario(){
-    document.querySelector('#btnFile').innerHTML = "Seleccionar Archivo";
+
+    /* Comprueba si existe el botón para subir archivos */
+    let botonFoto = document.querySelector('#btnFile');
+    if (botonFoto != null) {
+        document.querySelector('#btnFile').innerHTML = "Seleccionar Archivo";
+    }
+
+    /* Comprueba si hay listas de ingredientes o utensilios */
+    let listaIngred = document.querySelector("#listaIngredientesEnviarReceta");
+    if (listaIngred != null) {
+        listaIngred.innerHTML = "";        
+    }
+    let listaUtens = document.querySelector("#listaUtensiliosEnviarReceta");
+    if (listaUtens != null) {
+        listaUtens.innerHTML = "";        
+    }
 }
 
 /* Filtra una tabla por lo que se introduce en el input */
