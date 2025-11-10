@@ -84,6 +84,14 @@ function quitarFoto(){
     document.querySelector('#btnFile').innerHTML = "Seleccionar Archivo";
 }
 
+/* Elimina la foto del input de las recetas y de la preview */
+function eliminarFotoReceta(){
+    console.log(document.querySelector('#fotoReceta-0').value);
+    document.querySelector('#fotoReceta-0').value = "";
+    console.log(document.querySelector('#fotoReceta-0').value);
+    document.querySelector('#fotoReceta').src = APP_URL+'app/views/photos/recetas_photos/default.png';
+}
+
 /* Limpia elementos accesorios de un formulario, como el botón de un formulario que lleve foto y otros elementos */
 function limpiarFormulario(){
 
@@ -303,8 +311,12 @@ function desactivarFormulario(idContainer){
 
 /* Oculta un formulario en pantalla sin recargar la página */
 function ocultarFormulario(idContainer){
-    document.querySelector('#'+idContainer).querySelector('form').reset();
-    document.querySelector('#'+idContainer).classList.add('oculto');
+    let container = document.querySelector('#'+idContainer);
+    if (container.querySelector('img') != null) {
+        container.querySelector('img').src = APP_URL+'app/views/photos/default.png';
+    }
+    container.querySelector('form').reset();
+    container.classList.add('oculto');
 }
 
 /* Agrega un elemento recién guardado a un select y su lista asociada */

@@ -670,7 +670,7 @@ th.headerUserTitle{
     color: red;
 }
 .userDel{
-    color: red;
+    color: red !important;
 }
 .userList .userLink:hover{
     background-color: var(--oscuro);
@@ -1060,9 +1060,6 @@ li > span{
     .inputListas{
         width: auto;
     }
-    /* li > span{
-        font-size: 1rem;
-    } */
 }
 /* Clases para las ventanas de sweetAlert2 */
 .botonCerrar{
@@ -1126,6 +1123,27 @@ li > span{
     width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+.btnsFotoReceta{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+    top: -2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.btnFotoReceta{
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    border: none;
+    color: var(--oscuro);
+    background-color: transparent;
+}
+.btnFotoReceta:hover{
+    cursor: pointer;
+    color: var(--fondoClaro);
+    background-color: var(--oscuro);
 }
 
 @media screen and (min-width:768px) {

@@ -73,7 +73,25 @@
 
             /* Comprueba haya NOMBRE DE LA RECETA */
             if (isset($_POST['nombreReceta']) && $_POST['nombreReceta'] != "") {
+                
                 $nombre_receta = $this->limpiarCadena($_POST['nombreReceta']);
+
+                /* Verifica que el nombre no existe */
+                $check_nombre = $this->ejecutarConsulta("SELECT nombre_receta FROM recetas WHERE nombre_receta='$nombre_receta'");
+
+                if ($check_nombre->rowCount()>0) {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"Error en el formulario",
+                        "texto"=>"Ya hay una receta con ese nombre.\n Por favor, elija otro.",
+                        "icono"=>"error"
+                    ];
+                    /* Codifica la variable como datos JSON */
+                    return json_encode($alerta);
+                    /* Detiene la ejecución del script */
+                    exit();
+                }
+
             }
             else{
                 $campo = "nombre de la receta";
@@ -218,7 +236,12 @@
             
             /* Comprueba el array de los utensilios */
             if (isset($_POST['arrayUtensilios'])) {
-                $utensilios_receta = explode(",", $this->limpiarCadena($_POST['arrayUtensilios']));
+                if ($_POST['arrayUtensilios'] != "") {
+                    $utensilios_receta = explode(",", $this->limpiarCadena($_POST['arrayUtensilios']));
+                } else {
+                    $utensilios_receta = [];
+                }
+                
             }
             else{
                 $campo = "utensilios";
@@ -303,7 +326,7 @@
             /* Verificar que cada una de las variables coincide con los patrones de los datos */
 
             /* Nombre de la receta */
-            if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}", $nombre_receta)) {
+            if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,\/\-_ ]{3,255}", $nombre_receta)) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
@@ -442,12 +465,12 @@
             }
 
             /* Descripción corta */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\/\-_ ]{3,255}", $_POST['descripcionCorta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,\r\n\/\-_ ]{3,255}", $_POST['descripcionCorta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "La descripción corta la receta sólo puede contener letras, números, .,/,-,_ y espacios. Máximo 255 caracteres",
+                        "texto" => "La descripción corta la receta sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios. Máximo 255 caracteres",
                         "icono" => "error"
                     ];
 
@@ -582,12 +605,12 @@
             }
 
             /* Elaboración */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\*\/\-_ ]{3,}", $_POST['elaboracionEnviarReceta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:\r\n\*\/\-_ ]{3,}", $_POST['elaboracionEnviarReceta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "La elaboración de la receta debe tener al menos 3 caracteres y sólo puede contener letras, números, *, .,/,-,_ y espacios",
+                        "texto" => "La elaboración de la receta debe tener al menos 3 caracteres y sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios",
                         "icono" => "error"
                     ];
 
@@ -599,12 +622,12 @@
             }
 
             /* Emplatado */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:\r\n\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El emplatado sólo puede contener letras, números, *, .,/,-,_ y espacios",
+                        "texto" => "El emplatado sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios",
                         "icono" => "error"
                     ];
 
@@ -615,7 +638,88 @@
                     exit();
             }
 
-            /* GUARDAR LA RECETA */
+            /* FOTO DE LA RECETA */
+
+            /* Establece el directorio de las imagenes */
+            $img_dir = "../views/photos/recetas_photos/";
+
+            /* Comprueba si hay imágenes en el input */
+            if ($_FILES['foto_receta']['tmp_name'] != "" && $_FILES['foto_receta']['size']>0) {
+                
+                /* Verifica el formato de imagen */
+                if (mime_content_type($_FILES['foto_receta']['tmp_name']) != "image/jpeg" && mime_content_type($_FILES['foto_receta']['tmp_name']) != "image/png") {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"Error al guardar la imagen.",
+                        "texto"=>"El formato de archivo no está permitido. Debe seleccionar una imagen en formato jpg o png",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+
+                /* Verifica el tamño de la imagen */
+                if ($_FILES['foto_receta']['size']/1024 > 5120) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"Error al guardar la imagen.",
+                        "texto"=>"El tamaño del archivo debe ser inferior a 5 Mb.",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+
+                /* Establece el nombre de la nueva imagen */
+                $foto_receta = iconv('UTF-8', 'ASCII//IGNORE', strtok($nombre_receta, " "));
+                $foto_receta .= "_".date('Ymdhis').rand(0, 10000);
+
+                /* Establece la extensión de la nueva imagen */
+                switch (mime_content_type($_FILES['foto_receta']['tmp_name'])) {
+                    case 'image/jpeg':
+                        $foto_receta .= '.jpg';
+                        break;
+                    
+                    case 'image/png':
+                        $foto_receta .= '.png';
+                        break;
+                    
+                }
+
+                /* Crea el directorio si no está creado */
+                if (!file_exists($img_dir)) {
+                    if (!mkdir($img_dir, 0777)) {
+                        $alerta = [
+                            "tipo" => "simple",
+                            "titulo" => "Error inesperado.",
+                            "texto" => "No se ha podido crear la carpeta de imágenes",
+                            "icono" => "error"
+                        ];
+                        return json_encode($alerta);
+                        exit();
+                    }
+                }
+
+                /* Permisos en el directorio de imágenes por si acaso */
+                chmod($img_dir, 0777);
+
+                /* Sube la imagen al directorio de imágenes */
+                if (!move_uploaded_file($_FILES['foto_receta']['tmp_name'], $img_dir.$foto_receta)) {
+                    $alerta=[
+                        "tipo"=>"recargar",
+                        "titulo"=>"Error al actualizar la foto",
+                        "texto"=>"No se ha podido guardar la imagen. Inténtelo de nuevo más tarde",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+
+            } else {
+                $foto_receta = null;
+            }
+
+            /* GUARDAR LA RECETA EN LA BASE DE DATOS */
 
             /* Establece los campos para guardar la receta */
             $receta_datos_reg = [
@@ -702,6 +806,12 @@
                     "campo_nombre"=>"actualizado_receta",
                     "campo_marcador"=>":Actualizado",
                     "campo_valor"=>date("Y-m-d H:i:s")
+                ],
+                /* Foto de la receta */
+                [
+                    "campo_nombre"=>"foto_receta",
+                    "campo_marcador"=>":Foto",
+                    "campo_valor"=>$foto_receta
                 ]
             ];
 
@@ -737,6 +847,16 @@
                     /* Guarda los estilos llamando al método del mainModel */
                     $registrar_estilo = $this->guardarDatos("recetas_estilos", $guardar_estilo);
                     if (!$registrar_estilo->rowCount() == 1 ) {
+
+                        /* Borra lo que haya grabado hasta ahora (al estar el delete establecido en cascada, ya borra también los datos de las tablas intermedias) */
+                        $this->eliminarRegistro('recetas', 'id_receta', $id_receta);
+
+                        /* Borra la foto si se ha subido */
+                        if (is_file($img_dir.$foto_receta)) {
+                            chmod($img_dir.$foto_receta, 777);
+                            unlink($img_dir.$foto_receta);
+                        }
+
                         /* Muestra la ventana de error */
                         $alerta = [
                             "tipo"=>"simple",
@@ -750,7 +870,7 @@
 
                 /* Recorre el array de los tipos de plato */
                 foreach ($tipo_plato as $tipo) {
-                    /* Establece la variable para guardar cada estilo en la tabla recetas_estilos */
+                    /* Establece la variable para guardar cada estilo en la tabla recetas_tiposplato */
                     $guardar_tipo = [
                         /* Id receta */
                         [
@@ -769,6 +889,16 @@
                     /* Guarda los tipos de plato llamando al método del mainModel */
                     $registrar_tipo = $this->guardarDatos("recetas_tiposplato", $guardar_tipo);
                     if (!$registrar_tipo->rowCount() == 1 ) {
+
+                        /* Borra lo que haya grabado hasta ahora (al estar el delete establecido en cascada, ya borra también los datos de las tablas intermedias) */
+                        $this->eliminarRegistro('recetas', 'id_receta', $id_receta);
+
+                        /* Borra la foto si se ha subido */
+                        if (is_file($img_dir.$foto_receta)) {
+                            chmod($img_dir.$foto_receta, 777);
+                            unlink($img_dir.$foto_receta);
+                        }
+
                         /* Muestra la ventana de error */
                         $alerta = [
                             "tipo"=>"simple",
@@ -782,7 +912,7 @@
 
                 /* Recorre el array de los métodos */
                 foreach ($metodo_receta as $metodo) {
-                    /* Establece la variable para guardar cada estilo en la tabla recetas_estilos */
+                    /* Establece la variable para guardar cada estilo en la tabla recetas_metodos */
                     $guardar_metodo = [
                         /* Id receta */
                         [
@@ -801,6 +931,16 @@
                     /* Guarda los métodos llamando al método del mainModel */
                     $registrar_metodo = $this->guardarDatos("recetas_tecnicas", $guardar_metodo);
                     if (!$registrar_metodo->rowCount() == 1 ) {
+
+                        /* Borra lo que haya grabado hasta ahora (al estar el delete establecido en cascada, ya borra también los datos de las tablas intermedias) */
+                        $this->eliminarRegistro('recetas', 'id_receta', $id_receta);
+
+                        /* Borra la foto si se ha subido */
+                        if (is_file($img_dir.$foto_receta)) {
+                            chmod($img_dir.$foto_receta, 777);
+                            unlink($img_dir.$foto_receta);
+                        }
+
                         /* Muestra la ventana de error */
                         $alerta = [
                             "tipo"=>"simple",
@@ -812,19 +952,133 @@
 
                 }
 
+                /* Recorre el array de utensilios */
+                foreach ($utensilios_receta as $utensilio) {
+                    /* Establece la variable para guardar cada utensilio en la tabla recetas_utensilios */
+                    $guardar_utensilio = [
+                        /* Id receta */
+                        [
+                            "campo_nombre"=>"id_receta",
+                            "campo_marcador"=>":Receta",
+                            "campo_valor"=>$id_receta
+                        ],
+                        /* Id utensilio */
+                        [
+                            "campo_nombre"=>"id_utensilio",
+                            "campo_marcador"=>":Utensilio",
+                            "campo_valor"=>$utensilio
+                        ]
+                    ];
+
+                    /* Guarda los utensilios llamando al método del mainModel */
+                    $registrar_utensilio = $this->guardarDatos("recetas_utensilios", $guardar_utensilio);
+                    if (!$registrar_utensilio->rowCount() == 1 ) {
+
+                        /* Borra lo que haya grabado hasta ahora (al estar el delete establecido en cascada, ya borra también los datos de las tablas intermedias) */
+                        $this->eliminarRegistro('recetas', 'id_receta', $id_receta);
+
+                        /* Borra la foto si se ha subido */
+                        if (is_file($img_dir.$foto_receta)) {
+                            chmod($img_dir.$foto_receta, 777);
+                            unlink($img_dir.$foto_receta);
+                        }
+
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                    }
+
+                }
+
+                /* Recorre el array de ingredientes */
+                foreach ($ingredientes_receta as $ingrediente) {
+                    /* Busca la cantidad en el array de cantidades */
+                    if (array_key_exists($ingrediente, $cantidad_ingredientes)) {
+                        $cant = $cantidad_ingredientes[$ingrediente];
+                    }
+
+                    /* Busca la unidad de medida en el array de unidades */
+                    if (array_key_exists($ingrediente, $unidad_ingredientes)) {
+                        $unid = $unidad_ingredientes[$ingrediente];
+                    }
 
 
+                    /* Establece la variable para guardar cada utensilio en la tabla recetas_ingredientes */
+                    $guardar_ingrediente = [
+                        /* Id receta */
+                        [
+                            "campo_nombre"=>"id_receta",
+                            "campo_marcador"=>":Receta",
+                            "campo_valor"=>$id_receta
+                        ],
 
+                        /* Id ingrediente */
+                        [
+                            "campo_nombre"=>"id_ingrediente",
+                            "campo_marcador"=>":Ingrediente",
+                            "campo_valor"=>$ingrediente
+                        ],
+
+                        /* Cantidad */
+                        [
+                            "campo_nombre"=>"cantidad",
+                            "campo_marcador"=>":Cantidad",
+                            "campo_valor"=>$cant
+                        ],
+
+                        /* Unidad de medida */
+                        [
+                            "campo_nombre"=>"id_unidad",
+                            "campo_marcador"=>":Unidad",
+                            "campo_valor"=>$unid
+                        ]
+                    ];
+
+                    /* Guarda los ingredientes llamando al método del mainModel */
+                    $registrar_ingrediente = $this->guardarDatos("recetas_ingredientes", $guardar_ingrediente);
+                    if (!$registrar_ingrediente->rowCount() == 1 ) {
+
+                        /* Borra lo que haya grabado hasta ahora (al estar el delete establecido en cascada, ya borra también los datos de las tablas intermedias) */
+                        $this->eliminarRegistro('recetas', 'id_receta', $id_receta);
+
+                        /* Borra la foto si se ha subido */
+                        if (is_file($img_dir.$foto_receta)) {
+                            chmod($img_dir.$foto_receta, 777);
+                            unlink($img_dir.$foto_receta);
+                        }
+
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                    }
+
+                }
+
+                
 
                 /* Ventana de Éxito y limpia el formulario */
                 $alerta = [
-                    "tipo" => "limpiarRegistro",
+                    "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
                     "texto" => "La receta ".$nombre_receta." ha sido guardada correctamente por el usuario ".$_SESSION['id']." con el id ".$id_receta,
                     "icono" => "success"
                 ];
 
             } else {
+
+                /* Borra la foto si se ha subido */
+                if (is_file($img_dir.$foto_receta)) {
+                    chmod($img_dir.$foto_receta, 777);
+                    unlink($img_dir.$foto_receta);
+                }
 
                 /* Muestra la ventana de error */
                 $alerta = [
