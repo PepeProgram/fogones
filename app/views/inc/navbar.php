@@ -3,12 +3,12 @@
         <i class="fa-solid fa-house" aria-label="Página de Inicio"></i>
         Inicio
     </a>
-    <a href="<?php echo APP_URL; ?>aperitivos">Aperitivos</a>
-    <a href="<?php echo APP_URL; ?>primerosPlatos">Primeros Platos</a>
-    <a href="<?php echo APP_URL; ?>segundosPlatos">Segundos Platos</a>
+    <a href="<?php echo APP_URL; ?>aperitivos">Picoteo y Aperitivos</a>
+    <a href="<?php echo APP_URL; ?>primerosPlatos">Primeros</a>
+    <a href="<?php echo APP_URL; ?>segundosPlatos">Segundos</a>
     <a href="<?php echo APP_URL; ?>postres">Postres</a>
-    <a href="<?php echo APP_URL; ?>salsas">Salsas</a>
-    <a href="<?php echo APP_URL; ?>complementos">Complementos</a>
+    <a href="<?php echo APP_URL; ?>guarniciones">Guarniciones</a>
+    <a href="<?php echo APP_URL; ?>desayunos">Desayunos y meriendas</a>
     <a href="<?php echo APP_URL; ?>buscarRecetas">Buscar Recetas</a>
 
     <?php 

@@ -12,5 +12,5 @@
 ?>
 
 <header class="tituloPagina">
-    <h1>Picoteo y Aperitivos</h1>
+    <h1>Desayunos y Meriendas</h1>
 </header>

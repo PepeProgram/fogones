@@ -41,7 +41,7 @@ if (isset($_GET['views'])) {
                 $viewsController = new viewsController();
                 $insLogin = new loginController();
                 
-                /* Obtiene la url de la vista que se llame como lo que hay inmediatamente después de recetas en la url */
+                /* Obtiene la url de la vista que se llame como lo que hay inmediatamente después de fogones en la url */
                 $vista = $viewsController->obtenerVistasControlador($url[0]);
 
                 /* Carga la barra de navegación antes de cargar la vista */

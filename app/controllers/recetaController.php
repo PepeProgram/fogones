@@ -4,6 +4,9 @@
     /* Trae el modelo principal para utilizar sus funciones */
     use app\models\mainModel;
 
+    /* Carga el modelo de receta para crear y devolver objetos receta */
+    use app\models\recetaModel;
+
     /* Crea la clase hija de la clase principal */
     class recetaController extends mainModel{
 
@@ -94,9 +97,18 @@
 
             }
             else{
-                $campo = "nombre de la receta";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado nombre",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -105,9 +117,18 @@
                 $numero_personas = $this->limpiarCadena($_POST['numeroPersonasEnviarReceta']);
             }
             else{
-                $campo = "número de personas (Pax.)";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado número de personas (pax.)",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -116,9 +137,18 @@
                 $tiempo_elaboracion = $this->limpiarCadena($_POST['tiempoElaboracionEnviarReceta']);
             }
             else{
-                $campo = "tiempo de elaboración";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado tiempo de elaboración",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
 
             }
@@ -128,9 +158,18 @@
                 $dificultad_receta = $this->limpiarCadena($_POST['dificultadEnviarReceta']);
             }
             else{
-                $campo = "dificultad";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado dificultad de la receta",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
 
             }
@@ -158,9 +197,18 @@
                 }
             }
             else{
-                $campo = "tipo de plato";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado tipo de plato",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -183,9 +231,18 @@
                 $grupo_plato = $this->limpiarCadena($_POST['grupoPlatosEnviarReceta']);
             }
             else{
-                $campo = "grupo de platos";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado grupo de platos",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
 
             }
@@ -195,9 +252,18 @@
                 $descripcion_receta = $this->limpiarCadena($_POST['descripcionCorta']);
             }
             else{
-                $campo = "Descripción corta de la receta";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado descripción corta de la receta",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -206,9 +272,18 @@
                 $zona_receta = $this->limpiarCadena($_POST['zonaEnviarReceta']);
             }
             else{
-                $campo = "área geográfica";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado zona geográfica",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -217,9 +292,18 @@
                 $pais_receta = $this->limpiarCadena($_POST['paisEnviarReceta']);
             }
             else{
-                $campo = "país";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado país",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -228,9 +312,18 @@
                 $region_receta = $this->limpiarCadena($_POST['regionEnviarReceta']);
             }
             else{
-                $campo = "región";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado región",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -244,9 +337,18 @@
                 
             }
             else{
-                $campo = "utensilios";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado utensilios",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -255,9 +357,18 @@
                 $ingredientes_receta = explode(",", $this->limpiarCadena($_POST['arrayIngredientes']));
             }
             else{
-                $campo = "ingredientes";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado ingredientes",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -273,14 +384,35 @@
                     $cantidad = $this->limpiarCadena($cantidad);
                 }
                 if (!$correcto) {
-                    $campo = "cantidad en los ingredientes";
-                    echo errorGuardar($campo);
-                    exit();
+                    /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado cantidad en los ingredientes",
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
+                exit();
                 }
 
             } else {
                 $campo = "cantidad en los ingredientes";
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado ".$campo,
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -290,13 +422,35 @@
                 foreach ($unidad_ingredientes as $ingrediente => $unidad) {
                     if ($unidad == "" || $unidad == null || $unidad == 0) {
                         $campo = "unidad de medida en los ingredientes";
-                        echo errorGuardar($campo);
+                        /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                        $alerta = [
+                            "tipo" => "simple",
+                            "titulo" => "Error en el formulario",
+                            "texto" => "Compruebe el apartado ".$campo,
+                            "icono" => "error"
+                        ];
+
+                        /* Codifica la variable como datos JSON */
+                        return json_encode($alerta);
+
+                        /* Detiene la ejecución del script */
                         exit();
                     }
                 }
             } else {
                 $campo = "unidad de medida en los ingredientes";
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado ".$campo,
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -307,8 +461,18 @@
             }
             else{
                 $campo = "elaboración";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado ".$campo,
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
             
@@ -318,8 +482,18 @@
             }
             else{
                 $campo = "emplatado";
-                errorGuardar($campo);
-                echo errorGuardar($campo);
+                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
+                $alerta = [
+                    "tipo" => "simple",
+                    "titulo" => "Error en el formulario",
+                    "texto" => "Compruebe el apartado ".$campo,
+                    "icono" => "error"
+                ];
+
+                /* Codifica la variable como datos JSON */
+                return json_encode($alerta);
+
+                /* Detiene la ejecución del script */
                 exit();
             }
 
@@ -1133,5 +1307,69 @@
 
 
         /* Fin guardarRecetaControlador */
+        }
+
+        /* LISTAR TODAS LAS RECETAS */
+        public function listarRecetasControlador(){
+
+            /* Obtiene la vista actual */
+            $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
+
+            /* Comprueba cuál es la vista actual para construir la búsqueda de recetas */
+            if (isset($vista_actual[2]) && $vista_actual[2] != "") {
+                switch ($vista_actual[2]) {
+                    case 'aperitivos':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1";
+                        break;
+                    case 'primerosPlatos':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3";
+                        break;
+                    case 'segundosPlatos':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7";
+                        break;
+                    case 'postres':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4";
+                        break;
+                    case 'guarniciones':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11";
+                        break;
+                    case 'desayunos':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10";
+                        break;
+                    
+                    default:
+                        $consulta = "SELECT * FROM recetas ORDER BY id_receta DESC";
+                        break;
+                }
+                
+            }
+            else {
+                $consulta = "SELECT * FROM RECETAS ORDER BY id_receta DESC";
+            }
+
+            /* Ejecuta la consulta */
+            $todasLasRecetas = $this->ejecutarConsulta($consulta);
+            $todasLasRecetas = $todasLasRecetas->fetchAll();
+
+            /* Crea un array para ir guardando los objetos receta */
+            $recetas = array();
+
+            /* Recorre el resultado de la consulta para ir añadiendo objetos receta al array */
+            foreach ($todasLasRecetas as $receta) {
+                $nuevaReceta = new recetaModel($receta['id_receta'], $receta['nombre_receta'], $receta['descripcion_receta'], $receta['id_usuario'], $receta['id_grupo'], $receta['n_personas'], $receta['tiempo_receta'], $receta['id_autor'], $receta['id_region'], $receta['id_pais'], $receta['id_zona'], $receta['dificultad'], $receta['elaboracion'], $receta['emplatado'], $receta['foto_receta'], $receta['visualizaciones'], $receta['creado_receta'], $receta['actualizado_receta'], $receta['activo']);
+
+                /* Añade la receta al array */
+                array_push($recetas, $nuevaReceta);
+            }
+
+            foreach ($recetas as $prueba) {
+                echo $prueba->getNombre()."<br>";
+                foreach($prueba->getIngredientes() as $ingrediente){
+                    echo $ingrediente['id_ingrediente']." ";
+                    echo $ingrediente['cantidad']." ";
+                    echo $ingrediente['id_unidad']."<br><br>";
+                }
+                
+            }
         }
     }

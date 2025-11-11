@@ -151,7 +151,7 @@
             <div id="btnsFotoReceta" class="btnsFotoReceta">
                 <button id="quitarFotoReceta" type="button" class="fa-solid fa-square-xmark btnFotoReceta userDel" title="Quitar Foto" onclick="eliminarFotoReceta();"></button>
                 <label for="fotoReceta-0" class="oculto">Archivo Imagen</label>
-                <input type="file" name="foto_receta" id="fotoReceta-0" class="file-input" accept=".jpg, .jpeg, png" onchange="previewImage(this, 'fotoReceta', '<?php echo APP_URL; ?>app/views/photos/recetas_photos/default.png');">
+                <input type="file" name="foto_receta" id="fotoReceta-0" class="file-input" accept=".jpg, .jpeg, .png" onchange="previewImage(this, 'fotoReceta', '<?php echo APP_URL; ?>app/views/photos/recetas_photos/default.png');">
                 <button id="cambiarFotoReceta" type="button" class="fa-solid fa-camera btnFotoReceta" title="Añadir Foto en formato jpg o png. Máximo 5 Mb." onclick="document.querySelector('#fotoReceta-0').click();"></button>
             </div>
         </div>
