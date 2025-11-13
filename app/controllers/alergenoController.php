@@ -103,12 +103,12 @@
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
+                if ($this->verificarDatos("[(),;:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 200 caracteres",
                         "icono" => "error"
                     ];
 
@@ -293,12 +293,12 @@
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
+                if ($this->verificarDatos("[(),;:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,200}", $_POST['nombre_alergeno'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del alérgeno sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 200 caracteres",
                         "icono" => "error"
                     ];
 

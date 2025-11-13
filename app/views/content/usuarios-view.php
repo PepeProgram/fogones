@@ -98,7 +98,7 @@
                                             <input type="hidden" name="modulo_usuario" value="cambiarRedactor">
                                             <input type="hidden" name="id_usuario" value="'.$usuario->getId_usuario().'">
 
-                                            <button type="submit" class="userDel btnIcon" aria-label="'.$tituloRedactor.$usuario->getLogin_usuario().'" title="'.$tituloRedactor.$usuario->getLogin_usuario().'" style="color:'.$colorRedactor.'">
+                                            <button type="submit" class="btnIcon" aria-label="'.$tituloRedactor.$usuario->getLogin_usuario().'" title="'.$tituloRedactor.$usuario->getLogin_usuario().'" style="color:'.$colorRedactor.'">
                                                 <i class="fa-solid fa-user-pen"></i>
                                             </button> 
                                         </form>
@@ -108,7 +108,7 @@
                                             <input type="hidden" name="modulo_usuario" value="cambiarRevisor">
                                             <input type="hidden" name="id_usuario" value="'.$usuario->getId_usuario().'">
 
-                                            <button type="submit" class="userDel btnIcon" aria-label="'.$tituloRevisor.$usuario->getLogin_usuario().'" title="'.$tituloRevisor.$usuario->getLogin_usuario().'" style="color:'.$colorRevisor.'">
+                                            <button type="submit" class="btnIcon" aria-label="'.$tituloRevisor.$usuario->getLogin_usuario().'" title="'.$tituloRevisor.$usuario->getLogin_usuario().'" style="color:'.$colorRevisor.'">
                                                 <i class="fa-solid fa-user-graduate"></i>
                                             </button> 
                                         </form>
@@ -118,7 +118,7 @@
                                             <input type="hidden" name="modulo_usuario" value="cambiarAdministrador">
                                             <input type="hidden" name="id_usuario" value="'.$usuario->getId_usuario().'">
 
-                                            <button type="submit" class="userDel btnIcon" aria-label="'.$tituloAdministrador.$usuario->getLogin_usuario().'" title="'.$tituloAdministrador.$usuario->getLogin_usuario().'" style="color:'.$colorAdministrador.'">
+                                            <button type="submit" class="btnIcon" aria-label="'.$tituloAdministrador.$usuario->getLogin_usuario().'" title="'.$tituloAdministrador.$usuario->getLogin_usuario().'" style="color:'.$colorAdministrador.'">
                                                 <i class="fa-solid fa-user-gear"></i>
                                             </button> 
                                         </form>

@@ -115,12 +115,12 @@
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_ingrediente'])) {
+                if ($this->verificarDatos("[,;:()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_ingrediente'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del ingrediente sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del ingrediente sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios",
                         "icono" => "error"
                     ];
 
@@ -266,12 +266,12 @@
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_ingrediente'])) {
+                if ($this->verificarDatos("[()%,;:a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_ingrediente'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del ingrediente sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del ingrediente sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios",
                         "icono" => "error"
                     ];
 

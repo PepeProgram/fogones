@@ -500,12 +500,12 @@
             /* Verificar que cada una de las variables coincide con los patrones de los datos */
 
             /* Nombre de la receta */
-            if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,\/\-_ ]{3,255}", $nombre_receta)) {
+            if ($this->verificarDatos("[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,;\/\-_ ]{3,255}", $nombre_receta)) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre de la receta sólo puede contener letras, números, .,/,-,_ y espacios. Al menos 3 caracteres y máximo 255",
+                        "texto" => "El nombre de la receta sólo puede contener letras, números, %, (, ), ,, ;, .,/,-,_ y espacios. Al menos 3 caracteres y máximo 255",
                         "icono" => "error"
                     ];
 
@@ -639,12 +639,12 @@
             }
 
             /* Descripción corta */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,\r\n\/\-_ ]{3,255}", $_POST['descripcionCorta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.:,;\r\n\/\-_ ]{3,255}", $_POST['descripcionCorta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "La descripción corta la receta sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios. Máximo 255 caracteres",
+                        "texto" => "La descripción corta la receta sólo puede letras, números, *, :, ,, ;, ., /, (, ), %, -, _, retornos de línea y espacios. Máximo 255 caracteres",
                         "icono" => "error"
                     ];
 
@@ -779,12 +779,12 @@
             }
 
             /* Elaboración */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:\r\n\*\/\-_ ]{3,}", $_POST['elaboracionEnviarReceta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;:\(\)\r\n\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "La elaboración de la receta debe tener al menos 3 caracteres y sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios",
+                        "texto" => "La elaboración de la receta debe tener al menos 3 caracteres y sólo puede contener letras, números, *, :, ,, ;, ., /, (, ), %, -, _, retornos de línea y espacios",
                         "icono" => "error"
                     ];
 
@@ -796,12 +796,12 @@
             }
 
             /* Emplatado */
-            if ($this->verificarDatos("(?!.*\\\\)[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:\r\n\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;:\(\)\r\n\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El emplatado sólo puede contener letras, números, *, :, , .,/,-,_, retornos de línea y espacios",
+                        "texto" => "El emplatado sólo puede contener lletras, números, *, :, ,, ;, ., /, (, ), %, -, _, retornos de línea y espacios",
                         "icono" => "error"
                     ];
 
@@ -1336,6 +1336,13 @@
                     case 'desayunos':
                         $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10";
                         break;
+                    case 'complementos':
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12";
+                        break;
+                    case 'misRecetas':
+                        $id = $_SESSION['id'];
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_usuario=$id";
+                        break;
                     
                     default:
                         $consulta = "SELECT * FROM recetas ORDER BY id_receta DESC";
@@ -1344,7 +1351,7 @@
                 
             }
             else {
-                $consulta = "SELECT * FROM RECETAS ORDER BY id_receta DESC";
+                $consulta = "SELECT * FROM recetas ORDER BY id_receta DESC";
             }
 
             /* Ejecuta la consulta */
@@ -1362,14 +1369,7 @@
                 array_push($recetas, $nuevaReceta);
             }
 
-            foreach ($recetas as $prueba) {
-                echo $prueba->getNombre()."<br>";
-                foreach($prueba->getIngredientes() as $ingrediente){
-                    echo $ingrediente['id_ingrediente']." ";
-                    echo $ingrediente['cantidad']." ";
-                    echo $ingrediente['id_unidad']."<br><br>";
-                }
-                
-            }
+            /* Devuelve el array de recetas */
+            return $recetas;
         }
     }

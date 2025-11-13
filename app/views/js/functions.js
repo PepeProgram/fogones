@@ -511,3 +511,20 @@ function quitarElementoLista(linea, evento, array){
     /* Elimina la línea de la lista de elementos */
     linea.parentNode.remove();
 }
+
+/* Rellena la dificultad de una receta con estrellas */
+function rellenarDificultad(elemento, dif){
+    console.log(elemento);
+    let texto = document.querySelector('#'+elemento).innerHTML+" ";
+    for (let i = 1; i <= 5; i++) {
+        if (i <= dif) {
+            texto += '<i class="fa-solid fa-star"></i>';
+        } else {
+            texto += '<i class="fa-regular fa-star"></i>';
+        }
+        
+    }
+
+    document.querySelector('#'+elemento).innerHTML = texto;
+
+}

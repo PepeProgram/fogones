@@ -26,7 +26,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreGrupo">Nombre del Grupo:</label>
-                        <input type="text" id="nombreGrupo" class="nombreAutor" name="nombre_grupo" maxlength="80" required value="" placeholder="Nombre del Grupo de Platos" title="Introduzca el nombre del Grupo de Platos. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                        <input type="text" id="nombreGrupo" class="nombreAutor" name="nombre_grupo" maxlength="80" required value="" placeholder="Nombre del Grupo de Platos" title="Introduzca el nombre del Grupo de Platos. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres" pattern="[(),;:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoGrupo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoGrupo-0').click();"></button>
@@ -71,11 +71,11 @@
 
                         <tr class='userUserList' id='<?php echo $grupo->getId_grupo(); ?>'>
                             <td class="fotoPeque">
-                                <div class='fotoAutorLista'>
+                                <div class='fotoAutorLista foto'>
                                     <img src='<?php echo APP_URL; ?>app/views/photos/groups_photos/<?php echo $grupo->getFoto_grupo(); ?>' alt='Foto de <?php echo $grupo->getNombre_grupo(); ?>'>
                                 </div>
                             </td>
-                            <td><div class="nombreAutorLista"><?php echo $grupo->getNombre_grupo(); ?></div></td>
+                            <td><?php echo $grupo->getNombre_grupo(); ?></td>
                             <td>
                                 <div class='opcionesAutores'>
                                     <button class='fa-regular fa-pen-to-square' title='Actualizar datos de <?php echo $grupo->getNombre_grupo(); ?>' onclick='activarFormulario("modulo_grupo", "formAgregarGrupo", "actualizar", <?php echo json_encode($grupo); ?>);'></button>

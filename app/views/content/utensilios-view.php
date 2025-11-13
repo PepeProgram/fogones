@@ -27,7 +27,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreUtensilio">Nombre del Utensilio de Cocina:</label>
-                        <input type="text" id="nombreUtensilio" class="nombreAutor" name="nombre_utensilio" maxlength="80" required value="" placeholder="Nombre del Utensilio de Cocina" title="Introduzca el nombre del Utensilio de Cocina. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                        <input type="text" id="nombreUtensilio" class="nombreAutor" name="nombre_utensilio" maxlength="80" required value="" placeholder="Nombre del Utensilio de Cocina" title="Introduzca el nombre del Utensilio de Cocina. letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios" pattern="[();:,%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoUtensilio" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoUtensilio-0').click();"></button>
@@ -109,7 +109,7 @@
 
                         <tr class='userUserList' id='<?php echo $utensilio->getId_utensilio(); ?>'>
                             <td class="fotoPeque">
-                                <div class='fotoAutorLista'>
+                                <div class='fotoAutorLista foto'>
                                     <img src='<?php echo APP_URL; ?>app/views/photos/utensilios_photos/<?php echo $utensilio->getFoto_utensilio(); ?>' alt='Foto de <?php echo $utensilio->getNombre_utensilio(); ?>'>
                                 </div>
                             </td>

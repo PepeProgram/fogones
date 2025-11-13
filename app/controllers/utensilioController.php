@@ -112,12 +112,12 @@
                 /* VERIFICA LOS PATRONES DE LOS DATOS */
             
                 /* Nombre */
-                if ($this->verificarDatos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}", $_POST['nombre_utensilio'])) {
+                if ($this->verificarDatos("[();,:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}", $_POST['nombre_utensilio'])) {
                     /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El nombre del utensilio de cocina sólo puede contener letras, números, .,-,_ y espacios",
+                        "texto" => "El nombre del utensilio de cocina sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres",
                         "icono" => "error"
                     ];
 

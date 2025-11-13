@@ -33,7 +33,7 @@
                             </div>
                             <div class="tituloAlergeno">
                                 <label for="nombreAlergeno-'.$alergeno->getId_alergeno().'" class="oculto">Nombre</label>
-                                <textarea id="nombreAlergeno-'.$alergeno->getId_alergeno().'" name="nombre_alergeno" class="nombreAlergeno" maxlength=230 title="Nombre del alérgeno. Sólo puede contener letras, números, .,-,_ y espacios" required disabled rows=3>'.$alergeno->getNombre_alergeno().'</textarea>
+                                <textarea id="nombreAlergeno-'.$alergeno->getId_alergeno().'" name="nombre_alergeno" class="nombreAlergeno" maxlength=230 title="Nombre del alérgeno. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres" required disabled rows=3>'.$alergeno->getNombre_alergeno().'</textarea>
                                 <div class="opcionesAlergenos">
                                     <button id="editarAlergeno-'.$alergeno->getId_alergeno().'" type="button" class="fa-solid fa-pen-to-square" title="Editar Alérgeno" onclick="activarBotonesAlergenos(this);"></button>
                                     <button id="cambiarIconoAlergeno-'.$alergeno->getId_alergeno().'" type="button" class="fa-solid fa-camera desactivar" title="Cambiar Icono" onclick="document.querySelector(\'#fotoAlergeno-'.$alergeno->getId_alergeno().'\').click();" disabled></button>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="tituloAlergeno">
                     <label for="nombreAlergeno-0" class="oculto">Nombre</label>
-                    <textarea name="nombre_alergeno" id="nombreAlergeno-0" class="nombreAlergeno" maxlength="230" title="Nombre del alérgeno. Sólo puede contener letras, números, .,-,_ y espacios" required rows="3" disabled></textarea>
+                    <textarea name="nombre_alergeno" id="nombreAlergeno-0" class="nombreAlergeno" maxlength="230" title="Nombre del alérgeno. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 200 caracteres" required rows="3" disabled></textarea>
                     <div class="opcionesAlergenos">
                         <button id="editarAlergeno-0" type="button" class="fa-regular fa-square-plus" title="Añadir alérgeno" onclick="activarBotonesAlergenos(this);"></button>
                         <button id="cambiarIconoAlergeno-0" type="button" class="fa-solid fa-camera desactivar" title="Añadir Icono" onclick="document.querySelector('#fotoAlergeno-0').click();" disabled></button>

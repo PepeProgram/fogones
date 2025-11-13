@@ -25,7 +25,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreEstilo">Nombre del Estilo de Cocina:</label>
-                        <input type="text" id="nombreEstilo" class="nombreAutor" name="nombre_estilo" maxlength="80" required value="" placeholder="Nombre del Estilo de Cocina" title="Introduzca el nombre del Estilo de Cocina. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                        <input type="text" id="nombreEstilo" class="nombreAutor" name="nombre_estilo" maxlength="80" required value="" placeholder="Nombre del Estilo de Cocina" title="Introduzca el nombre del Estilo de Cocina. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres" pattern="[,;:()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoEstilo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoEstilo-0').click();"></button>
@@ -70,11 +70,11 @@
 
                         <tr class='userUserList' id='<?php echo $estilo->getId_estilo(); ?>'>
                             <td class="fotoPeque">
-                                <div class='fotoAutorLista'>
+                                <div class='fotoAutorLista foto'>
                                     <img src='<?php echo APP_URL; ?>app/views/photos/styles_photos/<?php echo $estilo->getFoto_estilo(); ?>' alt='Foto de <?php echo $estilo->getNombre_estilo(); ?>'>
                                 </div>
                             </td>
-                            <td><div class="nombreAutorLista"><?php echo $estilo->getNombre_estilo(); ?></div></td>
+                            <td><?php echo $estilo->getNombre_estilo(); ?></td>
                             <td>
                                 <div class='opcionesAutores'>
                                     <button class='fa-regular fa-pen-to-square' title='Actualizar datos de <?php echo $estilo->getNombre_estilo(); ?>' onclick='activarFormulario("modulo_estilo", "formAgregarEstilo", "actualizar", <?php echo json_encode($estilo); ?>);'></button>

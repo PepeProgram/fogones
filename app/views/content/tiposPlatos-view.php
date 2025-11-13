@@ -24,7 +24,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreTipo">Nombre del tipo de plato:</label>
-                        <input type="text" id="nombreTipo" class="nombreAutor" name="nombre_tipo" maxlength="80" required value="" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}" placeholder="Nombre del Tipo de platos" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, .,-,_ y espacios">
+                        <input type="text" id="nombreTipo" class="nombreAutor" name="nombre_tipo" maxlength="80" required value="" pattern="[(),;:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}" placeholder="Nombre del Tipo de platos" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoTipo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoTipo-0').click();"></button>
@@ -67,7 +67,7 @@
 
                         <tr class='userUserList' id='<?php echo $tipo->getId_tipo(); ?>'>
                             <td class='fotoPeque'>
-                                <div class='fotoAutorLista'>
+                                <div class='fotoAutorLista foto'>
                                     <img src='<?php echo APP_URL; ?>app/views/photos/tipos_photos/<?php echo $tipo->getFoto_tipo(); ?>' alt='Foto de <?php echo $tipo->getNombre_tipo(); ?>'>
                                 </div>
                             </td>

@@ -180,7 +180,7 @@ body{
     position: absolute;
     right: 0;
     background-color: var(--fondoBlanco);
-    min-width: 10rem;
+    width: max-content;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -227,6 +227,26 @@ body{
     .topnav a.icon {
         float: right;
         display: none;
+    }
+
+    /* Añadido para probar ahora */
+    .topnav{
+        overflow: visible;
+    }
+    .topnav::after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Añadido ahora */
+    .dropdown{
+        position: relative;
+        float: right;
+        overflow: visible;
+    }
+    .dropdown-content{
+        right: 0;
     }
 }
 
@@ -281,13 +301,6 @@ body{
     .topnav.responsive .dropdown .dropbtn{
         display: none;
         text-align: center;
-    }
-}
-
-@media screen and (min-width: 1200px){
-    .dropdown-content{
-        position: absolute;
-        right: unset;
     }
 }
 
@@ -642,7 +655,7 @@ th.headerUserTitle{
     width: 100%;
 }
 .fotoPeque{
-    max-width: 1.875rem;
+    width: 2.2rem;
 }
 @media screen and (min-width: 450px) {
     .peque{
@@ -1053,6 +1066,58 @@ li > span{
     appearance: none;
 }
 
+/* TARJETAS DE LAS RECETAS */
+.tarjetaReceta{
+    background-color: var(--fondoBlanco);
+    box-shadow: 4px 4px 4px black;
+    height: 100%;
+}
+.tarjetaReceta a{
+    text-decoration: none;
+    color: var(--oscuro);
+}
+.pointer{
+    cursor: pointer;
+}
+.estrellas{
+    color: yellow;
+}
+a{
+    text-decoration: none;
+}
+.tarjetaReceta h3{
+    color: var(--fondoOscuro);
+}
+.tarjetaReceta.vertical,
+.tarjetaReceta.top{
+    padding-top: 0px !important;
+}
+.textoLargo{
+    text-indent: 2rem;
+}
+.etiquetasTarjeta{
+    margin-top: auto;
+}
+.etiqueta{
+    padding: 0.5rem;
+    background-color: var(--claro);
+    font-size: small;
+    margin-right: 0.5rem;
+    height: 2rem;
+    border-radius: 1rem;
+}
+.iconoDificultad i{
+    color: lightskyblue;
+}
+.tiempo{
+    width: 6rem;
+}
+.iconoEtiqueta{
+    height: 2rem;
+    margin-right: 0.5rem;
+    width: 100%;
+}
+
 @media screen and (min-width:768px) {
     .listasEnviarReceta{
         margin: 0px;
@@ -1086,6 +1151,9 @@ li > span{
 }
 .col-20.static{
     width: 20%;
+}
+.col-40.static{
+    width: 40%;
 }
 .col-50.static{
     width: 50%;
@@ -1123,6 +1191,15 @@ li > span{
     width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+.fotoTarjetaReceta{
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+.fotoTarjetaReceta img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .btnsFotoReceta{
     display: flex;

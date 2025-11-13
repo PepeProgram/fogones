@@ -3,13 +3,14 @@
         <i class="fa-solid fa-house" aria-label="Página de Inicio"></i>
         Inicio
     </a>
-    <a href="<?php echo APP_URL; ?>aperitivos">Picoteo y Aperitivos</a>
+    <a href="<?php echo APP_URL; ?>aperitivos">Picoteo</a>
     <a href="<?php echo APP_URL; ?>primerosPlatos">Primeros</a>
     <a href="<?php echo APP_URL; ?>segundosPlatos">Segundos</a>
     <a href="<?php echo APP_URL; ?>postres">Postres</a>
     <a href="<?php echo APP_URL; ?>guarniciones">Guarniciones</a>
-    <a href="<?php echo APP_URL; ?>desayunos">Desayunos y meriendas</a>
-    <a href="<?php echo APP_URL; ?>buscarRecetas">Buscar Recetas</a>
+    <a href="<?php echo APP_URL; ?>desayunos">Desayunos</a>
+    <a href="<?php echo APP_URL; ?>complementos">Complementos</a>
+    <a href="<?php echo APP_URL; ?>buscarRecetas">Buscar</a>
 
     <?php 
         /* Comprueba si hay sesión iniciada */
@@ -19,7 +20,7 @@
         <div class="dropdown">
             <button class="dropbtn">
                 <div class="divFotoNav">
-                    <figure>
+                    <figure class="foto">
                         <?php 
                             if (is_file("./app/views/photos/user_photos/".$_SESSION["foto"])) {
                                 echo '

@@ -8,7 +8,7 @@
     class viewsModel{
         protected function obtenerVistasModelo($vista){
             /* Array que contiene todas las vistas que se van a permitir en la URL*/
-            $listaBlanca = ["principal", "aperitivos", "primerosPlatos", "segundosPlatos", "postres", "guarniciones", "desayunos", "buscarRecetas", "userNew", "login", "logout"];
+            $listaBlanca = ["principal", "aperitivos", "primerosPlatos", "segundosPlatos", "postres", "guarniciones", "desayunos", "complementos", "buscarRecetas", "userNew", "login", "logout"];
 
             /* Comprueba si hay sesión iniciada para permitir las vistas del menú de usuario */
             if (isset($_SESSION['id']) && isset($_SESSION['nombre']) && isset($_SESSION['apellido1']) && isset($_SESSION['apellido2']) && isset($_SESSION['login']) && isset($_SESSION['foto'])) {
@@ -16,7 +16,7 @@
 
                 /* Comprueba si el usuario es redactor para permitir las vistas de redactor */
                 if ($_SESSION['redactor']) {
-                    array_push($listaBlanca, "misRecetas", "recetaData");
+                    array_push($listaBlanca, "misRecetas", "recetaData", "recetaUpdate");
                 }
                 
                 /* Comprueba si el usuario es revisor para permitir las vistas de revisor */

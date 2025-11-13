@@ -2,6 +2,9 @@
     namespace app\models;
     /* Define namespaces. El lugar donde se encuentra almacenado el modelo */
 
+    /* Carga el modelo de alérgenos para poder usarlo */
+    use app\models\alergenoModel;
+
     class recetaModel extends mainModel{
         private $id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo, $estilos, $tipos_plato, $metodos, $utensilios, $ingredientes, $alergenos;
 
@@ -65,8 +68,17 @@
         }
 
         function checkAlergenos(){
-            $alergenos = $this->ejecutarConsulta("SELECT DISTINCT id_alergeno FROM recetas_ingredientes INNER JOIN ingredientes_alergenos ON recetas_ingredientes.id_ingrediente = ingredientes_alergenos.id_ingrediente WHERE `id_receta` = '$this->id'");
-            $alergenos = $alergenos->fetchAll();
+            $total_alergenos = $this->ejecutarConsulta("SELECT DISTINCT alerg.* FROM recetas_ingredientes rec_ing INNER JOIN ingredientes_alergenos ing_al ON rec_ing.id_ingrediente = ing_al.id_ingrediente INNER JOIN alergenos alerg ON ing_al.id_alergeno = alerg.id_alergeno WHERE rec_ing.id_receta = '$this->id'");
+            $total_alergenos = $total_alergenos->fetchAll();
+            
+            $alergenos = array();
+
+            foreach ($total_alergenos as $alergeno) {
+                $alergeno_array = new alergenoModel($alergeno['id_alergeno'], $alergeno['nombre_alergeno'], $alergeno['foto_alergeno']);
+                array_push($alergenos, $alergeno_array);
+                
+            }
+
             return $alergenos;
         }
 

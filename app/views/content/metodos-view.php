@@ -24,7 +24,7 @@
                     </div>
                     <div class="tituloAutor">
                         <label for="nombreMetodo">Nombre del método de cocción:</label>
-                        <input type="text" id="nombreMetodo" class="nombreAutor" name="nombre_metodo" maxlength="80" required value="" placeholder="Nombre del Método de cocción" title="Introduzca el nombre del Método de cocción. Sólo puede contener letras, números, .,-,_ y espacios" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,50}">
+                        <input type="text" id="nombreMetodo" class="nombreAutor" name="nombre_metodo" maxlength="80" required value="" placeholder="Nombre del Método de cocción" title="Introduzca el nombre del Método de cocción. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 80 caracteres" pattern="[(),;:%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.\-_ ]{3,80}">
                     </div>
                     <div class="opcionesAutores">
                         <button id="cambiarFotoMetodo" type="button" class="fa-solid fa-camera desactivar" title="Añadir Foto" onclick="document.querySelector('#fotoMetodo-0').click();"></button>
@@ -67,7 +67,7 @@
 
                         <tr class='userUserList' id='<?php echo $metodo->getId_metodo(); ?>'>
                             <td class='fotoPeque'>
-                                <div class='fotoAutorLista'>
+                                <div class='fotoAutorLista foto'>
                                     <img src='<?php echo APP_URL; ?>app/views/photos/metodos_photos/<?php echo $metodo->getFoto_metodo(); ?>' alt='Foto de <?php echo $metodo->getNombre_metodo(); ?>'>
                                 </div>
                             </td>

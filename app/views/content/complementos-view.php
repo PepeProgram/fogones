@@ -1,5 +1,5 @@
 <header class="tituloPagina">
-    <h1>Mis Recetas Enviadas</h1>
+    <h1>Acompañamientos y complementos</h1>
 </header>
 
 <!-- Carga la lista de recetas -->
