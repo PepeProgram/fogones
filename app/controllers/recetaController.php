@@ -1288,24 +1288,6 @@
             echo 'Elaboración '.$elaboracion_receta;
             echo 'Emplatado '.$emplatado_receta; */
 
-
-
-
-
-
-
-            /* Comprobar que el controlador va funcionando */
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Funciona",
-                "texto"=>json_encode($receta_datos_reg)
-                /* "texto"=>"Nombre: ".$nombre_receta." Pax: ".$numero_personas." Tiempo: ".$tiempo_elaboracion." Dificultad: ".$dificultad_receta." Estilo:  ".json_encode($estilo_cocina)." Tipo Plato: ".json_encode($tipo_plato)." Método: ".json_encode($metodo_receta)." Grupo Plato: ".$grupo_plato." Descripción: ".$descripcion_receta." Zona: ".$zona_receta." País: ".$pais_receta." Región: ".$region_receta." Utensilios: ".json_encode($utensilios_receta)." Ingredientes: ".json_encode($ingredientes_receta)." Cantidades: ".json_encode($cantidad_ingredientes)." Unidades: ".json_encode($unidad_ingredientes)." Elaboración: ".$elaboracion_receta." Emplatado: ".$emplatado_receta,
-                "icono"=>"success" */
-            ];
-            return json_encode($alerta);
-            exit();
-
-
         /* Fin guardarRecetaControlador */
         }
 
@@ -1341,7 +1323,7 @@
                         break;
                     case 'misRecetas':
                         $id = $_SESSION['id'];
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_usuario=$id";
+                        $consulta = "SELECT * FROM recetas WHERE id_usuario=$id";
                         break;
                     
                     default:
@@ -1371,5 +1353,26 @@
 
             /* Devuelve el array de recetas */
             return $recetas;
+        }
+
+        /* ACTUALIZAR RECETA */
+        public function actualizarRecetaControlador(){
+            
+
+
+
+
+
+
+
+
+            /* Comprobar que el controlador va funcionando */
+            $alerta=[
+                "tipo"=>"simple",
+                "titulo"=>"Funciona",
+                "texto"=>"Vas a actualizar la receta"
+            ];
+            return json_encode($alerta);
+            exit();
         }
     }

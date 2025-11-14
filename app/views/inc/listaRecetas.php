@@ -28,7 +28,9 @@
         /* Comprueba si hay sesión iniciada */
         if (isset($_SESSION['id'])) {
                 $id_usuario_ver = $_SESSION['id'];
-            }
+        } else {
+            $id_usuario_ver = "";
+        }
 
         foreach ($recetas as $receta) {
             /* Establece la foto si hay o foto por defecto */

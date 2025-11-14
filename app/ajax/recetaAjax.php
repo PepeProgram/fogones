@@ -25,7 +25,7 @@
                 break;
             
             case 'actualizar':
-                # code...
+                echo $insReceta->actualizarRecetaControlador();
                 break;
             
             case 'eliminar':

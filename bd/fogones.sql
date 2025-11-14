@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-11-2025 a las 22:20:04
+-- Tiempo de generación: 14-11-2025 a las 23:18:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -251,9 +251,9 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (3, 'Vino', 1),
 (4, 'Sardinas', 1),
 (6, 'Mantequilla de Cacahuete', 1),
-(7, 'Leche de Vaca', 1),
-(8, 'Mantequilla de vaca', 1),
-(9, 'Azúcar blanco refinado', 1),
+(7, 'Leche', 1),
+(8, 'Mantequilla', 1),
+(9, 'Azúcar blanco', 1),
 (22, 'Azúcar en cuadradillo', 1),
 (23, 'Almendras', 1),
 (24, 'Bourbon', 1),
@@ -268,7 +268,7 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (35, 'Aceite de oliva virgen extra', 1),
 (36, 'Naranjas', 1),
 (37, 'Salsa de soja', 1),
-(38, 'vinagre balsámico', 1),
+(38, 'Vinagre balsámico', 1),
 (39, 'Miel', 1),
 (40, 'Harina de maíz', 1),
 (41, 'Huevo', 1),
@@ -309,7 +309,31 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (76, 'Almeja', 1),
 (77, 'Cayena', 1),
 (78, 'Arroz bomba', 1),
-(79, 'Aromas (ver en receta)', 1);
+(79, 'Aromas (ver en receta)', 1),
+(80, 'Trucha', 1),
+(81, 'Pimentón dulce', 1),
+(82, 'Pimiento verde', 1),
+(83, 'Pimiento rojo', 1),
+(84, 'Miga de pan', 1),
+(85, 'Uva blanca', 1),
+(86, 'Vinagre blanco', 1),
+(87, 'Ajo diente', 1),
+(88, 'Azafrán', 1),
+(89, 'Caldo de pollo', 1),
+(90, 'Conejo', 1),
+(91, 'Pollo', 1),
+(92, 'Judias verdes', 1),
+(94, 'Rama romero', 1),
+(95, 'Mero', 1),
+(96, 'Manzana', 1),
+(97, 'Ácido cítrico', 1),
+(98, 'Ortiguillas anémona marina', 1),
+(99, 'Lima', 1),
+(100, 'Vinagre de jerez', 1),
+(101, 'Jengibre', 1),
+(102, 'Xantana', 1),
+(103, 'Frutos rojos', 1),
+(104, 'Chocolate blanco', 1);
 
 -- --------------------------------------------------------
 
@@ -362,7 +386,13 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 (41, 74, 1),
 (43, 74, 5),
 (42, 74, 14),
-(39, 76, 14);
+(39, 76, 14),
+(47, 80, 5),
+(48, 84, 3),
+(49, 86, 12),
+(51, 95, 5),
+(52, 98, 14),
+(53, 100, 12);
 
 -- --------------------------------------------------------
 
@@ -706,7 +736,12 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (45, 'Pan (receta básica)', 'Masa horneada compuesta básicamente por un cereal, agua y sal', 23, 13, 8, '03:00:00', NULL, 0, 0, 1, 3, 'Tasmizamos la harina con la sal en un bol grande, y disolvemos la levadura en agua templada.\r\nIncorporamos la levadura junto al agua fría a la harina\r\nMezclamos manualmente hasta conseguir una mezcla homogénea y amasamos hasta conseguir una masa elástica que se suelte de las manos.\r\nHacemos una bola y la depositamos en un recipiente enharinado. espolvoreamos con harina por encima y arropamos. Dejamos fermentar una hora en  lugar templado.\r\nPasado ese tiempo formateamos la masa, dándole el menor trabajo posible para evitar que las levaduras bajen.\r\nUna vez le damos la forma que le queremos, se deposita en papel sulfurizado y se espolvorea con harina. Le damos el mismo tiempo de reposo que la primera vez. \r\nUna vez reposado, se le da un corte en la superficie y se mete al horno 220ºC durante 1 hora si es para pan mollete, y 40 minutos si es para bollitos.', 'Troceado en un platito', 'Pan_202511131129281648.jpg', 1, '2025-11-13 10:29:28', '2025-11-13 10:29:28', 0),
 (46, 'Aguacates rellenos de langostinos', 'Refrescante ensalada fácil de preparar con un toque picante', 23, 25, 4, '00:30:00', NULL, 0, 141, 4, 1, 'Pelamos y salpimentamos los langostinos salteamos en aceite. Picamos 8 en paisana fina , y dejamos 8 para el final.\r\nPicamos en brunoise la cebolla y mezclamos con los langostinos.\r\nAñadimos el chile chipotle a la mayonesa. y la incorporamos a la mezcla de langostinos con cebolla.\r\nPartimos los aguacates por la mitad, retiramos el hueso, y la carne que trocearemos y rellenamos junto a la mezcla anterior cada cáscara del aguacate.', 'Podemos presentar cada dos mitades con los langostinos enteros reservados encima y espolvoreado de cilantro, sobre una cama de lechuga.', 'Aguacates_202511130751164383.jpg', 1, '2025-11-13 18:51:16', '2025-11-13 18:51:16', 0),
 (47, 'Albóndigas de pescado', 'Las albóndigas de pescado son una alternativa deliciosa y saludable que te permitirá disfrutar del sabor del mar en cada bocado.', 23, 2, 6, '01:00:00', NULL, 0, 0, 0, 3, '*Albóndigas: Machacar 1 diente de ajo con un poco de aceite  hasta conseguir una pasta.\r\nPicar el bacalao y el salmón sin piel ni espinas, muy fino a cuchillo. Sazonar con sal, la pasta de ajo y perejil.\r\nMezclar todos los ingredientes, formar albóndigas, enharinarlas y freírlas en aceite muy caliente, reservarlas\r\n\r\n*Salsa: Picar muy fino los tres dientes de ajo y se dispone en un rondón, con aceite, cayena picada y perejil se dora ligeramente y se añade la harina, removiéndo con espátula.\r\nSe añade el fumet y se deja reducir, removiendo par qeu no se formen grumos.\r\nA parte, se abren las almejas y se las incorpora a la salsa. \r\nSe añaden las albóndigas, se les da un hervor y se sirven', 'Emplatamos 5 o 6 albóndigas con almejas  y espolvoreado todo con perejil muy picado.\r\nPodemos acompañar con arroz blanco o un salteado de verduras, por ejemplo.', 'Albndigas_202511130853442671.jpg', 1, '2025-11-13 19:53:44', '2025-11-13 19:53:44', 0),
-(48, 'Arroz con leche', 'Postre cremoso con arroz, leche, azúcar y aromatizado con canel y limón, su textura suave y dulzor delicado lo convierten en un clásico.', 23, 6, 8, '01:00:00', NULL, 0, 0, 0, 2, '*Aromas: Rama de vainilla o rama de canela con piel de naranja y limón, etc.\r\n\r\nSe lava el arroz en agua fría y se deposita en un caza con 150 ml de agua, cuando rompa el hervor, se le incorpora la leche y los aromas y se remueve bien. Se deja cocer a fuego muy suave, removiendo de vez en cuando para que no se agarre, unos 40 minutos..\r\nCuando el grano esté abierto, se retiran los aromas se incorpora la nata y un poco más de leche si vemos que nos queda muy espeso. Se remueve hasta punto de ebullición y se incorpora el azúcar. Se sigue removiendo hasta que el azúcar esté bien incorporado.', 'En copas individuales espolvoreado con canela y un hilito de zeste de limón adornando.', 'Arroz_202511130924359281.jpg', 1, '2025-11-13 20:24:35', '2025-11-13 20:24:35', 0);
+(48, 'Arroz con leche', 'Postre cremoso con arroz, leche, azúcar y aromatizado con canel y limón, su textura suave y dulzor delicado lo convierten en un clásico.', 23, 6, 8, '01:00:00', NULL, 0, 0, 0, 2, '*Aromas: Rama de vainilla o rama de canela con piel de naranja y limón, etc.\r\n\r\nSe lava el arroz en agua fría y se deposita en un caza con 150 ml de agua, cuando rompa el hervor, se le incorpora la leche y los aromas y se remueve bien. Se deja cocer a fuego muy suave, removiendo de vez en cuando para que no se agarre, unos 40 minutos..\r\nCuando el grano esté abierto, se retiran los aromas se incorpora la nata y un poco más de leche si vemos que nos queda muy espeso. Se remueve hasta punto de ebullición y se incorpora el azúcar. Se sigue removiendo hasta que el azúcar esté bien incorporado.', 'En copas individuales espolvoreado con canela y un hilito de zeste de limón adornando.', 'Arroz_202511130924359281.jpg', 1, '2025-11-13 20:24:35', '2025-11-13 20:24:35', 0),
+(49, 'Empanada de trucha y pimientos asados', 'Receta típica de Galicia. Su masa crujiente y tierna a la vez, contrasta con el relleno jugoso', 23, 13, 8, '01:15:00', NULL, 13, 64, 1, 3, '*Para el relleno: Cortar en juliana la cebolla y los pimientos, sofreir a fuego lento hasta que liguen los ingredientes, con un aspecto suave y meloso.\r\nSazonar la trucha y cocer al vapor 8 minutos para que quede poco cocinada ya que se acabará dentro de la empanada. Dejar enfriar, desespinar y desmigar. Reservar.\r\n\r\n    *Para la masa: Mezclar en un bol la harina, el pimentón, el aceite, la leche y el agua. Amasar hasta obtener una masa uniforme.\r\nColocar sobre papel sulfurizado y extender con un rodillo hasta que la masa quede fina.\r\n\r\nRellenar con el relleno y la trucha, cerrar la masa y sellar con un tenedor. Pintar con huevo batido y hornear 30 minutos a 180ºC', 'En un plato dos trozos pequeños cruzados o en una bandeja, si es para varios comensales, media empanada dispuesta en trocitos un poco montados. Le podemos espolvorear un poco de pimentón en el plato para dar color.', 'Empanada_20251114113939781.jpg', 1, '2025-11-14 10:39:39', '2025-11-14 10:39:39', 0),
+(50, 'Ajoblanco', 'Receta típica de algunas zonas de Andalucía y Extremadura, muy refrescante de de sabor suave, lleva poco ajo a pesar de su nombre, predominando la almendra', 23, 19, 4, '00:20:00', NULL, 1, 64, 1, 1, 'El pan se pone a remojo en la leche y el agua.\r\nLas almendras, el ajo y la sal, se majan en un mortero. Tras el majado, se añade el pan remojado, el aceite y el vinagre.\r\nSe sazona al gusto. y se reserva una hora mínimo en frio. Se debe servir bien frio', 'En plato hondo, adornado con unas uvas blancas y unas lágrimas de aceite de oliva, esta es la forma tradicional, aunque también le va muy bien unos cubos de melón, lascas de jamón...', 'Ajoblanco_202511140104553040.jpg', 1, '2025-11-14 12:04:55', '2025-11-14 12:04:55', 0),
+(51, 'Paella valenciana', 'Sabor limpio y equilibrado, donde se aprecia el caldo reducido y el socarrat (capa fina tostada del fondo) con identidad cultural propia.', 23, 15, 6, '01:00:00', NULL, 11, 64, 1, 3, 'Cortar la cebolla y  el ajo  en brunoise,  el tomate en concassé,  el pimiento en trozos pequeños. y trocear las judias.\r\nCortar en trozos pequeños el pollo y el conejo y salpimentar. Calentar 3 cucharadas de aceite en una paella y dorar los trozos de la carne a fuego moderado durante 20 minutos, o hasta que estén bien dorados. Retirar de la paella y reservar.\r\nAgregar del resto del aceite a esta misma sartén y añadir la cebolla y el pimiento unos 5 minutos a fuego moderado, remover de vez en cuando hasta que ablanden. Añadir el ajo, mezclar un minuto e incorporar los guisantes, las judias, y la carne.\r\nRehogar con el vino, dejar cocer 3 minutos para reducir el alcohol incorporar el arroz, rehogar bien, añadirle el caldo y el azafrán. Cocer a fuego moderado unos 10 minutos y rectificar de sal si fuera necesario. Añadir la ramita de romero y proseguir la cocción otros 15 minutos, o hasta que el líquido se haya evaporado y el arroz esté completamente cocido.', 'En la misma paella con un trozo de limón por comensal para limpiar el borde donde va a apoyar la cuchara con la que se sirve y come directamente.', 'Paella_202511140754054351.jpg', 1, '2025-11-14 18:54:05', '2025-11-14 18:54:05', 0),
+(52, 'Mero con ortiguillas y salsa de lima', 'Receta de Paco Roncero donde utiliza la ortiguilla, que es una anémona marina, que junto al mero evoca el sabor a mar, la salsa de lima contrasta y equilibra con su frescura, y el dulce del  puré de manzana equilibra el plato', 23, 2, 4, '03:00:00', NULL, 0, 64, 1, 4, '*Para el mero: Limpiar el mero de escamas y espinas.  Sacar los dos lomos y racionar en porciones de 180 gr. aproximadamente. Reservar en cámara hasta su utilización.\r\n\r\n    *Para el puré de manzana: Pelar las manzanas, descorazonar y cortar en gajos irregulares. Pochar la mantequilla y el ácido cítrico o zumo de limón hasta que queden blandos. Triturar, colar y reservar en caliente hasta el momento de su uso.\r\n    \r\n    *Para las ortiguillas: Cortar en 2 o 3 partes en función de su tamaño. Enharinar y freír en abundante aceite de oliva bien caliente para que se forme una costra en el exterior manteniendo la melosidad en su interior. Quitar el exceso de aceite y congelar hasta su uso.\r\n\r\n    *Para la salsa de lima: Mezclar la salsa de soja y el vinagre de jerez y calentar hasta llegar hasta su punto de ebullición. Añadir el jengibre rallado, tapar y dejar infusionar durante 25 minutos aproximadamente. Colar. Mezlar el zumo de las limas y el azúcar e incorporar a la infusión anterior. Mezclar. Añadir la xantana y batir con la túrmix hasta que la xantana se hidrate completamente y la mezcla tenga textura de crema ligera.', 'Disponer en el centro del plato una cucharada de sasa de lima. A la izquierda 4 puntos de puré de manzana y encima de estos 4 ortiguillas fritas y sazonadas. \r\nEncima de la salsa de lima, terminar con el mero marcado a la plancha.', 'Mero_202511140837496775.jpg', 1, '2025-11-14 19:37:49', '2025-11-14 19:37:49', 0),
+(53, 'Pavlova con frutos rojos', 'Estupenda combinación de sabores y texturas crujiente por fuera y suave por dentro,  muy impactante a la vista', 23, 6, 4, '01:30:00', NULL, 0, 0, 6, 3, 'Realizamos un merengue francés, Batiendo las claras (con unas gotas de limón o cremor tártaro)  hasta que empiecen a hacer picos blandos, momento en el que empezamos a añadir el azúcar poco a poco, hacia el final, añadimos el vinagre y la harina de maiz sin dejar de batir.\r\nFormamos un nido de 20 cm. o varios individuales, más pequeños, y horneamos a 150ºC una  hora. Apagar el horno y dejar el merengue dentro hasta que enfríe.\r\nUna hora antes de servir, montamos la nata hasta que haga picos duros, e introducimos en manga pastelera con boquilla rizada.\r\nSe recomienda pincelar con chocolate blanco derretido el interior de la pavlova para que la humedad de la nata y las frutas no ablande el merengue', 'Dentro del nido de merengue, rellenamos con la manga pastelera la nata,\r\nEncima disponemos los frutos rojos como más nos guste', 'Pavlova_20251114091805974.jpg', 1, '2025-11-14 20:18:05', '2025-11-14 20:18:05', 0);
 
 -- --------------------------------------------------------
 
@@ -755,7 +790,15 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (23, 40, 3),
 (26, 43, 14),
 (28, 45, 14),
-(29, 46, 3);
+(29, 46, 3),
+(30, 49, 14),
+(31, 50, 14),
+(32, 45, 3),
+(33, 51, 1),
+(34, 51, 14),
+(35, 52, 8),
+(36, 53, 3),
+(37, 53, 11);
 
 -- --------------------------------------------------------
 
@@ -864,7 +907,63 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (98, 48, 78, 80, 2),
 (99, 48, 9, 100, 2),
 (100, 48, 79, 1, 6),
-(101, 48, 43, 150, 4);
+(101, 48, 43, 150, 4),
+(102, 49, 80, 1, 1),
+(103, 49, 2, 1, 1),
+(104, 49, 81, 2, 8),
+(105, 49, 43, 50, 4),
+(106, 49, 52, 400, 4),
+(107, 49, 7, 400, 4),
+(108, 49, 54, 3, 9),
+(109, 49, 82, 2, 9),
+(110, 49, 83, 2, 9),
+(111, 49, 41, 1, 9),
+(112, 49, 28, 1, 6),
+(113, 50, 23, 100, 2),
+(114, 50, 43, 500, 4),
+(115, 50, 84, 100, 2),
+(116, 50, 35, 100, 4),
+(117, 50, 86, 1, 10),
+(118, 50, 7, 100, 4),
+(119, 50, 28, 1, 6),
+(120, 50, 87, 2, 9),
+(121, 51, 73, 125, 4),
+(122, 51, 88, 1, 10),
+(123, 51, 89, 1, 3),
+(124, 51, 90, 750, 2),
+(125, 51, 91, 750, 2),
+(126, 51, 82, 1, 9),
+(127, 51, 87, 5, 9),
+(128, 51, 53, 2, 9),
+(129, 51, 81, 2, 10),
+(130, 51, 78, 750, 2),
+(131, 51, 75, 100, 2),
+(132, 51, 92, 450, 2),
+(133, 51, 72, 2, 11),
+(134, 51, 28, 1, 6),
+(135, 51, 52, 4, 8),
+(136, 51, 94, 1, 9),
+(137, 51, 57, 1, 9),
+(138, 52, 95, 1, 1),
+(139, 52, 96, 4, 9),
+(140, 52, 8, 50, 2),
+(141, 52, 97, 1, 5),
+(142, 52, 98, 1, 6),
+(143, 52, 52, 1, 5),
+(144, 52, 99, 2, 9),
+(145, 52, 37, 100, 4),
+(146, 52, 100, 50, 4),
+(147, 52, 101, 1, 6),
+(148, 52, 9, 20, 2),
+(149, 52, 102, 5, 2),
+(150, 53, 58, 3, 9),
+(151, 53, 9, 175, 2),
+(152, 53, 86, 1, 10),
+(153, 53, 40, 1, 8),
+(154, 53, 47, 300, 4),
+(155, 53, 103, 1, 6),
+(156, 53, 57, 1, 5),
+(157, 53, 104, 50, 2);
 
 -- --------------------------------------------------------
 
@@ -897,7 +996,14 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (19, 45, 25),
 (20, 46, 21),
 (21, 47, 28),
-(22, 48, 13);
+(22, 48, 13),
+(24, 49, 18),
+(25, 49, 21),
+(23, 49, 25),
+(26, 51, 21),
+(27, 52, 13),
+(28, 52, 21),
+(29, 53, 25);
 
 -- --------------------------------------------------------
 
@@ -931,7 +1037,14 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (32, 45, 12),
 (33, 46, 3),
 (34, 47, 3),
-(35, 48, 4);
+(35, 48, 4),
+(36, 49, 1),
+(37, 49, 3),
+(39, 50, 3),
+(38, 50, 11),
+(40, 51, 7),
+(41, 52, 7),
+(42, 53, 4);
 
 -- --------------------------------------------------------
 
@@ -985,7 +1098,26 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (44, 47, 178),
 (45, 47, 180),
 (47, 48, 180),
-(46, 48, 181);
+(46, 48, 181),
+(49, 49, 167),
+(51, 49, 175),
+(50, 49, 176),
+(48, 49, 177),
+(52, 49, 182),
+(54, 50, 171),
+(53, 50, 183),
+(55, 51, 184),
+(60, 52, 4),
+(56, 52, 164),
+(58, 52, 166),
+(57, 52, 181),
+(59, 52, 185),
+(61, 53, 1),
+(62, 53, 165),
+(63, 53, 167),
+(64, 53, 186),
+(65, 53, 187),
+(66, 53, 188);
 
 -- --------------------------------------------------------
 
@@ -1303,7 +1435,14 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (178, 'Rondón', NULL, 1),
 (179, 'Marmita', NULL, 1),
 (180, 'Espátula', NULL, 1),
-(181, 'Cazo', NULL, 0);
+(181, 'Cazo', NULL, 1),
+(182, 'Rodillo', NULL, 1),
+(183, 'Mortero', NULL, 1),
+(184, 'Paella', NULL, 1),
+(185, 'Batidora eléctrica', NULL, 1),
+(186, 'Pincel silicona', NULL, 1),
+(187, 'Manga pastelera', NULL, 1),
+(188, 'Boquilla', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1591,13 +1730,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -1615,7 +1754,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -1627,31 +1766,31 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
@@ -1699,7 +1838,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`

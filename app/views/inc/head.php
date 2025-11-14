@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo APP_NAME ?></title>
 <!-- Carga el favicon -->
- <link rel="shortcut icon" href="./app/views/img/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="<?php echo APP_URL; ?>/app/views/img/favicon.ico" type="image/x-icon">
 <!-- Carga iconos de font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <!-- Carga las ventanas de sweetAlert2 -->

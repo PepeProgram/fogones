@@ -356,6 +356,33 @@ function nuevoElementoEnLista(idSelect, idLista, idElemento, nombreElemento, idA
 
 }
 
+/* Agrega elementos a la lista en la vista de actualizar recetas */
+function agregarElementoListaUpdate(idCampoSelect, idLista, idArray, idElementos){
+
+    /* Recupera el select donde están los elementos */
+    
+    
+    console.log('El select es: '+idCampoSelect);
+    console.log('La lista es: '+idLista);
+    console.log('El array es: '+idArray);
+    
+    selectNodes = document.querySelector('#'+idCampoSelect).options;
+    
+    /* Recorre los elementos del array */
+    idElementos.forEach(elemento => {
+        
+        /* Recorre las opciones para ver si el elemento coincide con el value de la opción y seleccionarlo */
+        for (let i = 0; i < selectNodes.length; i++) {
+            if (selectNodes[i].value == elemento[0]) {
+                selectNodes[i].setAttribute('selected', '');
+                agregarElementoLista('', idCampoSelect, idLista, idArray);
+                break;
+            }
+        }    
+
+    });
+}
+
 /* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
 function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
 
@@ -514,7 +541,6 @@ function quitarElementoLista(linea, evento, array){
 
 /* Rellena la dificultad de una receta con estrellas */
 function rellenarDificultad(elemento, dif){
-    console.log(elemento);
     let texto = document.querySelector('#'+elemento).innerHTML+" ";
     for (let i = 1; i <= 5; i++) {
         if (i <= dif) {

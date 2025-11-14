@@ -1,7 +1,7 @@
 /* Realiza las peticiones para rellenar datos en una página sin recargar */
 
 /* Rellena un select con los datos obtenidos de la base de datos cuando se selecciona una opción de otro */
-async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
+async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccionar){
 
     /* Obtiene el select que hay que rellenar */
     let campoSelect = document.querySelector('#'+idRellenar);
@@ -46,6 +46,11 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
         
         try {
             const response = await fetch(accion, config);
+
+            /* Añadido para que al llamarla con await, espere correctamente */
+            if (!response.ok) {
+                throw new Error("Error en la respuesta");
+            }
 
             const data = await response.json();
 
@@ -131,6 +136,26 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 
                 /* Añade al value de la option el id del elemento */
                 option.setAttribute('value', data[i][id_tabla]);
+
+                /* Comprueba si la variable seleccionar viene definida y selecciona el elemento */
+                if (typeof(seleccionar) !== 'undefined') {
+
+                    /* Comprueba si es un array de un select múltiple o un string de un select sencillo */
+                    if (Array.isArray(seleccionar)) {
+                        seleccionar.forEach(element => {
+                            if (element[0] == data[i][id_tabla]) {
+                                option.setAttribute('selected', '');
+                            }
+                        });
+                    }
+                    else{
+                        /* Si seleccionar tiene el mismo valor que el value de la option, la selecciona */
+                        if (data[i][id_tabla] == seleccionar)  {
+                            option.setAttribute('selected', '');
+                        }
+                    }
+
+                }
                 
                 /* Añade las clases a la option */
                 option.setAttribute('class', clasesOptions);
@@ -143,8 +168,11 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
             }
 
             if (tabla == 'paises') {
-                rellenarSelect(0, 'regionEnviarReceta', 'regiones', 'id_region');
+                await rellenarSelect(0, 'regionEnviarReceta', 'regiones', 'id_region');
             }
+
+            /* Añadido para esperar el await correctamente */
+            return response;
             
         } catch (error) {
             textoAlerta = {
@@ -154,7 +182,21 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo){
                 texto: error+' Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
                 confirmButtonText: 'Aceptar',
                 colorIcono: 'red'};
-            ventanaModal(textoAlerta);
+                ventanaModal(textoAlerta);
+            }
         }
+        
+        /* Añadido para esperar el await correctamente */
+        return true;
+}
+
+/* Selecciona los elementos de un select determinado */
+function seleccionarSelect(idSelect, seleccionados){
+
+    if (Array.isArray(seleccionados)) {
+        console.log(seleccionados);
+    } else {
+        console.log('no es un array')
     }
+
 }
