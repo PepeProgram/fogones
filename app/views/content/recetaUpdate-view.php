@@ -74,6 +74,7 @@
             }
         }
     }
+
 ?>
 
 <script type="text/javascript">
@@ -117,9 +118,13 @@
 
         /* Coloca los utensilios de la receta en la lista de utensilios */
         agregarElementoListaUpdate('selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios', <?php echo json_encode($receta_actualizar->getUtensilios()) ?>);
-
+        
         /* Rellena el select de ingredientes */
-        rellenarSelect('activable', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
+        await rellenarSelect('activable', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
+        
+        /* Coloca los ingredientes de la receta en la lista de ingredientes */
+        agregarElementoListaUpdate('selectIngredientesEnviarReceta', 'listaIngredientesEnviarReceta', 'arrayIngredientes', <?php echo json_encode($receta_actualizar->getIngredientes()) ?>);
+
     });
 </script>
 
@@ -429,9 +434,20 @@
         </div>
     </section>
 
-    <!-- Enviar receta -->
-    <section name='Enviar receta' id="enviarReceta" class="enviarReceta total horizontal">
-        <button type="submit" form="formEnviarReceta" value="submit" class="btn col-100">Guardar Receta</button> 
+    <section name='Enviar receta' id="enviarReceta" class="enviarReceta total horizontal top">
+        <!-- Aprobar receta -->
+        <?php
+            /* Comprueba si el usuario es administrador o revisor */ 
+            if (($_SESSION['administrador'] || $_SESSION['revisor']) && !$receta_actualizar->getActivo()) {
+        ?> 
+                <!-- Coloca el botón para aprobar la receta -->
+                <div class="btn btnAlerta col-100" onclick='aprobarReceta(<?php echo json_encode($receta_actualizar); ?>);'>Aprobar receta</div>
+        <?php   
+            }
+        ?>
+
+        <!-- Enviar receta -->
+        <button type="submit" form="formEnviarReceta" value="submit" class="btn col-100">Actualizar Receta</button> 
     </section>
 </form>
 

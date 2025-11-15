@@ -163,7 +163,7 @@
             <div class="nombrePrincipalesInput medio izquierda derecha top horizontal">
                 <div class="vertical col-40 medio izquierda top">
                     <label for="nombreReceta" class="labelForm">Nombre del plato*</label>
-                    <input type="text" name="nombreReceta" id="nombreReceta" class="input  nombreReceta" maxlength="255" pattern="[()a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:;%\/\-_ ]{3,255}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 255 caracteres">
+                    <input type="text" name="nombreReceta" id="nombreReceta" class="input  nombreReceta" maxlength="255" pattern="[\(\)%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:;\/\-_ ]{3,255}" title="Introduzca el nombre del Tipo de platos. Sólo puede contener letras, números, (, ), , ,, ;, :, %, .,-,_ y espacios, entre 3 y 255 caracteres">
                 </div>
                 <div class="vertical col-20 medio top">
                     <label for="numeroPersonasEnviarReceta" class="labelForm">Pax.*</label>

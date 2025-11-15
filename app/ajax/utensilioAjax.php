@@ -34,6 +34,10 @@
                 echo $insUtensilio->cambiarActivoUtensilioControlador();
                 break;
             
+            case 'aprobar':
+                echo $insUtensilio->aprobarUtensilioControlador();
+                break;
+            
             default:
                 $alerta=[
                     "tipo"=>"recargar",

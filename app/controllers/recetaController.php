@@ -55,23 +55,6 @@
                 
             }
 
-            /* Función que devuelve el texto de las alertas modificado en función de quién las envía */
-            function errorGuardar($campo){
-                /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
-                $alerta = [
-                    "tipo" => "simple",
-                    "titulo" => "Error en el formulario",
-                    "texto" => "Compruebe el apartado ".$campo,
-                    "icono" => "error"
-                ];
-
-                /* Codifica la variable como datos JSON */
-                return json_encode($alerta);
-
-                /* Detiene la ejecución del script */
-                exit();
-            }
-
             /* Recupera los post aplicándoles la función limpiarCadena para evitar SQL Injection */
 
             /* Comprueba haya NOMBRE DE LA RECETA */
@@ -1211,7 +1194,7 @@
                             "campo_valor"=>$unid
                         ]
                     ];
-
+                    
                     /* Guarda los ingredientes llamando al método del mainModel */
                     $registrar_ingrediente = $this->guardarDatos("recetas_ingredientes", $guardar_ingrediente);
                     if (!$registrar_ingrediente->rowCount() == 1 ) {
@@ -1242,7 +1225,7 @@
                 $alerta = [
                     "tipo" => "recargar",
                     "titulo" => "Felicidades!!!",
-                    "texto" => "La receta ".$nombre_receta." ha sido guardada correctamente por el usuario ".$_SESSION['id']." con el id ".$id_receta,
+                    "texto" => "La receta ".$nombre_receta." ha sido guardada correctamente",
                     "icono" => "success"
                 ];
 

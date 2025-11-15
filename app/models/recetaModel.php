@@ -4,8 +4,9 @@
 
     /* Carga el modelo de alérgenos para poder usarlo */
     use app\models\alergenoModel;
+use JsonSerializable;
 
-    class recetaModel extends mainModel{
+    class recetaModel extends mainModel implements JsonSerializable{
         private $id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo, $estilos, $tipos_plato, $metodos, $utensilios, $ingredientes, $alergenos;
 
         function __construct($id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo) {
@@ -35,6 +36,37 @@
             $this->ingredientes = $this->checkIngredientes();
             $this->alergenos = $this->checkAlergenos();
             
+        }
+
+        public function jsonSerialize(): mixed {
+                return [
+                        'id'                      => $this->id,
+                        'nombre'                  => $this->nombre,
+                        'descripcion'             => $this->descripcion,
+                        'id_usuario'              => $this->id_usuario,
+                        'id_grupo'                => $this->id_grupo,
+                        'personas'                => $this->personas,
+                        'tiempo'                  => $this->tiempo,
+                        'id_autor'                => $this->id_autor,
+                        'id_region'               => $this->id_region,
+                        'id_pais'                 => $this->id_pais,
+                        'id_zona'                 => $this->id_zona,
+                        'dificultad'              => $this->dificultad,
+                        'elaboracion'             => $this->elaboracion,
+                        'emplatado'               => $this->emplatado,
+                        'foto'                    => $this->foto,
+                        'visualizaciones'         => $this->visualizaciones,
+                        'creado'                  => $this->creado,
+                        'actualizado'             => $this->actualizado,
+                        'activo'                  => $this->activo,
+                        'estilos'                 => $this->estilos,
+                        'tipos_plato'             => $this->tipos_plato,
+                        'metodos'                 => $this->metodos,
+                        'utensilios'              => $this->utensilios,
+                        'ingredientes'            => $this->ingredientes,
+                        'alergenos'               => $this->alergenos
+
+                ];
         }
 
         function checkEstilos(){

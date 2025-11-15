@@ -360,22 +360,19 @@ function nuevoElementoEnLista(idSelect, idLista, idElemento, nombreElemento, idA
 function agregarElementoListaUpdate(idCampoSelect, idLista, idArray, idElementos){
 
     /* Recupera el select donde están los elementos */
-    
-    
-    console.log('El select es: '+idCampoSelect);
-    console.log('La lista es: '+idLista);
-    console.log('El array es: '+idArray);
-    
     selectNodes = document.querySelector('#'+idCampoSelect).options;
     
     /* Recorre los elementos del array */
     idElementos.forEach(elemento => {
-        
+    
+        if (typeof(elemento['id_ingrediente']) !== 'undefined') {
+            elemento[0] = elemento['id_ingrediente'];
+        }
         /* Recorre las opciones para ver si el elemento coincide con el value de la opción y seleccionarlo */
         for (let i = 0; i < selectNodes.length; i++) {
             if (selectNodes[i].value == elemento[0]) {
                 selectNodes[i].setAttribute('selected', '');
-                agregarElementoLista('', idCampoSelect, idLista, idArray);
+                agregarElementoLista('', idCampoSelect, idLista, idArray, elemento);
                 break;
             }
         }    
@@ -384,7 +381,7 @@ function agregarElementoListaUpdate(idCampoSelect, idLista, idArray, idElementos
 }
 
 /* Recibe una option seleccionada de un select y añade un input con sus datos a una lista */
-function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
+async function agregarElementoLista(evento, idCampoSelect, idLista, idArray, elemento){
 
     /* Comprueba si llamo a la función desde el botón seleccionar elemento o desde añadir un elemento nuevo */
     if (evento != '') {
@@ -457,7 +454,15 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
                 input_cantidad.setAttribute('min', '0.01');
                 input_cantidad.setAttribute('placeholder', 'cant.');
                 input_cantidad.setAttribute('title', 'Cantidad de '+texto_elemento);
-                
+
+                /* Comprueba si se ha enviado un elemento */
+                if (typeof(elemento) !== 'undefined') {
+                    /* Comprueba si el elemento trae cantidad y le añade su valor al input cantidad */
+                    if ('cantidad' in elemento) {
+                        input_cantidad.setAttribute('value', elemento['cantidad']);
+                    }
+                }
+
                 /* Añade el input a la linea */
                 linea.appendChild(input_cantidad);
                 
@@ -467,7 +472,7 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
                 input_unidad.setAttribute('id', 'unid-'+id_elemento);
                 input_unidad.setAttribute('class', 'inputUnidad col-20 static');
                 input_unidad.setAttribute('title', 'Seleccione unidad de medida para '+texto_elemento);
-                
+
                 /* Establece las options con las unidades. Las acaba de rellenar al final */
                 
                 select0 = document.createElement('option');
@@ -488,13 +493,32 @@ function agregarElementoLista(evento, idCampoSelect, idLista, idArray){
             
             /* Añade el texto a la linea */
             linea.appendChild(texto_linea);
+
+            /* Coloca el botón para activar un ingrediente */
             
             /* Añade la linea a la lista */
             lista.appendChild(linea);
             
             /* Rellena el select de las unidades con las unidades de medida */
             if (idLista == 'listaIngredientesEnviarReceta') {
-                rellenarSelect('', 'unid-'+id_elemento, 'unidades_medida', '');
+                await rellenarSelect('', 'unid-'+id_elemento, 'unidades_medida', '');
+            }
+
+            /* Selecciona la unidad del ingrediente en la receta en el select */
+            if (typeof(elemento) !== 'undefined') {
+                if ('id_unidad' in elemento) {
+                    /* Recupera las options del select de unidades */
+                    optionsUnidades = document.querySelector('#unid-'+id_elemento).options;
+
+                    /* Recorre las options para seleccionar la del elemento si es la misma */
+                    for (let i = 0; i < optionsUnidades.length; i++) {
+                        if (optionsUnidades[i].value == elemento['id_unidad']) {
+                            optionsUnidades[i].setAttribute('selected', '');
+                            break;
+                        }
+                        
+                    }
+                }
             }
 
             /* Elimina la selección del select tras haber añadido un elemento a la lista */
@@ -553,4 +577,74 @@ function rellenarDificultad(elemento, dif){
 
     document.querySelector('#'+elemento).innerHTML = texto;
 
+}
+
+/* Aprueba una receta cambiando el estado de activo_receta */
+function aprobarReceta(receta){
+
+    /*
+    
+    ¡¡¡¡¡¡¡OJOOOOOOOOO!!!!!
+    ESTOY ENVIANDO LA RECETA Y OBTENIENDO LOS UTENSILIOS DE LA RECETA SIN ACTUALIZAR.
+    HAY QUE ENVIAR EL ARRAY DE UTENSILIOS Y EL ARRAY DE INGREDIENTES, NO LA RECETA SIN ACTUALIZAR
+    
+    */
+
+
+    console.log(receta.utensilios);
+
+
+    /* APRUEBA AUTOMÁTICAMENTE LOS UTENSILIOS DE LA RECETA SI LOS HAY */
+    if (receta.utensilios.length > 0) {
+        
+        /* Crea un array para guardar los id de los utensilios */
+        arrayUtensilios = [];
+    
+        receta.utensilios.forEach(utensilio => {
+            arrayUtensilios.push(utensilio.id_utensilio);
+        });
+    
+        /* Crea un formulario para enviar al utensilioAjax */
+        let formUtensilio = document.createElement('form');
+        
+        /* Añade el method al formulario */
+        formUtensilio.setAttribute('method', 'POST');
+        
+        
+        /* Crea un formdata con el formulario */
+        let data = new FormData(formUtensilio);
+        
+        /* Añade el campo módulo para enviar al utensilioAjax */
+        data.append('modulo_utensilio', 'aprobar');
+        
+        /* Aañade el campo id_utensilio para enviar al controlador */
+        data.append('id_utensilio', arrayUtensilios.toString());
+        
+        /* Crea las cabeceras para enviar la peticion */
+        let encabezados = new Headers();
+        
+        /* Establece el action para enviar */
+        let action = APP_URL+'app/ajax/utensilioAjax.php';
+    
+        /* Configuraciones en formato JSON de los datos de la petición */
+        let config ={
+            "method": "POST",
+            "headers": encabezados,
+            "mode": "cors",
+            "cache": "no-cache",
+            "body": data
+        };
+    
+        /* Realiza la petición a la acción del formulario */
+        fetch(action, config).then(respuesta => {
+            return respuesta.json();
+        }).then(respuestaJSON=>{
+            if (respuestaJSON.length == 0) {
+                return true;
+            } else {
+                return alertas_ajax(respuestaJSON);
+            }
+        });
+        
+    }
 }

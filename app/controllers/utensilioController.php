@@ -652,7 +652,7 @@
             /* Verificar si el utensilio está activo o no */
             if ($activo_utensilio['activo'] == 0) {
 
-                /* Desactiva el utensilio */
+                /* Activa el utensilio */
                 /* Crea el array para guardar los datos */
                 $utensilio_datos_up = [
                     [
@@ -722,6 +722,67 @@
                 }
                 
             }
+            return json_encode($alerta);
+        }
+
+        /* Activa un utensilio directamente desde la revisión de la receta */
+        public function aprobarUtensilioControlador(){
+
+            /* Comprobar que el usuario es administrador o revisor */
+            if (!$_SESSION['administrador']) {
+                if (!$_SESSION['revisor']) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR GRAVE",
+                        "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                        "icono"=>"error"
+                    ];
+                }
+                return json_encode($alerta);
+                exit();
+            }
+
+            /* Obtener el id que viene en el campo oculto del botón */
+            $id = $this->limpiarCadena($_POST['id_utensilio']);
+
+            /* Convertir en array el string de los id */
+            $idArray = explode(',', $id);
+
+            /* Recorre el array para activar los utensilios que no estén activos */
+            foreach ($idArray as $id) {
+
+                /* Activa el utensilio */
+                /* Crea el array para guardar los datos */
+                $utensilio_datos_up = [
+                    [
+                        "campo_nombre"=>"activo",
+                        "campo_marcador"=>":Activo",
+                        "campo_valor"=>1
+                    ]
+                ];
+
+                $condicion = [
+                    "condicion_campo"=>"id_utensilio",
+                    "condicion_marcador"=>":ID",
+                    "condicion_valor"=>$id
+                ];
+
+                /* Comprueba si se han insertado los datos */
+                if ($this->actualizarDatos("utensilios", $utensilio_datos_up, $condicion)) {
+                    $alerta = [];
+                } else {
+
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"Error",
+                        "texto"=>"No se han podido actualizar los datos en este momento. Inténtelo de nuevo más tarde",
+                        "icono"=>"error"
+                    ];
+                    exit();
+                }
+                
+            }
+
             return json_encode($alerta);
         }
     }

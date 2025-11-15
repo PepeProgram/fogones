@@ -572,6 +572,7 @@ option{
 .btnAlerta{
     background-color: #b30000;
     color: var(--fondoClaro);
+    text-align: center;
 }
 .labelFile{
     float: left;
