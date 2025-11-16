@@ -493,6 +493,10 @@ body{
     font-style: italic;
     color: var(--oscuro);
 }
+input[type=number],
+input[type=time]{
+    text-align: right;
+}
 .input{
     width: 100%;
     padding: 0.5rem;
@@ -922,13 +926,15 @@ th.headerUserTitle{
     resize: none;
     font-size: 0.8rem;
 }
-.opcionesAutores{
+.opcionesAutores,
+.opcionesRecetas{
     display: flex;
     flex-direction: row;
     align-self: end;
     float: right;
 }
-.opcionesAutores button{
+.opcionesAutores button,
+.opcionesRecetas button{
     padding: 0.5rem;
     color: var(--oscuro);
     background: none;
@@ -936,7 +942,8 @@ th.headerUserTitle{
     font-size: 1rem;
     border-radius: 0.5rem;
 }
-.opcionesAutores button:hover{
+.opcionesAutores button:hover,
+.opcionesRecetas button:hover{
     cursor: pointer;
     background-color: var(--oscuro);
     color: var(--fondoClaro);
@@ -1127,6 +1134,33 @@ a{
         width: auto;
     }
 }
+/* LISTADO DE RECETAS EN EL PANEL DE CONTROL */
+
+.listaRecetasContainer{
+    margin: auto;
+}
+.listaRecetasFila:nth-child(odd){
+    background-color: var(--medio);
+}
+.listaRecetasCabecera{
+    color: var(--fondoClaro);
+    background-color: var(--oscuro);
+    font-weight: bold;
+}
+.fotoListaRecetas{
+    display: none;
+}
+button.btnOpcionesRecetas{
+    font-size: larger;
+}
+
+@media screen and (min-width: 768px) {
+    .fotoListaRecetas{
+        display: block;
+    }
+}
+
+
 /* Clases para las ventanas de sweetAlert2 */
 .botonCerrar{
     border: 0px;

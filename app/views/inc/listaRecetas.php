@@ -78,7 +78,8 @@
                         ?>
                     </div>
                     <?php 
-                        if ($id_usuario_ver == $receta->getId_usuario()) {
+                        if ((isset($_SESSION['revisor']) && $_SESSION['revisor'] == true) || $id_usuario_ver == $receta->getId_usuario()) {
+                        
                     ?>
                             <div class="opcionesAutores btnRecetaUpdate">
                                 <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>">

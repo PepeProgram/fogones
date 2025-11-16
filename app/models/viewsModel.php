@@ -21,7 +21,7 @@
                 
                 /* Comprueba si el usuario es revisor para permitir las vistas de revisor */
                 if ($_SESSION['revisor']) {
-                    array_push($listaBlanca, "paraRevisar");
+                    array_push($listaBlanca, "paraRevisar", "misRecetas", "recetaUpdate");
                 }
 
                 /* Comprueba si el usuario es administrador para permitir el acceso al panel de control */

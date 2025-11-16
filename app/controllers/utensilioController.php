@@ -725,7 +725,7 @@
             return json_encode($alerta);
         }
 
-        /* Activa un utensilio directamente desde la revisión de la receta */
+        /* ACTIVA UN UTENSILIO DIRECTAMENTE DESDE LA REVISIÓN DE LA RECETA */
         public function aprobarUtensilioControlador(){
 
             /* Comprobar que el usuario es administrador o revisor */
@@ -737,9 +737,9 @@
                         "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
                         "icono"=>"error"
                     ];
+                    return json_encode($alerta);
+                    exit();
                 }
-                return json_encode($alerta);
-                exit();
             }
 
             /* Obtener el id que viene en el campo oculto del botón */

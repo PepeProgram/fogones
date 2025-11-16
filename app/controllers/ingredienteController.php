@@ -38,7 +38,7 @@
             else{
 
                 /* Ejecuta la búsqueda de todos los ingredientes */
-                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes ORDER BY nombre_ingrediente");
+                $ingredientes = $this->ejecutarConsulta("SELECT * FROM ingredientes ORDER BY id_ingrediente DESC");
             }
 
 
@@ -804,5 +804,67 @@
                 
             }
             return json_encode($alerta);
+        }
+
+        /* ACTIVA UN INGREDIENTE DIRECTAMENTE DESDE LA REVISIÓN DE LA RECETA  */
+        public function aprobarIngredienteControlador(){
+
+            /* Comprobar que el usuario es administrador o revisor */
+            if (!$_SESSION['administrador']) {
+                if (!$_SESSION['revisor']) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR GRAVE",
+                        "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+            }
+
+            /* Obtener el id que viene en el campo oculto del botón */
+            $id = $this->limpiarCadena($_POST['id_ingrediente']);
+
+            /* Convertir en array el string de los id */
+            $idArray = explode(',', $id);
+
+            /* Recorre el array para activar los ingredientes que no estén activos */
+            foreach ($idArray as $id) {
+
+                /* Activa el ingrediente */
+                /* Crea el array para guardar los datos */
+                $ingrediente_datos_up = [
+                    [
+                        "campo_nombre"=>"activo",
+                        "campo_marcador"=>":Activo",
+                        "campo_valor"=>1
+                    ]
+                ];
+
+                $condicion = [
+                    "condicion_campo"=>"id_ingrediente",
+                    "condicion_marcador"=>":ID",
+                    "condicion_valor"=>$id
+                ];
+
+                /* Comprueba si se han insertado los datos */
+                if ($this->actualizarDatos("ingredientes", $ingrediente_datos_up, $condicion)) {
+                    $alerta = [];
+                } else {
+
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"Error",
+                        "texto"=>"No se han podido actualizar los datos en este momento. Inténtelo de nuevo más tarde",
+                        "icono"=>"error"
+                    ];
+                    exit();
+                }
+                
+            }
+
+            return json_encode($alerta);
+        
         }
     }

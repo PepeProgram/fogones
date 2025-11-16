@@ -441,7 +441,7 @@
             if (($_SESSION['administrador'] || $_SESSION['revisor']) && !$receta_actualizar->getActivo()) {
         ?> 
                 <!-- Coloca el botón para aprobar la receta -->
-                <div class="btn btnAlerta col-100" onclick='aprobarReceta(<?php echo json_encode($receta_actualizar); ?>);'>Aprobar receta</div>
+                <div id="btnAprobarReceta" class="btn btnAlerta col-100" onclick='aprobarReceta(<?php echo json_encode($receta_actualizar); ?>, document.querySelector("#arrayUtensilios").value, document.querySelector("#arrayIngredientes").value);'>Aprobar receta</div>
         <?php   
             }
         ?>

@@ -58,6 +58,10 @@
                 echo $insIngrediente->cambiarActivoIngredienteControlador();
                 break;
             
+            case 'aprobar':
+                echo $insIngrediente->aprobarIngredienteControlador();
+                break;
+            
             default:
                 $alerta=[
                     "tipo"=>"recargar",

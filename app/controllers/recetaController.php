@@ -1274,6 +1274,20 @@
         /* Fin guardarRecetaControlador */
         }
 
+        /* CHEQUEAR SI HAY RECETAS PENDIENTES DE REVISIÓN */
+        public function revisarRecetasControlador(){
+            /* Ejecuta la búsqueda para comprobar si hay pendientes de revisión */
+            $recetasRevisar = $this->ejecutarConsulta("SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta");
+
+            /* Devuelve true o false */
+            if ($recetasRevisar->rowCount()>0) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
         /* LISTAR TODAS LAS RECETAS */
         public function listarRecetasControlador(){
 
@@ -1281,28 +1295,36 @@
             $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
 
             /* Comprueba cuál es la vista actual para construir la búsqueda de recetas */
+            if (isset($vista_actual[3]) && $vista_actual[3] == "paraRevisar"){
+
+                /* Ejecuta la búsqueda de los utensilios de cocina pendientes de revisión */
+                $consulta = $this->ejecutarConsulta("SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta");
+            }
             if (isset($vista_actual[2]) && $vista_actual[2] != "") {
                 switch ($vista_actual[2]) {
+                    case 'principal':
+                        $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
+                        break;
                     case 'aperitivos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1 AND activo = 1";
                         break;
                     case 'primerosPlatos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3 AND activo = 1";
                         break;
                     case 'segundosPlatos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7 AND activo = 1";
                         break;
                     case 'postres':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4 AND activo = 1";
                         break;
                     case 'guarniciones':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11 AND activo = 1";
                         break;
                     case 'desayunos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10 AND activo = 1";
                         break;
                     case 'complementos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12";
+                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12 AND activo = 1";
                         break;
                     case 'misRecetas':
                         $id = $_SESSION['id'];
@@ -1336,6 +1358,7 @@
 
             /* Devuelve el array de recetas */
             return $recetas;
+        /* Fin listarRecetasControlador */
         }
 
         /* ACTUALIZAR RECETA */
@@ -1357,5 +1380,65 @@
             ];
             return json_encode($alerta);
             exit();
+        }
+
+        /* APROBAR UNA RECETA */
+        public function aprobarRecetaControlador(){
+            /* Comprobar que el usuario es administrador o revisor */
+            if (!$_SESSION['administrador']) {
+                if (!$_SESSION['revisor']) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR GRAVE",
+                        "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador del sistema",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+            }
+
+            /* Obtener el id que viene en el campo oculto del botón */
+            $id = $this->limpiarCadena($_POST['id_receta']);
+
+
+                /* Activa la receta */
+                /* Crea el array para guardar los datos */
+                $receta_datos_up = [
+                    [
+                        "campo_nombre"=>"activo",
+                        "campo_marcador"=>":Activo",
+                        "campo_valor"=>1
+                    ]
+                ];
+
+                $condicion = [
+                    "condicion_campo"=>"id_receta",
+                    "condicion_marcador"=>":ID",
+                    "condicion_valor"=>$id
+                ];
+
+                /* Comprueba si se han insertado los datos */
+                if ($this->actualizarDatos("recetas", $receta_datos_up, $condicion)) {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"Activada",
+                        "texto"=>"La receta ha sido activada satisfactoriamente",
+                        "icono"=>"success"
+                    ];
+                } else {
+
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"Error",
+                        "texto"=>"No se han podido actualizar los datos en este momento. Inténtelo de nuevo más tarde",
+                        "icono"=>"error"
+                    ];
+                    exit();
+                }
+
+            return json_encode($alerta);
+
+        /* Fin aprobarRecetaControlador */
         }
     }

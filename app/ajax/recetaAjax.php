@@ -32,6 +32,10 @@
                 # code...
                 break;
             
+            case 'aprobar':
+                echo $insReceta->aprobarRecetaControlador();
+                break;
+            
             default:
                 # code...
                 break;

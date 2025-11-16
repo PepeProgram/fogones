@@ -459,7 +459,7 @@ async function agregarElementoLista(evento, idCampoSelect, idLista, idArray, ele
                 if (typeof(elemento) !== 'undefined') {
                     /* Comprueba si el elemento trae cantidad y le añade su valor al input cantidad */
                     if ('cantidad' in elemento) {
-                        input_cantidad.setAttribute('value', elemento['cantidad']);
+                        input_cantidad.setAttribute('value', parseFloat(elemento['cantidad']));
                     }
                 }
 
@@ -494,8 +494,6 @@ async function agregarElementoLista(evento, idCampoSelect, idLista, idArray, ele
             /* Añade el texto a la linea */
             linea.appendChild(texto_linea);
 
-            /* Coloca el botón para activar un ingrediente */
-            
             /* Añade la linea a la lista */
             lista.appendChild(linea);
             
@@ -580,30 +578,11 @@ function rellenarDificultad(elemento, dif){
 }
 
 /* Aprueba una receta cambiando el estado de activo_receta */
-function aprobarReceta(receta){
+function aprobarReceta(receta, IdsUtensilios, IdsIngredientes){
 
-    /*
-    
-    ¡¡¡¡¡¡¡OJOOOOOOOOO!!!!!
-    ESTOY ENVIANDO LA RECETA Y OBTENIENDO LOS UTENSILIOS DE LA RECETA SIN ACTUALIZAR.
-    HAY QUE ENVIAR EL ARRAY DE UTENSILIOS Y EL ARRAY DE INGREDIENTES, NO LA RECETA SIN ACTUALIZAR
-    
-    */
-
-
-    console.log(receta.utensilios);
-
-
-    /* APRUEBA AUTOMÁTICAMENTE LOS UTENSILIOS DE LA RECETA SI LOS HAY */
-    if (receta.utensilios.length > 0) {
+    /* Aprueba automáticamente los UTENSILIOS de la receta si los hay */
+    if (IdsUtensilios != "") {
         
-        /* Crea un array para guardar los id de los utensilios */
-        arrayUtensilios = [];
-    
-        receta.utensilios.forEach(utensilio => {
-            arrayUtensilios.push(utensilio.id_utensilio);
-        });
-    
         /* Crea un formulario para enviar al utensilioAjax */
         let formUtensilio = document.createElement('form');
         
@@ -612,31 +591,31 @@ function aprobarReceta(receta){
         
         
         /* Crea un formdata con el formulario */
-        let data = new FormData(formUtensilio);
+        let dataUtensilio = new FormData(formUtensilio);
         
         /* Añade el campo módulo para enviar al utensilioAjax */
-        data.append('modulo_utensilio', 'aprobar');
+        dataUtensilio.append('modulo_utensilio', 'aprobar');
         
         /* Aañade el campo id_utensilio para enviar al controlador */
-        data.append('id_utensilio', arrayUtensilios.toString());
+        dataUtensilio.append('id_utensilio', IdsUtensilios);
         
         /* Crea las cabeceras para enviar la peticion */
-        let encabezados = new Headers();
+        let encabezadosUtensilio = new Headers();
         
         /* Establece el action para enviar */
-        let action = APP_URL+'app/ajax/utensilioAjax.php';
+        let actionUtensilio = APP_URL+'app/ajax/utensilioAjax.php';
     
         /* Configuraciones en formato JSON de los datos de la petición */
-        let config ={
+        let configUtensilio ={
             "method": "POST",
-            "headers": encabezados,
+            "headers": encabezadosUtensilio,
             "mode": "cors",
             "cache": "no-cache",
-            "body": data
+            "body": dataUtensilio
         };
     
         /* Realiza la petición a la acción del formulario */
-        fetch(action, config).then(respuesta => {
+        fetch(actionUtensilio, configUtensilio).then(respuesta => {
             return respuesta.json();
         }).then(respuestaJSON=>{
             if (respuestaJSON.length == 0) {
@@ -645,6 +624,100 @@ function aprobarReceta(receta){
                 return alertas_ajax(respuestaJSON);
             }
         });
-        
     }
+    
+    /* Aprueba automáticamente los INGREDIENTES de la receta si los hay */
+    if (IdsIngredientes != "") {
+        
+        /* Crea un formulario para enviar al utensilioAjax */
+        let formIngrediente = document.createElement('form');
+        
+        /* Añade el method al formulario */
+        formIngrediente.setAttribute('method', 'POST');
+        
+        /* Crea un formdata con el formulario */
+        let dataIngrediente = new FormData(formIngrediente);
+        
+        /* Añade el campo módulo para enviar al ingredienteAjax */
+        dataIngrediente.append('modulo_ingrediente', 'aprobar');
+        
+        /* Aañade el campo id_ingrediente para enviar al controlador */
+        dataIngrediente.append('id_ingrediente', IdsIngredientes);
+        
+        /* Crea las cabeceras para enviar la peticion */
+        let encabezadosIngrediente = new Headers();
+        
+        /* Establece el action para enviar */
+        let actionIngrediente = APP_URL+'app/ajax/ingredienteAjax.php';
+    
+        /* Configuraciones en formato JSON de los datos de la petición */
+        let configIngrediente ={
+            "method": "POST",
+            "headers": encabezadosIngrediente,
+            "mode": "cors",
+            "cache": "no-cache",
+            "body": dataIngrediente
+        };
+    
+        /* Realiza la petición a la acción del formulario */
+        fetch(actionIngrediente, configIngrediente).then(respuesta => {
+            return respuesta.json();
+        }).then(respuestaJSON=>{
+            if (respuestaJSON.length == 0) {
+                return true;
+            } else {
+                return alertas_ajax(respuestaJSON);
+            }
+        });
+    }
+
+    /* Aprueba la RECETA */
+
+    if ('id' in receta && receta.id != null &&receta.id != "") {
+        
+        /* Crea un formulario para enviar al recetaAjax */
+        let formReceta = document.createElement('form');
+        
+        /* Añade el method al formulario */
+        formReceta.setAttribute('method', 'POST');
+        
+        /* Crea un formdata con el formulario */
+        let dataReceta = new FormData(formReceta);
+        
+        /* Añade el campo módulo para enviar al recetaAjax */
+        dataReceta.append('modulo_receta', 'aprobar');
+        
+        /* Aañade el campo id_receta para enviar al controlador */
+        dataReceta.append('id_receta', receta.id);
+        
+        /* Crea las cabeceras para enviar la peticion */
+        let encabezadosReceta = new Headers();
+        
+        /* Establece el action para enviar */
+        let actionReceta = APP_URL+'app/ajax/recetaAjax.php';
+    
+        /* Configuraciones en formato JSON de los datos de la petición */
+        let configReceta ={
+            "method": "POST",
+            "headers": encabezadosReceta,
+            "mode": "cors",
+            "cache": "no-cache",
+            "body": dataReceta
+        };
+    
+        /* Realiza la petición a la acción del formulario */
+        fetch(actionReceta, configReceta).then(respuesta => {
+            return respuesta.json();
+        }).then(respuestaJSON=>{
+            document.querySelector('#btnAprobarReceta').classList.add('oculto');
+            if (respuestaJSON.length == 0) {
+                return true;
+            } else {
+                return alertas_ajax(respuestaJSON);
+            }
+        });
+    }
+
+
+        
 }
