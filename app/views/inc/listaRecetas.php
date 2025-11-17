@@ -17,6 +17,10 @@
 ?>
 
 
+<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total">
+    <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
+    <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, 'tarjetaReceta');" placeholder="Buscar en título y descripción ...">
+</form>
 <section name="Ultimas recetas" id="ultimasAgregadas" class="columns">
     <?php
         /* Establece el directorio de fotos */
@@ -65,7 +69,7 @@
                 </div>
                 <div class="etiquetasTarjeta col-100 total horizontal static">
                     <div class="etiqueta tiempo static pointer" title="Tiempo de elaboración <?php echo date("h:m",strtotime($receta->getTiempo())) ?>">
-                        <i class="fa-solid fa-clock-rotate-left"></i><?php echo " ".date("h:m",strtotime($receta->getTiempo())) ?>
+                        <i class="fa-solid fa-clock-rotate-left"></i><?php echo " ".substr($receta->getTiempo(), 0, 5); ?>
                     </div>
                     <div class="iconoEtiqueta horizontal static">
                         <?php 

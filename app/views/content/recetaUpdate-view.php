@@ -129,7 +129,7 @@
 </script>
 
 <header class="tituloPagina">
-    <h2>Comprobar una receta</h2>
+    <h2><?php echo $receta_actualizar->getNombre(); ?></h2>
     <p><?php echo "Creado el ".strftime('%a. %d de %b. de %Y', strtotime($receta_actualizar->getCreado()))." - Última actualización el ".strftime('%a. %d de %b. de %Y', strtotime($receta_actualizar->getActualizado())) ?></p>
     <?php include "./app/views/inc/btn_back.php"; ?>
 </header>
@@ -223,10 +223,9 @@
         <div id="fotoCabeceraEnviarReceta" class="fotoCabeceraEnviarReceta foto col-25 total vertical izquierda">
             <img id="fotoReceta" src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto_receta ?>" alt="<?php echo $alt_foto.$receta_actualizar->getFoto(); ?>" title="<?php echo $alt_foto.$receta_actualizar->getFoto(); ?>">
             <div id="btnsFotoReceta" class="btnsFotoReceta">
-                <button id="quitarFotoReceta" type="button" class="fa-solid fa-square-xmark btnFotoReceta userDel" title="Quitar Foto" onclick="eliminarFotoReceta();"></button>
                 <label for="fotoReceta-0" class="oculto">Archivo Imagen</label>
                 <input type="file" name="foto_receta" id="fotoReceta-0" class="file-input" accept=".jpg, .jpeg, .png" onchange="previewImage(this, 'fotoReceta', '<?php echo APP_URL; ?>app/views/photos/recetas_photos/default.png');">
-                <button id="cambiarFotoReceta" type="button" class="fa-solid fa-camera btnFotoReceta" title="Añadir Foto en formato jpg o png. Máximo 5 Mb." onclick="document.querySelector('#fotoReceta-0').click();"></button>
+                <button id="cambiarFotoReceta" type="button" class="fa-solid fa-camera btnFotoReceta checked" title="Cambiar foto. Admite fotos en formato jpg o png. Máximo 5 Mb." onclick="document.querySelector('#fotoReceta-0').click();"></button>
             </div>
         </div>
 
@@ -245,7 +244,7 @@
                 </div>
                 <div class="vertical col-20 medio top">
                     <label for="tiempoElaboracionEnviarReceta" class="labelForm">Tiempo*</label>
-                    <input type="time" name="tiempoElaboracionEnviarReceta" id="tiempoElaboracionEnviarReceta" class="input tiempoElaboracionEnviarReceta" value="<?php echo date("h:m",strtotime($receta_actualizar->getTiempo())) ?>">
+                    <input type="time" name="tiempoElaboracionEnviarReceta" id="tiempoElaboracionEnviarReceta" class="input tiempoElaboracionEnviarReceta" value="<?php echo substr($receta_actualizar->getTiempo(), 0, 5); ?>">
                 </div>
                 <div class="vertical col-20 medio derecha top">
                     <label for="dificultadEnviarReceta" class="labelForm">Dificultad*</label>

@@ -155,6 +155,43 @@ function filtrarTablas(input, tabla){
     }
 }
 
+function filtrarRecetas(input, divRecetas){
+
+    /* Trae el input de búsqueda */
+    input = document.querySelector('#'+input);
+
+    /* Convierte el texto del input a mayúsculas */
+    filter = input.value.toUpperCase();
+    
+    /* Trae los div de las recetas */
+    let recetas = document.querySelectorAll('.'+divRecetas);
+    
+    /* Recorre cada fila de la lista */
+    for (let i = 0; i < recetas.length; i++) {
+        
+        /* Trae los div de cada fila */
+        let receta = recetas[i].children;
+
+        /* Oculta la fila actual */
+        recetas[i].style.display = "none";
+
+        /* recorre cada div de la fila */
+        for (let j = 0; j < receta.length; j++) {
+            
+            /* Extrae el texto del div actual */
+            txtValue = receta[j].textContent;
+            
+            /* Si el texto del div actual en mayúsculas contiene el texto del input, muestra la fila actual */
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                recetas[i].style.display = "";
+            }
+            
+        }
+        
+    }
+
+}
+
 /* Activa un formulario en pantalla */
 function activarFormulario(modulo, idContainer, accion, datosActualizar){
         

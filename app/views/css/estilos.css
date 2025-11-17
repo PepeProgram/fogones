@@ -934,7 +934,8 @@ th.headerUserTitle{
     float: right;
 }
 .opcionesAutores button,
-.opcionesRecetas button{
+.opcionesRecetas button,
+.opcionesRecetas p{
     padding: 0.5rem;
     color: var(--oscuro);
     background: none;
@@ -1150,8 +1151,12 @@ a{
 .fotoListaRecetas{
     display: none;
 }
-button.btnOpcionesRecetas{
+button.btnOpcionesRecetas,
+p.btnOpcionesRecetas{
     font-size: larger;
+}
+.checked{
+    color: limegreen !important;
 }
 
 @media screen and (min-width: 768px) {

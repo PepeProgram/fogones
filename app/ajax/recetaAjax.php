@@ -36,6 +36,10 @@
                 echo $insReceta->aprobarRecetaControlador();
                 break;
             
+            case 'desactivar':
+                echo $insReceta->desactivarRecetaControlador();
+                break;
+            
             default:
                 # code...
                 break;

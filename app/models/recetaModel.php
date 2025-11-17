@@ -94,7 +94,7 @@ use JsonSerializable;
         }
 
         function checkIngredientes(){
-            $ingredientes = $this->ejecutarConsulta("SELECT * FROM recetas_ingredientes WHERE id_receta = '$this->id'");
+            $ingredientes = $this->ejecutarConsulta("SELECT * FROM recetas_ingredientes WHERE id_receta = '$this->id' ORDER BY id_recetas_ingredientes");
             $ingredientes = $ingredientes->fetchAll();
             return $ingredientes;
         }
