@@ -46,6 +46,8 @@ body{
 }
 .centrar{
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 .descripcion{
     margin: 0rem 1rem;
@@ -812,7 +814,7 @@ th.headerUserTitle{
     width: 100%;
 }
 .fotoAutorLista{
-    width: 2.1875rem;
+    width: 3rem;
     padding: 0px;
     display: flex;
     flex-direction: row;
@@ -1081,9 +1083,14 @@ li > span{
     box-shadow: 4px 4px 4px black;
     height: 100%;
 }
-.tarjetaReceta a{
+.tarjetaReceta a,
+.cabeceraReceta a{
     text-decoration: none;
     color: var(--oscuro);
+}
+.tarjetaReceta a:hover,
+.cabeceraReceta a:hover{
+    text-decoration: underline;
 }
 .pointer{
     cursor: pointer;
@@ -1103,6 +1110,11 @@ a{
 }
 .textoLargo{
     text-indent: 2rem;
+    text-align: justify;
+    margin-bottom: 0.5rem;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 .etiquetasTarjeta{
     margin-top: auto;
@@ -1162,6 +1174,55 @@ p.btnOpcionesRecetas{
 @media screen and (min-width: 768px) {
     .fotoListaRecetas{
         display: block;
+    }
+}
+
+/* VISTA DE LA RECETA */
+.tituloReceta{
+    color: var(--oscuro);
+    background-color: var(--fondoBlanco);
+    border-bottom: 2px solid var(--oscuro);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 0px;
+}
+.recetaContainer{
+    background-color: var(--fondoBlanco);
+    height: 100%;
+}
+.datosCabeceraReceta{
+    background-color: var(--fondoClaro);
+    color: var(--oscuro);
+}
+.datosCabeceraReceta h2{
+    font-size: unset;
+}
+.etiquetaCaracteristicasReceta{
+    background-color: var(--fondoBlanco);
+    margin-right: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.iconoEtiquetaReceta{
+    height: 2.5rem;
+    margin-right: 0.5rem;
+    width: 100%;
+}
+.fotoReceta{
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+.fotoReceta img{
+    height: 100%;
+}
+.containerPropietario{
+    height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .datosCabeceraReceta h2{
+        font-size: 1.5rem;
     }
 }
 

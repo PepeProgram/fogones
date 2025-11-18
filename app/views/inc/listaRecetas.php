@@ -56,7 +56,7 @@
                 
                 <div class="col-100 static total vertical">
                     <h3>
-                        <a href="">
+                        <a href="vistaReceta/<?php echo $receta->getId(); ?>">
                             <?php echo $receta->getNombre(); ?>
                         </a>
                     </h3>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="etiquetasTarjeta col-100 total horizontal static">
-                    <div class="etiqueta tiempo static pointer" title="Tiempo de elaboración <?php echo date("h:m",strtotime($receta->getTiempo())) ?>">
+                    <div class="etiqueta tiempo static pointer" title="Tiempo de elaboración <?php echo date("h:i",strtotime($receta->getTiempo())) ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i><?php echo " ".substr($receta->getTiempo(), 0, 5); ?>
                     </div>
                     <div class="iconoEtiqueta horizontal static">

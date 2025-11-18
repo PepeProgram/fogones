@@ -26,7 +26,7 @@
     /* Comprueba si la receta existe */
     $datos = $insLogin->seleccionarDatos('Unico', 'recetas', 'id_receta', $id_receta);
     if ($datos->rowCount()<=0) {
-        /* Si el usuario no existe, vuelta a la página principal */
+        /* Si la receta no existe, vuelta a la página principal */
         echo "
                 <script>
                     textoAlerta = {

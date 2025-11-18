@@ -1343,7 +1343,7 @@
                 
             }
             else {
-                $consulta = "SELECT * FROM recetas ORDER BY id_receta DESC";
+                $consulta = "SELECT * FROM recetas WHERE activo = 1 ORDER BY id_receta DESC";
             }
 
             /* Ejecuta la consulta */
@@ -2259,12 +2259,6 @@
 
             /* Establece los campos para guardar la receta */
             $receta_datos_up = [
-                /* Id usuario */
-                [
-                    "campo_nombre"=>"id_usuario",
-                    "campo_marcador"=>":Usuario",
-                    "campo_valor"=>$_SESSION['id']
-                ],
                 /* Nombre de la receta */
                 [
                     "campo_nombre"=>"nombre_receta",
@@ -2330,12 +2324,6 @@
                     "campo_nombre"=>"emplatado",
                     "campo_marcador"=>":Emplatado",
                     "campo_valor"=>$emplatado_receta
-                ],
-                /* Fecha de creación */
-                [
-                    "campo_nombre"=>"creado_receta",
-                    "campo_marcador"=>":Creado",
-                    "campo_valor"=>date("Y-m-d H:i:s")
                 ],
                 /* Fecha de actualización */
                 [
