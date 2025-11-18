@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-11-2025 a las 23:18:56
+-- Tiempo de generación: 18-11-2025 a las 23:34:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -159,16 +159,22 @@ TRUNCATE TABLE `estilos_cocina`;
 --
 
 INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `foto_estilo`) VALUES
-(1, 'Mediterránea', NULL),
-(3, 'Internacional', NULL),
-(4, 'Molecular', NULL),
-(8, 'De Autor', NULL),
-(9, 'Vegana', NULL),
-(10, 'Bio', NULL),
-(11, 'Sin Gluten', NULL),
-(12, 'Sin Lactosa', NULL),
-(13, 'Vegetariana', NULL),
-(14, 'Tradicional', NULL);
+(1, 'Mediterránea', 'Mediterrnea_8037.png'),
+(3, 'Internacional', 'Internacional_8719.jpg'),
+(4, 'Molecular', 'Molecular_6892.jpg'),
+(8, 'De Autor', 'De_Autor_5595.jpg'),
+(9, 'Vegana', 'Vegana_9402.jpg'),
+(10, 'Bio', 'Bio_8974.jpg'),
+(11, 'Sin Gluten', 'Sin_Gluten_6070.jpg'),
+(12, 'Sin Lactosa', 'Sin_Lactosa_6174.jpg'),
+(13, 'Vegetariana', 'Vegetariana_9459.jpg'),
+(14, 'Tradicional', 'Tradicional_4056.jpg'),
+(15, 'Erótica', 'Ertica_6985.jpg'),
+(16, 'Cumpleaños y aniversarios', 'Cumpleaos_y_aniversarios_8159.jpg'),
+(17, 'Navidad', 'Navidad_1119.jpg'),
+(18, 'Semana Santa', 'Semana_Santa_352.jpg'),
+(19, 'Halloween', 'Halloween_5022.jpg'),
+(20, 'Carnavales', 'Carnavales_5594.jpg');
 
 -- --------------------------------------------------------
 
@@ -217,12 +223,12 @@ INSERT INTO `grupos_plato` (`id_grupo`, `nombre_grupo`, `foto_grupo`) VALUES
 (5, 'Frutas y verduras', 'Frutas_622.jpg'),
 (6, 'Postres y Dulces', 'Bollera_y_pastelera_1687.jpg'),
 (13, 'Pan y masas', 'Masas_2454.jpg'),
-(15, 'Arroz legumbres y cereales', NULL),
-(16, 'Bebidas', NULL),
-(17, 'Lácteos y huevos', NULL),
-(18, 'Pasta y pizza', NULL),
-(19, 'Sopas y cremas', NULL),
-(25, 'Ensaladas', NULL);
+(15, 'Arroz legumbres y cereales', 'Arroz_legumbres_y_cereales_2945.jpg'),
+(16, 'Bebidas', 'Bebidas_5515.jpg'),
+(17, 'Lácteos y huevos', 'Lcteos_y_huevos_738.jpg'),
+(18, 'Pasta y pizza', 'Pasta_y_pizza_4396.jpg'),
+(19, 'Sopas y cremas', 'Sopas_y_cremas_6922.jpg'),
+(25, 'Ensaladas', 'Ensaladas_1950.jpg');
 
 -- --------------------------------------------------------
 
@@ -333,7 +339,33 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (101, 'Jengibre', 1),
 (102, 'Xantana', 1),
 (103, 'Frutos rojos', 1),
-(104, 'Chocolate blanco', 1);
+(104, 'Chocolate blanco', 1),
+(105, 'Nuez moscada', 1),
+(106, 'Jamón serrano', 1),
+(107, 'Alga nori', 1),
+(108, 'Huevas de salmón', 1),
+(109, 'Sal en escamas', 1),
+(110, 'Centolla', 1),
+(111, 'Puerro', 1),
+(112, 'Brandy', 1),
+(113, 'Rape', 1),
+(114, 'Laurel', 1),
+(115, 'Lomo de buey', 1),
+(116, 'Mostaza en polvo', 1),
+(117, 'Patatas', 1),
+(118, 'Vino tinto', 1),
+(119, 'Brécol', 1),
+(120, 'Picantones', 1),
+(121, 'Pimienta blanca', 1),
+(122, 'Pasas', 1),
+(123, 'Caldo de carne', 1),
+(124, 'Almíbar', 1),
+(125, 'Piña', 1),
+(126, 'Puré de castaña', 1),
+(127, 'Calabaza', 1),
+(128, 'Nuez', 1),
+(129, 'Harina de espelta', 1),
+(130, 'Azúcar moreno', 1);
 
 -- --------------------------------------------------------
 
@@ -392,7 +424,18 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 (49, 86, 12),
 (51, 95, 5),
 (52, 98, 14),
-(53, 100, 12);
+(53, 100, 12),
+(54, 105, 8),
+(55, 107, 1),
+(56, 107, 14),
+(57, 108, 5),
+(59, 110, 1),
+(58, 112, 12),
+(60, 113, 5),
+(61, 116, 10),
+(62, 118, 12),
+(63, 126, 8),
+(64, 128, 8);
 
 -- --------------------------------------------------------
 
@@ -727,21 +770,30 @@ TRUNCATE TABLE `recetas`;
 --
 
 INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_usuario`, `id_grupo`, `n_personas`, `tiempo_receta`, `id_autor`, `id_region`, `id_pais`, `id_zona`, `dificultad`, `elaboracion`, `emplatado`, `foto_receta`, `visualizaciones`, `creado_receta`, `actualizado_receta`, `activo`) VALUES
-(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 13, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-10 19:09:49', 0),
-(37, 'Pechuga de pato con verduras', 'Plato con gran aporte de proteinas pero también con grasas saturadas.', 1, 1, 4, '01:20:00', NULL, 0, 0, 0, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato en forma de fichas de dominó en el centro, la salsa a un lado y las verduras en el otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-11 12:41:25', '2025-11-11 12:41:25', 0),
-(38, 'Doriyakis', 'Tortitas muy esponjosas japonesas emparejadas a modo de sandwich con algún relleno en medio de mermelada, crema,  dulce de leche, etc., al gusto', 23, 6, 6, '00:45:00', NULL, 0, 124, 2, 2, 'Abizcochar los huevos con el azúcar, añadir la miel y continuar batiendo.\r\nDiluir el bicarbonato en el agua e incorporarlo a la masa. Mezclarlo bien.\r\nTamizar la harina con la levadura y añadir poco a poco a la masa, sin dejar de mezclar para que no queden grumos.\r\nPintar una sartén con aceite de girasol y, cuando esté bien caliente, añadir 2-3 cucharadas soperas de masa en el centro. Cocinar unos minutos, hasta que la superficie se llene de burbujas. La parte inferior debería estar bien dorada. Dar la vuelta con cuidado  y esperar a que se dore por la otra cara. Sacar a una bandeja con papel de horno para que no se pegue.\r\nCuando estén frias, emparejar las tortas de dos en dos, poniendo juntas las que más se parezcan por su forma. Untar con el relleno elegido la mitad y cierra con sus respectivas parejas, formando sandwiches.', '', NULL, 1, '2025-11-12 20:07:10', '2025-11-12 20:07:10', 0),
-(39, 'Biersuppe', 'Reconfortante sopa cremosa elaborada con cerveza originaria de Baviera', 23, 19, 6, '00:30:00', NULL, 0, 3, 1, 2, 'Croutons:\nCortar las rebanadas de pan, si son del día anterior mejor, en cuadraditos de uno o dos centímetros y freír en abundante aceite de oliva suave. Sopa: Fundir la mantequilla en una olla a fuego suave. Cuando esté líquida se incorpora la harina y se remueve hasta que se haya tostado ligeramente; incorporar la cerveza. Se deja hervir a fuego lento, sin dejar de remover durante unos 20 min. y, a continuación, se salpimenta y, opcionalmente, se añade la canela. Se retira del fuego, se baten las yemas con la nata líquida y se incorporan a la sopa caliente cuando ya no esté hirviendo. Se vuelve a poner el conjunto a fuego bajo durante unos cinco minutos.', 'Se sirve bien caliente en plato hondo con unos poquitos croutons adornando', 'Biersuppe_202511120955296304.jpg', 1, '2025-11-12 20:55:29', '2025-11-12 20:55:29', 0),
-(40, 'Pico de gallo', 'Es una mezcla fresca de verduras picadas, y su encanto está en la simplicidad y el equlibrio entre lo picante, ácido y lo crujiente, ideal para acompañar, tacos, carnes asadas, quesadilla o totopos.', 23, 3, 6, '00:30:00', NULL, 0, 141, 4, 1, 'Cortar los tomates, la cebolla y jalapeño en brunoise, y picar finamente el cilantro,\r\nMetemos estos ingredientes en un bol y añadimos zumo de limón ,si es verde, mejor, y la sal.\r\nMezclamos suavemete y dejamos reposar 10-15 minutos para que se integren los sabores.\r\nRectificamos de sal y limón, si es necesario.', 'En un cuenco adornado con unos trozos en cuartos de lima o limón, o le podemos añadir pepino o aguacate en cuadraditos en una versión más moderna.', 'Pico_202511121117113292.jpg', 1, '2025-11-12 22:17:11', '2025-11-12 22:17:11', 0),
-(43, 'Bica blanca  o estilo Laza', 'Es un bizcocho tradicional gallego, que se caracteriza por su esponjosidad y color blanco', 23, 6, 8, '01:30:00', NULL, 13, 64, 1, 3, 'Montamos las claras con 430gr de azúcar a punto de nieve.\r\nDespués mezclaremos suavemente con la nata (35% grasa) semimontada.\r\nPor último agregamos la harina, poco a poco, tamizando y con cuidado de que no se baje la mezcla.\r\nIntroducimos en una bandeja de horno con papel sulfurizado y espolvoreamos bien de azúcar en grano por encima.\r\nHorneamos a 180ºC 10 minutos y después a 170ºC aproximadamente 50 minutos, o hasta que la brocheta salga limpia.\r\nEnfriar sobre rejilla, consumimos una vez fría', 'Cortar en trocitos para emplatar, con un sirope o sola\r\nademás de postre, puede servirse en un desayuno o merienda acompañando una bebida caliente tipo café, chocolate o una infusión', 'Bica_202511121144135279.jpg', 1, '2025-11-12 22:44:13', '2025-11-12 22:44:13', 0),
-(45, 'Pan (receta básica)', 'Masa horneada compuesta básicamente por un cereal, agua y sal', 23, 13, 8, '03:00:00', NULL, 0, 0, 1, 3, 'Tasmizamos la harina con la sal en un bol grande, y disolvemos la levadura en agua templada.\r\nIncorporamos la levadura junto al agua fría a la harina\r\nMezclamos manualmente hasta conseguir una mezcla homogénea y amasamos hasta conseguir una masa elástica que se suelte de las manos.\r\nHacemos una bola y la depositamos en un recipiente enharinado. espolvoreamos con harina por encima y arropamos. Dejamos fermentar una hora en  lugar templado.\r\nPasado ese tiempo formateamos la masa, dándole el menor trabajo posible para evitar que las levaduras bajen.\r\nUna vez le damos la forma que le queremos, se deposita en papel sulfurizado y se espolvorea con harina. Le damos el mismo tiempo de reposo que la primera vez. \r\nUna vez reposado, se le da un corte en la superficie y se mete al horno 220ºC durante 1 hora si es para pan mollete, y 40 minutos si es para bollitos.', 'Troceado en un platito', 'Pan_202511131129281648.jpg', 1, '2025-11-13 10:29:28', '2025-11-13 10:29:28', 0),
-(46, 'Aguacates rellenos de langostinos', 'Refrescante ensalada fácil de preparar con un toque picante', 23, 25, 4, '00:30:00', NULL, 0, 141, 4, 1, 'Pelamos y salpimentamos los langostinos salteamos en aceite. Picamos 8 en paisana fina , y dejamos 8 para el final.\r\nPicamos en brunoise la cebolla y mezclamos con los langostinos.\r\nAñadimos el chile chipotle a la mayonesa. y la incorporamos a la mezcla de langostinos con cebolla.\r\nPartimos los aguacates por la mitad, retiramos el hueso, y la carne que trocearemos y rellenamos junto a la mezcla anterior cada cáscara del aguacate.', 'Podemos presentar cada dos mitades con los langostinos enteros reservados encima y espolvoreado de cilantro, sobre una cama de lechuga.', 'Aguacates_202511130751164383.jpg', 1, '2025-11-13 18:51:16', '2025-11-13 18:51:16', 0),
-(47, 'Albóndigas de pescado', 'Las albóndigas de pescado son una alternativa deliciosa y saludable que te permitirá disfrutar del sabor del mar en cada bocado.', 23, 2, 6, '01:00:00', NULL, 0, 0, 0, 3, '*Albóndigas: Machacar 1 diente de ajo con un poco de aceite  hasta conseguir una pasta.\r\nPicar el bacalao y el salmón sin piel ni espinas, muy fino a cuchillo. Sazonar con sal, la pasta de ajo y perejil.\r\nMezclar todos los ingredientes, formar albóndigas, enharinarlas y freírlas en aceite muy caliente, reservarlas\r\n\r\n*Salsa: Picar muy fino los tres dientes de ajo y se dispone en un rondón, con aceite, cayena picada y perejil se dora ligeramente y se añade la harina, removiéndo con espátula.\r\nSe añade el fumet y se deja reducir, removiendo par qeu no se formen grumos.\r\nA parte, se abren las almejas y se las incorpora a la salsa. \r\nSe añaden las albóndigas, se les da un hervor y se sirven', 'Emplatamos 5 o 6 albóndigas con almejas  y espolvoreado todo con perejil muy picado.\r\nPodemos acompañar con arroz blanco o un salteado de verduras, por ejemplo.', 'Albndigas_202511130853442671.jpg', 1, '2025-11-13 19:53:44', '2025-11-13 19:53:44', 0),
-(48, 'Arroz con leche', 'Postre cremoso con arroz, leche, azúcar y aromatizado con canel y limón, su textura suave y dulzor delicado lo convierten en un clásico.', 23, 6, 8, '01:00:00', NULL, 0, 0, 0, 2, '*Aromas: Rama de vainilla o rama de canela con piel de naranja y limón, etc.\r\n\r\nSe lava el arroz en agua fría y se deposita en un caza con 150 ml de agua, cuando rompa el hervor, se le incorpora la leche y los aromas y se remueve bien. Se deja cocer a fuego muy suave, removiendo de vez en cuando para que no se agarre, unos 40 minutos..\r\nCuando el grano esté abierto, se retiran los aromas se incorpora la nata y un poco más de leche si vemos que nos queda muy espeso. Se remueve hasta punto de ebullición y se incorpora el azúcar. Se sigue removiendo hasta que el azúcar esté bien incorporado.', 'En copas individuales espolvoreado con canela y un hilito de zeste de limón adornando.', 'Arroz_202511130924359281.jpg', 1, '2025-11-13 20:24:35', '2025-11-13 20:24:35', 0),
-(49, 'Empanada de trucha y pimientos asados', 'Receta típica de Galicia. Su masa crujiente y tierna a la vez, contrasta con el relleno jugoso', 23, 13, 8, '01:15:00', NULL, 13, 64, 1, 3, '*Para el relleno: Cortar en juliana la cebolla y los pimientos, sofreir a fuego lento hasta que liguen los ingredientes, con un aspecto suave y meloso.\r\nSazonar la trucha y cocer al vapor 8 minutos para que quede poco cocinada ya que se acabará dentro de la empanada. Dejar enfriar, desespinar y desmigar. Reservar.\r\n\r\n    *Para la masa: Mezclar en un bol la harina, el pimentón, el aceite, la leche y el agua. Amasar hasta obtener una masa uniforme.\r\nColocar sobre papel sulfurizado y extender con un rodillo hasta que la masa quede fina.\r\n\r\nRellenar con el relleno y la trucha, cerrar la masa y sellar con un tenedor. Pintar con huevo batido y hornear 30 minutos a 180ºC', 'En un plato dos trozos pequeños cruzados o en una bandeja, si es para varios comensales, media empanada dispuesta en trocitos un poco montados. Le podemos espolvorear un poco de pimentón en el plato para dar color.', 'Empanada_20251114113939781.jpg', 1, '2025-11-14 10:39:39', '2025-11-14 10:39:39', 0),
-(50, 'Ajoblanco', 'Receta típica de algunas zonas de Andalucía y Extremadura, muy refrescante de de sabor suave, lleva poco ajo a pesar de su nombre, predominando la almendra', 23, 19, 4, '00:20:00', NULL, 1, 64, 1, 1, 'El pan se pone a remojo en la leche y el agua.\r\nLas almendras, el ajo y la sal, se majan en un mortero. Tras el majado, se añade el pan remojado, el aceite y el vinagre.\r\nSe sazona al gusto. y se reserva una hora mínimo en frio. Se debe servir bien frio', 'En plato hondo, adornado con unas uvas blancas y unas lágrimas de aceite de oliva, esta es la forma tradicional, aunque también le va muy bien unos cubos de melón, lascas de jamón...', 'Ajoblanco_202511140104553040.jpg', 1, '2025-11-14 12:04:55', '2025-11-14 12:04:55', 0),
-(51, 'Paella valenciana', 'Sabor limpio y equilibrado, donde se aprecia el caldo reducido y el socarrat (capa fina tostada del fondo) con identidad cultural propia.', 23, 15, 6, '01:00:00', NULL, 11, 64, 1, 3, 'Cortar la cebolla y  el ajo  en brunoise,  el tomate en concassé,  el pimiento en trozos pequeños. y trocear las judias.\r\nCortar en trozos pequeños el pollo y el conejo y salpimentar. Calentar 3 cucharadas de aceite en una paella y dorar los trozos de la carne a fuego moderado durante 20 minutos, o hasta que estén bien dorados. Retirar de la paella y reservar.\r\nAgregar del resto del aceite a esta misma sartén y añadir la cebolla y el pimiento unos 5 minutos a fuego moderado, remover de vez en cuando hasta que ablanden. Añadir el ajo, mezclar un minuto e incorporar los guisantes, las judias, y la carne.\r\nRehogar con el vino, dejar cocer 3 minutos para reducir el alcohol incorporar el arroz, rehogar bien, añadirle el caldo y el azafrán. Cocer a fuego moderado unos 10 minutos y rectificar de sal si fuera necesario. Añadir la ramita de romero y proseguir la cocción otros 15 minutos, o hasta que el líquido se haya evaporado y el arroz esté completamente cocido.', 'En la misma paella con un trozo de limón por comensal para limpiar el borde donde va a apoyar la cuchara con la que se sirve y come directamente.', 'Paella_202511140754054351.jpg', 1, '2025-11-14 18:54:05', '2025-11-14 18:54:05', 0),
-(52, 'Mero con ortiguillas y salsa de lima', 'Receta de Paco Roncero donde utiliza la ortiguilla, que es una anémona marina, que junto al mero evoca el sabor a mar, la salsa de lima contrasta y equilibra con su frescura, y el dulce del  puré de manzana equilibra el plato', 23, 2, 4, '03:00:00', NULL, 0, 64, 1, 4, '*Para el mero: Limpiar el mero de escamas y espinas.  Sacar los dos lomos y racionar en porciones de 180 gr. aproximadamente. Reservar en cámara hasta su utilización.\r\n\r\n    *Para el puré de manzana: Pelar las manzanas, descorazonar y cortar en gajos irregulares. Pochar la mantequilla y el ácido cítrico o zumo de limón hasta que queden blandos. Triturar, colar y reservar en caliente hasta el momento de su uso.\r\n    \r\n    *Para las ortiguillas: Cortar en 2 o 3 partes en función de su tamaño. Enharinar y freír en abundante aceite de oliva bien caliente para que se forme una costra en el exterior manteniendo la melosidad en su interior. Quitar el exceso de aceite y congelar hasta su uso.\r\n\r\n    *Para la salsa de lima: Mezclar la salsa de soja y el vinagre de jerez y calentar hasta llegar hasta su punto de ebullición. Añadir el jengibre rallado, tapar y dejar infusionar durante 25 minutos aproximadamente. Colar. Mezlar el zumo de las limas y el azúcar e incorporar a la infusión anterior. Mezclar. Añadir la xantana y batir con la túrmix hasta que la xantana se hidrate completamente y la mezcla tenga textura de crema ligera.', 'Disponer en el centro del plato una cucharada de sasa de lima. A la izquierda 4 puntos de puré de manzana y encima de estos 4 ortiguillas fritas y sazonadas. \r\nEncima de la salsa de lima, terminar con el mero marcado a la plancha.', 'Mero_202511140837496775.jpg', 1, '2025-11-14 19:37:49', '2025-11-14 19:37:49', 0),
-(53, 'Pavlova con frutos rojos', 'Estupenda combinación de sabores y texturas crujiente por fuera y suave por dentro,  muy impactante a la vista', 23, 6, 4, '01:30:00', NULL, 0, 0, 6, 3, 'Realizamos un merengue francés, Batiendo las claras (con unas gotas de limón o cremor tártaro)  hasta que empiecen a hacer picos blandos, momento en el que empezamos a añadir el azúcar poco a poco, hacia el final, añadimos el vinagre y la harina de maiz sin dejar de batir.\r\nFormamos un nido de 20 cm. o varios individuales, más pequeños, y horneamos a 150ºC una  hora. Apagar el horno y dejar el merengue dentro hasta que enfríe.\r\nUna hora antes de servir, montamos la nata hasta que haga picos duros, e introducimos en manga pastelera con boquilla rizada.\r\nSe recomienda pincelar con chocolate blanco derretido el interior de la pavlova para que la humedad de la nata y las frutas no ablande el merengue', 'Dentro del nido de merengue, rellenamos con la manga pastelera la nata,\r\nEncima disponemos los frutos rojos como más nos guste', 'Pavlova_20251114091805974.jpg', 1, '2025-11-14 20:18:05', '2025-11-14 20:18:05', 0);
+(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 13, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-18 19:06:34', 1),
+(37, 'Pechuga de pato con verduras', 'Es un plato perfecto para ocasiones especiales, equilibra la intensidad de la carne  con la frescura de las verduaras y la salsa agridulce.', 1, 1, 4, '01:20:00', NULL, 0, 0, 1, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato un poco montadas, con  salsa en un lado y unas verduras salteadas al otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-18 12:14:33', '2025-11-18 12:14:33', 1),
+(38, 'Doriyakis', 'Tortitas muy esponjosas japonesas emparejadas a modo de sandwich con algún relleno en medio de mermelada, crema,  dulce de leche, etc...', 23, 6, 6, '00:45:00', NULL, 0, 124, 2, 2, 'Abizcochar los huevos con el azúcar, añadir la miel y continuar batiendo.\r\nDiluir el bicarbonato en el agua e incorporarlo a la masa. Mezclarlo bien.\r\nTamizar la harina con la levadura y añadir poco a poco a la masa, sin dejar de mezclar para que no queden grumos.\r\nPintar una sartén con aceite de girasol y, cuando esté bien caliente, añadir 2-3 cucharadas soperas de masa en el centro. Cocinar unos minutos, hasta que la superficie se llene de burbujas. La parte inferior debería estar bien dorada. Dar la vuelta con cuidado  y esperar a que se dore por la otra cara. Sacar a una bandeja con papel de horno para que no se pegue.\r\nCuando estén frias, emparejar las tortas de dos en dos, poniendo juntas las que más se parezcan por su forma. Untar con el relleno elegido la mitad y cierra con sus respectivas parejas, formando sandwiches.', 'En platitos individuales, acompañada de nata montada, fruta fresca, sirope....', 'Doriyakis_202511170743548061.jpg', 1, '2025-11-18 11:48:08', '2025-11-18 11:48:08', 1),
+(39, 'Biersuppe', 'Reconfortante sopa cremosa elaborada con cerveza originaria de Baviera', 23, 19, 6, '00:30:00', NULL, 0, 3, 1, 2, '*Croutons: Cortar las rebanadas de pan, si son del día anterior mejor, en cuadraditos de uno o dos centímetros y freír en abundante aceite de oliva suave. \r\n\r\n    *Sopa: Fundir la mantequilla en una olla a fuego suave. Cuando esté líquida se incorpora la harina y se remueve hasta que se haya tostado ligeramente incorporar la cerveza. Se deja hervir a fuego lento, sin dejar de remover durante unos 20 min. y, a continuación, se salpimenta y, opcionalmente, se añade la canela. Se retira del fuego, se baten las yemas con la nata líquida y se incorporan a la sopa caliente cuando ya no esté hirviendo. Se vuelve a poner el conjunto a fuego bajo durante unos cinco minutos.', 'Se sirve bien caliente en plato hondo con unos poquitos croutons adornando', 'Biersuppe_202511120955296304.jpg', 1, '2025-11-18 11:43:04', '2025-11-18 11:43:04', 1),
+(40, 'Pico de gallo', 'Es una mezcla fresca de verduras picadas, y su encanto está en la simplicidad y el equlibrio entre lo picante, ácido y lo crujiente, ideal para acompañar, tacos, carnes asadas, quesadilla o totopos.', 23, 3, 6, '00:30:00', NULL, 0, 141, 4, 1, 'Cortar los tomates, la cebolla y jalapeño en brunoise, y picar finamente el cilantro,\r\nMetemos estos ingredientes en un bol y añadimos zumo de limón ,si es verde, mejor, y la sal.\r\nMezclamos suavemete y dejamos reposar 10-15 minutos para que se integren los sabores.\r\nRectificamos de sal y limón, si es necesario.\r\nSi queremos un pico de gallo más suave podemos utilizar cebolla morada en vez de blanca, además de la un poco más de contraste visual al plato, en algunas zonas del sur méxico es  más típica esta cebolla.', 'En un cuenco adornado con unos trozos en cuartos de lima o limón, o le podemos añadir pepino o aguacate en cuadraditos en una versión más moderna.', 'Pico_202511121117113292.jpg', 1, '2025-11-18 11:59:10', '2025-11-18 11:59:10', 1),
+(43, 'Bica blanca  o estilo Laza', 'Es un bizcocho tradicional gallego, que se caracteriza por no llevar levadura, lo que le confiere una textura diferente del bizcocho convecional.', 23, 6, 8, '01:30:00', NULL, 0, 64, 1, 3, 'Montamos las claras con 430gr de azúcar a punto de nieve.\r\nDespués mezclaremos suavemente con la nata (35% grasa) semimontada.\r\nPor último agregamos la harina, poco a poco, tamizando y con cuidado de que no se baje la mezcla.\r\nIntroducimos en una bandeja de horno con papel sulfurizado y espolvoreamos bien de azúcar en grano por encima.\r\nHorneamos a 180ºC 10 minutos y después a 170ºC aproximadamente 50 minutos, o hasta que la brocheta salga limpia.\r\nEnfriar sobre rejilla, consumimos una vez fría', 'Cortar en trocitos para emplatar, con un sirope o sola\r\nademás de postre, puede servirse en un desayuno o merienda acompañando una bebida caliente tipo café, chocolate o una infusión', 'Bica_202511121144135279.jpg', 1, '2025-11-18 11:55:22', '2025-11-18 11:55:22', 1),
+(45, 'Pan (receta básica)', 'Masa horneada compuesta básicamente por un cereal, agua y sal', 23, 13, 8, '03:00:00', NULL, 0, 0, 1, 3, 'Tamizamos la harina con la sal en un bol grande, y disolvemos la levadura en agua templada.\r\nIncorporamos la levadura junto al agua fría a la harina\r\nMezclamos manualmente hasta conseguir una mezcla homogénea y amasamos hasta conseguir una masa elástica que se suelte de las manos.\r\nHacemos una bola y la depositamos en un recipiente enharinado. espolvoreamos con harina por encima y arropamos. Dejamos fermentar una hora en  lugar templado.\r\nPasado ese tiempo formateamos la masa, dándole el menor trabajo posible para evitar que las levaduras bajen.\r\nUna vez le damos la forma elegida, se deposita en papel sulfurizado y se espolvorea con harina. Le damos el mismo tiempo de reposo que la primera vez. \r\nUna vez reposado, se le da un corte en la superficie y se mete al horno 220ºC durante 1 hora si es para pan mollete, y 40 minutos si es para bollitos.', 'Troceado en un platito', 'Pan_202511170738598223.jpg', 1, '2025-11-17 21:17:54', '2025-11-17 21:17:54', 1),
+(46, 'Aguacates rellenos de langostinos', 'Refrescante ensalada fácil de preparar con un toque picante', 23, 25, 4, '00:30:00', NULL, 0, 141, 4, 1, 'Pelamos y salpimentamos los langostinos salteamos en aceite. Picamos 8 en paisana fina , y dejamos 8 para el final.\r\nPicamos en brunoise la cebolla y mezclamos con los langostinos.\r\nAñadimos el chile chipotle a la mayonesa, emulsionamos  y la incorporamos a la mezcla de langostinos con cebolla.\r\nPartimos los aguacates por la mitad, retiramos el hueso, y la carne la trocearemos y rellenamos junto a la mezcla anterior cada cáscara del aguacate.', 'Podemos presentar cada dos mitades con los langostinos enteros reservados encima y espolvoreado de cilantro.', 'Aguacates_202511130751164383.jpg', 1, '2025-11-17 21:08:04', '2025-11-17 21:08:04', 1),
+(47, 'Albóndigas de pescado', 'Las albóndigas de pescado son una alternativa deliciosa y saludable que te permitirá disfrutar del sabor del mar en cada bocado.', 23, 2, 6, '01:00:00', NULL, 0, 0, 0, 3, '*Albóndigas: Machacar 1 diente de ajo con un poco de aceite  hasta conseguir una pasta.\r\nPicar el bacalao y el salmón sin piel ni espinas, muy fino a cuchillo. Sazonar con sal, la pasta de ajo y perejil.\r\nMezclar todos los ingredientes, formar albóndigas, enharinarlas y freírlas en aceite muy caliente, reservarlas\r\n\r\n    *Salsa: Picar muy fino los tres dientes de ajo y se dispone en un rondón, con aceite, cayena picada y perejil se dora ligeramente y se añade la harina, removiéndo con espátula.\r\nSe añade el fumet y se deja reducir, removiendo para que no se formen grumos.\r\nA parte, se abren las almejas y se las incorpora a la salsa. \r\nSe añaden las albóndigas, se les da un hervor y se sirven', 'Emplatamos 5 o 6 albóndigas con almejas  y espolvoreado todo con perejil muy picado.\r\nPodemos acompañar con arroz blanco o un salteado de verduras, por ejemplo.', 'Albndigas_202511130853442671.jpg', 1, '2025-11-17 21:04:58', '2025-11-17 21:04:58', 1),
+(48, 'Arroz con leche', 'Postre cremoso con arroz, leche, azúcar y aromatizado con canel y limón, su textura suave y dulzor delicado lo convierten en un clásico.', 23, 6, 8, '01:00:00', NULL, 0, 0, 0, 2, '*Aromas: Rama de vainilla o rama de canela con piel de naranja y limón, etc. \r\n\r\nSe lava el arroz en agua fría y se deposita en un caza con 150 ml de agua, cuando rompa el hervor, se le incorpora la leche y los aromas y se remueve bien. Se deja cocer a fuego muy suave, removiendo de vez en cuando para que no se agarre, unos 40 minutos..\r\nCuando el grano esté abierto, se retiran los aromas se incorpora la nata y un poco más de leche si vemos que nos queda muy espeso. Se remueve hasta punto de ebullición y se incorpora el azúcar. Se sigue removiendo hasta que el azúcar esté bien incorporado.', 'En copas individuales espolvoreado con canela y un hilito de zeste de limón adornando.', 'Arroz_202511170830348077.jpg', 1, '2025-11-17 21:01:50', '2025-11-17 21:01:50', 1),
+(49, 'Empanada de trucha y pimientos asados', 'Receta típica de Galicia. Su masa crujiente y tierna a la vez, contrasta con el relleno jugoso', 23, 13, 8, '01:15:00', NULL, 13, 64, 1, 3, 'La trucha mejor blanca o asalmonada grande. \r\n\r\n    *Para el relleno: Cortar en juliana la cebolla y los pimientos, sofreir a fuego lento hasta que liguen los ingredientes, con un aspecto suave y meloso.\r\nSazonar la trucha y cocer al vapor 8 minutos para que quede poco cocinada ya que se acabará dentro de la empanada. Dejar enfriar, desespinar y desmigar. Reservar.\r\n\r\n    *Para la masa: Mezclar en un bol la harina, el pimentón, el aceite, la leche y el agua. Amasar hasta obtener una masa uniforme.\r\nColocar sobre papel sulfurizado y extender con un rodillo hasta que la masa quede fina.\r\n\r\nRellenar con el relleno y la trucha, cerrar la masa y sellar pellizcando. hacer cortes pequeños en la superficid.  Pintar con huevo batido y hornear 30 minutos a 180ºC', 'En un plato dos trozos pequeños cruzados o en una bandeja, o, si es para varios comensales, media empanada dispuesta en trocitos un poco montados. Le podemos espolvorear un poco de pimentón en el plato para dar color. o una ramita de romero', 'Empanada_20251114113939781.jpg', 1, '2025-11-17 20:58:42', '2025-11-17 20:58:42', 1),
+(50, 'Ajoblanco', 'Receta típica de algunas zonas de Andalucía y Extremadura, muy refrescante de de sabor suave, lleva poco ajo a pesar de su nombre, predominando la almendra', 23, 19, 4, '00:20:00', NULL, 1, 64, 1, 1, 'El pan se pone a remojo en la leche y el agua.\r\nLas almendras, el ajo y la sal, se majan en un mortero. Tras el majado, se añade el pan remojado, el aceite y el vinagre.\r\nSe sazona al gusto. y se reserva una hora mínimo en frio. Se debe servir bien frio', 'En plato hondo, adornado con unas uvas blancas y unas lágrimas de aceite de oliva, esta es la forma tradicional, aunque también le va muy bien unos cubos de melón, lascas de jamón...', 'Ajoblanco_202511140104553040.jpg', 1, '2025-11-17 20:54:51', '2025-11-17 20:54:51', 1),
+(51, 'Paella valenciana', 'Sabor limpio y equilibrado, donde se aprecia el caldo reducido y el socarrat (capa fina tostada del fondo) con identidad cultural propia.', 23, 15, 6, '01:00:00', NULL, 11, 64, 1, 3, 'Cortar la cebolla y  el ajo  en brunoise,  el tomate en concassé,  el pimiento en trozos pequeños. y trocear las judias.\r\nCortar en trozos pequeños el pollo y el conejo y salpimentar. Calentar 3 cucharadas de aceite en una paella y dorar los trozos de la carne a fuego moderado durante 20 minutos, o hasta que estén bien dorados. Retirar de la paella y reservar.\r\nAgregar del resto del aceite a esta misma sartén y añadir la cebolla y el pimiento unos 5 minutos a fuego moderado, remover de vez en cuando hasta que ablanden. Añadir el ajo, mezclar un minuto e incorporar los guisantes, las judias, y la carne.\r\nRehogar con el vino, dejar cocer 3 minutos para reducir el alcohol incorporar el arroz, rehogar bien, añadirle el caldo y el azafrán. Cocer a fuego moderado unos 10 minutos y rectificar de sal si fuera necesario. Añadir la ramita de romero y proseguir la cocción otros 15 minutos, o hasta que el líquido se haya evaporado y el arroz esté completamente cocido.', 'En la misma paella con un trozo de limón por comensal para limpiar el borde donde va a apoyar la cuchara con la que se sirve y come directamente.', 'Paella_202511140754054351.jpg', 1, '2025-11-17 20:48:58', '2025-11-17 20:48:58', 1),
+(52, 'Mero con ortiguillas y salsa de lima', 'Receta de Paco Roncero donde utiliza la ortiguilla, que es una anémona marina, que junto al mero evoca el sabor a mar, la salsa de lima contrasta y equilibra con su frescura, y el dulce del  puré de manzana equilibra el plato', 23, 2, 4, '03:00:00', NULL, 0, 64, 1, 4, '*Para el mero: Limpiar el mero de escamas y espinas.  Sacar los dos lomos y racionar en porciones de 180 gr. aproximadamente. Reservar en cámara hasta su utilización.\r\n\r\n    *Para el puré de manzana: Pelar las manzanas, descorazonar y cortar en gajos irregulares. Pochar la mantequilla y el ácido cítrico o zumo de limón hasta que queden blandos. Triturar, colar y reservar en caliente hasta el momento de su uso.\r\n    \r\n    *Para las ortiguillas: Cortar en 2 o 3 partes en función de su tamaño. Enharinar y freír en abundante aceite de oliva bien caliente para que se forme una costra en el exterior manteniendo la melosidad en su interior. Quitar el exceso de aceite y congelar hasta su uso.\r\n\r\n    *Para la salsa de lima: Mezclar la salsa de soja y el vinagre de jerez y calentar hasta llegar hasta su punto de ebullición. Añadir el jengibre rallado, tapar y dejar infusionar durante 25 minutos aproximadamente. Colar. Mezlar el zumo de las limas y el azúcar e incorporar a la infusión anterior. Mezclar. Añadir la xantana y batir con la túrmix hasta que la xantana se hidrate completamente y la mezcla tenga textura de crema ligera.', 'Disponer en el centro del plato una cucharada de sasa de lima. A la izquierda 4 puntos de puré de manzana y encima de estos 4 ortiguillas fritas y sazonadas. \r\nEncima de la salsa de lima, terminar con el mero marcado a la plancha.', 'Mero_202511140837496775.jpg', 1, '2025-11-14 19:37:49', '2025-11-14 19:37:49', 1),
+(53, 'Pavlova con frutos rojos', 'Estupenda combinación de sabores y texturas crujiente por fuera y suave por dentro,  muy impactante a la vista', 23, 6, 4, '01:30:00', NULL, 0, 0, 6, 3, 'Realizamos un merengue francés, Batiendo las claras (con unas gotas de limón o cremor tártaro)  hasta que empiecen a hacer picos blandos, momento en el que empezamos a añadir el azúcar poco a poco, hacia el final, añadimos el vinagre y la harina de maiz sin dejar de batir.\r\nFormamos un nido de 20 cm. o varios individuales, más pequeños, y horneamos a 150ºC una  hora. Apagar el horno y dejar el merengue dentro hasta que enfríe.\r\nUna hora antes de servir, montamos la nata hasta que haga picos duros, e introducimos en manga pastelera con boquilla rizada.\r\nSe recomienda pincelar con chocolate blanco derretido el interior de la pavlova para que la humedad de la nata y las frutas no ablande el merengue', 'Dentro del nido de merengue, rellenamos con la manga pastelera la nata,\r\nEncima disponemos los frutos rojos como más nos guste.', 'Pavlova_20251114091805974.jpg', 1, '2025-11-17 20:41:45', '2025-11-17 20:41:45', 1),
+(61, 'Croquetas de jamón serrano', 'Masa rellena de jamón que se caracteríza por su textura crujiente por fuera y suavidad por dentro.', 23, 1, 8, '01:00:00', NULL, 0, 0, 1, 2, 'Además de la harina indicada, necesitamos c/s para rebozar ligeramente las croquetas. Picamos el jamón en brunoise muy fina\r\n\r\nElaboramos un roux derritiendo la harina a fuego suave e incorporamos la harina tamizada. Removemos bien y cocemos unos 5 min., sin dejar de remover.\r\nAñdimos la leche caliente. Removemos procurando romper todos los grumos de harina que se hayan formado.\r\nIncorporamos los aromas y la sal, el jamón. Cocemos hasta que la masa se separe de las paredes y el suelo de la olla.\r\nUna vez bien espeso, se unta la placa de aceite y se deposita la masa sobre ella. Se deja enfriar, mejor un dia entero\r\nSe forman bolitas y se pasan por harina. a continuación por huevo y, por último, por pan rallado.\r\nSe fríen en abundante aceite caliente.', 'En un plato, espolvoreadas de cebollino, perejil o alguna hierba al gusto, o un punto de mayonesa de kimchi, o chipotle, por ejemplo', 'Croquetas_20251116111011811.jpg', 1, '2025-11-17 20:38:18', '2025-11-17 20:38:18', 1),
+(62, 'Huevo marino: Yema líquida con tempura crujiente de alga marina', 'La textura crujiente exterior del alga nori se contrapone a la fluida yema de su interior. Intenso sabor a mar en un bocado sorprendente', 23, 17, 4, '03:00:00', NULL, 0, 0, 0, 3, 'El agua debe de estar helada.\r\n\r\nSeparamos las yemas de las claras y colocamos cada una de las yemas, de forma individual envueltas en papel film. Congelamos las yemas, mínimo dos horas. \r\nPreparamos la tempura, para ello hacemos una pasta espesa con la harina, el agua helada y una pizca de sal.\r\n\r\nCortamos la hoja de alga nori en cuadrados lo suficientemente grandes para envolver una yema. Mojamos un pincel con agua y humedecemos el alga nori, para que sea fácil de manejar.\r\n\r\nExtraemos las yemas del congelador, envolvemos cada una en una lámina de alga nori. Sumergimos en la tempura y las freímos en abundante aceite hasta que se dore ligeramente ( un par de minutos aproximadamente).', 'Disponemos una cucharada de huevas de salmón o huevas de pez volador y, sobre estas, depositamos una yema envuelta en tempura de alga nori. Le echamos por encima unas escamas de sal', 'Huevo_202511161155485082.jpg', 1, '2025-11-17 20:31:46', '2025-11-17 20:31:46', 1),
+(63, 'Txangurro', 'Combinación de sabores intensos y textura cremosa.', 23, 2, 2, '01:30:00', NULL, 14, 64, 1, 2, 'Picamos la cebolla y el  blanco del puerro en brunoise, y el tomate en concassé.\r\n\r\nPonemos la cazuela al fuego muy suave, con un poco de aove. Pochamos la cebolla y el puerro sin que tome color, añadiendo el tomate, cocemos 15 minutos.\r\n\r\nA parte, cocemos la centolla en agua con sal entre 12 y 15 minutos (para una centolla de 750gr. más o menos), desde que empiece a hervir. Retiramos la centolla y, en caliente la abrimos para colar su caldo y el coral que tiene en su caparazón. Vertemos el caldo en el sofrito y echamos brandy para flambear.\r\n\r\nLimpiamos las patas para aprovechar su carne y la introducimos en la salsa. Le damos un hervor a todos los ingredientes, reciticamos de sal y llenamos el caparazón de la centolla limpia con esta mezcla..\r\n\r\nEspolvoreamos con pan rallado y colocamos encima unos dados de mantequilla repartidos por toda la superficie.\r\nGratinamos y servimos caliente.', 'Ponemos una cama de lechuga o hielo picado en un plato y encima el txangurro.\r\nPodemos acompañar con un alioli casero.', 'Txangurro_202511161219353318.jpg', 1, '2025-11-17 20:26:59', '2025-11-17 20:26:59', 1),
+(64, 'Rape alangostado', 'Pescado con sabor intenso y ahumado que recuerda al de la langosta.', 23, 2, 4, '03:00:00', NULL, 0, 64, 1, 2, 'Necesitamos un cola de rape.\r\nEmbadurnamos la cola de rape de pimentón, en seco. Untar de aceite y salpimentar. Lo cubrimos con papel fim y le damos forma de cola de langosta con la cuerda de bramamante. Dejamos reposar en la nevera por dos horas. Crubrir y apretar con papel aluminio.\r\n\r\nDisponer fumet en una olla, el suficiente para que cubra la cola de rape. Cuando rompa a hervir, bajar el fuego y cocer a fuego muy suave durante 10 minutos (por cada 500gr de rape).\r\nTambién se puede cocer al vapor para conservar mejor el sabor y color.', 'Cortamos en rodajas finas como si se tratara de un lomo de langosta.\r\nPodemos ponerle unos puntitos de mayonesa de ajo y unos tomatitos cherry en mitades.', 'Rape_20251116014357231.jpg', 1, '2025-11-17 20:24:01', '2025-11-17 20:24:01', 1),
+(65, 'Roast beef con salsa gravy', 'Un plato que combina la eleganciaa de un buen asado con el sabor intenso de una salsa casera.', 23, 1, 4, '02:00:00', NULL, 0, 185, 1, 2, '* Carne: En un bol mezclamos una cucharada de mostaza en polvo y un poco de agua para hacer una pasta con la que untaremos el lomo de buey.\r\nSellamos la carne en una sartén o cazuela con una cucharada de aceite. La ponemos en una rustidera y al horno 200ºC (por cada 500gr. de carne le damos 15 min. si la quermos poco hecha, 20min. si la queremos al punto y 25 min. si la queremos más hecha.\r\nUna vez que haya pasado el tiempo que consideramos oportuno, sacaremos la carne y la cubrimos con papel aluminio para que sude.\r\n\r\n    *Mientras pelamos las patatas y las cocemos en abundante agua con con sal, pero antes de que estén cocidas del todo, se retiran y se acaban en horno junto a unos dientes de ajo majados con un chorrito de aceite y unas ramitas romero.\r\n\r\n    *Salsa: Picamos la cebolla en brunoise y la rehogamos en aceite de oliva. Cuando esté transparente, añadimos un poco de harina y le damos unas vueltas para que tueste un poco.\r\nAgregamos los jugos que ha soltado nuestro lomo y el vinto dejamos que cueza y reduzca.\r\n\r\nHervimos el brécol.', 'Cortamos la carne en lonchas finas,  bañada en la salsa gravy, la acompañamos con las patatas y el brécol hervido', 'Roast_202511160743214398.jpg', 1, '2025-11-17 20:20:32', '2025-11-17 20:20:32', 1),
+(66, 'Picantones rellenos de manzana', 'La versatilidad de esta carne nos permite acompañarla con infinidad de guarniciones, desde el clásico puré de patata o patata panadera, hasta una ensalada, que le va a dar frescor sin llenar demasiado.', 23, 1, 2, '01:30:00', NULL, 0, 0, 1, 3, '*Relleno: Cortamos el pan en dados que tostaremos en 15 gr. de mantequilla en una sartén. Escurrimos en papel y reservamos.\r\nPelamos las manzanas y las cortamos en brunoise, las depositamos en un bol donde las mezclamos con las pasas, el licor, el vino y el caldo y el almíbar. Dejamos macerar unos 30 minutos.\r\nAl pan frito le añadimos ajo en brunoise frito, la yema de huevo en crudo, la nata y el perejil. Añadimos esta mezcla a la marinada. Condimentamos.\r\n\r\n    *Picantones: Los deshuesamos y salpimentamos. Separamos la piel de las pechugas y comenzamos a rellenar debajo, dándole forma.\r\nDamos la vuelta al pollo y rellenamos la cavidad abdominal con el relleno que nos queda.\r\nBridamos dándole una bonita forma y metemos al horno durante 40-45 minutos a 165ºC. Hidratar de vez en cuando con almíbar mezclado con aceite o mantequilla.\r\n\r\nDoramos unas rodajas de piña a la plancha como guarnición.', 'En un plato, acompañado de la piña a la plancha colocamos el picantón con la piel hacia arriba y lo braseamos con sus jugos.\r\nAdemás le podemos poner otra  guarnción a mayores como,  patata panadera, puré de patata, ensalada, ....', 'Picantones_202511160819295636.jpg', 1, '2025-11-17 20:16:34', '2025-11-17 20:16:34', 1),
+(67, 'Flan de castaña', 'Evoca los sabores de otoño con una textura cremosa y un sabor delicadamente dulce.', 23, 6, 8, '01:00:00', NULL, 13, 64, 1, 3, '*Puré de castaña: Cocer las castañas, pelar y triturar con parte de la leche.\r\nAñadir el resto de la leche y calentar el conjunto.\r\n\r\nPor otro lado mezclar los huevos con 200 gr. de azúcar, sobre esta mezcla, añadir la  leche de castaña, .\r\n\r\nCon los 200gr restantes de azúcar, caramelizar los moldes con un caramelo rubio (128ºC).\r\n\r\nLlenar los moldes hasta 3/4 con la mezcla de flan. Hornear a 180ºC en baño maría, 20 minutos para flanes individuales.\r\n\r\nEnfriar antes de desmoldar.', 'Se puede acompañar de cigarrillos, tejas, figura de caramelo o chocolate, crumble, nata montada etc..', 'Flan_202511160839378170.jpg', 1, '2025-11-17 20:05:50', '2025-11-17 20:05:50', 1),
+(68, 'Naked cake de calabaza vegano (sin huevos, sin lactosa)', 'Un cake libre de ingredientes de origen animal, siendo una deliciosa opción para quienes siguen una dieta vegana o les apetece probar algo nuevo.', 23, 6, 8, '01:00:00', NULL, 0, 0, 1, 2, 'Asar la calabaza y triturarla hasta obtener un puré.\r\nAñadir al puré el aceite de oliva y el azúcar, triturar de nuevo.\r\nSobre esta mezcla, ir incorporando suavemente la harina con la canela molida y el bicarbonato y la sal.\r\nIncorporamos las nueces troceadas.\r\nHornear  a 180ºC aproximadamente unos 40 minutos. en pequeños moldes\r\nDesmoldar una vez frío. Es delicado.', 'Montamos varios discos en un aro estilo naked cake, rellenar de nata vegetal montada con fresas naturales en daditos y puntos de coulis de calabaza.', 'Naked_202511160857516651.jpg', 1, '2025-11-18 12:17:37', '2025-11-18 12:17:37', 1),
+(69, 'Platito de pruebas', 'Descripción descrita muy descritamente', 19, 15, 3, '05:11:00', NULL, 13, 64, 1, 1, 'Elaboración muy elaborada y elaboradita', 'Emplatadito bien emplatado', 'Platito_202511170712064815.jpg', 1, '2025-11-17 18:26:02', '2025-11-17 18:26:02', 0);
 
 -- --------------------------------------------------------
 
@@ -784,21 +836,36 @@ TRUNCATE TABLE `recetas_estilos`;
 --
 
 INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) VALUES
-(20, 36, 8),
-(21, 37, 3),
-(22, 39, 14),
-(23, 40, 3),
-(26, 43, 14),
-(28, 45, 14),
-(29, 46, 3),
-(30, 49, 14),
-(31, 50, 14),
-(32, 45, 3),
-(33, 51, 1),
-(34, 51, 14),
 (35, 52, 8),
-(36, 53, 3),
-(37, 53, 11);
+(63, 69, 8),
+(77, 67, 14),
+(78, 66, 17),
+(79, 66, 14),
+(80, 65, 3),
+(81, 64, 14),
+(82, 63, 14),
+(83, 62, 8),
+(84, 62, 3),
+(85, 61, 14),
+(86, 53, 16),
+(87, 53, 3),
+(88, 53, 11),
+(89, 51, 1),
+(90, 51, 14),
+(91, 50, 14),
+(92, 49, 14),
+(93, 46, 3),
+(94, 45, 3),
+(95, 45, 14),
+(96, 39, 3),
+(97, 43, 20),
+(98, 43, 14),
+(99, 40, 3),
+(101, 37, 3),
+(102, 68, 11),
+(103, 68, 12),
+(104, 68, 9),
+(105, 36, 8);
 
 -- --------------------------------------------------------
 
@@ -811,7 +878,7 @@ CREATE TABLE `recetas_ingredientes` (
   `id_recetas_ingredientes` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
   `id_ingrediente` int(11) NOT NULL,
-  `cantidad` decimal(10,0) NOT NULL,
+  `cantidad` decimal(10,2) NOT NULL,
   `id_unidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -825,145 +892,222 @@ TRUNCATE TABLE `recetas_ingredientes`;
 --
 
 INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_ingrediente`, `cantidad`, `id_unidad`) VALUES
-(16, 36, 9, 10, 2),
-(17, 36, 2, 1, 1),
-(18, 36, 8, 50, 2),
-(19, 36, 7, 1, 3),
-(20, 36, 4, 4, 9),
-(21, 36, 6, 5, 2),
-(22, 36, 23, 100, 1),
-(23, 37, 27, 4, 9),
-(24, 37, 28, 1, 6),
-(25, 37, 29, 2, 8),
-(26, 37, 30, 4, 9),
-(27, 37, 31, 300, 2),
-(28, 37, 32, 200, 2),
-(29, 37, 33, 2, 8),
-(30, 37, 34, 2, 8),
-(31, 37, 35, 4, 8),
-(32, 37, 36, 4, 9),
-(33, 37, 37, 200, 4),
-(34, 37, 38, 200, 4),
-(35, 37, 39, 2, 8),
-(36, 37, 40, 2, 8),
-(37, 38, 41, 2, 9),
-(38, 38, 9, 150, 2),
-(39, 38, 39, 60, 2),
-(40, 38, 42, 2, 2),
-(41, 38, 43, 120, 4),
-(42, 38, 44, 2, 2),
-(43, 38, 2, 200, 2),
-(44, 38, 45, 0, 5),
-(45, 39, 46, 1, 3),
-(46, 39, 8, 50, 2),
-(47, 39, 2, 100, 2),
-(48, 39, 47, 150, 4),
-(49, 39, 48, 2, 9),
-(50, 39, 49, 8, 9),
-(51, 39, 50, 1, 11),
-(52, 39, 51, 1, 6),
-(53, 39, 28, 1, 6),
-(54, 39, 52, 1, 5),
-(55, 40, 53, 3, 9),
-(56, 40, 54, 1, 9),
-(57, 40, 55, 2, 9),
-(58, 40, 56, 0, 7),
-(59, 40, 57, 1, 9),
-(60, 40, 28, 1, 6),
-(63, 43, 58, 330, 2),
-(64, 43, 9, 530, 2),
-(65, 43, 47, 240, 2),
-(66, 43, 2, 240, 2),
-(68, 45, 59, 1, 1),
-(69, 45, 60, 25, 2),
-(70, 45, 28, 15, 2),
-(71, 45, 61, 500, 4),
-(72, 45, 62, 150, 4),
-(73, 46, 63, 4, 9),
-(74, 46, 64, 16, 9),
-(75, 46, 65, 1, 9),
-(76, 46, 35, 1, 5),
-(77, 46, 67, 1, 6),
-(78, 46, 66, 1, 6),
-(79, 46, 56, 1, 6),
-(80, 46, 28, 1, 6),
-(81, 46, 51, 1, 6),
-(82, 47, 68, 250, 2),
-(83, 47, 69, 250, 2),
-(84, 47, 70, 50, 2),
-(85, 47, 41, 2, 9),
-(86, 47, 71, 4, 9),
-(87, 47, 72, 1, 5),
-(88, 47, 28, 1, 5),
-(89, 47, 52, 1, 5),
-(90, 47, 2, 10, 2),
-(91, 47, 74, 200, 4),
-(92, 47, 73, 100, 4),
-(93, 47, 75, 100, 2),
-(94, 47, 76, 200, 2),
-(95, 47, 77, 1, 5),
-(96, 48, 7, 1, 3),
-(97, 48, 47, 100, 4),
-(98, 48, 78, 80, 2),
-(99, 48, 9, 100, 2),
-(100, 48, 79, 1, 6),
-(101, 48, 43, 150, 4),
-(102, 49, 80, 1, 1),
-(103, 49, 2, 1, 1),
-(104, 49, 81, 2, 8),
-(105, 49, 43, 50, 4),
-(106, 49, 52, 400, 4),
-(107, 49, 7, 400, 4),
-(108, 49, 54, 3, 9),
-(109, 49, 82, 2, 9),
-(110, 49, 83, 2, 9),
-(111, 49, 41, 1, 9),
-(112, 49, 28, 1, 6),
-(113, 50, 23, 100, 2),
-(114, 50, 43, 500, 4),
-(115, 50, 84, 100, 2),
-(116, 50, 35, 100, 4),
-(117, 50, 86, 1, 10),
-(118, 50, 7, 100, 4),
-(119, 50, 28, 1, 6),
-(120, 50, 87, 2, 9),
-(121, 51, 73, 125, 4),
-(122, 51, 88, 1, 10),
-(123, 51, 89, 1, 3),
-(124, 51, 90, 750, 2),
-(125, 51, 91, 750, 2),
-(126, 51, 82, 1, 9),
-(127, 51, 87, 5, 9),
-(128, 51, 53, 2, 9),
-(129, 51, 81, 2, 10),
-(130, 51, 78, 750, 2),
-(131, 51, 75, 100, 2),
-(132, 51, 92, 450, 2),
-(133, 51, 72, 2, 11),
-(134, 51, 28, 1, 6),
-(135, 51, 52, 4, 8),
-(136, 51, 94, 1, 9),
-(137, 51, 57, 1, 9),
-(138, 52, 95, 1, 1),
-(139, 52, 96, 4, 9),
-(140, 52, 8, 50, 2),
-(141, 52, 97, 1, 5),
-(142, 52, 98, 1, 6),
-(143, 52, 52, 1, 5),
-(144, 52, 99, 2, 9),
-(145, 52, 37, 100, 4),
-(146, 52, 100, 50, 4),
-(147, 52, 101, 1, 6),
-(148, 52, 9, 20, 2),
-(149, 52, 102, 5, 2),
-(150, 53, 58, 3, 9),
-(151, 53, 9, 175, 2),
-(152, 53, 86, 1, 10),
-(153, 53, 40, 1, 8),
-(154, 53, 47, 300, 4),
-(155, 53, 103, 1, 6),
-(156, 53, 57, 1, 5),
-(157, 53, 104, 50, 2);
+(23, 37, 27, 4.00, 9),
+(24, 37, 28, 1.00, 6),
+(25, 37, 29, 2.00, 8),
+(26, 37, 30, 4.00, 9),
+(27, 37, 31, 300.00, 2),
+(28, 37, 32, 200.00, 2),
+(29, 37, 33, 2.00, 8),
+(30, 37, 34, 2.00, 8),
+(31, 37, 35, 4.00, 8),
+(32, 37, 36, 4.00, 9),
+(33, 37, 37, 200.00, 4),
+(34, 37, 38, 200.00, 4),
+(35, 37, 39, 2.00, 8),
+(36, 37, 40, 2.00, 8),
+(37, 38, 41, 2.00, 9),
+(38, 38, 9, 150.00, 2),
+(39, 38, 39, 60.00, 2),
+(40, 38, 42, 2.00, 2),
+(41, 38, 43, 120.00, 4),
+(42, 38, 44, 2.00, 2),
+(43, 38, 2, 200.00, 2),
+(44, 38, 45, 0.00, 5),
+(55, 40, 53, 3.00, 9),
+(56, 40, 54, 1.00, 9),
+(57, 40, 55, 2.00, 9),
+(58, 40, 56, 0.00, 7),
+(59, 40, 57, 1.00, 9),
+(60, 40, 28, 1.00, 6),
+(82, 47, 68, 250.00, 2),
+(83, 47, 69, 250.00, 2),
+(84, 47, 70, 50.00, 2),
+(85, 47, 41, 2.00, 9),
+(86, 47, 71, 4.00, 9),
+(87, 47, 72, 1.00, 5),
+(88, 47, 28, 1.00, 5),
+(89, 47, 52, 1.00, 5),
+(90, 47, 2, 10.00, 2),
+(91, 47, 74, 200.00, 4),
+(92, 47, 73, 100.00, 4),
+(93, 47, 75, 100.00, 2),
+(94, 47, 76, 200.00, 2),
+(95, 47, 77, 1.00, 5),
+(96, 48, 7, 1.00, 3),
+(97, 48, 47, 100.00, 4),
+(98, 48, 78, 80.00, 2),
+(99, 48, 9, 100.00, 2),
+(100, 48, 79, 1.00, 6),
+(101, 48, 43, 150.00, 4),
+(113, 50, 23, 100.00, 2),
+(114, 50, 43, 500.00, 4),
+(115, 50, 84, 100.00, 2),
+(116, 50, 35, 100.00, 4),
+(117, 50, 86, 1.00, 10),
+(118, 50, 7, 100.00, 4),
+(119, 50, 28, 1.00, 6),
+(120, 50, 87, 2.00, 9),
+(138, 52, 95, 1.00, 1),
+(139, 52, 96, 4.00, 9),
+(140, 52, 8, 50.00, 2),
+(141, 52, 97, 1.00, 5),
+(142, 52, 98, 1.00, 6),
+(143, 52, 52, 1.00, 5),
+(144, 52, 99, 2.00, 9),
+(145, 52, 37, 100.00, 4),
+(146, 52, 100, 50.00, 4),
+(147, 52, 101, 1.00, 6),
+(148, 52, 9, 20.00, 2),
+(149, 52, 102, 5.00, 2),
+(253, 69, 43, 2.00, 3),
+(254, 69, 71, 1.00, 9),
+(255, 69, 97, 3.75, 3),
+(304, 67, 126, 300.00, 2),
+(305, 67, 41, 12.00, 9),
+(306, 67, 9, 400.00, 2),
+(307, 67, 7, 1.00, 3),
+(308, 66, 120, 2.00, 9),
+(309, 66, 28, 1.00, 6),
+(310, 66, 121, 1.00, 6),
+(311, 66, 52, 30.00, 4),
+(312, 66, 8, 55.00, 2),
+(313, 66, 49, 60.00, 2),
+(314, 66, 96, 1.00, 9),
+(315, 66, 122, 40.00, 2),
+(316, 66, 73, 100.00, 4),
+(317, 66, 112, 100.00, 4),
+(318, 66, 123, 200.00, 4),
+(319, 66, 124, 200.00, 4),
+(320, 66, 48, 2.00, 9),
+(321, 66, 47, 1.00, 8),
+(322, 66, 87, 1.00, 9),
+(323, 66, 105, 1.00, 6),
+(324, 66, 125, 1.00, 6),
+(325, 65, 115, 1.00, 1),
+(326, 65, 116, 1.00, 8),
+(327, 65, 43, 1.00, 5),
+(328, 65, 117, 4.00, 9),
+(329, 65, 34, 1.00, 6),
+(330, 65, 28, 1.00, 6),
+(331, 65, 51, 1.00, 6),
+(332, 65, 118, 1.00, 5),
+(333, 65, 54, 0.50, 9),
+(334, 65, 2, 1.00, 8),
+(335, 65, 71, 1.00, 9),
+(336, 65, 119, 1.00, 6),
+(337, 64, 113, 1.00, 1),
+(338, 64, 81, 1.00, 5),
+(339, 64, 114, 1.00, 9),
+(340, 64, 52, 1.00, 5),
+(341, 64, 28, 1.00, 6),
+(342, 64, 51, 1.00, 6),
+(343, 64, 74, 1.00, 5),
+(344, 63, 110, 1.00, 9),
+(345, 63, 54, 0.50, 9),
+(346, 63, 111, 1.00, 9),
+(347, 63, 53, 2.00, 9),
+(348, 63, 70, 1.00, 5),
+(349, 63, 112, 2.00, 8),
+(350, 63, 35, 1.00, 5),
+(351, 63, 8, 40.00, 2),
+(352, 63, 28, 1.00, 6),
+(353, 62, 41, 4.00, 9),
+(354, 62, 28, 1.00, 6),
+(355, 62, 43, 2.00, 8),
+(356, 62, 107, 2.00, 9),
+(357, 62, 108, 1.00, 6),
+(358, 62, 45, 1.00, 5),
+(359, 62, 109, 1.00, 6),
+(360, 61, 52, 1.00, 5),
+(361, 61, 2, 175.00, 2),
+(362, 61, 8, 175.00, 2),
+(363, 61, 28, 1.00, 6),
+(364, 61, 51, 1.00, 6),
+(365, 61, 105, 1.00, 6),
+(366, 61, 106, 250.00, 2),
+(367, 61, 70, 1.00, 5),
+(368, 61, 41, 4.00, 9),
+(369, 61, 7, 1.00, 3),
+(370, 53, 58, 3.00, 9),
+(371, 53, 9, 175.00, 2),
+(372, 53, 86, 1.00, 10),
+(373, 53, 40, 1.00, 8),
+(374, 53, 47, 300.00, 4),
+(375, 53, 103, 1.00, 6),
+(376, 53, 57, 1.00, 5),
+(377, 53, 104, 50.00, 2),
+(378, 51, 73, 125.00, 4),
+(379, 51, 88, 1.00, 10),
+(380, 51, 89, 1.00, 3),
+(381, 51, 90, 750.00, 2),
+(382, 51, 91, 750.00, 2),
+(383, 51, 82, 1.00, 9),
+(384, 51, 87, 5.00, 9),
+(385, 51, 53, 2.00, 9),
+(386, 51, 81, 2.00, 10),
+(387, 51, 78, 750.00, 2),
+(388, 51, 75, 100.00, 2),
+(389, 51, 92, 450.00, 2),
+(390, 51, 72, 2.00, 11),
+(391, 51, 28, 1.00, 6),
+(392, 51, 52, 4.00, 8),
+(393, 51, 94, 1.00, 9),
+(394, 51, 57, 1.00, 9),
+(395, 49, 80, 1.00, 1),
+(396, 49, 2, 1.00, 1),
+(397, 49, 81, 2.00, 8),
+(398, 49, 43, 50.00, 4),
+(399, 49, 52, 400.00, 4),
+(400, 49, 7, 400.00, 4),
+(401, 49, 54, 3.00, 9),
+(402, 49, 82, 2.00, 9),
+(403, 49, 83, 2.00, 9),
+(404, 49, 41, 1.00, 9),
+(405, 49, 28, 1.00, 6),
+(406, 46, 63, 4.00, 9),
+(407, 46, 64, 16.00, 9),
+(408, 46, 65, 1.00, 9),
+(409, 46, 35, 1.00, 5),
+(410, 46, 67, 1.00, 6),
+(411, 46, 66, 1.00, 6),
+(412, 46, 56, 1.00, 6),
+(413, 46, 28, 1.00, 6),
+(414, 46, 51, 1.00, 6),
+(415, 45, 59, 1.00, 1),
+(416, 45, 60, 25.00, 2),
+(417, 45, 28, 15.00, 2),
+(418, 45, 61, 500.00, 4),
+(419, 45, 62, 150.00, 4),
+(420, 39, 46, 1.00, 3),
+(421, 39, 8, 50.00, 2),
+(422, 39, 2, 100.00, 2),
+(423, 39, 47, 150.00, 4),
+(424, 39, 48, 2.00, 9),
+(425, 39, 49, 8.00, 9),
+(426, 39, 50, 1.00, 11),
+(427, 39, 51, 1.00, 6),
+(428, 39, 28, 1.00, 6),
+(429, 39, 52, 1.00, 5),
+(430, 43, 58, 330.00, 2),
+(431, 43, 9, 530.00, 2),
+(432, 43, 47, 240.00, 2),
+(433, 43, 2, 240.00, 2),
+(434, 68, 28, 1.00, 11),
+(435, 68, 42, 5.00, 2),
+(436, 68, 50, 1.00, 5),
+(437, 68, 52, 100.00, 4),
+(438, 68, 127, 300.00, 2),
+(439, 68, 128, 100.00, 2),
+(440, 68, 129, 200.00, 2),
+(441, 68, 130, 100.00, 2),
+(442, 36, 9, 10.00, 2),
+(443, 36, 2, 1.00, 1),
+(444, 36, 8, 50.00, 2),
+(445, 36, 7, 1.00, 3),
+(446, 36, 4, 4.00, 9),
+(447, 36, 6, 5.00, 2),
+(448, 36, 23, 100.00, 1);
 
 -- --------------------------------------------------------
 
@@ -988,22 +1132,37 @@ TRUNCATE TABLE `recetas_tecnicas`;
 --
 
 INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`) VALUES
-(10, 36, 12),
-(11, 37, 12),
+(91, 36, 12),
+(89, 37, 12),
 (12, 38, 21),
-(13, 39, 13),
-(16, 43, 25),
-(19, 45, 25),
-(20, 46, 21),
+(86, 39, 13),
+(87, 43, 25),
+(85, 45, 25),
+(84, 46, 21),
 (21, 47, 28),
 (22, 48, 13),
-(24, 49, 18),
-(25, 49, 21),
-(23, 49, 25),
-(26, 51, 21),
+(82, 49, 18),
+(83, 49, 21),
+(81, 49, 25),
+(80, 51, 21),
 (27, 52, 13),
 (28, 52, 21),
-(29, 53, 25);
+(79, 53, 25),
+(77, 61, 12),
+(78, 61, 21),
+(76, 62, 12),
+(74, 63, 13),
+(75, 63, 21),
+(73, 63, 25),
+(72, 64, 13),
+(71, 64, 18),
+(70, 65, 13),
+(69, 65, 25),
+(68, 66, 21),
+(67, 66, 25),
+(66, 67, 18),
+(90, 68, 25),
+(58, 69, 20);
 
 -- --------------------------------------------------------
 
@@ -1028,23 +1187,33 @@ TRUNCATE TABLE `recetas_tiposplato`;
 --
 
 INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo`) VALUES
-(21, 36, 1),
-(23, 37, 7),
+(93, 36, 1),
+(91, 37, 7),
 (24, 38, 10),
-(25, 39, 3),
-(26, 40, 11),
-(29, 43, 4),
-(32, 45, 12),
-(33, 46, 3),
+(87, 39, 3),
+(89, 40, 11),
+(88, 43, 4),
+(86, 45, 12),
+(85, 46, 3),
 (34, 47, 3),
 (35, 48, 4),
-(36, 49, 1),
-(37, 49, 3),
-(39, 50, 3),
-(38, 50, 11),
-(40, 51, 7),
+(83, 49, 1),
+(84, 49, 3),
+(82, 50, 3),
+(81, 50, 11),
+(80, 51, 7),
 (41, 52, 7),
-(42, 53, 4);
+(79, 53, 4),
+(78, 61, 1),
+(76, 62, 1),
+(77, 62, 3),
+(75, 63, 3),
+(74, 64, 7),
+(73, 65, 7),
+(72, 66, 7),
+(71, 67, 4),
+(92, 68, 4),
+(64, 69, 12);
 
 -- --------------------------------------------------------
 
@@ -1069,55 +1238,81 @@ TRUNCATE TABLE `recetas_utensilios`;
 --
 
 INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_utensilio`) VALUES
-(11, 36, 1),
-(12, 36, 4),
-(13, 36, 6),
+(179, 36, 1),
+(180, 36, 4),
+(181, 36, 6),
 (14, 38, 163),
 (15, 38, 164),
 (16, 38, 165),
 (17, 38, 166),
 (18, 38, 167),
-(19, 39, 163),
-(21, 39, 166),
-(20, 39, 168),
+(168, 39, 163),
+(169, 39, 166),
+(170, 39, 168),
 (24, 40, 169),
 (22, 40, 170),
 (23, 40, 171),
-(29, 43, 1),
-(30, 43, 165),
-(31, 43, 167),
-(32, 43, 172),
-(33, 43, 173),
-(34, 43, 174),
-(40, 45, 167),
-(39, 45, 172),
-(41, 45, 174),
-(38, 45, 175),
-(42, 46, 166),
+(171, 43, 1),
+(172, 43, 165),
+(173, 43, 167),
+(174, 43, 172),
+(175, 43, 173),
+(176, 43, 174),
+(164, 45, 167),
+(165, 45, 172),
+(166, 45, 174),
+(167, 45, 175),
+(163, 46, 166),
 (43, 47, 166),
 (44, 47, 178),
 (45, 47, 180),
 (47, 48, 180),
 (46, 48, 181),
-(49, 49, 167),
-(51, 49, 175),
-(50, 49, 176),
-(48, 49, 177),
-(52, 49, 182),
+(158, 49, 167),
+(159, 49, 175),
+(160, 49, 176),
+(161, 49, 177),
+(162, 49, 182),
 (54, 50, 171),
 (53, 50, 183),
-(55, 51, 184),
+(157, 51, 184),
 (60, 52, 4),
 (56, 52, 164),
 (58, 52, 166),
 (57, 52, 181),
 (59, 52, 185),
-(61, 53, 1),
-(62, 53, 165),
-(63, 53, 167),
-(64, 53, 186),
-(65, 53, 187),
-(66, 53, 188);
+(151, 53, 1),
+(152, 53, 165),
+(153, 53, 167),
+(154, 53, 186),
+(155, 53, 187),
+(156, 53, 188),
+(148, 61, 178),
+(149, 61, 180),
+(150, 61, 190),
+(145, 62, 166),
+(146, 62, 186),
+(147, 62, 191),
+(143, 63, 172),
+(144, 63, 178),
+(139, 64, 168),
+(140, 64, 191),
+(141, 64, 192),
+(142, 64, 193),
+(135, 65, 168),
+(136, 65, 171),
+(137, 65, 193),
+(138, 65, 194),
+(131, 66, 166),
+(132, 66, 171),
+(133, 66, 192),
+(134, 66, 194),
+(128, 67, 168),
+(129, 67, 190),
+(130, 67, 195),
+(177, 68, 168),
+(178, 68, 185),
+(108, 69, 175);
 
 -- --------------------------------------------------------
 
@@ -1305,9 +1500,9 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 (3, 'Primeros Platos', 'Primeros_Platos_7868.jpg'),
 (4, 'Postres', 'Postres_5632.jpg'),
 (7, 'Segundos platos', 'Segundos_platos_2673.jpg'),
-(10, 'Desayunos y meriendas', NULL),
-(11, 'Guarniciones', NULL),
-(12, 'Acompañamientos', NULL);
+(10, 'Desayunos y meriendas', 'Desayunos_y_meriendas_149.jpg'),
+(11, 'Guarniciones', 'Guarniciones_7773.png'),
+(12, 'Acompañamientos', 'Acompaamientos_65.jpg');
 
 -- --------------------------------------------------------
 
@@ -1442,7 +1637,14 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (185, 'Batidora eléctrica', NULL, 1),
 (186, 'Pincel silicona', NULL, 1),
 (187, 'Manga pastelera', NULL, 1),
-(188, 'Boquilla', NULL, 1);
+(188, 'Boquilla', NULL, 1),
+(190, 'Gastronorm', NULL, 1),
+(191, 'Papel film', NULL, 1),
+(192, 'Cuerda bramante', NULL, 1),
+(193, 'Papel aluminio', NULL, 1),
+(194, 'Rustidera', NULL, 1),
+(195, 'Moldes', NULL, 1),
+(196, 'Molde individual', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1712,7 +1914,7 @@ ALTER TABLE `editores`
 -- AUTO_INCREMENT de la tabla `estilos_cocina`
 --
 ALTER TABLE `estilos_cocina`
-  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_estilo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `favoritas`
@@ -1730,13 +1932,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -1754,7 +1956,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -1766,31 +1968,31 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=449;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
@@ -1838,7 +2040,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
