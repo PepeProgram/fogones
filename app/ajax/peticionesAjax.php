@@ -14,5 +14,29 @@
     /* Crea la instancia del controlador */
     $listElementos = new peticionesController();
 
-    /* Llama al método del controlador para obtener el listado */
-    echo $listElementos->listarElementosControlador();
+    /* Comprueba la acción a realizar */
+    if (isset($_POST['accion'])) {
+
+        switch ($_POST['accion']) {
+            case 'rellenarSelect':
+
+                /* Llama al método del controlador para obtener el listado */
+                echo $listElementos->listarElementosControlador();
+                break;
+            
+            case 'obtenerElemento':
+
+                /* Llama al método del controlador para obtener los elementos de un array */
+                echo $listElementos->obtenerElementosControlador();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        # code...
+    } else {
+        # code...
+    }
+    
+

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-11-2025 a las 23:34:47
+-- Tiempo de generación: 19-11-2025 a las 23:47:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -47,7 +47,6 @@ TRUNCATE TABLE `administradores`;
 INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
 (1, 1),
 (13, 8),
-(14, 13),
 (15, 23);
 
 -- --------------------------------------------------------
@@ -365,7 +364,9 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (127, 'Calabaza', 1),
 (128, 'Nuez', 1),
 (129, 'Harina de espelta', 1),
-(130, 'Azúcar moreno', 1);
+(130, 'Azúcar moreno', 1),
+(131, 'Ajo en polvo', 1),
+(132, 'Arroz Basmati', 1);
 
 -- --------------------------------------------------------
 
@@ -770,8 +771,8 @@ TRUNCATE TABLE `recetas`;
 --
 
 INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_usuario`, `id_grupo`, `n_personas`, `tiempo_receta`, `id_autor`, `id_region`, `id_pais`, `id_zona`, `dificultad`, `elaboracion`, `emplatado`, `foto_receta`, `visualizaciones`, `creado_receta`, `actualizado_receta`, `activo`) VALUES
-(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 13, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-18 19:06:34', 1),
-(37, 'Pechuga de pato con verduras', 'Es un plato perfecto para ocasiones especiales, equilibra la intensidad de la carne  con la frescura de las verduaras y la salsa agridulce.', 1, 1, 4, '01:20:00', NULL, 0, 0, 1, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato un poco montadas, con  salsa en un lado y unas verduras salteadas al otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-18 12:14:33', '2025-11-18 12:14:33', 1),
+(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 1, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-19 22:39:28', 1),
+(37, 'Pechuga de pato con verduras', 'Es un plato perfecto para ocasiones especiales, equilibra la intensidad de la carne  con la frescura de las verduaras y la salsa agridulce.', 1, 1, 4, '01:20:00', NULL, 0, 0, 1, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato un poco montadas, con  salsa en un lado y unas verduras salteadas al otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-18 12:14:33', '2025-11-19 21:02:05', 1),
 (38, 'Doriyakis', 'Tortitas muy esponjosas japonesas emparejadas a modo de sandwich con algún relleno en medio de mermelada, crema,  dulce de leche, etc...', 23, 6, 6, '00:45:00', NULL, 0, 124, 2, 2, 'Abizcochar los huevos con el azúcar, añadir la miel y continuar batiendo.\r\nDiluir el bicarbonato en el agua e incorporarlo a la masa. Mezclarlo bien.\r\nTamizar la harina con la levadura y añadir poco a poco a la masa, sin dejar de mezclar para que no queden grumos.\r\nPintar una sartén con aceite de girasol y, cuando esté bien caliente, añadir 2-3 cucharadas soperas de masa en el centro. Cocinar unos minutos, hasta que la superficie se llene de burbujas. La parte inferior debería estar bien dorada. Dar la vuelta con cuidado  y esperar a que se dore por la otra cara. Sacar a una bandeja con papel de horno para que no se pegue.\r\nCuando estén frias, emparejar las tortas de dos en dos, poniendo juntas las que más se parezcan por su forma. Untar con el relleno elegido la mitad y cierra con sus respectivas parejas, formando sandwiches.', 'En platitos individuales, acompañada de nata montada, fruta fresca, sirope....', 'Doriyakis_202511170743548061.jpg', 1, '2025-11-18 11:48:08', '2025-11-18 11:48:08', 1),
 (39, 'Biersuppe', 'Reconfortante sopa cremosa elaborada con cerveza originaria de Baviera', 23, 19, 6, '00:30:00', NULL, 0, 3, 1, 2, '*Croutons: Cortar las rebanadas de pan, si son del día anterior mejor, en cuadraditos de uno o dos centímetros y freír en abundante aceite de oliva suave. \r\n\r\n    *Sopa: Fundir la mantequilla en una olla a fuego suave. Cuando esté líquida se incorpora la harina y se remueve hasta que se haya tostado ligeramente incorporar la cerveza. Se deja hervir a fuego lento, sin dejar de remover durante unos 20 min. y, a continuación, se salpimenta y, opcionalmente, se añade la canela. Se retira del fuego, se baten las yemas con la nata líquida y se incorporan a la sopa caliente cuando ya no esté hirviendo. Se vuelve a poner el conjunto a fuego bajo durante unos cinco minutos.', 'Se sirve bien caliente en plato hondo con unos poquitos croutons adornando', 'Biersuppe_202511120955296304.jpg', 1, '2025-11-18 11:43:04', '2025-11-18 11:43:04', 1),
 (40, 'Pico de gallo', 'Es una mezcla fresca de verduras picadas, y su encanto está en la simplicidad y el equlibrio entre lo picante, ácido y lo crujiente, ideal para acompañar, tacos, carnes asadas, quesadilla o totopos.', 23, 3, 6, '00:30:00', NULL, 0, 141, 4, 1, 'Cortar los tomates, la cebolla y jalapeño en brunoise, y picar finamente el cilantro,\r\nMetemos estos ingredientes en un bol y añadimos zumo de limón ,si es verde, mejor, y la sal.\r\nMezclamos suavemete y dejamos reposar 10-15 minutos para que se integren los sabores.\r\nRectificamos de sal y limón, si es necesario.\r\nSi queremos un pico de gallo más suave podemos utilizar cebolla morada en vez de blanca, además de la un poco más de contraste visual al plato, en algunas zonas del sur méxico es  más típica esta cebolla.', 'En un cuenco adornado con unos trozos en cuartos de lima o limón, o le podemos añadir pepino o aguacate en cuadraditos en una versión más moderna.', 'Pico_202511121117113292.jpg', 1, '2025-11-18 11:59:10', '2025-11-18 11:59:10', 1),
@@ -793,7 +794,9 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (66, 'Picantones rellenos de manzana', 'La versatilidad de esta carne nos permite acompañarla con infinidad de guarniciones, desde el clásico puré de patata o patata panadera, hasta una ensalada, que le va a dar frescor sin llenar demasiado.', 23, 1, 2, '01:30:00', NULL, 0, 0, 1, 3, '*Relleno: Cortamos el pan en dados que tostaremos en 15 gr. de mantequilla en una sartén. Escurrimos en papel y reservamos.\r\nPelamos las manzanas y las cortamos en brunoise, las depositamos en un bol donde las mezclamos con las pasas, el licor, el vino y el caldo y el almíbar. Dejamos macerar unos 30 minutos.\r\nAl pan frito le añadimos ajo en brunoise frito, la yema de huevo en crudo, la nata y el perejil. Añadimos esta mezcla a la marinada. Condimentamos.\r\n\r\n    *Picantones: Los deshuesamos y salpimentamos. Separamos la piel de las pechugas y comenzamos a rellenar debajo, dándole forma.\r\nDamos la vuelta al pollo y rellenamos la cavidad abdominal con el relleno que nos queda.\r\nBridamos dándole una bonita forma y metemos al horno durante 40-45 minutos a 165ºC. Hidratar de vez en cuando con almíbar mezclado con aceite o mantequilla.\r\n\r\nDoramos unas rodajas de piña a la plancha como guarnición.', 'En un plato, acompañado de la piña a la plancha colocamos el picantón con la piel hacia arriba y lo braseamos con sus jugos.\r\nAdemás le podemos poner otra  guarnción a mayores como,  patata panadera, puré de patata, ensalada, ....', 'Picantones_202511160819295636.jpg', 1, '2025-11-17 20:16:34', '2025-11-17 20:16:34', 1),
 (67, 'Flan de castaña', 'Evoca los sabores de otoño con una textura cremosa y un sabor delicadamente dulce.', 23, 6, 8, '01:00:00', NULL, 13, 64, 1, 3, '*Puré de castaña: Cocer las castañas, pelar y triturar con parte de la leche.\r\nAñadir el resto de la leche y calentar el conjunto.\r\n\r\nPor otro lado mezclar los huevos con 200 gr. de azúcar, sobre esta mezcla, añadir la  leche de castaña, .\r\n\r\nCon los 200gr restantes de azúcar, caramelizar los moldes con un caramelo rubio (128ºC).\r\n\r\nLlenar los moldes hasta 3/4 con la mezcla de flan. Hornear a 180ºC en baño maría, 20 minutos para flanes individuales.\r\n\r\nEnfriar antes de desmoldar.', 'Se puede acompañar de cigarrillos, tejas, figura de caramelo o chocolate, crumble, nata montada etc..', 'Flan_202511160839378170.jpg', 1, '2025-11-17 20:05:50', '2025-11-17 20:05:50', 1),
 (68, 'Naked cake de calabaza vegano (sin huevos, sin lactosa)', 'Un cake libre de ingredientes de origen animal, siendo una deliciosa opción para quienes siguen una dieta vegana o les apetece probar algo nuevo.', 23, 6, 8, '01:00:00', NULL, 0, 0, 1, 2, 'Asar la calabaza y triturarla hasta obtener un puré.\r\nAñadir al puré el aceite de oliva y el azúcar, triturar de nuevo.\r\nSobre esta mezcla, ir incorporando suavemente la harina con la canela molida y el bicarbonato y la sal.\r\nIncorporamos las nueces troceadas.\r\nHornear  a 180ºC aproximadamente unos 40 minutos. en pequeños moldes\r\nDesmoldar una vez frío. Es delicado.', 'Montamos varios discos en un aro estilo naked cake, rellenar de nata vegetal montada con fresas naturales en daditos y puntos de coulis de calabaza.', 'Naked_202511160857516651.jpg', 1, '2025-11-18 12:17:37', '2025-11-18 12:17:37', 1),
-(69, 'Platito de pruebas', 'Descripción descrita muy descritamente', 19, 15, 3, '05:11:00', NULL, 13, 64, 1, 1, 'Elaboración muy elaborada y elaboradita', 'Emplatadito bien emplatado', 'Platito_202511170712064815.jpg', 1, '2025-11-17 18:26:02', '2025-11-17 18:26:02', 0);
+(69, 'Platito de pruebas', 'Descripción descrita muy descritamente', 19, 15, 3, '05:11:00', NULL, 13, 64, 1, 1, 'Elaboración muy elaborada y elaboradita', 'Emplatadito bien emplatado', 'Platito_202511170712064815.jpg', 1, '2025-11-17 18:26:02', '2025-11-17 18:26:02', 0),
+(70, 'Buñuelosde  bacalao', 'Su origen se remonta a la cuaresma, cuando se evitava el consumo de carne,  una alternativa rica y fácil de conservar.  Son unas bolitas fritas y esponjosas con un sabor saldo delicioso.', 2, 2, 4, '02:30:00', NULL, 0, 64, 1, 3, 'Preparar la masa de los buñuelos: Poner en un cuenco la harina formando un volcán y verter en el centro el aceite de oliva, la cerveza, la levadura, el ajo en polvo, una pizca de sal y pimienta negra molida la yema de huevo y el agua (la que necesita.) \r\nAmasar hasta conseguir una masa densa. Tapar y dejar reposar 1-2 horas.\r\nAparte, escaldamos el bacalao, desmigamos y desmenuzamos.\r\nUna vez reposada la masa de los buñuelos, montar la clara a punto de nieve.\r\nIncorporar el bacalao a la masa y a continuación la clara, con cuidado.\r\nFreír en abundante aceite caliente.', '', 'Buuelosde_20251119065416671.jpg', 1, '2025-11-19 17:54:16', '2025-11-19 18:28:20', 1),
+(71, 'Arroz pilaf', 'Receta de arroz largo de origen oriental, que admite infinidad de ingredientes.  Ideal para guarnición de carnes, aves,  pescados e incluso parrillada de verduras', 13, 15, 4, '00:45:00', NULL, 0, 0, 2, 1, 'Estos son los ingredientes de la receta básica, pero se le pueden añadir pasas, almendras o pistachos para darle dulzura o vegetales como zanahoria, guisantes, pimientos para hacerlo más nutritivo y colorido. Además en algunos paises de medio oriente lo enriquecen con comino, canela, clavo y cardamomo\r\n\r\nPasamos el arroz bajo el grifo de agua fria para quitarle el almidón.\r\nCortamos el ajo y la cebolla en brunoise y, opcionalmente los vegetales . Los pochamos en 1 cucharada mantequilla, hasta que estén transparentes,(es el momento de añadir hierbas, y frutos secos que hayas elegido),  incorporamos el arroz y rehogamos todo junto. Dejamos que tome los sabores y añadimos el caldo de pollo, también le va bien  de verduras. Dejamos a fuego lento 15 minutos y terminamos en horno con el arroz tapado a 160ºC. 10 minutos más.', 'Servir en plato decorado con hierbas frescas', 'Arroz_202511190849446374.jpg', 1, '2025-11-19 19:49:44', '2025-11-19 19:51:39', 1);
 
 -- --------------------------------------------------------
 
@@ -861,11 +864,20 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (97, 43, 20),
 (98, 43, 14),
 (99, 40, 3),
-(101, 37, 3),
 (102, 68, 11),
 (103, 68, 12),
 (104, 68, 9),
-(105, 36, 8);
+(112, 70, 1),
+(113, 70, 18),
+(114, 70, 14),
+(120, 71, 3),
+(121, 71, 11),
+(122, 71, 12),
+(123, 71, 9),
+(124, 71, 13),
+(125, 37, 3),
+(151, 36, 20),
+(152, 36, 16);
 
 -- --------------------------------------------------------
 
@@ -1101,13 +1113,31 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (439, 68, 128, 100.00, 2),
 (440, 68, 129, 200.00, 2),
 (441, 68, 130, 100.00, 2),
-(442, 36, 9, 10.00, 2),
-(443, 36, 2, 1.00, 1),
-(444, 36, 8, 50.00, 2),
-(445, 36, 7, 1.00, 3),
-(446, 36, 4, 4.00, 9),
-(447, 36, 6, 5.00, 2),
-(448, 36, 23, 100.00, 1);
+(470, 70, 69, 250.00, 2),
+(471, 70, 43, 130.00, 2),
+(472, 70, 2, 145.00, 2),
+(473, 70, 52, 1.00, 5),
+(474, 70, 46, 1.00, 5),
+(475, 70, 44, 1.00, 2),
+(476, 70, 41, 1.00, 9),
+(477, 70, 72, 1.00, 5),
+(478, 70, 28, 1.00, 6),
+(479, 70, 29, 1.00, 6),
+(480, 70, 131, 1.00, 10),
+(488, 71, 132, 180.00, 2),
+(489, 71, 8, 2.00, 8),
+(490, 71, 54, 0.50, 9),
+(491, 71, 87, 1.00, 9),
+(492, 71, 52, 1.00, 5),
+(493, 71, 28, 1.00, 6),
+(494, 71, 89, 315.00, 4),
+(513, 36, 9, 10.00, 2),
+(514, 36, 2, 1.00, 1),
+(515, 36, 8, 50.00, 2),
+(516, 36, 7, 1.00, 3),
+(517, 36, 4, 4.00, 9),
+(518, 36, 6, 5.00, 2),
+(519, 36, 23, 100.00, 1);
 
 -- --------------------------------------------------------
 
@@ -1132,8 +1162,9 @@ TRUNCATE TABLE `recetas_tecnicas`;
 --
 
 INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`) VALUES
-(91, 36, 12),
-(89, 37, 12),
+(113, 36, 12),
+(112, 36, 28),
+(100, 37, 12),
 (12, 38, 21),
 (86, 39, 13),
 (87, 43, 25),
@@ -1162,7 +1193,10 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (67, 66, 25),
 (66, 67, 18),
 (90, 68, 25),
-(58, 69, 20);
+(58, 69, 20),
+(94, 70, 12),
+(98, 71, 21),
+(97, 71, 25);
 
 -- --------------------------------------------------------
 
@@ -1187,8 +1221,11 @@ TRUNCATE TABLE `recetas_tiposplato`;
 --
 
 INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo`) VALUES
-(93, 36, 1),
-(91, 37, 7),
+(139, 36, 1),
+(137, 36, 10),
+(138, 36, 11),
+(136, 36, 12),
+(100, 37, 7),
 (24, 38, 10),
 (87, 39, 3),
 (89, 40, 11),
@@ -1213,7 +1250,9 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (72, 66, 7),
 (71, 67, 4),
 (92, 68, 4),
-(64, 69, 12);
+(64, 69, 12),
+(96, 70, 1),
+(98, 71, 11);
 
 -- --------------------------------------------------------
 
@@ -1238,9 +1277,9 @@ TRUNCATE TABLE `recetas_utensilios`;
 --
 
 INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_utensilio`) VALUES
-(179, 36, 1),
-(180, 36, 4),
-(181, 36, 6),
+(217, 36, 1),
+(218, 36, 4),
+(219, 36, 6),
 (14, 38, 163),
 (15, 38, 164),
 (16, 38, 165),
@@ -1312,7 +1351,11 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (130, 67, 195),
 (177, 68, 168),
 (178, 68, 185),
-(108, 69, 175);
+(108, 69, 175),
+(186, 70, 166),
+(187, 70, 175),
+(190, 71, 164),
+(191, 71, 168);
 
 -- --------------------------------------------------------
 
@@ -1340,6 +1383,7 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 (4, 2),
 (18, 3),
 (26, 8),
+(28, 13),
 (27, 23);
 
 -- --------------------------------------------------------
@@ -1428,7 +1472,6 @@ TRUNCATE TABLE `revisores`;
 
 INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 (5, 1),
-(6, 2),
 (8, 5),
 (9, 13),
 (11, 19),
@@ -1458,20 +1501,20 @@ TRUNCATE TABLE `tecnicas`;
 
 INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `foto_tecnica`) VALUES
 (11, 'Papillote', 'Papillote_8681.jpg'),
-(12, 'Freir', 'Fritos_3425.jpg'),
-(13, 'Hervir', 'Hervir_3088.png'),
-(17, 'Pochar o escalfar', NULL),
-(18, 'Cocción al vapor', NULL),
-(19, 'Cocción en olla a presión', NULL),
-(20, 'Blanquear', NULL),
-(21, 'Sofreir', NULL),
-(22, 'Saltear', NULL),
-(23, 'Dorar o gratinar', NULL),
-(24, 'En parrilla', NULL),
-(25, 'Al horno', NULL),
-(26, 'Guisar', NULL),
-(27, 'Estofar', NULL),
-(28, 'Brasear', NULL);
+(12, 'Freir', 'Freir_8221.jpg'),
+(13, 'Hervir', 'Hervir_1558.jpg'),
+(17, 'Pochar o escalfar', 'Pochar_o_escalfar_9643.jpg'),
+(18, 'Cocción al vapor', 'Coccin_al_vapor_4152.jpg'),
+(19, 'Cocción en olla a presión', 'Coccin_en_olla_a_presin_5363.jpg'),
+(20, 'Blanquear', 'Blanquear_1120.jpg'),
+(21, 'Sofreir', 'Sofreir_2565.jpg'),
+(22, 'Saltear', 'Saltear_5732.jpg'),
+(23, 'Dorar o gratinar', 'Dorar_o_gratinar_5922.jpg'),
+(24, 'En parrilla', 'En_parrilla_7125.jpg'),
+(25, 'Al horno', 'Al_horno_451.jpg'),
+(26, 'Guisar', 'Guisar_2041.jpg'),
+(27, 'Estofar', 'Estofar_6448.jpg'),
+(28, 'Brasear', 'Brasear_2736.jpg');
 
 -- --------------------------------------------------------
 
@@ -1496,7 +1539,7 @@ TRUNCATE TABLE `tipos_plato`;
 --
 
 INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
-(1, 'Picoteo aperitivos entrantes...', 'aperitivos.jpg'),
+(1, 'Picoteo y aperitivos', 'aperitivos.jpg'),
 (3, 'Primeros Platos', 'Primeros_Platos_7868.jpg'),
 (4, 'Postres', 'Postres_5632.jpg'),
 (7, 'Segundos platos', 'Segundos_platos_2673.jpg'),
@@ -1612,39 +1655,40 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (6, 'Thermomix', 'Thermomix_2984.jpg', 1),
 (148, 'Cuchara de madera', 'Cuchara_de_madera_5105.jpg', 1),
 (149, 'Cucharilla de café', 'Cucharilla_de_postre_9316.jpg', 1),
-(163, 'Varillas', NULL, 1),
-(164, 'Colador', NULL, 1),
-(165, 'Lengua de silicona', NULL, 1),
-(166, 'Sartén', NULL, 1),
-(167, 'Papel de horno', NULL, 1),
-(168, 'Olla', NULL, 1),
-(169, 'Tabla de corte', NULL, 1),
-(170, 'Cuchillo cebollero', NULL, 1),
-(171, 'Bol pequeño', NULL, 1),
-(172, 'Bandeja de horno', NULL, 1),
-(173, 'Rejilla', NULL, 1),
-(174, 'Tamiz', NULL, 1),
-(175, 'Bol grande', NULL, 1),
-(176, 'Cuerna', NULL, 1),
-(177, 'Sauté', NULL, 1),
-(178, 'Rondón', NULL, 1),
-(179, 'Marmita', NULL, 1),
-(180, 'Espátula', NULL, 1),
-(181, 'Cazo', NULL, 1),
-(182, 'Rodillo', NULL, 1),
-(183, 'Mortero', NULL, 1),
-(184, 'Paella', NULL, 1),
-(185, 'Batidora eléctrica', NULL, 1),
-(186, 'Pincel silicona', NULL, 1),
-(187, 'Manga pastelera', NULL, 1),
-(188, 'Boquilla', NULL, 1),
-(190, 'Gastronorm', NULL, 1),
-(191, 'Papel film', NULL, 1),
-(192, 'Cuerda bramante', NULL, 1),
-(193, 'Papel aluminio', NULL, 1),
-(194, 'Rustidera', NULL, 1),
-(195, 'Moldes', NULL, 1),
-(196, 'Molde individual', NULL, 1);
+(163, 'Varillas', 'Varillas_3926.jpg', 1),
+(164, 'Colador', 'Colador_255.jpg', 1),
+(165, 'Lengua de silicona', 'Lengua_de_silicona_3072.jpg', 1),
+(166, 'Sartén', 'Sartn_2082.jpg', 1),
+(167, 'Papel de horno', 'Papel_de_horno_710.jpg', 1),
+(168, 'Olla', 'Olla_6735.jpg', 1),
+(169, 'Tabla de corte', 'Tabla_de_corte_395.jpg', 1),
+(170, 'Cuchillo cebollero', 'Cuchillo_cebollero_4767.jpg', 1),
+(171, 'Bol pequeño', 'Bol_pequeo_8385.jpg', 1),
+(172, 'Bandeja de horno', 'Bandeja_de_horno_6659.jpg', 1),
+(173, 'Rejilla', 'Rejilla_6104.jpg', 1),
+(174, 'Tamiz', 'Tamiz_2435.jpg', 1),
+(175, 'Bol grande', 'Bol_grande_8799.jpg', 1),
+(176, 'Cuerna', 'Cuerna_2571.jpg', 1),
+(177, 'Sauté', 'Saut_4777.jpg', 1),
+(178, 'Rondón', 'Rondn_7701.jpg', 1),
+(179, 'Marmita', 'Marmita_2520.jpg', 1),
+(180, 'Espátula', 'Esptula_8938.jpg', 1),
+(181, 'Cazo', 'Cazo_6249.jpg', 1),
+(182, 'Rodillo', 'Rodillo_8207.jpg', 1),
+(183, 'Mortero', 'Mortero_7185.jpg', 1),
+(184, 'Paella', 'Paella_976.jpg', 1),
+(185, 'Batidora eléctrica túrmix', 'Batidora_elctrica_trmix_2894.jpg', 1),
+(186, 'Pincel silicona', 'Pincel_silicona_9108.jpg', 1),
+(187, 'Manga pastelera', 'Manga_pastelera_3566.jpg', 1),
+(188, 'Boquilla', 'Boquilla_845.jpg', 1),
+(190, 'Gastronorm', 'Gastronorm_170.jpg', 1),
+(191, 'Papel film', 'Papel_film_2266.jpg', 1),
+(192, 'Cuerda bramante', 'Cuerda_bramante_3417.jpg', 1),
+(193, 'Papel aluminio', 'Papel_aluminio_444.jpg', 1),
+(194, 'Rustidera', 'Rustidera_8258.jpg', 1),
+(195, 'Moldes', 'Moldes_4457.jpg', 1),
+(196, 'Molde individual', 'Molde_individual_2170.jpg', 1),
+(197, 'wok', 'wok_4545.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1932,7 +1976,7 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
@@ -1956,7 +2000,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -1968,37 +2012,37 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=449;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
 --
 ALTER TABLE `redactores`
-  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `regiones`
@@ -2040,7 +2084,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`

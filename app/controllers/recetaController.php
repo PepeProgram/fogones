@@ -47,9 +47,9 @@
                                 "texto"=>"No puedes enviar recetas. No eres administrador ni redactor",
                                 "icono"=>"error"
                             ];
+                            return json_encode($alerta);
+                            exit();
                         }
-                        return json_encode($alerta);
-                        exit();
                     }
                 }
                 
@@ -1369,6 +1369,7 @@
         /* ACTUALIZAR RECETA */
         public function actualizarRecetaControlador(){
 
+
             /* Recupera el id de la receta */
             $id = $this->limpiarCadena($_POST['id_receta']);
 
@@ -1415,7 +1416,7 @@
                     /* Comprobar que el usuario es administrador o revisor, o es el propietario de la receta */
                     if (!$_SESSION['administrador']) {
                         if (!$_SESSION['revisor']) {
-                            if ($_SESSION['id'] != $receta_old['id_receta']) {
+                            if ($_SESSION['id'] != $receta_old['id_usuario']) {
                                 $alerta=[
                                     "tipo"=>"simple",
                                     "titulo"=>"ERROR GRAVE",
@@ -2352,21 +2353,26 @@
             /* Comprueba si se han insertado los datos */
             if ($registrar_receta->rowCount() == 1) {
 
-                /* Borra los estilos de cocina que hay guardados */
-                $borrar_estilos = $this->eliminarRegistro('recetas_estilos', 'id_receta', $id);
-
-                /* Comprueba que se hayan borrado los estilos */
-                if (!$borrar_estilos->rowCount() == 1) {
-                    /* Muestra la ventana de error */
-                        $alerta = [
-                            "tipo"=>"simple",
-                            "titulo"=>"Error inesperado",
-                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
-                            "icono"=>"error"
-                        ];
-                        return $alerta;
-                        exit();
+                /* Comprueba si hay estilos de cocina guardados */
+                if ($this->seleccionarDatos('Unico', 'recetas_estilos', 'id_receta', $id)->rowCount() > 0) {
+                    
+                    /* Borra los estilos de cocina que hay guardados */
+                    $borrar_estilos = $this->eliminarRegistro('recetas_estilos', 'id_receta', $id);
+    
+                    /* Comprueba que se hayan borrado los estilos */
+                    if (!$borrar_estilos->rowCount() == 1) {
+                        /* Muestra la ventana de error */
+                            $alerta = [
+                                "tipo"=>"simple",
+                                "titulo"=>"Error inesperado",
+                                "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                                "icono"=>"error"
+                            ];
+                            return json_encode($alerta);
+                            exit();
+                    }
                 }
+
 
                 /* Recorre el array de los estilos de cocina */
                 foreach ($estilo_cocina as $estilo) {
@@ -2397,7 +2403,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                     }
 
@@ -2415,7 +2421,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                 }
 
@@ -2448,27 +2454,31 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                     }
 
                 }
 
-                /* Borra los métodos que hay guardados */
-                $borrar_metodos = $this->eliminarRegistro('recetas_tecnicas', 'id_receta', $id);
-
-                /* Comprueba que se hayan borrado los métodos */
-                if (!$borrar_metodos->rowCount() == 1) {
-                    /* Muestra la ventana de error */
-                        $alerta = [
-                            "tipo"=>"simple",
-                            "titulo"=>"Error inesperado",
-                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
-                            "icono"=>"error"
-                        ];
-                        return $alerta;
-                        exit();
+                if ($this->seleccionarDatos('Unico', 'recetas_tecnicas', 'id_receta', $id)->rowCount() > 0) {
+                    
+                    /* Borra los métodos que hay guardados */
+                    $borrar_metodos = $this->eliminarRegistro('recetas_tecnicas', 'id_receta', $id);
+    
+                    /* Comprueba que se hayan borrado los métodos */
+                    if (!$borrar_metodos->rowCount() == 1) {
+                        /* Muestra la ventana de error */
+                            $alerta = [
+                                "tipo"=>"simple",
+                                "titulo"=>"Error inesperado",
+                                "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                                "icono"=>"error"
+                            ];
+                            return json_encode($alerta);
+                            exit();
+                    }
                 }
+
 
                 /* Recorre el array de los métodos */
                 foreach ($metodo_receta as $metodo) {
@@ -2499,7 +2509,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                     }
 
@@ -2517,7 +2527,7 @@
                         "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                         "icono"=>"error"
                     ];
-                    return $alerta;
+                    return json_encode($alerta);
                     exit();
                 }
 
@@ -2550,7 +2560,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit;
                     }
 
@@ -2568,7 +2578,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                 }
 
@@ -2627,7 +2637,7 @@
                             "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
                             "icono"=>"error"
                         ];
-                        return $alerta;
+                        return json_encode($alerta);
                         exit();
                     }
 

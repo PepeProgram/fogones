@@ -92,15 +92,18 @@
                     /* Comprobar que el usuario es administrador o revisor */
                     if (!$_SESSION['administrador']) {
                         if (!$_SESSION['revisor']) {
-                            $alerta=[
-                                "tipo"=>"simple",
-                                "titulo"=>"ERROR GRAVE",
-                                "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador ni revisor",
-                                "icono"=>"error"
-                            ];
+                            if (!$_SESSION['redactor']) {
+                                # code...
+                                $alerta=[
+                                    "tipo"=>"simple",
+                                    "titulo"=>"ERROR GRAVE",
+                                    "texto"=>"No puedes cambiar el estado de los utensilios. No eres administrador ni revisor",
+                                    "icono"=>"error"
+                                ];
+                            }
+                            return json_encode($alerta);
+                            exit();
                         }
-                        return json_encode($alerta);
-                        exit();
                     }
                 }
                 

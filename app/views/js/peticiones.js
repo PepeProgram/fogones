@@ -24,6 +24,9 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccio
     /* Añade el campo a buscar */
     data.append('campo', campo);
 
+    /* Añade la accion a realizar */
+    data.append('accion', 'rellenarSelect');
+
     /* Crea las cabeceras para enviar la peticion */
     let encabezados = new Headers();
 
@@ -181,13 +184,53 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccio
                 titulo: 'Error Fatal!!!',
                 texto: error+' Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
                 confirmButtonText: 'Aceptar',
-                colorIcono: 'red'};
+                colorIcono: 'red'
+            };
                 ventanaModal(textoAlerta);
             }
         }
         
         /* Añadido para esperar el await correctamente */
         return true;
+}
+
+/* Devuelve las etiquetas de una receta */
+function obtenerEtiquetas(id, tabla){
+
+    /* Crea la acción para la petición */
+    let accion = APP_URL+'app/ajax/peticionesAjax.php';
+
+    /* Crea un formulario para enviar a las peticiones */
+    let data = new FormData();
+
+    /* Añade la tabla en la que hay que buscar */
+    data.append('tabla', tabla);
+
+    /* Añade el id de la etiqueta a buscar */
+    data.append('id', id);
+
+    /* Añade la accion a realizar */
+    data.append('accion', 'obtenerElemento');
+
+    /* Crea los encabezados para enviar la petición */
+    let encabezados = new Headers();
+
+     /* Configuraciones en formato JSON de los datos de la petición */
+    let config ={
+        "method": 'POST',
+        "headers": encabezados,
+        "mode": "cors",
+        "cache": "no-cache",
+        "body": data
+    };
+
+    /* Realiza la petición de búsqueda sólo si el id es distinto de 0 y no está vacío */
+    if (id != 0 && id != "") {
+
+        return fetch(accion, config).then(respuesta=>{
+           return respuesta.json(); 
+        });
+    }
 }
 
 /* Selecciona los elementos de un select determinado */

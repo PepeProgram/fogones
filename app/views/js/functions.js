@@ -758,3 +758,110 @@ function aprobarReceta(receta, IdsUtensilios, IdsIngredientes){
 
         
 }
+
+/* Rellena la lista de utensilios de la vistaReceta */
+function rellenarUtensiliosReceta(idLista, arrayUtensilios) {
+
+    /* Recupera la lista para insertar los utensilios */
+    let lista = document.querySelector('#'+idLista);
+
+    /* Recorre el array de utensilios para agregar un li por cada utensilio */
+    arrayUtensilios.forEach(utensilio => {
+        let linea = document.createElement('li');
+        linea.setAttribute('class', 'liListaUtensilios');
+        linea.innerText = utensilio['nombre_utensilio'];
+        lista.appendChild(linea);
+    });
+
+}
+
+/* Rellena la lista de ingredientes de la vistaReceta */
+function rellenarIngredientesReceta(idLista, arrayIngredientes){
+
+    /* Recupera la lista para insertar los ingredientes */
+    let lista = document.querySelector('#'+idLista);
+    
+    /* Recorre el array de ingredientes para agregar un li por cada ingrediente */
+    arrayIngredientes.forEach(ingrediente => {
+
+        /* Crea la línea para cada ingrediente */
+        let linea = document.createElement('li');
+        linea.setAttribute('class', 'liListaIngredientes col-100 horizontal static');
+
+        /* Crea un div para el nombre */
+        let divNombre = document.createElement('div');
+        divNombre.setAttribute('class', 'nombreIngredienteListaReceta col-60 static');
+        
+        /* Añade el nombre del ingrediente al div */
+        divNombre.append(' '+ingrediente['nombre_ingrediente']);
+
+        /* Añade el div a la linea */
+        linea.append(divNombre);
+
+        
+        
+        /* Comprueba si la cantidad corresponde a alguna de las unidades incontables para eliminarla */
+        if (![5, 6].includes(ingrediente['id_unidad'])) {
+            
+            /* Crea un div para la cantidad */
+            let divCantidad = document.createElement('div');
+            divCantidad.setAttribute('class', 'cantidadIngredienteListaReceta');
+            
+            /* Crea el output para la cantidad */
+            let cantidad = document.createElement('output');
+            cantidad.setAttribute('class', 'outputCantidadIngrediente');
+            
+            /* Añade la cantidad al output */
+            cantidad.value = parseFloat(ingrediente['cantidad']);
+            
+            /* Añade output al div */
+            divCantidad.append(cantidad);
+            
+            /* Añade el div a la linea */
+            linea.append(divCantidad);
+        }
+
+        /* añade las unidades a cada cantidad */
+        linea.append(ingrediente['nombre_unidad']);
+
+        /* Añade la linea a la lista */
+        lista.appendChild(linea);
+        
+        
+    });
+}
+
+/* Rellena todas las etiquetas de la vistaReceta */
+function rellenarEtiquetasReceta(idDiv, idsEtiquetas, tabla) {
+
+    /* Recupera el div donde hay que poner las etiquetas */
+    let divEtiquetas = document.querySelector('#'+idDiv);
+
+    /* Convierte a array lo que viene en idsEtiquetas si no lo es */
+    if (!Array.isArray(idsEtiquetas)) {
+        idsEtiquetas = idsEtiquetas.toString().split(',');
+    }
+
+    if (idsEtiquetas != "") {
+        idsEtiquetas.forEach(id => {
+            obtenerEtiquetas(id[0], tabla).then(etiqueta => {
+
+                /* Crea la etiqueta */
+                let divEtiqueta = document.createElement('div');
+                divEtiqueta.setAttribute('class', 'etiqueta');
+
+                /* Añade el icono a la etiqueta */
+                let iconoEtiqueta = document.createElement('i');
+                iconoEtiqueta.setAttribute('class', 'fa-solid fa-tag');
+                divEtiqueta.append(iconoEtiqueta);
+
+                /* Añade el texto a la etiqueta */
+                divEtiqueta.append(' '+etiqueta[1]);
+ 
+                /* Añade la etiqueta al div */
+                divEtiquetas.append(divEtiqueta);
+            });
+        });
+    }
+    
+}

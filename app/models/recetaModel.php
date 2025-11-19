@@ -4,6 +4,8 @@
 
     /* Carga el modelo de alérgenos para poder usarlo */
     use app\models\alergenoModel;
+
+    /* Carga el modelo de ingredientes para poder usarlo */
 use JsonSerializable;
 
     class recetaModel extends mainModel implements JsonSerializable{
@@ -94,7 +96,7 @@ use JsonSerializable;
         }
 
         function checkIngredientes(){
-            $ingredientes = $this->ejecutarConsulta("SELECT * FROM recetas_ingredientes WHERE id_receta = '$this->id' ORDER BY id_recetas_ingredientes");
+            $ingredientes = $this->ejecutarConsulta("SELECT recetas_ingredientes.id_recetas_ingredientes, recetas_ingredientes.id_receta, recetas_ingredientes.id_ingrediente, ingredientes.nombre_ingrediente, recetas_ingredientes.cantidad, recetas_ingredientes.id_unidad, unidades_medida.nombre_unidad FROM recetas_ingredientes INNER JOIN ingredientes ON recetas_ingredientes.id_ingrediente = ingredientes.id_ingrediente INNER JOIN unidades_medida ON recetas_ingredientes.id_unidad = unidades_medida.id_unidad WHERE id_receta = '$this->id' ORDER BY id_recetas_ingredientes");
             $ingredientes = $ingredientes->fetchAll();
             return $ingredientes;
         }

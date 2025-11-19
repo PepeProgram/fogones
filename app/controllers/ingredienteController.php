@@ -101,9 +101,9 @@
                                         "icono"=>"error"
                                     ];
                                 }
+                                return json_encode($alerta);
+                                exit();
                             }
-                            return json_encode($alerta);
-                            exit();
                         }
                 }
                 

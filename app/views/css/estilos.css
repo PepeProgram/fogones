@@ -1188,7 +1188,6 @@ p.btnOpcionesRecetas{
 }
 .recetaContainer{
     background-color: var(--fondoBlanco);
-    height: 100%;
 }
 .datosCabeceraReceta{
     background-color: var(--fondoClaro);
@@ -1218,6 +1217,41 @@ p.btnOpcionesRecetas{
 }
 .containerPropietario{
     height: 100%;
+}
+.liListaUtensilios{
+    list-style-type: disc !important;
+    list-style-position: inside !important;
+}
+
+.liListaIngredientes {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 1.2em;
+}
+
+.liListaIngredientes::before {
+    content: "•";
+    position: absolute;
+    left: 0.1rem;
+    font-size: 1.6rem;
+    top: -0.2rem;
+}
+
+.cantidadIngredienteListaReceta{
+    text-align: right;
+    margin-right: 0.5rem;
+}
+.pieReceta{
+    border-radius: 0.5rem;
+    position: relative;
+    flex-wrap: wrap;
+}
+.leyendaEtiquetas{
+    padding: 0.5rem;
+}
+.pieReceta div{
+    margin-top: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {

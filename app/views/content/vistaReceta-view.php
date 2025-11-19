@@ -3,6 +3,9 @@
     /* Carga la clase receta para poder crear objetos receta */
     use app\models\recetaModel;
 
+    /* Carga la clase utensilio para poder crear objetos utensilio */
+    use app\models\utensilioModel;
+
     /* Comprueba si hay sesión iniciada */
     if ((isset($_SESSION['id']) && isset($_SESSION['nombre']) && isset($_SESSION['login']))) {
         $usuario = $_SESSION['id'];
@@ -36,6 +39,13 @@
         /* Crea una receta con todos los datos */
         $receta_ver = new recetaModel($datos['id_receta'], $datos['nombre_receta'], $datos['descripcion_receta'], $datos['id_usuario'], $datos['id_grupo'], $datos['n_personas'], $datos['tiempo_receta'], $datos['id_autor'], $datos['id_region'], $datos['id_pais'], $datos['id_zona'], $datos['dificultad'], $datos['elaboracion'], $datos['emplatado'], $datos['foto_receta'], $datos['visualizaciones'], $datos['creado_receta'], $datos['actualizado_receta'], $datos['activo']);
 
+        /* Obtiene un array con los utensilios */
+        $utensiliosReceta = [];
+        foreach ($receta_ver->getUtensilios() as $utensilioObject) {
+            $utensilio = new utensilioModel($utensilioObject['id_utensilio']);
+            array_push($utensiliosReceta, $utensilio);
+        }
+
         /* Obtiene los datos del creador de la receta */
         $creador = $insLogin->seleccionarDatos('Unico', 'usuarios', 'id_usuario', $receta_ver->getId_usuario());
 
@@ -52,6 +62,29 @@
 
 
 ?>
+
+<script>
+    window.addEventListener('load', async function () {
+       
+        /* Carga los utensilios */
+        rellenarUtensiliosReceta('ulListaUtensilios', <?php echo json_encode($utensiliosReceta); ?>);
+
+        /* Carga los ingredientes */
+        rellenarIngredientesReceta('ulListaIngredientes', <?php echo json_encode($receta_ver->getIngredientes()); ?>);
+
+        /* Carga las etiquetas */
+        rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getEstilos()); ?>, 'estilos_cocina');
+        rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getTipos_plato()); ?>, 'tipos_plato');
+        rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getId_grupo()); ?>, 'grupos_plato');
+        rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getMetodos()); ?>, 'tecnicas');
+
+
+    });
+
+
+
+
+</script>
 
 
 <header class="tituloReceta">
@@ -153,13 +186,24 @@
     </section>
 
     <!-- Desarrollo de la receta -->
-    <section id="desarrolloReceta" class="desarrolloReceta col-100 horizontal total">
+    <section id="desarrolloReceta" name="Desarrollo de la receta" class="desarrolloReceta col-100 horizontal total">
         <div id="ingredientesUtensilios" class="ingredientesUtensilios col-33 medio vertical top">
+            <div class="col-100 horizontal centrar static">
+                <p>Para&nbsp;</p>
+                <input type="number" name="nPersonas" id="nPersonas" step="1" class="input col-20 static" value="<?php echo $receta_ver->getPersonas() ?>">
+                <label for="nPersonas">&nbsp;Personas</label>
+            </div>
             <div id="listaIngredientes" class="listaIngredientes col-100 vertical">
                 <h3>Ingredientes</h3>
+                <ul id="ulListaIngredientes" class="ulListaIngredienetes">
+                
+                </ul>
             </div>
             <div id="listaUtensilios" class="listaUtensilios col-100 vertical">
                 <h3>Utensilios</h3>
+                <ul id="ulListaUtensilios" class="ulListaUtensilios">
+
+                </ul>
             </div>
         </div>
         <div id="elaboracionEmplatado" class="elaboracionEmplatado col-66 medio vertical top">
@@ -197,5 +241,13 @@
 
         </div>
     </section>
+
+    <!-- Etiquetas -->
+     <div class="col-100 horizontal total">
+         <fieldset id="pieReceta" class="pieReceta col-100 horizontal total static">
+            <legend class="leyendaEtiquetas">Etiquetas</legend>
+    
+         </fieldset>
+     </div>
 
 </div>

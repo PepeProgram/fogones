@@ -82,4 +82,55 @@
 
             echo json_encode($elementos);
         }
+
+        /* OBTENER ELEMENTOS DE UN ARRAY */
+        public function obtenerElementosControlador(){
+
+            /* Obtiene la tabla en la que hay que buscar */
+            $tabla = $this->limpiarCadena($_POST['tabla']);
+
+            /* Establece el campo por el que hay que buscar */
+            switch ($tabla) {
+                case 'estilos_cocina':
+                    $campo = 'id_estilo';
+                    $nombre = 'nombre_estilo';
+                    $foto = 'foto_estilo';
+                    break;
+                
+                case 'grupos_plato':
+                    $campo = 'id_grupo';
+                    $nombre = 'nombre_grupo';
+                    $foto = 'foto_grupo';
+                    break;
+                
+                case 'tipos_plato':
+                    $campo = 'id_tipo';
+                    $nombre = 'nombre_tipo';
+                    $foto = 'foto_tipo';
+                    break;
+                
+                case 'tecnicas':
+                    $campo = 'id_tecnica';
+                    $nombre = 'nombre_tecnica';
+                    $foto = 'foto_tecnica';
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+            /* Obtiene el id de la etiqueta a buscar */
+            $idEtiqueta = $_POST['id'];
+
+            /* Construye la búsqueda */
+            $busqueda = "SELECT $campo, $nombre, $foto FROM $tabla WHERE $campo = $idEtiqueta";
+
+            /* Ejecuta la búsqueda */
+            $etiqueta = $this->ejecutarConsulta($busqueda);
+            $etiqueta = $etiqueta->fetch();
+
+            /* Devuelve los datos de la etiqueta */
+            return json_encode($etiqueta);
+        }
     }
