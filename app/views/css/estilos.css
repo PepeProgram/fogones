@@ -1253,6 +1253,27 @@ p.btnOpcionesRecetas{
 .pieReceta div{
     margin-top: 0.5rem;
 }
+.fotoAutorListaRecetas{
+    width: 6rem;
+    height: 6rem;
+    min-width: 6rem;
+    min-height: 6rem;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.datosUsuario{
+    text-align: justify;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+}
 
 @media screen and (min-width: 768px) {
     .datosCabeceraReceta h2{

@@ -56,7 +56,7 @@
                 
                 <div class="col-100 static total vertical">
                     <h3>
-                        <a href="vistaReceta/<?php echo $receta->getId(); ?>">
+                        <a href="<?php echo APP_URL ?>vistaReceta/<?php echo $receta->getId(); ?>">
                             <?php echo $receta->getNombre(); ?>
                         </a>
                     </h3>

@@ -1300,6 +1300,7 @@
                 /* consulta las recetas sin activar */
                 $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
             }
+
             elseif (isset($vista_actual[2]) && $vista_actual[2] != "") {
                 switch ($vista_actual[2]) {
                     case 'principal':
@@ -1331,9 +1332,16 @@
                         $consulta = "SELECT * FROM recetas WHERE id_usuario=$id";
                         break;
                     case 'paraRevisar':
-                        $id = $_SESSION['id'];
                         /* consulta las recetas sin activar */
                         $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
+                        break;
+                    case 'recetasDe':
+                        /* Comprueba si hay algún id de usuario */
+                        if (isset($vista_actual[3]) && $vista_actual[3] != "") {
+                            $consulta = "SELECT * FROM recetas WHERE activo = 1 AND id_usuario = $vista_actual[3]";
+                        } else {
+                            $consulta = "SELECT * FROM recetas WHERE activo = 33";
+                        }
                         break;
                     
                     default:

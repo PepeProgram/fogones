@@ -51,6 +51,7 @@
 
         if($creador->rowCount() == 1){
             $creador = $creador->fetch();
+            $idCreador = $creador['id_usuario'];
             $nombreCreador = $creador['nombre_usuario']." ".$creador['ap1_usuario'];
             $fotoCreador = $creador['foto_usuario'];
         } else {
@@ -144,7 +145,7 @@
                     </div>
         
                     <!-- Nombre del creador -->
-                    <h5 class="total"><a href=""><?php echo $nombreCreador ?></a></h5>
+                    <h5 class="total"><a href="<?php echo APP_URL ?>recetasDe/<?php echo $idCreador ?>"><?php echo $nombreCreador ?></a></h5>
                 </div>
             </div>
     
@@ -190,8 +191,11 @@
         <div id="ingredientesUtensilios" class="ingredientesUtensilios col-33 medio vertical top">
             <div class="col-100 horizontal centrar static">
                 <p>Para&nbsp;</p>
-                <input type="number" name="nPersonas" id="nPersonas" step="1" class="input col-20 static" value="<?php echo $receta_ver->getPersonas() ?>">
+                <input type="number" name="nPersonas" id="nPersonas" step="1" class="input col-20 static" value="<?php echo $receta_ver->getPersonas() ?>" min="1" oninput="calcularIngredientes(this.value);">
                 <label for="nPersonas">&nbsp;Personas</label>
+
+                <input type="hidden" name="personasOld" id="personasOld" value="<?php echo $receta_ver->getPersonas(); ?>">
+
             </div>
             <div id="listaIngredientes" class="listaIngredientes col-100 vertical">
                 <h3>Ingredientes</h3>

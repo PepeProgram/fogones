@@ -801,7 +801,7 @@ function rellenarIngredientesReceta(idLista, arrayIngredientes){
         
         
         /* Comprueba si la cantidad corresponde a alguna de las unidades incontables para eliminarla */
-        if (![5, 6].includes(ingrediente['id_unidad'])) {
+        if (![5, 6, 11].includes(ingrediente['id_unidad'])) {
             
             /* Crea un div para la cantidad */
             let divCantidad = document.createElement('div');
@@ -810,9 +810,15 @@ function rellenarIngredientesReceta(idLista, arrayIngredientes){
             /* Crea el output para la cantidad */
             let cantidad = document.createElement('output');
             cantidad.setAttribute('class', 'outputCantidadIngrediente');
-            
+
             /* Añade la cantidad al output */
             cantidad.value = parseFloat(ingrediente['cantidad']);
+            
+            /* Guarda como data attribute la cantidad original para tenerla disponible al recalcular los ingredientes */
+            cantidad.dataset.original = cantidad.value;
+
+            /* Guarda como data attribute el id de la unidad para tenerlo disponible al recalcular los ingredientes */
+            cantidad.dataset.unidad = ingrediente['id_unidad'];
             
             /* Añade output al div */
             divCantidad.append(cantidad);
@@ -864,4 +870,43 @@ function rellenarEtiquetasReceta(idDiv, idsEtiquetas, tabla) {
         });
     }
     
+}
+
+/* Recalcula la cantidad de ingredientes al cambiar el número de personas */
+function calcularIngredientes(numeroPersonasNuevo){
+
+    /* Recupera el valor de la cantidad de ingredientes original y lo convierte a float */
+    let personasOriginal = parseFloat(document.querySelector('#personasOld').value);
+
+    /* Convierte a float el número de personas actual */
+    numeroPersonasFloat = parseFloat(numeroPersonasNuevo);
+
+    /* Recupera los output de las cantidades de cada ingrediente */
+    let cantidadIngredientes = document.querySelectorAll('.outputCantidadIngrediente');
+
+    /* Solo si nº de personas es mayor o igual a 1 */
+    if (numeroPersonasFloat >= 1 && Number.isInteger(numeroPersonasFloat)) {
+        
+        cantidadIngredientes.forEach(cantidad => {
+    
+            /* Convierte a float la cantidad original */
+            let cantidadOriginal = parseFloat(cantidad.dataset.original);
+    
+            /* Calcula la cantidad nueva */
+            let cantidadNew = (cantidadOriginal/personasOriginal)*numeroPersonasFloat;
+    
+            /* Redondea las cantidades dependiendo de las unidades */
+            console.log('La unidad es: '+cantidad.dataset.unidad);
+            if (["7", "8", "9"].includes(cantidad.dataset.unidad)) {
+                console.log('La unidad dentro del if es: '+cantidad.dataset.unidad)
+                cantidadNew = Math.round(cantidadNew * 4) / 4;
+            }
+    
+    
+            cantidad.value = cantidadNew;
+            
+        });
+    }
+
+
 }
