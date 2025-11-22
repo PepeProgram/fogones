@@ -1034,7 +1034,6 @@ th.headerUserTitle{
 }
 .listasEnviarReceta{
     padding-left: 0.5rem;
-    margin-top: 1.5rem;
 }
 .inputListas{
     font-size: 1rem;
@@ -1075,6 +1074,10 @@ li > span{
 }
 .inputCantidad{
     appearance: none;
+}
+
+.filtrarSelect{
+    margin-bottom: 0.3rem;
 }
 
 /* TARJETAS DE LAS RECETAS */
@@ -1137,6 +1140,22 @@ a{
     height: 2rem;
     margin-right: 0.5rem;
     width: 100%;
+}
+
+.btnBuscarRecetas{
+    padding: 0.5rem;
+    color: var(--oscuro);
+    background: var(--claro);
+    border: none;
+    font-size: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
+    position: relative;
+    left: -2rem;
+}
+.btnBuscarRecetas:hover{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
 }
 
 @media screen and (min-width:768px) {

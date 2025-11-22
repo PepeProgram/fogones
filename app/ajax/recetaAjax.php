@@ -40,6 +40,13 @@
                 echo $insReceta->desactivarRecetaControlador();
                 break;
             
+            case 'buscar':
+
+                $respuesta = $insReceta->listarRecetasControlador(true);
+                echo json_encode($respuesta);
+                return $respuesta;
+                break;
+            
             default:
                 # code...
                 break;

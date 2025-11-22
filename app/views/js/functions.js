@@ -163,25 +163,25 @@ function filtrarRecetas(input, divRecetas){
     /* Convierte el texto del input a mayúsculas */
     filter = input.value.toUpperCase();
     
-    /* Trae los div de las recetas */
+    /* Trae las tarjetas de las recetas */
     let recetas = document.querySelectorAll('.'+divRecetas);
     
-    /* Recorre cada fila de la lista */
+    /* Recorre cada tarjeta de la lista */
     for (let i = 0; i < recetas.length; i++) {
         
-        /* Trae los div de cada fila */
+        /* Trae los div de cada tarjeta */
         let receta = recetas[i].children;
 
-        /* Oculta la fila actual */
+        /* Oculta la tarjeta actual */
         recetas[i].style.display = "none";
 
-        /* recorre cada div de la fila */
+        /* recorre cada div de la tarjeta */
         for (let j = 0; j < receta.length; j++) {
             
             /* Extrae el texto del div actual */
             txtValue = receta[j].textContent;
             
-            /* Si el texto del div actual en mayúsculas contiene el texto del input, muestra la fila actual */
+            /* Si el texto del div actual en mayúsculas contiene el texto del input, muestra la tarjeta actual */
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 recetas[i].style.display = "";
             }
@@ -190,6 +190,31 @@ function filtrarRecetas(input, divRecetas){
         
     }
 
+}
+
+/* Busca options en un select */
+function filtrarSelect(textoInput, idSelect){
+    
+    /* Convierte a mayúsculas el texto a buscar */
+    textoInput = textoInput.toUpperCase();
+
+    /* Trae las options del select donde hay que buscar */
+    const options = document.querySelector('#'+idSelect).options;
+
+    /* Recorre cada option del select */
+    for (let i = 1; i < options.length; i++) {
+        
+        /* Oculta la option actual */
+        options[i].style.display = "none";
+    
+        /* Extrae el texto de la option actual y lo convierte a mayúsculas */
+        txtValue = options[i].innerText.toUpperCase();
+    
+        /* Si el texto de la option actual contiene el texto del input, muestra la option actual */
+        if (txtValue.indexOf(textoInput) > -1) {
+            options[i].style.display = "";
+        }
+    }
 }
 
 /* Activa un formulario en pantalla */

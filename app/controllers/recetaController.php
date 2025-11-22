@@ -1289,74 +1289,95 @@
         }
 
         /* LISTAR TODAS LAS RECETAS */
-        public function listarRecetasControlador(){
+        public function listarRecetasControlador($modoBusqueda = false){
 
             /* Obtiene la vista actual */
             $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
 
-            /* Comprueba cuál es la vista actual para construir la búsqueda de recetas */
-            if (isset($vista_actual[3]) && $vista_actual[3] == "paraRevisar"){
-
-                /* consulta las recetas sin activar */
-                $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
-            }
-
-            elseif (isset($vista_actual[2]) && $vista_actual[2] != "") {
-                switch ($vista_actual[2]) {
-                    case 'principal':
-                        $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
-                        break;
-                    case 'aperitivos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1 AND activo = 1";
-                        break;
-                    case 'primerosPlatos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3 AND activo = 1";
-                        break;
-                    case 'segundosPlatos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7 AND activo = 1";
-                        break;
-                    case 'postres':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4 AND activo = 1";
-                        break;
-                    case 'guarniciones':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11 AND activo = 1";
-                        break;
-                    case 'desayunos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10 AND activo = 1";
-                        break;
-                    case 'complementos':
-                        $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12 AND activo = 1";
-                        break;
-                    case 'misRecetas':
-                        $id = $_SESSION['id'];
-                        $consulta = "SELECT * FROM recetas WHERE id_usuario=$id";
-                        break;
-                    case 'paraRevisar':
-                        /* consulta las recetas sin activar */
-                        $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
-                        break;
-                    case 'recetasDe':
-                        /* Comprueba si hay algún id de usuario */
-                        if (isset($vista_actual[3]) && $vista_actual[3] != "") {
-                            $consulta = "SELECT * FROM recetas WHERE activo = 1 AND id_usuario = $vista_actual[3]";
-                        } else {
-                            $consulta = "SELECT * FROM recetas WHERE activo = 33";
-                        }
-                        break;
-                    
-                    default:
-                        $consulta = "SELECT * FROM recetas ORDER BY nombre_receta";
-                        break;
-                }
+            /* Comprueba si viene en modo normal o búsqueda */
+            if ($modoBusqueda) {
                 
-            }
-            else {
-                $consulta = "SELECT * FROM recetas WHERE activo = 1 ORDER BY id_receta DESC";
-            }
+                $texto = $this->limpiarCadena($_POST['busquedaRecetas']);
+                $idTipo = $this->limpiarCadena($_POST['id_tipo']) ?? null;
 
-            /* Ejecuta la consulta */
-            $todasLasRecetas = $this->ejecutarConsulta($consulta);
-            $todasLasRecetas = $todasLasRecetas->fetchAll();
+                if ($idTipo === "" || $idTipo === "null") {
+                    $idTipo = null;
+                }
+
+                $idsRecetas = $this->buscarRecetasGlobal($texto, $idTipo);
+
+                if (!empty($idsRecetas)) {
+                    $idsString = implode(',', $idsRecetas);
+                    $consulta = "SELECT * FROM recetas WHERE id_receta IN ($idsString)";
+                    $todasLasRecetas = $this->ejecutarConsulta($consulta)->fetchAll();
+                } else {
+                    $todasLasRecetas = []; // Si no hay resultados
+                }
+
+            } else {
+                
+                /* Comprueba cuál es la vista actual para construir la búsqueda de recetas */
+                if (isset($vista_actual[2]) && $vista_actual[2] != "") {
+
+                    $pagina_actual = $this->limpiarCadena($vista_actual[2]);
+                    switch ($pagina_actual) {
+                        case 'principal':
+                            $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
+                            break;
+                        case 'aperitivos':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1 AND activo = 1";
+                            break;
+                        case 'primerosPlatos':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3 AND activo = 1";
+                            break;
+                        case 'segundosPlatos':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7 AND activo = 1";
+                            break;
+                        case 'postres':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4 AND activo = 1";
+                            break;
+                        case 'guarniciones':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11 AND activo = 1";
+                            break;
+                        case 'desayunos':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10 AND activo = 1";
+                            break;
+                        case 'complementos':
+                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12 AND activo = 1";
+                            break;
+                        case 'misRecetas':
+                            $id = $_SESSION['id'];
+                            $consulta = "SELECT * FROM recetas WHERE id_usuario=$id";
+                            break;
+                        case 'paraRevisar':
+                            /* consulta las recetas sin activar */
+                            $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
+                            break;
+                        case 'recetasDe':
+                            /* Comprueba si hay algún id de usuario */
+                            if (isset($vista_actual[3]) && $vista_actual[3] != "") {
+                                $consulta = "SELECT * FROM recetas WHERE activo = 1 AND id_usuario = $vista_actual[3]";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo = 33";
+                            }
+                            break;# code...
+                        
+                        default:
+                            $consulta = "SELECT * FROM recetas ORDER BY nombre_receta";
+                            break;
+                    }
+                    
+                }
+                else {
+                    $consulta = "SELECT * FROM recetas WHERE activo = 1 ORDER BY id_receta DESC";
+                }
+    
+                /* Ejecuta la consulta */
+                $todasLasRecetas = $this->ejecutarConsulta($consulta);
+                $todasLasRecetas = $todasLasRecetas->fetchAll();
+            }
+            
+
 
             /* Crea un array para ir guardando los objetos receta */
             $recetas = array();

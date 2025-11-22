@@ -42,7 +42,7 @@
         ?>
 
             <!-- Botón para ver las recetas pendientes de revisión -->
-        <a href=<?php echo APP_URL."recetas/paraRevisar/" ?> class="<?php echo $ocultar ?>">
+        <a href=<?php echo APP_URL."paraRevisar/" ?> class="<?php echo $ocultar ?>">
             <button class="btn btnAlerta">Pendientes de Revisión!!!</button>
         </a>
     </div>

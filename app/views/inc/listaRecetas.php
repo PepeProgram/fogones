@@ -2,25 +2,68 @@
     /* Carga el controlador de recetas */
     use app\controllers\recetaController;
 
-    /* Carga el modelo de recetas */
-    use app\models\recetaModel;
-
-    /* Carga el modelo de alérgenos */
-    use app\models\alergenoModel;
-
     /* Crea una instancia del controlador de recetas para listarlas */
     $buscaRecetas = new recetaController();
 
-    /* Ejecuta la selección para listar las recetas */
-    $recetas = $buscaRecetas->listarRecetasControlador();
+    /* Comprueba si viene de buscar o accede directamente */
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['busquedaRecetas'])) {
+        $esBusqueda = true;
+        $recetas = $buscaRecetas->listarRecetasControlador($esBusqueda);
+        $busqueda = " por ".$_POST['busquedaRecetas']." en esta sección";
+    } else {
+        $esBusqueda = false;
+        $busqueda = "";
+        $recetas = $buscaRecetas->listarRecetasControlador($esBusqueda);
+    }
+
+    /* Obtiene la vista actual para poner el id_tipo en el formulario */
+    $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
+
+    if (isset($vista_actual[2]) && $vista_actual[2] != "") {
+
+        $pagina_actual = $buscaRecetas->limpiarCadena($vista_actual[2]);
+        switch ($pagina_actual) {
+            case 'principal':
+                $idTipo = "";
+                break;
+            case 'aperitivos':
+                $idTipo = 1;
+                break;
+            case 'primerosPlatos':
+                $idTipo = 3;
+                break;
+            case 'segundosPlatos':
+                $idTipo = 7;
+                break;
+            case 'postres':
+                $idTipo = 4;
+                break;
+            case 'guarniciones':
+                $idTipo = 11;
+                break;
+            case 'desayunos':
+                $idTipo = 10;
+            case 'complementos':
+                $idTipo = 12;
+                break;
+            
+            default:
+                $idTipo = "";
+                break;
+        }
+    }
 
 ?>
 
 
-<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total">
+<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total horizontal" method="POST">
     <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
-    <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, 'tarjetaReceta');" placeholder="Buscar en título y descripción ...">
+    <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" placeholder="Buscar en esta sección ...">
+    <button type="submit" class="btnBuscarRecetas"><i class="fa fa-search"></i></button>
+    <input type="hidden" name="modulo_receta" value="buscar">
+    <input type="hidden" name="id_tipo" value="<?php echo $idTipo; ?>">
 </form>
+<p>Se han encontrado <?php echo count($recetas)." recetas".$busqueda; ?></p>
 <section name="Ultimas recetas" id="ultimasAgregadas" class="columns">
     <?php
         /* Establece el directorio de fotos */
@@ -99,5 +142,9 @@
         }
     ?>
 
-
 </section>
+
+<script type="text/javascript">
+    // Reemplaza el historial para que la página actual aparezca como GET
+    window.history.replaceState(null, '', window.location.href);
+</script>

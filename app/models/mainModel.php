@@ -254,4 +254,143 @@ Contiene funciones que vamos a utilizar más de una vez
 
             return $sql;
         }
+
+        /* Modelo para buscar las recetas que contengan un texto */
+        public function buscarRecetasGlobal($texto, $idTipo = null){
+
+            $texto = $this->limpiarCadena($texto);
+            $pdo = $this->conectar();
+            $resultados = [];
+
+            // Subconsulta EXISTS para filtrar por tipo si $idTipo existe
+            $existsClause = "";
+            if ($idTipo !== null) {
+                $existsClause = " AND EXISTS (
+                    SELECT 1 FROM recetas_tiposplato rt
+                    WHERE rt.id_receta = r.id_receta
+                    AND rt.id_tipo = :idTipo
+                )";
+            }
+
+            // Array con las consultas por tabla, ahora con r.activo = 1
+            $queries = [
+
+                // 1. Tabla recetas (texto directo en receta) → FULLTEXT
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND (r.nombre_receta LIKE CONCAT('%', :texto, '%') OR r.descripcion_receta LIKE CONCAT('%', :texto, '%') OR r.elaboracion LIKE CONCAT('%', :texto, '%')OR r.emplatado LIKE CONCAT('%', :texto, '%'))"
+                . $existsClause,  
+
+                // 2. Tipos de plato → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM recetas_tiposplato rt
+                    JOIN tipos_plato tp ON tp.id_tipo = rt.id_tipo
+                    WHERE rt.id_receta = r.id_receta
+                        AND tp.nombre_tipo LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 3. Grupos de plato → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM grupos_plato gp
+                    WHERE gp.id_grupo = r.id_grupo
+                        AND gp.nombre_grupo LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 4. Estilos → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM recetas_estilos re
+                    JOIN estilos_cocina e ON e.id_estilo = re.id_estilo
+                    WHERE re.id_receta = r.id_receta
+                        AND e.nombre_estilo LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 5. Ingredientes → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM recetas_ingredientes ri
+                    JOIN ingredientes i ON i.id_ingrediente = ri.id_ingrediente
+                    WHERE ri.id_receta = r.id_receta
+                        AND i.nombre_ingrediente LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 6. Zonas → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM zonas z
+                    WHERE z.id_zona = r.id_zona
+                        AND z.nombre_zona LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 7. Regiones → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM regiones rg
+                    WHERE rg.id_region = r.id_region
+                        AND rg.nombre_region LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause,
+
+                // 8. Países → LIKE
+                "SELECT r.id_receta
+                FROM recetas r
+                WHERE r.activo = 1
+                AND EXISTS (
+                    SELECT 1
+                    FROM paises p
+                    WHERE p.id_pais = r.id_pais
+                        AND p.esp_pais LIKE CONCAT('%', :texto, '%')
+                )"
+                . $existsClause
+            ];
+
+
+
+            // Ejecutar cada consulta y combinar resultados sin duplicados
+            foreach ($queries as $query) {
+                $stmt = $pdo->prepare($query);
+                $stmt->bindValue(':texto', $texto);
+
+                if ($idTipo !== null) {
+                    $stmt->bindValue(':idTipo', (int)$idTipo, PDO::PARAM_INT);
+                }
+
+                $stmt->execute();
+                $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+                foreach ($ids as $id) {
+                    $resultados[(int)$id] = true; // usar claves para evitar duplicados
+                }
+            }
+
+            return array_keys($resultados); // IDs únicos de recetas
+        }
+
+
     }

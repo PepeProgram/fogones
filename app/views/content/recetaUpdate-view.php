@@ -320,7 +320,7 @@
     <section name="Localización, utensilios e ingredientes" id="localizacionUtensiliosIngredientes" class="localizacionUtensiliosIngredientes col-100 horizontal total top bottom">
 
         <!-- Área geográfica, país, region -->
-        <div id="geografiaEnviarReceta" class="geografiaEnviarReceta vertical col-20 izquierda top">
+        <div id="geografiaEnviarReceta" class="geografiaEnviarReceta vertical total col-20 izquierda derecha top">
 
             <div class="selectEnviarReceta col-100 medio izquierda vertical top">
                 <label for="zonaEnviarReceta" class="labelForm">Zona Geográfica</label>
@@ -349,7 +349,7 @@
         </div>
 
         <!-- Utensilios -->
-        <div id="utensiliosEnviarReceta" class="utensiliosEnviarReceta vertical static col-40 top">
+        <div id="utensiliosEnviarReceta" class="utensiliosEnviarReceta vertical total izquierda derecha col-40 top">
 
             <div class="selectEnviarReceta medio vertical top col-100">
                 <fieldset id="containerListaUtensiliosEnviarReceta" class="containerListaUtensiliosEnviarReceta vertical col-100 static listasEnviarReceta">
@@ -365,12 +365,14 @@
             <div id="agregarUtensiliosEnviarReceta" class="agregarUtensiliosEnviarReceta vertical col-100">
                 <div class="selectEnviarReceta col-100 medio vertical top bottom">
                     <label for="selectUtensiliosEnviarReceta" class="labelForm">Seleccione utensilios</label>
+                    <label for="searchUtensiliosEnviarReceta" class="oculto">Buscar Utensilio</label>
+                    <input type="text" id="searchUtensiliosEnviarReceta" class="col-100 input filtrarSelect" placeholder="Introduzca para buscar..." onkeyup="filtrarSelect(this.value, 'selectUtensiliosEnviarReceta');">
                     <select name="selectUtensiliosEnviarReceta" id="selectUtensiliosEnviarReceta" class="selectUtensiliosEnviarReceta input" size="5">
                         <option value="0" class="optionUtensiliosEnviarReceta oculto" disabled>Añada utensilios a la lista</option>
                     
                     </select>
                 </div>
-                <div class="selectEnviarReceta medio izquierda col-100 horizontal top">
+                <div class="selectEnviarReceta total horizontal top col-100 centrar">
 
                     <!-- Botón para agregar un utensilio a la lista -->
                     <button id="btnSeleccionarUtensiliosEnviarReceta" class="btnSeleccionarUtensiliosEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios');">Añadir a lista</button>
@@ -385,7 +387,7 @@
 
         <!-- Ingredientes -->
 
-        <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta vertical static col-40 top">
+        <div id="ingredientesEnviarReceta" class="ingredientesEnviarReceta total izquierda derecha vertical col-40 top">
             <div class="selectEnviarReceta medio vertical derecha top col-100">
                 <fieldset id="containerListaIngredientesEnviarReceta" class="containerListaIngredientesEnviarReceta vertical col-100 listasEnviarReceta">
                     <legend class="tituloListas">Lista de Ingredientes:</legend>
@@ -402,11 +404,13 @@
             <div id="agregarIngredientesEnviarReceta" class="agregarIngredientesEnviarReceta vertical col-100">
                 <div class="selectEnviarReceta col-100 medio vertical top bottom derecha">
                     <label for="selectIngredientesEnviarReceta" class="labelForm">Seleccione ingredientes*</label>
+                    <label for="searchIngredienesEnviarReceta" class="oculto">Buscar Ingrediente</label>
+                    <input type="text" id="searchIngredientesEnviarReceta" class="col-100 input filtrarSelect" placeholder="Introduzca para buscar..." onkeyup="filtrarSelect(this.value, 'selectIngredientesEnviarReceta');">
                     <select name="selectIngredientesEnviarReceta" id="selectIngredientesEnviarReceta" class="selectIngredientesEnviarReceta input" size="5">
                         <option value="0" class="optionIngredientesEnviarReceta oculto" disabled>Añadir a la lista</option>
                     </select>
                 </div>
-                <div class="selectEnviarReceta medio derecha horizontal top col-100">
+                <div class="selectEnviarReceta total horizontal top col-100 centrar">
 
                     <!-- Botón para agregar un ingrediente a la lista -->
                     <button id="btnSeleccionarIngredientesEnviarReceta" class="btnSeleccionarIngredientesEnviarReceta btn btnListas col-50" onclick="agregarElementoLista(event, 'selectIngredientesEnviarReceta', 'listaIngredientesEnviarReceta', 'arrayIngredientes');">Añadir a lista</button>
@@ -422,12 +426,12 @@
     </section>
 
     <!-- Elaboración y emplatado -->
-    <section name="elaboracion y emplatado" id="elaboracionEmplatadoEnviarReceta" class="elaboracionEmplatadoEnviarReceta total horizontal top">
-        <div class="elaboracionEnviarReceta col-50 medio izquierda vertical">
+    <section name="elaboracion y emplatado" id="elaboracionEmplatadoEnviarReceta" class="elaboracionEmplatadoEnviarReceta col-100 total horizontal top">
+        <div class="elaboracionEnviarReceta col-50 total izquierda  top vertical">
             <label for="elaboracionEnviarReceta" class="labelForm">Elaboración:*</label>
             <textarea name="elaboracionEnviarReceta" id="elaboracionEnviarReceta" rows="12" class="elaboracionEnviarReceta inputText" pattern="[()a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,:;\n\r\/\-_ ]{3, }" title="Explique la elaboración de la receta. Sólo puede contener letras, números, ., ,, :, ;, -,/,_, espacios y retornos de línea. Mínimo 3 caracteres"><?php echo $receta_actualizar->getElaboracion(); ?></textarea>
         </div>
-        <div class="emplatadoEnviarReceta col-50 medio derecha vertical">
+        <div class="emplatadoEnviarReceta col-50 total derecha top vertical">
             <label for="emplatadoEnviarReceta" class="labelForm">Sugerencias de emplatado:</label>
             <textarea name="emplatadoEnviarReceta" id="emplatadoEnviarReceta" rows="12" class="emplatadoEnviarReceta inputText" pattern="[()a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.;:\/\-_ ]{3, }" title="Describa una o más sugerencias de emplatado. Sólo puede contener letras, números, ., ,, :, ;, -,/,_, espacios y retornos de línea."><?php echo $receta_actualizar->getEmplatado(); ?></textarea>
         </div>
