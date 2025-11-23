@@ -116,6 +116,21 @@ use JsonSerializable;
             return $alergenos;
         }
 
+        function checkFavoritos(){
+                if (isset($_SESSION['id'])) {
+                        $id_user = $_SESSION['id'];
+                        $favorito = $this->ejecutarConsulta("SELECT * FROM favoritas WHERE id_receta = '$this->id' AND id_usuario = '$id_user'");
+                        if ($favorito->rowCount() > 0) {
+                                return true;
+                        } else {
+                                return false;
+                        }
+                }
+                else {
+                        return false;
+                }
+        }
+
 
 
 

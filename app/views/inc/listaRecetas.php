@@ -51,19 +51,34 @@
                 $idTipo = "";
                 break;
         }
+    } else {
+        $idTipo = "";
+    }
+
+    /* Comprueba si es un listado general o recetas de un autor para poner un formulario u otro */
+    if (isset($pagina_actual) && in_array($pagina_actual, ["recetasDe", "misRecetas", "recetasFavoritas"])) {
+        
+        echo '<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total">
+                <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
+                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, `tarjetaReceta`);" placeholder="Buscar en título y descripción ...">
+             </form>';
+    } else{
+
+        echo '<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total horizontal static" method="POST">
+                <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
+                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input inputBuscarRecetas" placeholder="Buscar en esta sección ...">
+                <button type="submit" class="btnBuscarRecetas"><i class="fa fa-search"></i></button>
+                <input type="hidden" name="modulo_receta" value="buscar">
+                <input type="hidden" name="id_tipo" value="'.$idTipo.'">
+             </form>';
     }
 
 ?>
-
-
-<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total horizontal" method="POST">
-    <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
-    <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" placeholder="Buscar en esta sección ...">
-    <button type="submit" class="btnBuscarRecetas"><i class="fa fa-search"></i></button>
-    <input type="hidden" name="modulo_receta" value="buscar">
-    <input type="hidden" name="id_tipo" value="<?php echo $idTipo; ?>">
-</form>
-<p>Se han encontrado <?php echo count($recetas)." recetas".$busqueda; ?></p>
+<div class="total top bottom">
+    <div class="col-100 resultadoBusqueda">
+        <p class=""><?php echo count($recetas)." recetas encontradas".$busqueda; ?></p>
+    </div>
+</div>
 <section name="Ultimas recetas" id="ultimasAgregadas" class="columns">
     <?php
         /* Establece el directorio de fotos */
@@ -90,8 +105,19 @@
             /* Recupera los alérgenos */
             $alergenos = $receta->getAlergenos();
 
+            /* Comprueba si es favorita */
+            $favorita = $receta->checkFavoritos();
+            if ($favorita) {
+                $heart = '<i class="fa-solid fa-heart userDel"></i>';
+                $legend = "Quitar ".$receta->getNombre()." de mis recetas favoritas";
+            } else {
+                $heart = '<i class="fa-regular fa-heart"></i>';
+                $legend = "Añadir ".$receta->getNombre()." a mis recetas favoritas";
+            }
+            
+
     ?>
-            <div class="column tarjetaReceta col-100 vertical top">
+            <div class="column tarjetaReceta col-100 centrar vertical top">
                 
                 <div class="fotoTarjetaReceta col-100 static">
                     <img src="<?php echo $img_dir.$foto; ?>" alt="Foto de <?php echo $receta->getNombre(); ?>" title="Foto de <?php echo $receta->getNombre(); ?>">
@@ -99,6 +125,18 @@
                 
                 <div class="col-100 static total vertical">
                     <h3>
+                        <form class="FormularioAjax formFavoritos" action="<?php echo APP_URL ?>app/ajax/recetaAjax.php" method="POST" autocomplete="off" name="<?php echo $legend; ?>">
+                            <input type="hidden" name="modulo_receta" value="cambiarFavorito">
+                            <input type="hidden" name="id_usuario" value="<?php echo $id_usuario_ver; ?>">
+                            <input type="hidden" name="id_receta" value="<?php echo $receta->getId(); ?>">
+                            <input type="hidden" name="nombre_receta" value="<?php echo $receta->getNombre(); ?>">
+                            
+                            
+                            <button type="submit" class="btnIcon" aria-label="<?php echo $legend; ?>" title="<?php echo $legend; ?>">
+                                <?php echo $heart; ?>
+                            </button> 
+                        </form>
+
                         <a href="<?php echo APP_URL ?>vistaReceta/<?php echo $receta->getId(); ?>">
                             <?php echo $receta->getNombre(); ?>
                         </a>
@@ -119,7 +157,7 @@
                             /* Coloca los iconos de los alérgenos */
                             foreach ($alergenos as $alergeno) {
                                 echo    '<div class="foto pointer">
-                                            <img src="'.$icon_dir.$alergeno->getFoto_alergeno().'" alt="'.$alergeno->getNombre_alergeno().'" title="Alérgeno: '.$alergeno->getNombre_alergeno().'"></img>
+                                            <img class="alergenoTarjeta" src="'.$icon_dir.$alergeno->getFoto_alergeno().'" alt="'.$alergeno->getNombre_alergeno().'" title="Alérgeno: '.$alergeno->getNombre_alergeno().'"></img>
                                         </div>';
                             }
                         ?>

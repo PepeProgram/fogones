@@ -9,7 +9,10 @@
     /* Comprueba si hay sesión iniciada */
     if ((isset($_SESSION['id']) && isset($_SESSION['nombre']) && isset($_SESSION['login']))) {
         $usuario = $_SESSION['id'];
-    } 
+    }
+    else{
+        $usuario = "";
+    }
 
     /* Obtiene el id de la receta de la url del index */
     $id_receta = $insLogin->limpiarCadena($url[1]);
@@ -58,6 +61,15 @@
             $nombreCreador = "Autor desconocido";
         }
         
+        /* Comprueba si es favorita */
+        $favorita = $receta_ver->checkFavoritos();
+        if ($favorita) {
+            $heart = '<i class="fa-solid fa-heart userDel"></i>';
+            $legend = "Quitar ".$receta_ver->getNombre()." de mis recetas favoritas";
+        } else {
+            $heart = '<i class="fa-regular fa-heart"></i>';
+            $legend = "Añadir ".$receta_ver->getNombre()." a mis recetas favoritas";
+        }
 
     }
 
@@ -119,14 +131,32 @@
     
         <!-- Foto de la receta -->
         <div id="fotoCabeceraReceta" class="fotoTarjetaReceta col-50">
-            <img id="fotoReceta" src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto_receta ?>" alt="<?php echo $alt_foto.$receta_ver->getFoto(); ?>" title="<?php echo $alt_foto.$receta_ver->getFoto(); ?>">
+            <img id="fotoReceta" src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto_receta ?>" alt="<?php echo $alt_foto.$receta_ver->getNombre(); ?>" title="<?php echo $alt_foto.$receta_ver->getNombre(); ?>">
         </div>
     
         <!-- Resto de datos principales -->
         <div id="datosCabeceraReceta" class="datosCabeceraReceta col-50 vertical total">
     
-            <!-- Nombre -->
-            <h2><?php echo $receta_ver->getNombre(); ?></h2>
+            <!-- Título de la receta -->
+            <div class="horizontal static">
+                <h2 class="col-100 static">
+                    <!-- Añadir a Favoritas -->
+                    <form class="FormularioAjax formFavoritos" action="<?php echo APP_URL ?>app/ajax/recetaAjax.php" method="POST" autocomplete="off" name="<?php echo $legend; ?>">
+                        <input type="hidden" name="modulo_receta" value="cambiarFavorito">
+                        <input type="hidden" name="id_usuario" value="<?php echo $usuario; ?>">
+                        <input type="hidden" name="id_receta" value="<?php echo $receta_ver->getId(); ?>">
+                        <input type="hidden" name="nombre_receta" value="<?php echo $receta_ver->getNombre(); ?>">
+                        <button type="submit" class="btnIcon" aria-label="<?php echo $legend; ?>" title="<?php echo $legend; ?>">
+                            <?php echo $heart; ?>
+                        </button> 
+                    </form>
+                    
+                    <!-- Nombre -->
+                    <?php echo $receta_ver->getNombre(); ?>
+                </h2>
+                <a href="" class="iconVerReceta" title="Ficha de coste"><i class="fa-solid fa-file-invoice-dollar"></i></a>
+                <a href="" class="iconVerReceta" title="Descargar ficha técnica en pdf"><i class="fa-solid fa-file-pdf"></i></a>
+             </div>
     
             <!-- Fecha de creación -->
             <p class="notas"><?php echo "Creado el ".strftime('%a. %d de %b. de %Y', strtotime($receta_ver->getCreado())) ?></p>

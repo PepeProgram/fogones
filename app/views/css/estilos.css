@@ -78,11 +78,11 @@ body{
 .columns{
     padding: 1rem;
     width: 100%;
-    display: grid;
-    grid-gap: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 .column{
     font-size: 1rem;
+    margin-bottom: 1.25rem;
 }
 .notas{
     font-size: 0.7rem;
@@ -120,12 +120,16 @@ body{
 
 @media screen and (min-width: 768px) {
     .columns{
+        display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-gap: 1.25rem;
     }
 }
 @media screen and (min-width: 1200px) {
     .columns{
+        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1.25rem;
     }
 }
 @media screen and (min-width: 1800px) {
@@ -1081,10 +1085,21 @@ li > span{
 }
 
 /* TARJETAS DE LAS RECETAS */
+.resultadoBusqueda{
+    padding: 0.5rem;
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+    font-size: small;
+    font-style: italic;
+    margin: auto;
+}
 .tarjetaReceta{
     background-color: var(--fondoBlanco);
     box-shadow: 4px 4px 4px black;
     height: 100%;
+}
+.formFavoritos{
+    display: inline;
 }
 .tarjetaReceta a,
 .cabeceraReceta a{
@@ -1130,18 +1145,24 @@ a{
     height: 2rem;
     border-radius: 1rem;
 }
+.alergenoTarjeta{
+    border-radius: 0px !important;
+    width: unset !important;
+}
 .iconoDificultad i{
     color: lightskyblue;
 }
 .tiempo{
-    width: 6rem;
+    min-width: 5rem;
 }
 .iconoEtiqueta{
     height: 2rem;
     margin-right: 0.5rem;
     width: 100%;
 }
-
+.inputBuscarRecetas{
+   border-radius: 0.5rem 0 0 0.5rem;
+}
 .btnBuscarRecetas{
     padding: 0.5rem;
     color: var(--oscuro);
@@ -1150,8 +1171,6 @@ a{
     font-size: 1rem;
     border-radius: 0 0.5rem 0.5rem 0;
     cursor: pointer;
-    position: relative;
-    left: -2rem;
 }
 .btnBuscarRecetas:hover{
     background-color: var(--oscuro);
@@ -1214,6 +1233,17 @@ p.btnOpcionesRecetas{
 }
 .datosCabeceraReceta h2{
     font-size: unset;
+}
+.iconVerReceta{
+    font-size: larger;
+    padding: 0.5rem;
+    height: fit-content;
+    border-radius: 0.5rem;
+    color: rgb(20, 111, 248) !important;
+}
+.iconVerReceta:hover{
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
 }
 .etiquetaCaracteristicasReceta{
     background-color: var(--fondoBlanco);
@@ -1318,7 +1348,7 @@ p.btnOpcionesRecetas{
 .col-10 {
     width: 10%;
 }
-.col-20, .col-25, .col-33, .col-40, .col-50, .col-60, .col-66, .col-75, .col-80{
+.col-20, .col-25, .col-33, .col-40, .col-50, .col-60, .col-66, .col-75, .col-80, .col-100{
     width: 100%;
 }
 .col-10.static{

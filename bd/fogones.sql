@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2025 a las 23:03:22
+-- Tiempo de generación: 23-11-2025 a las 23:21:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -194,6 +194,17 @@ CREATE TABLE `favoritas` (
 --
 
 TRUNCATE TABLE `favoritas`;
+--
+-- Volcado de datos para la tabla `favoritas`
+--
+
+INSERT INTO `favoritas` (`id_favoritas`, `id_usuario`, `id_receta`) VALUES
+(10, 1, 74),
+(11, 1, 79),
+(6, 1, 81),
+(9, 14, 74),
+(8, 14, 76);
+
 -- --------------------------------------------------------
 
 --
@@ -391,7 +402,9 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (153, 'Leche de almendra', 1),
 (154, 'Cardamomo', 1),
 (155, 'Agar-agar', 1),
-(156, 'Pan brioche', 1);
+(156, 'Pan brioche', 1),
+(157, 'Anchoa', 1),
+(158, 'Salmón ahumado', 1);
 
 -- --------------------------------------------------------
 
@@ -471,7 +484,9 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 (73, 149, 12),
 (76, 152, 2),
 (77, 153, 8),
-(78, 156, 3);
+(78, 156, 3),
+(80, 157, 5),
+(79, 158, 5);
 
 -- --------------------------------------------------------
 
@@ -839,7 +854,11 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (78, 'Risotto de restaurante Aquelarre', 'Plato de Pedro Subijana, que se caracteriza por su sabor intenso y su presentación elegante.', 2, 15, 4, '00:45:00', NULL, 14, 64, 1, 2, 'Picamos las verduras, dejando algunas puntas de espárragos para adornar.\r\nRehogamos el arroz en un rondón con aceite de oliva\r\nAgregamos la verdura picada y mezclamos hasta que el arroz esté un poco dorado.\r\nMojamos con el vino y el jerez, dejamos que evapore y agregamos parte del caldo de verduras, caliente.\r\nRemovemos el arroz con una espátula para sacar el almidón, y vamos echando el caldo según se vaya absorbiendo.\r\nCocemos entre 15 y 20 minutos. Cuando esté cocido (entre 15-16 minutos) agregamos el mascarpone, el parmesano y la mantequilla. Terminamos mantecando con una espátula.', 'Servimos de inmediato, adornando con los espárragos reservados y damos un toque de pimienta negra recién moldida , acentúa el sabor del risotto.', 'Risotto_202511220825446178.jpg', 1, '2025-11-22 19:25:44', '2025-11-22 19:25:44', 1),
 (79, 'Piroliños', 'Plato fácil de preparar ideal para un cumpleaños, un picnic o una comida informal', 2, 1, 4, '00:45:00', NULL, 0, 0, 1, 1, 'Filetear las pechugas de pollo en dos filetes al menos. salpimentar.\r\nDisponer  una loncha de jamón cocido sobre la superficie de trabaj y colocar encima el filete de pollo a lo largo, de manera que el jamón recubra bien el pollo.\r\nColocar encima del jamón el queso y enrollar sobre si mismo todo el conjunto. Sujetar con un palillo.\r\nPreparar el aceite para freir en una sartén o sauté a fuego moderado.\r\nPasar los rollitos por pan rallado y freir. Retirar a papel absorbene.', 'En un plato troceado en rodajas y adornado con hierbas frescas y unos tomatitos cherry  cortados a cuartos.', 'Pirolios_202511220842383864.jpg', 1, '2025-11-22 19:42:38', '2025-11-22 19:42:38', 1),
 (80, 'Panna Cotta  vegana de lima y cardamomo', 'Versión sin lácteos ni gelatinas, una variante fácil y muy válida de este típico postre italiano.', 13, 6, 8, '00:20:00', NULL, 0, 122, 1, 1, 'Mezclar todos los ingredientes en un cazo. leche de almendra, cardamomo verde en polvo, azúcar, y agar.\r\nAñadir sobre esta mezcla lima rallada.\r\nHervir todo el preparado 7 minutos. Colar.\r\nDisponer  en los recipientes de presentación.\r\nDejar enfriar', 'Desmoldar. Presentar con lima rallada al momento y acompañada de crumble vegano (elaborado con  margarina vegetal) y algún fruto rojo o almendra granillo tostada.', 'Panna_20251122091920775.jpg', 1, '2025-11-22 20:19:20', '2025-11-22 20:19:20', 1),
-(81, 'Torrija de brioche', 'Postre tradicional español, que se caracteriza por su textura suave y el crujiente del caramelizado', 13, 6, 4, '00:30:00', NULL, 0, 64, 1, 2, 'Aromas (canela, piel de limón y/o naranja)\r\n\r\nEn un cazo infusionar la leche entera, la nata líquida con el azúcar y los aromas elegidos. Dejar enfriar y colar.\r\n\r\nRemojar en esta mezcla las 4 rebanadas de brioche. Girar para mojar bien el pan por ambos lados. Hacer esto en una fuente amplia, para poder girar las rebanadas sin que se toquen. Dejar en la leche 10 minutos por cada lado. Mucho cuidado al girar porque se vuelven quebradizas. \r\nCalentar una sartén, poner un trozo de papel de horno del tamaño de la torrija, fundir en el una pizca de mantequilla y colocar la torrija escurrida. Dejar que se dore bien por ese lado y girar, con ayuda de una espátula y colocando otro papel de horno en la parte superior.\r\nDejamos que caramelice bien por ambos lados. Servir de inmediato.', 'Acompañada de crema pastelera de naranja o mandarina, por encima de la torrija  quemada-caramelizada.\r\n\r\nEn sopa ligera de vainilla y carmelizada la torriza.', 'Torrija_202511220936102951.png', 1, '2025-11-22 20:36:10', '2025-11-22 20:36:10', 1);
+(81, 'Torrija de brioche', 'Postre tradicional español, que se caracteriza por su textura suave y el crujiente del caramelizado', 13, 6, 4, '00:30:00', NULL, 0, 64, 1, 2, 'Aromas (canela, piel de limón y/o naranja)\r\n\r\nEn un cazo infusionar la leche entera, la nata líquida con el azúcar y los aromas elegidos. Dejar enfriar y colar.\r\n\r\nRemojar en esta mezcla las 4 rebanadas de brioche. Girar para mojar bien el pan por ambos lados. Hacer esto en una fuente amplia, para poder girar las rebanadas sin que se toquen. Dejar en la leche 10 minutos por cada lado. Mucho cuidado al girar porque se vuelven quebradizas. \r\nCalentar una sartén, poner un trozo de papel de horno del tamaño de la torrija, fundir en el una pizca de mantequilla y colocar la torrija escurrida. Dejar que se dore bien por ese lado y girar, con ayuda de una espátula y colocando otro papel de horno en la parte superior.\r\nDejamos que caramelice bien por ambos lados. Servir de inmediato.', 'Acompañada de crema pastelera de naranja o mandarina, por encima de la torrija  quemada-caramelizada.\r\n\r\nEn sopa ligera de vainilla y carmelizada la torriza.', 'Torrija_202511220936102951.png', 1, '2025-11-22 20:36:10', '2025-11-22 20:36:10', 1),
+(82, 'Mantequilla de ajo', 'Mantequilla saborizada con ajo, que tanto podemos utilizar como acompañamiento. o bien añadir en un plato como guarnición potenciando el sabor de un asado.', 2, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla.\r\n\r\nEn mortero majar el ajo, perejil y pimienta, una vez machacados mezclar con la mantequilla.\r\n\r\nPoner en modes pequeñitos como de bombones o hielo para bolitas, o hacer un cilindro con toda la mantequilla que filmaremos y guardamos en frio hasta que endurezca.', 'En un plato aparte, junto con tosta de pan, o picos, también puede acompañar una tabla de quesos y embutidos.', 'Mantequilla_202511230958049188.jpg', 1, '2025-11-23 20:58:04', '2025-11-23 20:58:04', 0),
+(83, 'Mantequilla de anchoas', 'Mantequilla saborizada con anchoas idela como acompañamiento, canapés o la podemos añadir como guarición en pescados a la parrilla.', 14, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla.\r\nTrituramos la mantequilla junto a  los filetes de anchoa bien escurrido y la pimienta, podemos colarlo si es necesario.\r\n\r\nLa guardamos en moldes pequeños para hacer bolitas o filmamos en cilindro,  en frio, si queremos tomarla mas compacta', 'En platito hondo para poder untarla en tostas o tomarla con picos de pan. O como una quenelle  en el mismo plato que un pescado a la parrilla.', 'Mantequilla_202511231009428921.jpg', 1, '2025-11-23 21:09:42', '2025-11-23 21:09:42', 0),
+(84, 'Mantequilla maitre de hotel', 'Mantequilla compuesta muy versátil por su composición que tanto nos sirve de acompañamiento al inicio de una comida  como de guarnición para cualquier plato, tanto de pescado, marisco, carne, arroz, etc.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla\r\nMezclar la mantequilla, el perejil picado, el zumo de limón, la pimienta y la sal.\r\n\r\nDisponer en molde como para hacer bolitas o filmar con forma de cilindro, y guardar en frio.', 'En platitos para untar tostas, canapés, etc.. O en el mismo plato principal como guarnición en caliente.', 'Mantequilla_202511231023251818.jpg', 1, '2025-11-23 21:23:25', '2025-11-23 21:23:25', 0),
+(85, 'Mantequilla de salmón', 'Una opción elegante y deliciosa de sabor sofisticado como complemento para una ocasión especial.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla y mezclamos con  el salmón ahumado triturado.\r\n\r\nLa cantidad de salmón es orientativa.', 'En canapé, como complemento al empezar un cena, también queda muy bien en una tabla de quesos y embutidos o en una ensalada de aguacates y cítricos.', 'Mantequilla_202511231035482410.jpg', 1, '2025-11-23 21:35:48', '2025-11-23 21:35:48', 0);
 
 -- --------------------------------------------------------
 
@@ -936,7 +955,11 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (166, 79, 16),
 (167, 79, 1),
 (168, 80, 9),
-(169, 81, 14);
+(169, 81, 14),
+(170, 82, 14),
+(171, 83, 14),
+(172, 84, 14),
+(173, 85, 14);
 
 -- --------------------------------------------------------
 
@@ -1269,7 +1292,21 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (602, 81, 7, 250.00, 4),
 (603, 81, 47, 125.00, 4),
 (604, 81, 9, 50.00, 2),
-(605, 81, 79, 1.00, 6);
+(605, 81, 79, 1.00, 6),
+(606, 82, 8, 100.00, 2),
+(607, 82, 87, 3.00, 9),
+(608, 82, 72, 10.00, 2),
+(609, 82, 51, 1.00, 6),
+(610, 83, 8, 100.00, 2),
+(611, 83, 157, 35.00, 2),
+(612, 83, 51, 1.00, 6),
+(613, 84, 8, 100.00, 2),
+(614, 84, 72, 10.00, 2),
+(615, 84, 57, 40.00, 4),
+(616, 84, 51, 1.00, 6),
+(617, 84, 28, 1.00, 6),
+(618, 85, 8, 100.00, 2),
+(619, 85, 158, 50.00, 2);
 
 -- --------------------------------------------------------
 
@@ -1404,7 +1441,15 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (147, 78, 3),
 (148, 79, 7),
 (149, 80, 4),
-(150, 81, 4);
+(150, 81, 4),
+(152, 82, 11),
+(151, 82, 12),
+(154, 83, 11),
+(153, 83, 12),
+(156, 84, 11),
+(155, 84, 12),
+(158, 85, 11),
+(157, 85, 12);
 
 -- --------------------------------------------------------
 
@@ -1525,7 +1570,17 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (237, 79, 166),
 (238, 80, 181),
 (239, 81, 166),
-(240, 81, 199);
+(240, 81, 199),
+(243, 82, 183),
+(241, 82, 191),
+(242, 82, 195),
+(244, 83, 185),
+(246, 83, 191),
+(245, 83, 195),
+(247, 84, 185),
+(249, 84, 191),
+(248, 84, 195),
+(250, 85, 185);
 
 -- --------------------------------------------------------
 
@@ -2146,7 +2201,7 @@ ALTER TABLE `estilos_cocina`
 -- AUTO_INCREMENT de la tabla `favoritas`
 --
 ALTER TABLE `favoritas`
-  MODIFY `id_favoritas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_favoritas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos_plato`
@@ -2158,13 +2213,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -2182,7 +2237,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -2194,13 +2249,13 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=606;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=620;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
@@ -2212,13 +2267,13 @@ ALTER TABLE `recetas_tecnicas`
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`

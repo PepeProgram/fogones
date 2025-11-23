@@ -1361,6 +1361,15 @@
                                 $consulta = "SELECT * FROM recetas WHERE activo = 33";
                             }
                             break;# code...
+                        case 'recetasFavoritas':
+                            /* Comprueba si hay sesión iniciada */
+                            if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
+                                $id = $_SESSION['id'];
+                                $consulta = "SELECT * FROM recetas INNER JOIN  favoritas ON recetas.id_receta = favoritas.id_receta WHERE favoritas.id_usuario = $id";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo = 33";
+                            }
+                            break;# code...
                         
                         default:
                             $consulta = "SELECT * FROM recetas ORDER BY nombre_receta";
@@ -2700,20 +2709,7 @@
             /* Devuelve la ventana de información */
             return json_encode($alerta);
 
-
-
-
-
-
-
-            /* Comprobar que el controlador va funcionando */
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Funciona",
-                "texto"=>"Vas a actualizar la receta"
-            ];
-            return json_encode($alerta);
-            exit();
+        /* Fin actualizarRecetaControlador */
         }
 
         /* APROBAR UNA RECETA */
@@ -2834,5 +2830,119 @@
             return json_encode($alerta);
 
         /* Fin desactivarRecetaControlador */
+        }
+
+        /* AÑADIR UNA RECETA A FAVORITOS */
+        public function cambiarFavoritoControlador(){
+
+            /* Verifica que el usuario ha iniciado sesión */
+            if (!isset($_SESSION['id'])) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR",
+                    "texto"=>"Regístrese o inicie sesión para añadir recetas a favoritos",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            } else {
+
+                /* Comprobar que el usuario es quien dice ser */
+                $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
+
+                if ($check_user->rowCount()<=0) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"Regístrese o inicie sesión con su NOMBRE DE USUARIO y CONTRASEÑA para añadir recetas a favoritos",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                }
+            }
+
+            /* Recupera los hidden del formulario limpiando las cadenas */
+            $idUsuario = $this->limpiarCadena($_POST['id_usuario']);
+            $idReceta = $this->limpiarCadena($_POST['id_receta']);
+            $nombreReceta = $this->limpiarCadena($_POST['nombre_receta']);
+
+
+            $estado = $this->ejecutarConsulta("SELECT * FROM favoritas WHERE id_receta = '$idReceta' AND id_usuario = '$idUsuario'");
+
+            if (!$estado->rowCount() == 1) {
+                /* Crea el array para guardar los datos y añadir la receta a favoritos */
+                $favorita = [
+                    [
+                        "campo_nombre"=>"id_usuario",
+                        "campo_marcador"=>":Usuario",
+                        "campo_valor"=>$idUsuario
+                    ],
+                    [
+                        "campo_nombre"=>"id_receta",
+                        "campo_marcador"=>":Receta",
+                        "campo_valor"=>$idReceta
+                    ]
+                ];
+
+                /* Añade la receta a favoritos */
+                $agregarFavoritos = $this->guardarDatos("favoritas", $favorita);
+
+                /* Comprueba que se ha guardado correctamente */
+                if ($agregarFavoritos->rowCount()==1) {
+                    $alerta = [
+                        "tipo"=>"recargar",
+                        "titulo"=>"Receta guardada en favoritas",
+                        "texto"=>"La receta ".$nombreReceta." ha sido guardada en favoritas",
+                        "icono"=>"success"
+                    ];
+                } else {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"La receta ".$nombreReceta." no ha podido ser eliminada de favoritas. Inténtelo más tarde",
+                        "icono"=>"error"
+                    ];
+                }
+                return json_encode($alerta);
+                
+            } else {
+                /* Elimina la receta de favoritos */
+                $idFavoritos = $estado->fetch()['id_favoritas'];
+                $eliminarFavoritos = $this->eliminarRegistro("favoritas", "id_favoritas", $idFavoritos);
+
+                /* Comprueba que se ha eliminado correctamente */
+                /* Comprueba que se ha guardado correctamente */
+                if ($eliminarFavoritos->rowCount()==1) {
+                    $alerta = [
+                        "tipo"=>"recargar",
+                        "titulo"=>"Receta eliminada de favoritas",
+                        "texto"=>"La receta ".$nombreReceta." ha sido eliminada de favoritas",
+                        "icono"=>"success"
+                    ];
+                } else {
+                    $alerta = [
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"La receta ".$nombreReceta." no ha podido ser eliminada de favoritas. Inténtelo más tarde",
+                        "icono"=>"error"
+                    ];
+                }
+                return json_encode($alerta);
+            }
+            
+
+
+
+            /* Comprobar que el controlador va funcionando */
+            $alerta=[
+                "tipo"=>"simple",
+                "titulo"=>"Funciona",
+                "texto"=>"Vas a añadir la receta a favoritos. IdUsuario: ".$idUsuario." IdReceta: ".$idReceta." Nombre: ".$nombreReceta." Estado: "
+            ];
+            return json_encode($alerta);
+            exit();
+
+        /* Fin agregarFavoritosControlador */
         }
     }

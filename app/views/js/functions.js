@@ -918,11 +918,11 @@ function calcularIngredientes(numeroPersonasNuevo){
             let cantidadOriginal = parseFloat(cantidad.dataset.original);
     
             /* Calcula la cantidad nueva */
-            let cantidadNew = (cantidadOriginal/personasOriginal)*numeroPersonasFloat;
+            let cantidadNew = parseFloat(((cantidadOriginal/personasOriginal)*numeroPersonasFloat).toFixed(2));
     
             /* Redondea las cantidades dependiendo de las unidades */
             console.log('La unidad es: '+cantidad.dataset.unidad);
-            if (["7", "8", "9"].includes(cantidad.dataset.unidad)) {
+            if (["2", "4", "7", "8", "9", "10"].includes(cantidad.dataset.unidad)) {
                 console.log('La unidad dentro del if es: '+cantidad.dataset.unidad)
                 cantidadNew = Math.round(cantidadNew * 4) / 4;
             }

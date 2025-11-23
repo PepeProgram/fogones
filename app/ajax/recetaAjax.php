@@ -40,11 +40,8 @@
                 echo $insReceta->desactivarRecetaControlador();
                 break;
             
-            case 'buscar':
-
-                $respuesta = $insReceta->listarRecetasControlador(true);
-                echo json_encode($respuesta);
-                return $respuesta;
+            case 'cambiarFavorito':
+                echo $insReceta->cambiarFavoritoControlador();                
                 break;
             
             default:
