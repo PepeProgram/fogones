@@ -431,6 +431,10 @@ body{
     margin-top: 0px;
 }
 
+.logoSuperior{
+    width: 100%;
+}
+
 /* Foto del Formulario de Usuario */
 
 @media  screen and (min-width: 576px) {
@@ -1240,6 +1244,7 @@ p.btnOpcionesRecetas{
     height: fit-content;
     border-radius: 0.5rem;
     color: rgb(20, 111, 248) !important;
+    margin: 0px;
 }
 .iconVerReceta:hover{
     background-color: var(--oscuro);

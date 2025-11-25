@@ -19,6 +19,9 @@
             /* Obtiene el id del elemento a buscar */
             $idElemento = $this->limpiarCadena($_POST['id']);
 
+            /* Obtiene si tiene que listar los inactivos o no */
+            $inactivos = $this->limpiarCadena($_POST['inactivos']);
+
             /* Construye el nombre del campo nombre según el nombre de la tabla */
             switch ($tabla) {
                 case 'zonas':
@@ -71,7 +74,14 @@
             if ($idElemento == "") {
                 $busqueda = "SELECT * FROM $tabla WHERE $id != 0 ORDER BY $nombre";
             } elseif ($idElemento == 'activable') {
-                $busqueda = "SELECT * FROM $tabla WHERE activo != 0 AND $id != 0 ORDER BY $nombre";
+                if ($inactivos) {
+                    # code...
+                    $busqueda = "SELECT * FROM $tabla WHERE $id != 0 ORDER BY $nombre";
+                } else {
+                    # code...
+                    $busqueda = "SELECT * FROM $tabla WHERE activo != 0 AND $id != 0 ORDER BY $nombre";
+                }
+                
             } else {
                 $busqueda = "SELECT * FROM $tabla WHERE $campo=$idElemento AND $id != 0 ORDER BY $nombre";
             }

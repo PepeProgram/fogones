@@ -2553,20 +2553,25 @@
 
                 }
 
-                /* Borra los utensilios que hay guardados */
-                $borrar_utensilios = $this->eliminarRegistro('recetas_utensilios', 'id_receta', $id);
+                /* Comprueba si había algún utensilio guardado para borrarlo */
+                if ($this->seleccionarDatos('Unico', 'recetas_utensilios', 'id_receta', $id)->rowCount() > 0){
 
-                /* Comprueba que se hayan borrado los estilos */
-                if (!$borrar_utensilios->rowCount() == 1) {
-                    /* Muestra la ventana de error */
-                    $alerta = [
-                        "tipo"=>"simple",
-                        "titulo"=>"Error inesperado",
-                        "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
-                        "icono"=>"error"
-                    ];
-                    return json_encode($alerta);
-                    exit();
+                    /* Borra los utensilios que hay guardados */
+                    $borrar_utensilios = $this->eliminarRegistro('recetas_utensilios', 'id_receta', $id);
+    
+                    /* Comprueba que se hayan borrado los estilos */
+                    if (!$borrar_utensilios->rowCount() == 1) {
+                        /* Muestra la ventana de error */
+                        $alerta = [
+                            "tipo"=>"simple",
+                            "titulo"=>"Error inesperado",
+                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                            "icono"=>"error"
+                        ];
+                        return json_encode($alerta);
+                        exit();
+                    }
+    
                 }
 
                 /* Recorre el array de utensilios */
@@ -2604,20 +2609,24 @@
 
                 }
 
-                /* Borra los ingredientes que hay guardados */
-                $borrar_ingredientes = $this->eliminarRegistro('recetas_ingredientes', 'id_receta', $id);
-
-                /* Comprueba que se hayan borrado los ingredientes */
-                if (!$borrar_ingredientes->rowCount() == 1) {
-                    /* Muestra la ventana de error */
-                        $alerta = [
-                            "tipo"=>"simple",
-                            "titulo"=>"Error inesperado",
-                            "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
-                            "icono"=>"error"
-                        ];
-                        return json_encode($alerta);
-                        exit();
+                /* Comprueba si había ingredientes guardados para borrarlos */
+                if ($this->seleccionarDatos('Unico', 'recetas_ingredientes', 'id_receta', $id)->rowCount() > 0) {
+                    
+                    /* Borra los ingredientes que hay guardados */
+                    $borrar_ingredientes = $this->eliminarRegistro('recetas_ingredientes', 'id_receta', $id);
+    
+                    /* Comprueba que se hayan borrado los ingredientes */
+                    if (!$borrar_ingredientes->rowCount() == 1) {
+                        /* Muestra la ventana de error */
+                            $alerta = [
+                                "tipo"=>"simple",
+                                "titulo"=>"Error inesperado",
+                                "texto"=>"No hemos podido guardar algún dato de la receta. Por favor, póngase en contacto con un administrador.",
+                                "icono"=>"error"
+                            ];
+                            return json_encode($alerta);
+                            exit();
+                    }
                 }
 
                 /* Recorre el array de ingredientes */

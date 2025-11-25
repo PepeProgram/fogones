@@ -869,10 +869,11 @@ function rellenarEtiquetasReceta(idDiv, idsEtiquetas, tabla) {
     let divEtiquetas = document.querySelector('#'+idDiv);
 
     /* Convierte a array lo que viene en idsEtiquetas si no lo es */
-    if (!Array.isArray(idsEtiquetas)) {
-        idsEtiquetas = idsEtiquetas.toString().split(',');
+    if (typeof idsEtiquetas === 'number') {
+        idsEtiquetas = [{0: idsEtiquetas}];
+        
     }
-
+    
     if (idsEtiquetas != "") {
         idsEtiquetas.forEach(id => {
             obtenerEtiquetas(id[0], tabla).then(etiqueta => {
@@ -935,3 +936,72 @@ function calcularIngredientes(numeroPersonasNuevo){
 
 
 }
+
+/* Genera el pdf de la receta */
+async function generarPDFReceta(){
+
+    const doc = new jsPDF();
+    console.log(APP_URL+"app/views/img/BannerAlargado.jpg");
+
+    const base64 = await cargarImagenBase64("http://192.168.1.53/fogones/app/views/img/BannerAlargado.jpg");
+
+    doc.addImage(base64, "JPEG", 10, 5, 190, 28.75);
+
+    /* doc.setTextColor(126, 90, 16);
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text("Fogones Conectados", 10,10);
+    
+    doc.rect(10, 15, 190, 10);
+    doc.setFontSize(16);
+    doc.text("Ficha Técnica", 105, 22.5, null, null, "center"); */
+
+
+    /* Nombre de la receta */
+    const nombre = document.querySelector('#datosCabeceraReceta h2').innerText;
+    
+    doc.rect(10, 25, 190, 10);
+    doc.setFontSize(14);
+    doc.text("Nombre: "+nombre, 12, 33);
+
+    doc.setFontSize(12);
+
+    /* doc.rect(10, 35, 130, 8);
+    doc.setFont("helvetica", "normal");
+    doc.text("Familia/Grupo: Sobremesas a base de Frutas", 12, 41); */
+    
+    /* Número de personas */
+    const nPersonas = document.querySelector('#nPersonas').value;
+    doc.rect(140, 35, 60, 8);
+    doc.text("Núm. Raciones: "+nPersonas+" Pax", 142, 41);
+
+    /* Elaboración */
+    const parrafos = document.querySelectorAll('#elaboracionReceta p');
+    let textoElaboracion = '';
+    parrafos.forEach(p => {
+        const limpio = p.textContent.trim();
+        if(limpio != ""){
+            textoElaboracion += "    " + limpio + '\n';
+        }
+    });
+
+    doc.setFontSize(10);
+    const textoAjustado = doc.splitTextToSize(textoElaboracion, 180);
+
+    doc.rect(10, 43, 190, 60);
+    doc.text(textoAjustado, 12, 48);
+
+    doc.output('dataurl');
+}
+
+/* Convierte a Base64 una imagen */
+async function cargarImagenBase64(url) {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    return await new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+

@@ -1,5 +1,5 @@
 <header class="tituloPagina">
-    <h1>Últimas recetas añadidas</h1>
+    <img class="logoSuperior" src="<?php echo APP_URL."app/views/img/BannerAlargado.png"; ?>" alt="">
 </header>
 
 <!-- Carga la lista de recetas -->

@@ -1,7 +1,7 @@
 /* Realiza las peticiones para rellenar datos en una página sin recargar */
 
 /* Rellena un select con los datos obtenidos de la base de datos cuando se selecciona una opción de otro */
-async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccionar){
+async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccionar, inactivos = false){
 
     /* Obtiene el select que hay que rellenar */
     let campoSelect = document.querySelector('#'+idRellenar);
@@ -23,6 +23,9 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccio
 
     /* Añade el campo a buscar */
     data.append('campo', campo);
+
+    /* Añade si tiene que listar los inactivos o no */
+    data.append('inactivos', inactivos);
 
     /* Añade la accion a realizar */
     data.append('accion', 'rellenarSelect');
@@ -182,7 +185,7 @@ async function rellenarSelect(idSeleccionado, idRellenar, tabla, campo, seleccio
                 tipo: 'recargar',
                 icono: 'error',
                 titulo: 'Error Fatal!!!',
-                texto: error+' Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
+                texto: 'Se ha producido un error inesperado. Inténtelo de nuevo más tarde.',
                 confirmButtonText: 'Aceptar',
                 colorIcono: 'red'
             };

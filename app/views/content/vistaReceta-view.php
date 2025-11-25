@@ -154,8 +154,8 @@
                     <!-- Nombre -->
                     <?php echo $receta_ver->getNombre(); ?>
                 </h2>
-                <a href="" class="iconVerReceta" title="Ficha de coste"><i class="fa-solid fa-file-invoice-dollar"></i></a>
-                <a href="" class="iconVerReceta" title="Descargar ficha técnica en pdf"><i class="fa-solid fa-file-pdf"></i></a>
+                <button class="btnIcon iconVerReceta" title="Ficha de coste"><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                <button type="submit" class="btnIcon iconVerReceta" title="Descargar ficha técnica en pdf" onclick="generarPDFReceta();"><i class="fa-solid fa-file-pdf"></i></button>
              </div>
     
             <!-- Fecha de creación -->

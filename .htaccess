@@ -10,3 +10,7 @@ Options All -Indexes
 
 # Permite todos los caracteres entre a y z, entre A y Z, del 0 al 9 y "/", ñ y Ñ en la url, que se almacena en la variable, mediante la regex. 
 RewriteRule ^([a-zA-z0-9/ñÑ-]+)$ index.php?views=$1
+
+# Para que el servidor acepte CORS
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"

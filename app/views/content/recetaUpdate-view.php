@@ -114,13 +114,13 @@
         rellenarSelect('', 'grupoPlatosEnviarReceta', 'grupos_plato', '', <?php echo json_encode($receta_actualizar->getId_grupo()) ?>);
         
         /* Rellena el select de utensilios */
-        await rellenarSelect('activable', 'selectUtensiliosEnviarReceta', 'utensilios', '' );
+        await rellenarSelect('activable', 'selectUtensiliosEnviarReceta', 'utensilios', '', '', true);
 
         /* Coloca los utensilios de la receta en la lista de utensilios */
         agregarElementoListaUpdate('selectUtensiliosEnviarReceta', 'listaUtensiliosEnviarReceta', 'arrayUtensilios', <?php echo json_encode($receta_actualizar->getUtensilios()) ?>);
         
         /* Rellena el select de ingredientes */
-        await rellenarSelect('activable', 'selectIngredientesEnviarReceta', 'ingredientes', '' );
+        await rellenarSelect('activable', 'selectIngredientesEnviarReceta', 'ingredientes', '', '', true );
         
         /* Coloca los ingredientes de la receta en la lista de ingredientes */
         agregarElementoListaUpdate('selectIngredientesEnviarReceta', 'listaIngredientesEnviarReceta', 'arrayIngredientes', <?php echo json_encode($receta_actualizar->getIngredientes()) ?>);

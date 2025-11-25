@@ -117,7 +117,7 @@
             
 
     ?>
-            <div class="column tarjetaReceta col-100 centrar vertical top">
+            <div class="column tarjetaReceta col-100 vertical top">
                 
                 <div class="fotoTarjetaReceta col-100 static">
                     <img src="<?php echo $img_dir.$foto; ?>" alt="Foto de <?php echo $receta->getNombre(); ?>" title="Foto de <?php echo $receta->getNombre(); ?>">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="etiquetasTarjeta col-100 total horizontal static">
-                    <div class="etiqueta tiempo static pointer" title="Tiempo de elaboración <?php echo date("h:i",strtotime($receta->getTiempo())) ?>">
+                    <div class="etiqueta tiempo static centrar pointer" title="Tiempo de elaboración <?php echo date("h:i",strtotime($receta->getTiempo())) ?>">
                         <i class="fa-solid fa-clock-rotate-left"></i><?php echo " ".substr($receta->getTiempo(), 0, 5); ?>
                     </div>
                     <div class="iconoEtiqueta horizontal static">
