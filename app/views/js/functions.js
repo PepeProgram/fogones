@@ -826,38 +826,46 @@ function rellenarIngredientesReceta(idLista, arrayIngredientes){
         
         
         /* Comprueba si la cantidad corresponde a alguna de las unidades incontables para eliminarla */
+        
+        /* Crea un div para la cantidad */
+        let divCantidad = document.createElement('div');
+        divCantidad.setAttribute('class', 'cantidadIngredienteListaReceta');
+        
+        /* Crea el output para la cantidad */
+        let cantidad = document.createElement('output');
+        cantidad.setAttribute('class', 'outputCantidadIngrediente');
+        
+        /* Si la cantidad pertenece a alguna de las unidades incontables, no la pone */        
         if (![5, 6, 11].includes(ingrediente['id_unidad'])) {
-            
-            /* Crea un div para la cantidad */
-            let divCantidad = document.createElement('div');
-            divCantidad.setAttribute('class', 'cantidadIngredienteListaReceta');
-            
-            /* Crea el output para la cantidad */
-            let cantidad = document.createElement('output');
-            cantidad.setAttribute('class', 'outputCantidadIngrediente');
 
             /* Añade la cantidad al output */
             cantidad.value = parseFloat(ingrediente['cantidad']);
-            
-            /* Guarda como data attribute la cantidad original para tenerla disponible al recalcular los ingredientes */
-            cantidad.dataset.original = cantidad.value;
-
-            /* Guarda como data attribute el id de la unidad para tenerlo disponible al recalcular los ingredientes */
-            cantidad.dataset.unidad = ingrediente['id_unidad'];
-            
-            /* Añade output al div */
-            divCantidad.append(cantidad);
-            
-            /* Añade el div a la linea */
-            linea.append(divCantidad);
         }
 
-        /* añade las unidades a cada cantidad */
-        linea.append(ingrediente['nombre_unidad']);
+        /* Guarda como data attribute la cantidad original para tenerla disponible al recalcular los ingredientes */
+        cantidad.dataset.original = cantidad.value;
+
+        /* Guarda como data attribute el id de la unidad para tenerlo disponible al recalcular los ingredientes */
+        cantidad.dataset.unidad = ingrediente['id_unidad'];
+        
+        /* Añade output al div */
+        divCantidad.append(cantidad);
+        
+        /* Añade el div a la linea */
+        linea.append(divCantidad);
+
+        /* Crea un div para la unidad */
+        let divUnidad = document.createElement('div');
+        divUnidad.setAttribute('class', 'unidadIngredienteListaReceta');
+
+        /* Añade las unidades al div */
+        divUnidad.append(ingrediente['nombre_unidad']);
+
+        /* Añade el div a la linea */
+        linea.append(divUnidad);
 
         /* Añade la linea a la lista */
         lista.appendChild(linea);
-        
         
     });
 }
@@ -880,7 +888,7 @@ function rellenarEtiquetasReceta(idDiv, idsEtiquetas, tabla) {
 
                 /* Crea la etiqueta */
                 let divEtiqueta = document.createElement('div');
-                divEtiqueta.setAttribute('class', 'etiqueta');
+                divEtiqueta.setAttribute('class', 'etiqueta ' + tabla);
 
                 /* Añade el icono a la etiqueta */
                 let iconoEtiqueta = document.createElement('i');
@@ -940,58 +948,204 @@ function calcularIngredientes(numeroPersonasNuevo){
 /* Genera el pdf de la receta */
 async function generarPDFReceta(){
 
-    const doc = new jsPDF();
-    console.log(APP_URL+"app/views/img/BannerAlargado.jpg");
+    /* Crea el documento */
+    const doc = new window.jspdf.jsPDF();
 
-    const base64 = await cargarImagenBase64("http://192.168.1.53/fogones/app/views/img/BannerAlargado.jpg");
+    /* Imagen de la cabecera: Obtiene el logo, lo convierte a base64 y lo coloca */
+    const bannerSuperior = await cargarImagenBase64("http://192.168.1.53/fogones/app/views/img/BannerAlargado.jpg");
 
-    doc.addImage(base64, "JPEG", 10, 5, 190, 28.75);
+    doc.addImage(bannerSuperior, "JPEG", 10, 5, 190, 28.75);
 
-    /* doc.setTextColor(126, 90, 16);
-    doc.setFontSize(20);
-    doc.setFont("helvetica", "bold");
-    doc.text("Fogones Conectados", 10,10);
-    
-    doc.rect(10, 15, 190, 10);
-    doc.setFontSize(16);
-    doc.text("Ficha Técnica", 105, 22.5, null, null, "center"); */
+    /* Titulo de la ficha */
+    doc.rect(10, 35, 190, 10);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.text("Ficha Técnica", 105, 42.5, null, null, "center");
 
 
     /* Nombre de la receta */
     const nombre = document.querySelector('#datosCabeceraReceta h2').innerText;
     
-    doc.rect(10, 25, 190, 10);
+    doc.rect(10, 45, 190, 10);
     doc.setFontSize(14);
-    doc.text("Nombre: "+nombre, 12, 33);
+    doc.text(nombre, 105, 53, null, null, "center");
 
+    /* Enviada por */
+    const redactor = document.querySelector('#propietarioReceta .total').innerText;
+
+    doc.rect(10, 55, 130, 6);
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(8);
+    doc.text('Enviada por: ', 12, 59);
+    doc.setFont('helvetica', 'italic');
+    doc.text(redactor, 30, 59);
+
+    /* Tiempo de elaboracion */
+    const tiempo = document.querySelector('#textoTiempoElaboracion').innerText;
+
+    doc.rect(140, 55, 60, 6);
+    doc.setFont('helvetica', 'bolditalic');
+    doc.text('Tiempo Elaboración: ', 142, 59);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text(tiempo, 172, 59);
+
+    /* Cambia el tamaño de la letra */
     doc.setFontSize(12);
 
-    /* doc.rect(10, 35, 130, 8);
-    doc.setFont("helvetica", "normal");
-    doc.text("Familia/Grupo: Sobremesas a base de Frutas", 12, 41); */
+    /* Estilo de cocina */
+    textoEstilo = '';
+    let estilos = document.querySelectorAll('.estilos_cocina');
+    estilos.forEach(estilo => {
+        textoEstilo += estilo.innerText + ' / ';
+        
+    });
+
+    if (textoEstilo != '') {
+        doc.setFont('helvetica', 'bolditalic');
+        doc.rect(10, 61, 190, 8);
+        doc.text('Estilo de cocina: ', 12, 67);
+        doc.setFont('helvetica', 'normal');
+        doc.text(textoEstilo, 48, 67);
+    }
+
+    /* Tipo y grupo de plato */
+    textoEtiquetas = '';
+
+    let grupo_plato = document.querySelector('.grupos_plato').innerText;
+    if (grupo_plato != "") {
+        textoEtiquetas += grupo_plato + ' / ';
+    }
+    
+    
+    let tipos_plato = document.querySelectorAll('.tipos_plato');
+    tipos_plato.forEach(tipo => {
+        textoEtiquetas += tipo.innerText + ' / ';
+        
+    });
+
+    textoEtiquetas = textoEtiquetas.slice(0, 62);
+
+    doc.rect(10, 69, 130, 8);
+    doc.setFont("helvetica", "bolditalic");
+    doc.text("Grupo/Familia: " , 12, 75);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text(textoEtiquetas, 42, 75);
     
     /* Número de personas */
     const nPersonas = document.querySelector('#nPersonas').value;
-    doc.rect(140, 35, 60, 8);
-    doc.text("Núm. Raciones: "+nPersonas+" Pax", 142, 41);
+    doc.rect(140, 69, 60, 8);
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(12);
+    doc.text("Núm. Raciones: ", 142, 75);
+    doc.setFont('helvetica', 'normal');
+    doc.text(nPersonas + " Pax", 176, 75);
+
+    /* Ingredienes */
+    doc.setFont('helvetica', 'bolditalic');
+    doc.text('Ingredientes:', 12, 81);
+    
+    let listaIngredienes = document.querySelectorAll('.liListaIngredientes');
+    let posicion = 88;
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    listaIngredienes.forEach(ingrediente => {
+        const nombre = ingrediente.children[0].innerText;
+        const cantidad = ingrediente.children[1].innerText;
+        const unidad = ingrediente.children[2].innerText;
+        
+        doc.text(nombre, 14, posicion);
+        doc.text(cantidad, 108, posicion, null, null, 'right');
+        doc.text(unidad, 110, posicion);
+        posicion += 4;
+        
+    });
+    doc.rect(10, 77, 120, posicion - 76);
+
+    /* Utensilios */
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(12);
+    doc.text('Utensilios:', 132, 81);
+
+    let listaUtensilios = document.querySelectorAll('.liListaUtensilios');
+    let posicionUtensilios = 88;
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    listaUtensilios.forEach(utensilio => {
+        const nombreUtensilio = utensilio.textContent;
+        doc.text(nombreUtensilio, 134, posicionUtensilios);
+        posicionUtensilios += 4;
+    });
+
+
+    /* CALCULAR SI ES MAYOR LA POSICION DE LOS UTENSILIOS O LA DE LOS INGREDIENTES PARA CALCULAR LA ALTURA DEL RECTÁNGULO
+    SI LA DE LOS UTENSILIOS EL MAYOR, MEJOR REASIGNAR EL VALOR DE posicion PARA NO ROMPER EL RESTO DEL CÓDIGO */
+    doc.rect(130, 77, 70, posicion - 76);
 
     /* Elaboración */
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(12);
+    const tituloY = posicion + 6;
+    doc.text('Elaboración: ', 12, tituloY);
+
     const parrafos = document.querySelectorAll('#elaboracionReceta p');
-    let textoElaboracion = '';
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+
+    /* Parámetros del texto */
+    const anchoTexto = 180;
+    const margenX = 14;
+    const inicioY = tituloY + 6;
+    let actualY = inicioY;
+
+
+    /* Factor de conversión de puntos a mm */
+    const fontSizePt = doc.internal.getFontSize();
+    const ptToMm = 0.3528;
+    const lineHeightProporcional = 1.15;
+    const lineHeight = fontSizePt * ptToMm * lineHeightProporcional;
+
+    /* Guarda la posicion Y inicial para el rectángulo */
+    const inicioRectY = actualY - 9;
+
+
+    /* Recorre los párrafos */
     parrafos.forEach(p => {
-        const limpio = p.textContent.trim();
-        if(limpio != ""){
-            textoElaboracion += "    " + limpio + '\n';
+        const texto = p.textContent.trim();
+        if (texto !== "") {
+            const lineas = doc.splitTextToSize(texto, anchoTexto);
+            doc.text(lineas, margenX, actualY);
+            actualY += lineas.length * lineHeight;
+            
         }
     });
 
-    doc.setFontSize(10);
-    const textoAjustado = doc.splitTextToSize(textoElaboracion, 180);
+    /* Calcula el alto del rectángulo */
+    const altoRect = actualY - inicioRectY + 2;
 
-    doc.rect(10, 43, 190, 60);
-    doc.text(textoAjustado, 12, 48);
+    /* Dibuja el rectángulo */
+    doc.rect(10, inicioRectY - 2, 190, altoRect);
+
+    /* Presentación */
+    /* doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(12);
+    tituloY = actualY + 6;
+    doc.text('Presentación: ', 12, tituloY); */
+
+
+
+
+    doc.rect(10, actualY, 190, 30);
+
+    
 
     doc.output('dataurl');
+
+
 }
 
 /* Convierte a Base64 una imagen */

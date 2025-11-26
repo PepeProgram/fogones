@@ -207,7 +207,7 @@
                 <!-- Tiempo de elaboración -->
                 <div class="etiquetaCaracteristicasReceta vertical">
                     <p class="notas">Elaboración</p>
-                    <div class="horizontal static" title="Tiempo de elaboración <?php echo " ".substr($receta_ver->getTiempo(), 0, 5); ?>">
+                    <div id="textoTiempoElaboracion" class="horizontal static" title="Tiempo de elaboración <?php echo " ".substr($receta_ver->getTiempo(), 0, 5); ?>">
                         <?php echo " ".substr($receta_ver->getTiempo(), 0, 5); ?>h.
                     </div>
                 </div>

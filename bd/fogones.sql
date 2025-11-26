@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-11-2025 a las 23:21:53
+-- Tiempo de generación: 26-11-2025 a las 22:32:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -404,7 +404,25 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (155, 'Agar-agar', 1),
 (156, 'Pan brioche', 1),
 (157, 'Anchoa', 1),
-(158, 'Salmón ahumado', 1);
+(158, 'Salmón ahumado', 1),
+(159, 'Agua caliente', 1),
+(160, 'Granadina', 1),
+(161, 'Ron', 1),
+(162, 'Curacao rojo', 1),
+(163, 'Vermouth rojo', 1),
+(164, 'Mezcal', 1),
+(165, 'Leche de avena', 1),
+(166, 'Leche desnatada', 1),
+(167, 'Queso rallado', 1),
+(168, 'Cerveza Guinness', 1),
+(169, 'Cacao en polvo', 1),
+(170, 'Crema agria', 1),
+(171, 'Vainilla', 1),
+(172, 'Chocolate negro', 1),
+(173, 'Crema Baileys', 1),
+(174, 'Azúcar glas', 1),
+(175, 'Melaza', 1),
+(176, 'Yogurt natural', 1);
 
 -- --------------------------------------------------------
 
@@ -486,7 +504,15 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 (77, 153, 8),
 (78, 156, 3),
 (80, 157, 5),
-(79, 158, 5);
+(79, 158, 5),
+(85, 161, 7),
+(83, 163, 3),
+(84, 163, 12),
+(82, 166, 2),
+(81, 167, 2),
+(86, 168, 3),
+(87, 168, 12),
+(88, 176, 2);
 
 -- --------------------------------------------------------
 
@@ -821,7 +847,7 @@ TRUNCATE TABLE `recetas`;
 --
 
 INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_usuario`, `id_grupo`, `n_personas`, `tiempo_receta`, `id_autor`, `id_region`, `id_pais`, `id_zona`, `dificultad`, `elaboracion`, `emplatado`, `foto_receta`, `visualizaciones`, `creado_receta`, `actualizado_receta`, `activo`) VALUES
-(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 1, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-19 22:39:28', 0),
+(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 1, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopa colombiana de la buena.', 'Bolovanes_202511100809491167.jpg', 1, '2025-11-10 19:09:49', '2025-11-25 13:14:03', 0),
 (37, 'Pechuga de pato con verduras', 'Es un plato perfecto para ocasiones especiales, equilibra la intensidad de la carne  con la frescura de las verduaras y la salsa agridulce.', 1, 1, 4, '01:20:00', NULL, 0, 0, 1, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato un poco montadas, con  salsa en un lado y unas verduras salteadas al otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-18 12:14:33', '2025-11-19 21:02:05', 1),
 (38, 'Doriyakis', 'Tortitas muy esponjosas japonesas emparejadas a modo de sandwich con algún relleno en medio de mermelada, crema,  dulce de leche, etc...', 23, 6, 6, '00:45:00', NULL, 0, 124, 2, 2, 'Abizcochar los huevos con el azúcar, añadir la miel y continuar batiendo.\r\nDiluir el bicarbonato en el agua e incorporarlo a la masa. Mezclarlo bien.\r\nTamizar la harina con la levadura y añadir poco a poco a la masa, sin dejar de mezclar para que no queden grumos.\r\nPintar una sartén con aceite de girasol y, cuando esté bien caliente, añadir 2-3 cucharadas soperas de masa en el centro. Cocinar unos minutos, hasta que la superficie se llene de burbujas. La parte inferior debería estar bien dorada. Dar la vuelta con cuidado  y esperar a que se dore por la otra cara. Sacar a una bandeja con papel de horno para que no se pegue.\r\nCuando estén frias, emparejar las tortas de dos en dos, poniendo juntas las que más se parezcan por su forma. Untar con el relleno elegido la mitad y cierra con sus respectivas parejas, formando sandwiches.', 'En platitos individuales, acompañada de nata montada, fruta fresca, sirope....', 'Doriyakis_202511170743548061.jpg', 1, '2025-11-18 11:48:08', '2025-11-18 11:48:08', 1),
 (39, 'Biersuppe', 'Reconfortante sopa cremosa elaborada con cerveza originaria de Baviera', 23, 19, 6, '00:30:00', NULL, 0, 3, 1, 2, '*Croutons: Cortar las rebanadas de pan, si son del día anterior mejor, en cuadraditos de uno o dos centímetros y freír en abundante aceite de oliva suave. \r\n\r\n    *Sopa: Fundir la mantequilla en una olla a fuego suave. Cuando esté líquida se incorpora la harina y se remueve hasta que se haya tostado ligeramente incorporar la cerveza. Se deja hervir a fuego lento, sin dejar de remover durante unos 20 min. y, a continuación, se salpimenta y, opcionalmente, se añade la canela. Se retira del fuego, se baten las yemas con la nata líquida y se incorporan a la sopa caliente cuando ya no esté hirviendo. Se vuelve a poner el conjunto a fuego bajo durante unos cinco minutos.', 'Se sirve bien caliente en plato hondo con unos poquitos croutons adornando', 'Biersuppe_202511120955296304.jpg', 1, '2025-11-18 11:43:04', '2025-11-18 11:43:04', 1),
@@ -831,7 +857,7 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (46, 'Aguacates rellenos de langostinos', 'Refrescante ensalada fácil de preparar con un toque picante', 23, 25, 4, '00:30:00', NULL, 0, 141, 4, 1, 'Pelamos y salpimentamos los langostinos salteamos en aceite. Picamos 8 en paisana fina , y dejamos 8 para el final.\r\nPicamos en brunoise la cebolla y mezclamos con los langostinos.\r\nAñadimos el chile chipotle a la mayonesa, emulsionamos  y la incorporamos a la mezcla de langostinos con cebolla.\r\nPartimos los aguacates por la mitad, retiramos el hueso, y la carne la trocearemos y rellenamos junto a la mezcla anterior cada cáscara del aguacate.', 'Podemos presentar cada dos mitades con los langostinos enteros reservados encima y espolvoreado de cilantro.', 'Aguacates_202511130751164383.jpg', 1, '2025-11-17 21:08:04', '2025-11-17 21:08:04', 1),
 (47, 'Albóndigas de pescado', 'Las albóndigas de pescado son una alternativa deliciosa y saludable que te permitirá disfrutar del sabor del mar en cada bocado.', 23, 2, 6, '01:00:00', NULL, 0, 0, 0, 3, '*Albóndigas: Machacar 1 diente de ajo con un poco de aceite  hasta conseguir una pasta.\r\nPicar el bacalao y el salmón sin piel ni espinas, muy fino a cuchillo. Sazonar con sal, la pasta de ajo y perejil.\r\nMezclar todos los ingredientes, formar albóndigas, enharinarlas y freírlas en aceite muy caliente, reservarlas\r\n\r\n    *Salsa: Picar muy fino los tres dientes de ajo y se dispone en un rondón, con aceite, cayena picada y perejil se dora ligeramente y se añade la harina, removiéndo con espátula.\r\nSe añade el fumet y se deja reducir, removiendo para que no se formen grumos.\r\nA parte, se abren las almejas y se las incorpora a la salsa. \r\nSe añaden las albóndigas, se les da un hervor y se sirven', 'Emplatamos 5 o 6 albóndigas con almejas  y espolvoreado todo con perejil muy picado.\r\nPodemos acompañar con arroz blanco o un salteado de verduras, por ejemplo.', 'Albndigas_202511130853442671.jpg', 1, '2025-11-17 21:04:58', '2025-11-17 21:04:58', 1),
 (48, 'Arroz con leche', 'Postre cremoso con arroz, leche, azúcar y aromatizado con canel y limón, su textura suave y dulzor delicado lo convierten en un clásico.', 23, 6, 8, '01:00:00', NULL, 0, 0, 0, 2, '*Aromas: Rama de vainilla o rama de canela con piel de naranja y limón, etc. \r\n\r\nSe lava el arroz en agua fría y se deposita en un caza con 150 ml de agua, cuando rompa el hervor, se le incorpora la leche y los aromas y se remueve bien. Se deja cocer a fuego muy suave, removiendo de vez en cuando para que no se agarre, unos 40 minutos..\r\nCuando el grano esté abierto, se retiran los aromas se incorpora la nata y un poco más de leche si vemos que nos queda muy espeso. Se remueve hasta punto de ebullición y se incorpora el azúcar. Se sigue removiendo hasta que el azúcar esté bien incorporado.', 'En copas individuales espolvoreado con canela y un hilito de zeste de limón adornando.', 'Arroz_202511170830348077.jpg', 1, '2025-11-17 21:01:50', '2025-11-17 21:01:50', 1),
-(49, 'Empanada de trucha y pimientos asados', 'Receta típica de Galicia. Su masa crujiente y tierna a la vez, contrasta con el relleno jugoso', 23, 13, 8, '01:15:00', NULL, 13, 64, 1, 3, 'La trucha mejor blanca o asalmonada grande. \r\n\r\n    *Para el relleno: Cortar en juliana la cebolla y los pimientos, sofreir a fuego lento hasta que liguen los ingredientes, con un aspecto suave y meloso.\r\nSazonar la trucha y cocer al vapor 8 minutos para que quede poco cocinada ya que se acabará dentro de la empanada. Dejar enfriar, desespinar y desmigar. Reservar.\r\n\r\n    *Para la masa: Mezclar en un bol la harina, el pimentón, el aceite, la leche y el agua. Amasar hasta obtener una masa uniforme.\r\nColocar sobre papel sulfurizado y extender con un rodillo hasta que la masa quede fina.\r\n\r\nRellenar con el relleno y la trucha, cerrar la masa y sellar pellizcando. hacer cortes pequeños en la superficid.  Pintar con huevo batido y hornear 30 minutos a 180ºC', 'En un plato dos trozos pequeños cruzados o en una bandeja, o, si es para varios comensales, media empanada dispuesta en trocitos un poco montados. Le podemos espolvorear un poco de pimentón en el plato para dar color. o una ramita de romero', 'Empanada_20251114113939781.jpg', 1, '2025-11-17 20:58:42', '2025-11-17 20:58:42', 1),
+(49, 'Empanada de trucha y pimientos asados', 'Receta típica de Galicia. Su masa crujiente y tierna a la vez, contrasta con el relleno jugoso', 23, 13, 8, '01:15:00', NULL, 0, 64, 1, 3, 'La trucha mejor blanca o asalmonada grande. \r\n\r\n    *Para el relleno: Cortar en juliana la cebolla y los pimientos, sofreir a fuego lento hasta que liguen los ingredientes, con un aspecto suave y meloso.\r\nSazonar la trucha y cocer al vapor 8 minutos para que quede poco cocinada ya que se acabará dentro de la empanada. Dejar enfriar, desespinar y desmigar. Reservar.\r\n\r\n    *Para la masa: Mezclar en un bol la harina, el pimentón, el aceite, la leche y el agua. Amasar hasta obtener una masa uniforme.\r\nColocar sobre papel sulfurizado y extender con un rodillo hasta que la masa quede fina.\r\n\r\nRellenar con el relleno y la trucha, cerrar la masa y sellar pellizcando. hacer cortes pequeños en la superficie.  Pintar con huevo batido y hornear 30 minutos a 180ºC', 'En un plato dos trozos pequeños cruzados o en una bandeja, o, si es para varios comensales, media empanada dispuesta en trocitos un poco montados. Le podemos espolvorear un poco de pimentón en el plato para dar color. o una ramita de romero', 'Empanada_20251114113939781.jpg', 1, '2025-11-17 20:58:42', '2025-11-25 21:43:14', 1),
 (50, 'Ajoblanco', 'Receta típica de algunas zonas de Andalucía y Extremadura, muy refrescante de de sabor suave, lleva poco ajo a pesar de su nombre, predominando la almendra', 23, 19, 4, '00:20:00', NULL, 1, 64, 1, 1, 'El pan se pone a remojo en la leche y el agua.\r\nLas almendras, el ajo y la sal, se majan en un mortero. Tras el majado, se añade el pan remojado, el aceite y el vinagre.\r\nSe sazona al gusto. y se reserva una hora mínimo en frio. Se debe servir bien frio', 'En plato hondo, adornado con unas uvas blancas y unas lágrimas de aceite de oliva, esta es la forma tradicional, aunque también le va muy bien unos cubos de melón, lascas de jamón...', 'Ajoblanco_202511140104553040.jpg', 1, '2025-11-17 20:54:51', '2025-11-17 20:54:51', 1),
 (51, 'Paella valenciana', 'Sabor limpio y equilibrado, donde se aprecia el caldo reducido y el socarrat (capa fina tostada del fondo) con identidad cultural propia.', 23, 15, 6, '01:00:00', NULL, 11, 64, 1, 3, 'Cortar la cebolla y  el ajo  en brunoise,  el tomate en concassé,  el pimiento en trozos pequeños. y trocear las judias.\r\nCortar en trozos pequeños el pollo y el conejo y salpimentar. Calentar 3 cucharadas de aceite en una paella y dorar los trozos de la carne a fuego moderado durante 20 minutos, o hasta que estén bien dorados. Retirar de la paella y reservar.\r\nAgregar del resto del aceite a esta misma sartén y añadir la cebolla y el pimiento unos 5 minutos a fuego moderado, remover de vez en cuando hasta que ablanden. Añadir el ajo, mezclar un minuto e incorporar los guisantes, las judias, y la carne.\r\nRehogar con el vino, dejar cocer 3 minutos para reducir el alcohol incorporar el arroz, rehogar bien, añadirle el caldo y el azafrán. Cocer a fuego moderado unos 10 minutos y rectificar de sal si fuera necesario. Añadir la ramita de romero y proseguir la cocción otros 15 minutos, o hasta que el líquido se haya evaporado y el arroz esté completamente cocido.', 'En la misma paella con un trozo de limón por comensal para limpiar el borde donde va a apoyar la cuchara con la que se sirve y come directamente.', 'Paella_202511140754054351.jpg', 1, '2025-11-17 20:48:58', '2025-11-17 20:48:58', 1),
 (52, 'Mero con ortiguillas y salsa de lima', 'Receta de Paco Roncero donde utiliza la ortiguilla, que es una anémona marina, que junto al mero evoca el sabor a mar, la salsa de lima contrasta y equilibra con su frescura, y el dulce del  puré de manzana equilibra el plato', 23, 2, 4, '03:00:00', NULL, 0, 64, 1, 4, '*Para el mero: Limpiar el mero de escamas y espinas.  Sacar los dos lomos y racionar en porciones de 180 gr. aproximadamente. Reservar en cámara hasta su utilización.\r\n\r\n    *Para el puré de manzana: Pelar las manzanas, descorazonar y cortar en gajos irregulares. Pochar la mantequilla y el ácido cítrico o zumo de limón hasta que queden blandos. Triturar, colar y reservar en caliente hasta el momento de su uso.\r\n    \r\n    *Para las ortiguillas: Cortar en 2 o 3 partes en función de su tamaño. Enharinar y freír en abundante aceite de oliva bien caliente para que se forme una costra en el exterior manteniendo la melosidad en su interior. Quitar el exceso de aceite y congelar hasta su uso.\r\n\r\n    *Para la salsa de lima: Mezclar la salsa de soja y el vinagre de jerez y calentar hasta llegar hasta su punto de ebullición. Añadir el jengibre rallado, tapar y dejar infusionar durante 25 minutos aproximadamente. Colar. Mezlar el zumo de las limas y el azúcar e incorporar a la infusión anterior. Mezclar. Añadir la xantana y batir con la túrmix hasta que la xantana se hidrate completamente y la mezcla tenga textura de crema ligera.', 'Disponer en el centro del plato una cucharada de sasa de lima. A la izquierda 4 puntos de puré de manzana y encima de estos 4 ortiguillas fritas y sazonadas. \r\nEncima de la salsa de lima, terminar con el mero marcado a la plancha.', 'Mero_202511140837496775.jpg', 1, '2025-11-14 19:37:49', '2025-11-14 19:37:49', 1),
@@ -855,10 +881,17 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (79, 'Piroliños', 'Plato fácil de preparar ideal para un cumpleaños, un picnic o una comida informal', 2, 1, 4, '00:45:00', NULL, 0, 0, 1, 1, 'Filetear las pechugas de pollo en dos filetes al menos. salpimentar.\r\nDisponer  una loncha de jamón cocido sobre la superficie de trabaj y colocar encima el filete de pollo a lo largo, de manera que el jamón recubra bien el pollo.\r\nColocar encima del jamón el queso y enrollar sobre si mismo todo el conjunto. Sujetar con un palillo.\r\nPreparar el aceite para freir en una sartén o sauté a fuego moderado.\r\nPasar los rollitos por pan rallado y freir. Retirar a papel absorbene.', 'En un plato troceado en rodajas y adornado con hierbas frescas y unos tomatitos cherry  cortados a cuartos.', 'Pirolios_202511220842383864.jpg', 1, '2025-11-22 19:42:38', '2025-11-22 19:42:38', 1),
 (80, 'Panna Cotta  vegana de lima y cardamomo', 'Versión sin lácteos ni gelatinas, una variante fácil y muy válida de este típico postre italiano.', 13, 6, 8, '00:20:00', NULL, 0, 122, 1, 1, 'Mezclar todos los ingredientes en un cazo. leche de almendra, cardamomo verde en polvo, azúcar, y agar.\r\nAñadir sobre esta mezcla lima rallada.\r\nHervir todo el preparado 7 minutos. Colar.\r\nDisponer  en los recipientes de presentación.\r\nDejar enfriar', 'Desmoldar. Presentar con lima rallada al momento y acompañada de crumble vegano (elaborado con  margarina vegetal) y algún fruto rojo o almendra granillo tostada.', 'Panna_20251122091920775.jpg', 1, '2025-11-22 20:19:20', '2025-11-22 20:19:20', 1),
 (81, 'Torrija de brioche', 'Postre tradicional español, que se caracteriza por su textura suave y el crujiente del caramelizado', 13, 6, 4, '00:30:00', NULL, 0, 64, 1, 2, 'Aromas (canela, piel de limón y/o naranja)\r\n\r\nEn un cazo infusionar la leche entera, la nata líquida con el azúcar y los aromas elegidos. Dejar enfriar y colar.\r\n\r\nRemojar en esta mezcla las 4 rebanadas de brioche. Girar para mojar bien el pan por ambos lados. Hacer esto en una fuente amplia, para poder girar las rebanadas sin que se toquen. Dejar en la leche 10 minutos por cada lado. Mucho cuidado al girar porque se vuelven quebradizas. \r\nCalentar una sartén, poner un trozo de papel de horno del tamaño de la torrija, fundir en el una pizca de mantequilla y colocar la torrija escurrida. Dejar que se dore bien por ese lado y girar, con ayuda de una espátula y colocando otro papel de horno en la parte superior.\r\nDejamos que caramelice bien por ambos lados. Servir de inmediato.', 'Acompañada de crema pastelera de naranja o mandarina, por encima de la torrija  quemada-caramelizada.\r\n\r\nEn sopa ligera de vainilla y carmelizada la torriza.', 'Torrija_202511220936102951.png', 1, '2025-11-22 20:36:10', '2025-11-22 20:36:10', 1),
-(82, 'Mantequilla de ajo', 'Mantequilla saborizada con ajo, que tanto podemos utilizar como acompañamiento. o bien añadir en un plato como guarnición potenciando el sabor de un asado.', 2, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla.\r\n\r\nEn mortero majar el ajo, perejil y pimienta, una vez machacados mezclar con la mantequilla.\r\n\r\nPoner en modes pequeñitos como de bombones o hielo para bolitas, o hacer un cilindro con toda la mantequilla que filmaremos y guardamos en frio hasta que endurezca.', 'En un plato aparte, junto con tosta de pan, o picos, también puede acompañar una tabla de quesos y embutidos.', 'Mantequilla_202511230958049188.jpg', 1, '2025-11-23 20:58:04', '2025-11-23 20:58:04', 0),
-(83, 'Mantequilla de anchoas', 'Mantequilla saborizada con anchoas idela como acompañamiento, canapés o la podemos añadir como guarición en pescados a la parrilla.', 14, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla.\r\nTrituramos la mantequilla junto a  los filetes de anchoa bien escurrido y la pimienta, podemos colarlo si es necesario.\r\n\r\nLa guardamos en moldes pequeños para hacer bolitas o filmamos en cilindro,  en frio, si queremos tomarla mas compacta', 'En platito hondo para poder untarla en tostas o tomarla con picos de pan. O como una quenelle  en el mismo plato que un pescado a la parrilla.', 'Mantequilla_202511231009428921.jpg', 1, '2025-11-23 21:09:42', '2025-11-23 21:09:42', 0),
-(84, 'Mantequilla maitre de hotel', 'Mantequilla compuesta muy versátil por su composición que tanto nos sirve de acompañamiento al inicio de una comida  como de guarnición para cualquier plato, tanto de pescado, marisco, carne, arroz, etc.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla\r\nMezclar la mantequilla, el perejil picado, el zumo de limón, la pimienta y la sal.\r\n\r\nDisponer en molde como para hacer bolitas o filmar con forma de cilindro, y guardar en frio.', 'En platitos para untar tostas, canapés, etc.. O en el mismo plato principal como guarnición en caliente.', 'Mantequilla_202511231023251818.jpg', 1, '2025-11-23 21:23:25', '2025-11-23 21:23:25', 0),
-(85, 'Mantequilla de salmón', 'Una opción elegante y deliciosa de sabor sofisticado como complemento para una ocasión especial.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla y mezclamos con  el salmón ahumado triturado.\r\n\r\nLa cantidad de salmón es orientativa.', 'En canapé, como complemento al empezar un cena, también queda muy bien en una tabla de quesos y embutidos o en una ensalada de aguacates y cítricos.', 'Mantequilla_202511231035482410.jpg', 1, '2025-11-23 21:35:48', '2025-11-23 21:35:48', 0);
+(82, 'Mantequilla de ajo', 'Mantequilla saborizada con ajo, que tanto podemos utilizar como acompañamiento. o bien añadir en un plato como guarnición potenciando el sabor de un asado.', 2, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla.\r\n\r\nEn mortero majar el ajo, perejil y pimienta, una vez machacados mezclar con la mantequilla.\r\n\r\nPoner en modes pequeñitos como de bombones o hielo para bolitas, o hacer un cilindro con toda la mantequilla que filmaremos y guardamos en frio hasta que endurezca.', 'En un plato aparte, junto con tosta de pan, o picos, también puede acompañar una tabla de quesos y embutidos.', 'Mantequilla_202511230958049188.jpg', 1, '2025-11-23 20:58:04', '2025-11-24 11:37:44', 1),
+(83, 'Mantequilla de anchoas', 'Mantequilla saborizada con anchoas idela como acompañamiento, canapés o la podemos añadir como guarición en pescados a la parrilla.', 14, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla.\r\nTrituramos la mantequilla junto a  los filetes de anchoa bien escurrido y la pimienta, podemos colarlo si es necesario.\r\n\r\nLa guardamos en moldes pequeños para hacer bolitas o filmamos en cilindro,  en frio, si queremos tomarla mas compacta', 'En platito hondo para poder untarla en tostas o tomarla con picos de pan. O como una quenelle  en el mismo plato que un pescado a la parrilla.', 'Mantequilla_202511231009428921.jpg', 1, '2025-11-23 21:09:42', '2025-11-24 11:38:06', 1),
+(84, 'Mantequilla maitre de hotel', 'Mantequilla compuesta muy versátil por su composición que tanto nos sirve de acompañamiento al inicio de una comida  como de guarnición para cualquier plato, tanto de pescado, marisco, carne, arroz, etc.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla\r\nMezclar la mantequilla, el perejil picado, el zumo de limón, la pimienta y la sal.\r\n\r\nDisponer en molde como para hacer bolitas o filmar con forma de cilindro, y guardar en frio.', 'En platitos para untar tostas, canapés, etc.. O en el mismo plato principal como guarnición en caliente.', 'Mantequilla_202511231023251818.jpg', 1, '2025-11-23 21:23:25', '2025-11-24 11:39:15', 0),
+(85, 'Mantequilla de salmón', 'Una opción elegante y deliciosa de sabor sofisticado como complemento para una ocasión especial.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla y mezclamos con  el salmón ahumado triturado.\r\n\r\nLa cantidad de salmón es orientativa.', 'En canapé, como complemento al empezar un cena, también queda muy bien en una tabla de quesos y embutidos o en una ensalada de aguacates y cítricos.', 'Mantequilla_202511231035482410.jpg', 1, '2025-11-23 21:35:48', '2025-11-25 12:40:00', 1),
+(86, 'Totopos caseros', 'Triangulos de tortilla fritas o tostadas muy populares en méxico.', 13, 13, 4, '01:00:00', NULL, 0, 141, 4, 2, 'Mezclar bien las harinas con la sal y pimienta, añadir el aceite de oliva, mezclar.\r\nIr añadiendo el agua caliente poco a poco, según pida la masa, hasta que quede lisa y manejable, seguimos amasando un poco.\r\n\r\nFilmamos y llevamos a  frio por media hora.\r\n\r\nExtendemos la masa entre dos papeles de horno, y estiramos lo más fino posible.\r\n\r\nCortamos en triángulos y freimos en abundante aceite, 2 minutos. Depositamos en papel absorvente.', 'Ideales para acompañar guacamole, pico de gallo....', 'Totopos_202511240112589106.jpg', 1, '2025-11-24 12:12:58', '2025-11-24 12:12:58', 1),
+(87, 'Sangre de muerto', 'Combinación perfecta de un rojo intenso imitando la sangre  con sabor  afrutado.', 14, 16, 1, '00:05:00', NULL, 0, 0, 0, 1, 'En la misma copa donde se va a servir, disponemos unas gotitas de granadina, para dar intensidad, y mezclamos el resto de los ingredientes con delicadeza para conseguir el efecto de la sangre.\r\n\r\nSi queremos hacer más cantidad, podemos mezclarlo en una jarra y  repartirlo posteriormene en copas, chupitos.. a los que les echamos las gotitas de grandina con anterioridad al reparto.', 'Adornamos la copa con unas pieles de naranja para intensificar el sabor y una guinda. También podemos presentarlo en una jeringuilla.', 'Sangre_202511240156262851.jpg', 1, '2025-11-24 12:56:26', '2025-11-25 19:27:12', 1),
+(88, 'Tortitas de avena sin lactosa', 'Esta receta de  tortitas contiene gluten, pero están hechas con leche de avena, por lo que no llevan lactosa, quedan esponjosas y resultan deliciosas.', 2, 13, 4, '00:40:00', NULL, 0, 0, 0, 1, 'Mezclar huevo y leche de avena, e ir incorporando poco a poco los sólidos (ya mezclados previamente)\r\nDejamos reposar la mezcla 30 minutos.\r\n\r\nCocinar por ambos lados en sartén antihadherente hasta que haga burbujitas. ( Si usamos mantequilla, que sea sin lactosa) pero no haría falta,.', 'Podemos acompañarla con una compota de pera, o plátanos, o fresa.., y adornarla con un coulis, sirope, salsa dulce.....', 'Tortitas_202511240805568160.jpg', 1, '2025-11-24 19:05:56', '2025-11-24 19:05:56', 0),
+(89, 'Escondidinho', 'El escondidinho es un plato delicioso que combina un puré cremoso con un relleno de sardinas, gratinado, fácil de hacer e ideal para cocinar con antelación e incluso congelar.', 2, 2, 1, '00:50:00', NULL, 0, 31, 4, 2, '*Puré de patata: Cocer la patata y cuando esté blandita, ligar con aceite de oliva y leche.\r\n\r\n    *Relleno: Escurrir la sardina y picarla muy fina, la cebolla picada en brunoise\r\n\r\nEn un ramequín un poco alto, disponer la mitad del puré, enima una capa de sardina+cebolla, y una última capa con la otra mitad de puré de patata.  \r\nEspolvorear con el queso rallado y gratinar a 200ºC unos 20 minutos, hasta que la superficie esté dorada.', 'En el propio ramequín, encima de un plato', 'Escondidinho_202511240845348788.png', 1, '2025-11-24 19:45:34', '2025-11-25 19:25:55', 1),
+(90, 'Pastel de chocolate con Guinness y Baileys', 'Este postre combina la deliciosa cerveza negra Guinness con la suave crema Baileys para crear un sabor único y refrescante.', 14, 6, 8, '01:00:00', NULL, 0, 0, 0, 3, 'Precalentar el horno a 195ºC, Engrasar 8 moldes pequeños y encamisarlos con papel sulfurizado y que sobresalga 2cm del borde.\r\n\r\n    *Bizcocho: Poner en un cazo a fuego medio la guinness y 120gr. de mantequilla. Remover hasta que se haya derretido, procurando que no llegue a hervir. Incorporar el cacao en polvo y 200gr. de azúcar tamizados, batir la mezcla y pasarla a un recipiente mediano.\r\nEn otro bol, batir la crema agria, el huevo y la vainilla, añadir la mezcla de la cerveza, sin dejar de remover. Tamizar la harina, sal y bicarbonato en un recipiente y añadir a  la mezcla anterior, batiendo hasta que los ingredientes estén incorporados y no se vean grumos. Introducir la mezcla en los moldes y hornear los pasteles unos 20 minutos o hasta que al pinchar el centro con un palillo, éste salga limpio.\r\nSacar los moldes del horno, dejar que se enfríen unos 10 minutos y desmoldarlos. Dejar enfriar.\r\n\r\n    *Crema Baileys: Batir el mascarpone con el Baileys,  utilizando la kitchen ( o batidora de varillas eléctrica). Añadir los 40 gr. de azúcar glass restante y seguir batiendo a baja velocidad para mezclar los ingredientes. Aumenta la velocidad a media-alta y sigue batiendo hasta obtener textura de buttercream. Reservar hasta el momento de servir.\r\n\r\n    *Ganache de chocolate: Trocear muy fino 100 gr de chocolate (mejor si es 70%), Calentar la nata y la melaza a fuego medio-alto. En cuanto empiece a burbujear, retirar del fuego. Añadir el chocolate troceado y batir enérgicamente hasta que se disuelva, incorporar la mantequilla restante y seguir batiendo hasta que la mezcla se vuelva homogénea y brillante.\r\n\r\nCon el resto de chocolate, hacemos unas virutas y decoramos.', 'Cortar a la mitad los bizcochos y rellenar con un poco crema baileys. con el resto de crema envolvemos los bizcochos ya montados.\r\nCubrimos la parte superior  con la ganache y decoramos con las virutas de chocolate.', 'Pastel_202511251003205302.jpg', 1, '2025-11-25 21:03:20', '2025-11-25 21:07:15', 1),
+(91, 'Bizcocho marmolado', 'Mezcla de chocolate y vainilla en un bizcocho marmolado, que resulta esponjoso y algo húmedo.', 13, 6, 8, '01:30:00', NULL, 0, 0, 1, 2, 'Blanquear  huevos y azúcar. Cuando estén bien esponjados, ir añadiendo el aceite a chorro fino y después la vainilla, mientras seguimos batiendo. Añadir el yogurt.\r\nA continuación, ya a mano, incorporar suavemente con movimientos envolventes la harina tamizada con el impulsor.\r\nDebe quedar una mezcla homogénea sin grumos.\r\nEn otro recipiente, ponemos el cacao con la leche  lo disolvemos completamente.\r\nAhora, dividiremos la masa del bizcocho, 2/3  en un bol y 1/2 en otro bol. En este último, agregaremos el cacao disuelto en la leche.\r\nPreparamos una capa de masa sin cacao y después un poco de masa con cacao, con movimientos zigzageantes, y cubriendo después con la masa sin cacao restante.\r\nHornear a 170º aproximadamente 45 minutos o hasta que la brocheta salga limpia.\r\nEnfriar sobre una rejilla.', 'Desmoldar una vez frío\r\nDecorar con sucedáneo de chocolate fundido y una hilera de rosetas de trufa fresca de chocolate negro.', 'Bizcocho_202511260902023449.jpg', 1, '2025-11-26 20:02:02', '2025-11-26 20:02:02', 0),
+(92, 'Tortilla de patatas deconstruida', 'Receta de Ferrán Adriá. Sabor similar a la clásica tortilla de patatas tradicional, pero con una presentacion y técnica de preparación innovadora.', 13, 17, 1, '01:30:00', NULL, 0, 64, 1, 4, '*Para el sabayón de huevo: Disponer la yema en un bol, batirla con unas varilla de mano, e ir incorporando 80 ml  agua hirviendo en forma de hilo.\r\nBatir enérgicamente hasta que emulsione y poner a punto de sal.\r\n\r\n    *Para la cebolla: Pelar las cebollas, partir en cuartos y cortar en juliana bien fina.\r\nRehogar la cebolla en aceite de oliva 0,4º, y remover continuamente hasta que coja un color dorado.\r\nEscurrir el exceso de aceite y desgrasar con un poco de agua. Cocer hasta evaporar.\r\nRepetir la operación hasta conseguir una textura y un color de confitura caramelizada.\r\nPoner a punto de sal y reservar.\r\n\r\n    *Para la espuma de patata: Pelar, cortar y hervir las patatas en el litro de agua restante con sal partiendo de líquido frío durante unos 30 minutos.\r\nUna vez terminada la cocción, se escurren y se reserva el agua de cocerlas.\r\nDisponer la patata cocida y 100g de agua de cocción  en Thermomix a 60º.\r\nTrturar e ir añadiendo poco a poco la nata, siguiendo el mismo prodecimiento con el aceite de oliva 0,4º hasta emulsionar finamente y de manera homogénea. Poner punto de sal.\r\nColar el puré y rellenar con él el sifón, con ayuda de un embudo.\r\nCargar el sifón  y mantener en baño maría a 70ºC aproximadamente.', 'En la parte inferior de una copa de cóctel, disponer un poco de cebolla caramelizada muy caliente.\r\nEncima, una capa de sabayón de huevo, espuma de patata. Decorar con un cordón de aceite de oliva virgen.', 'Tortilla_202511260948046335.jpg', 1, '2025-11-26 20:48:04', '2025-11-26 20:48:04', 0);
 
 -- --------------------------------------------------------
 
@@ -918,7 +951,6 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (89, 51, 1),
 (90, 51, 14),
 (91, 50, 14),
-(92, 49, 14),
 (93, 46, 3),
 (94, 45, 3),
 (95, 45, 14),
@@ -938,8 +970,6 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (123, 71, 9),
 (124, 71, 13),
 (125, 37, 3),
-(151, 36, 20),
-(152, 36, 16),
 (154, 75, 1),
 (155, 75, 11),
 (156, 75, 12),
@@ -956,10 +986,19 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (167, 79, 1),
 (168, 80, 9),
 (169, 81, 14),
-(170, 82, 14),
-(171, 83, 14),
-(172, 84, 14),
-(173, 85, 14);
+(174, 82, 14),
+(175, 83, 14),
+(177, 84, 14),
+(178, 86, 3),
+(187, 88, 12),
+(206, 85, 14),
+(219, 36, 20),
+(220, 36, 16),
+(227, 89, 3),
+(228, 87, 19),
+(230, 90, 16),
+(235, 49, 14),
+(236, 92, 8);
 
 -- --------------------------------------------------------
 
@@ -1148,17 +1187,6 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (392, 51, 52, 4.00, 8),
 (393, 51, 94, 1.00, 9),
 (394, 51, 57, 1.00, 9),
-(395, 49, 80, 1.00, 1),
-(396, 49, 2, 1.00, 1),
-(397, 49, 81, 2.00, 8),
-(398, 49, 43, 50.00, 4),
-(399, 49, 52, 400.00, 4),
-(400, 49, 7, 400.00, 4),
-(401, 49, 54, 3.00, 9),
-(402, 49, 82, 2.00, 9),
-(403, 49, 83, 2.00, 9),
-(404, 49, 41, 1.00, 9),
-(405, 49, 28, 1.00, 6),
 (406, 46, 63, 4.00, 9),
 (407, 46, 64, 16.00, 9),
 (408, 46, 65, 1.00, 9),
@@ -1213,13 +1241,6 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (492, 71, 52, 1.00, 5),
 (493, 71, 28, 1.00, 6),
 (494, 71, 89, 315.00, 4),
-(513, 36, 9, 10.00, 2),
-(514, 36, 2, 1.00, 1),
-(515, 36, 8, 50.00, 2),
-(516, 36, 7, 1.00, 3),
-(517, 36, 4, 4.00, 9),
-(518, 36, 6, 5.00, 2),
-(519, 36, 23, 100.00, 1),
 (533, 75, 138, 2.00, 9),
 (534, 75, 54, 2.00, 9),
 (535, 75, 71, 1.00, 9),
@@ -1293,20 +1314,94 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (603, 81, 47, 125.00, 4),
 (604, 81, 9, 50.00, 2),
 (605, 81, 79, 1.00, 6),
-(606, 82, 8, 100.00, 2),
-(607, 82, 87, 3.00, 9),
-(608, 82, 72, 10.00, 2),
-(609, 82, 51, 1.00, 6),
-(610, 83, 8, 100.00, 2),
-(611, 83, 157, 35.00, 2),
-(612, 83, 51, 1.00, 6),
-(613, 84, 8, 100.00, 2),
-(614, 84, 72, 10.00, 2),
-(615, 84, 57, 40.00, 4),
-(616, 84, 51, 1.00, 6),
-(617, 84, 28, 1.00, 6),
-(618, 85, 8, 100.00, 2),
-(619, 85, 158, 50.00, 2);
+(620, 82, 8, 100.00, 2),
+(621, 82, 87, 3.00, 9),
+(622, 82, 72, 10.00, 2),
+(623, 82, 51, 1.00, 6),
+(624, 83, 8, 100.00, 2),
+(625, 83, 157, 35.00, 2),
+(626, 83, 51, 1.00, 6),
+(629, 84, 8, 100.00, 2),
+(630, 84, 72, 10.00, 2),
+(631, 84, 57, 40.00, 4),
+(632, 84, 51, 1.00, 6),
+(633, 84, 28, 1.00, 6),
+(634, 86, 2, 100.00, 2),
+(635, 86, 40, 1.00, 8),
+(636, 86, 159, 80.00, 4),
+(637, 86, 52, 1.00, 8),
+(638, 86, 28, 1.00, 6),
+(639, 86, 29, 1.00, 6),
+(640, 86, 45, 1.00, 5),
+(675, 88, 41, 1.00, 9),
+(676, 88, 59, 190.00, 2),
+(677, 88, 165, 295.00, 2),
+(678, 88, 28, 1.00, 11),
+(679, 88, 9, 5.00, 2),
+(680, 88, 44, 1.00, 2),
+(703, 85, 8, 100.00, 2),
+(704, 85, 158, 50.00, 2),
+(705, 36, 9, 10.00, 2),
+(706, 36, 2, 1.00, 1),
+(707, 36, 8, 50.00, 2),
+(708, 36, 7, 1.00, 3),
+(709, 36, 4, 4.00, 9),
+(710, 36, 6, 5.00, 2),
+(711, 36, 23, 100.00, 1),
+(739, 89, 117, 100.00, 2),
+(740, 89, 4, 50.00, 2),
+(741, 89, 54, 10.00, 2),
+(742, 89, 166, 20.00, 2),
+(743, 89, 167, 10.00, 2),
+(744, 89, 52, 1.00, 10),
+(745, 87, 160, 1.00, 6),
+(746, 87, 161, 60.00, 4),
+(747, 87, 162, 30.00, 4),
+(748, 87, 163, 90.00, 4),
+(764, 90, 168, 120.00, 4),
+(765, 90, 8, 160.00, 2),
+(766, 90, 169, 30.00, 2),
+(767, 90, 174, 240.00, 2),
+(768, 90, 170, 65.00, 2),
+(769, 90, 41, 1.00, 9),
+(770, 90, 171, 1.00, 10),
+(771, 90, 2, 130.00, 2),
+(772, 90, 28, 1.00, 11),
+(773, 90, 42, 1.00, 10),
+(774, 90, 172, 105.00, 2),
+(775, 90, 145, 125.00, 2),
+(776, 90, 173, 45.00, 4),
+(777, 90, 47, 100.00, 4),
+(778, 90, 175, 100.00, 4),
+(823, 49, 80, 1.00, 1),
+(824, 49, 2, 1.00, 1),
+(825, 49, 81, 2.00, 8),
+(826, 49, 43, 50.00, 4),
+(827, 49, 52, 400.00, 4),
+(828, 49, 7, 400.00, 4),
+(829, 49, 54, 3.00, 9),
+(830, 49, 82, 2.00, 9),
+(831, 49, 83, 2.00, 9),
+(832, 49, 41, 1.00, 9),
+(833, 49, 28, 1.00, 6),
+(834, 91, 41, 3.00, 9),
+(835, 91, 9, 200.00, 2),
+(836, 91, 45, 125.00, 2),
+(837, 91, 171, 1.00, 11),
+(838, 91, 176, 125.00, 2),
+(839, 91, 2, 250.00, 2),
+(840, 91, 44, 16.00, 2),
+(841, 91, 169, 15.00, 2),
+(842, 91, 7, 3.00, 8),
+(843, 91, 8, 1.00, 6),
+(844, 92, 43, 1080.00, 4),
+(845, 92, 28, 1.00, 5),
+(846, 92, 48, 1.00, 9),
+(847, 92, 54, 1.00, 1),
+(848, 92, 47, 250.00, 4),
+(849, 92, 52, 1.00, 5),
+(850, 92, 117, 1.00, 1),
+(851, 92, 35, 1.00, 6);
 
 -- --------------------------------------------------------
 
@@ -1331,8 +1426,8 @@ TRUNCATE TABLE `recetas_tecnicas`;
 --
 
 INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`) VALUES
-(113, 36, 12),
-(112, 36, 28),
+(143, 36, 12),
+(142, 36, 28),
 (100, 37, 12),
 (12, 38, 21),
 (86, 39, 13),
@@ -1341,9 +1436,9 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (84, 46, 21),
 (21, 47, 28),
 (22, 48, 13),
-(82, 49, 18),
-(83, 49, 21),
-(81, 49, 25),
+(164, 49, 18),
+(165, 49, 21),
+(163, 49, 25),
 (80, 51, 21),
 (27, 52, 13),
 (28, 52, 21),
@@ -1375,7 +1470,15 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (122, 78, 28),
 (123, 79, 12),
 (124, 80, 13),
-(125, 81, 23);
+(125, 81, 23),
+(126, 86, 12),
+(129, 88, 23),
+(148, 89, 23),
+(147, 89, 25),
+(150, 90, 25),
+(166, 91, 25),
+(167, 92, 13),
+(168, 92, 21);
 
 -- --------------------------------------------------------
 
@@ -1400,10 +1503,10 @@ TRUNCATE TABLE `recetas_tiposplato`;
 --
 
 INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo`) VALUES
-(139, 36, 1),
-(137, 36, 10),
-(138, 36, 11),
-(136, 36, 12),
+(230, 36, 1),
+(228, 36, 10),
+(229, 36, 11),
+(227, 36, 12),
 (100, 37, 7),
 (24, 38, 10),
 (87, 39, 3),
@@ -1413,8 +1516,8 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (85, 46, 3),
 (34, 47, 3),
 (35, 48, 4),
-(83, 49, 1),
-(84, 49, 3),
+(250, 49, 1),
+(251, 49, 3),
 (82, 50, 3),
 (81, 50, 11),
 (80, 51, 7),
@@ -1442,14 +1545,26 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (148, 79, 7),
 (149, 80, 4),
 (150, 81, 4),
-(152, 82, 11),
-(151, 82, 12),
-(154, 83, 11),
-(153, 83, 12),
-(156, 84, 11),
-(155, 84, 12),
-(158, 85, 11),
-(157, 85, 12);
+(161, 82, 1),
+(160, 82, 11),
+(159, 82, 12),
+(164, 83, 1),
+(163, 83, 11),
+(162, 83, 12),
+(170, 84, 1),
+(169, 84, 11),
+(168, 84, 12),
+(208, 85, 1),
+(207, 85, 11),
+(206, 85, 12),
+(172, 86, 1),
+(171, 86, 12),
+(239, 87, 1),
+(183, 88, 10),
+(238, 89, 3),
+(241, 90, 4),
+(252, 91, 10),
+(253, 92, 3);
 
 -- --------------------------------------------------------
 
@@ -1474,9 +1589,8 @@ TRUNCATE TABLE `recetas_utensilios`;
 --
 
 INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_utensilio`) VALUES
-(217, 36, 1),
-(218, 36, 4),
-(219, 36, 6),
+(285, 36, 1),
+(286, 36, 4),
 (14, 38, 163),
 (15, 38, 164),
 (16, 38, 165),
@@ -1504,11 +1618,11 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (45, 47, 180),
 (47, 48, 180),
 (46, 48, 181),
-(158, 49, 167),
-(159, 49, 175),
-(160, 49, 176),
-(161, 49, 177),
-(162, 49, 182),
+(325, 49, 167),
+(326, 49, 175),
+(327, 49, 176),
+(328, 49, 177),
+(329, 49, 182),
 (54, 50, 171),
 (53, 50, 183),
 (157, 51, 184),
@@ -1571,16 +1685,43 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (238, 80, 181),
 (239, 81, 166),
 (240, 81, 199),
-(243, 82, 183),
-(241, 82, 191),
-(242, 82, 195),
-(244, 83, 185),
-(246, 83, 191),
-(245, 83, 195),
-(247, 84, 185),
-(249, 84, 191),
-(248, 84, 195),
-(250, 85, 185);
+(251, 82, 183),
+(252, 82, 191),
+(253, 82, 195),
+(254, 83, 185),
+(255, 83, 191),
+(256, 83, 195),
+(258, 84, 185),
+(259, 84, 191),
+(260, 84, 195),
+(284, 85, 185),
+(261, 86, 166),
+(262, 86, 167),
+(263, 86, 175),
+(265, 86, 182),
+(264, 86, 191),
+(274, 88, 166),
+(275, 88, 175),
+(292, 89, 181),
+(293, 89, 199),
+(294, 89, 202),
+(300, 90, 1),
+(301, 90, 163),
+(302, 90, 171),
+(303, 90, 181),
+(304, 90, 196),
+(331, 91, 1),
+(332, 91, 163),
+(333, 91, 173),
+(330, 91, 175),
+(340, 92, 6),
+(335, 92, 163),
+(338, 92, 164),
+(334, 92, 171),
+(336, 92, 177),
+(337, 92, 181),
+(339, 92, 203),
+(341, 92, 204);
 
 -- --------------------------------------------------------
 
@@ -1917,7 +2058,11 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (197, 'wok', 'wok_4545.jpg', 1),
 (198, 'Desescamador', NULL, 1),
 (199, 'Fuente', 'Fuente_8260.jpg', 1),
-(200, 'Tiburón', 'Tiburn_2027.jpg', 1);
+(200, 'Tiburón', 'Tiburn_2027.jpg', 1),
+(201, 'Copa cocktail', 'Copa_cocktail_8719.jpg', 1),
+(202, 'Ramequín', 'Ramequn_5740.jpg', 1),
+(203, 'Sifón', 'Sifn_1502.jpg', 0),
+(204, 'Embudo', 'Embudo_6467.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -2213,13 +2358,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -2237,7 +2382,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -2249,31 +2394,31 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=620;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=852;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
@@ -2321,7 +2466,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
