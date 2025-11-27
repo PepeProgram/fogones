@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-11-2025 a las 22:32:50
+-- Tiempo de generación: 27-11-2025 a las 22:10:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,7 +29,6 @@ USE `fogones`;
 -- Estructura de tabla para la tabla `administradores`
 --
 
-DROP TABLE IF EXISTS `administradores`;
 CREATE TABLE `administradores` (
   `id_administrador` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -56,7 +55,6 @@ INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `alergenos`
 --
 
-DROP TABLE IF EXISTS `alergenos`;
 CREATE TABLE `alergenos` (
   `id_alergeno` int(11) NOT NULL,
   `nombre_alergeno` varchar(200) NOT NULL,
@@ -94,7 +92,6 @@ INSERT INTO `alergenos` (`id_alergeno`, `nombre_alergeno`, `foto_alergeno`) VALU
 -- Estructura de tabla para la tabla `autores`
 --
 
-DROP TABLE IF EXISTS `autores`;
 CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL,
   `nombre_autor` varchar(80) NOT NULL,
@@ -125,7 +122,6 @@ INSERT INTO `autores` (`id_autor`, `nombre_autor`, `foto_autor`, `id_pais`, `des
 -- Estructura de tabla para la tabla `editores`
 --
 
-DROP TABLE IF EXISTS `editores`;
 CREATE TABLE `editores` (
   `id_editor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -142,7 +138,6 @@ TRUNCATE TABLE `editores`;
 -- Estructura de tabla para la tabla `estilos_cocina`
 --
 
-DROP TABLE IF EXISTS `estilos_cocina`;
 CREATE TABLE `estilos_cocina` (
   `id_estilo` int(11) NOT NULL,
   `nombre_estilo` varchar(50) NOT NULL,
@@ -182,7 +177,6 @@ INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `foto_estilo`) VALUE
 -- Estructura de tabla para la tabla `favoritas`
 --
 
-DROP TABLE IF EXISTS `favoritas`;
 CREATE TABLE `favoritas` (
   `id_favoritas` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -211,7 +205,6 @@ INSERT INTO `favoritas` (`id_favoritas`, `id_usuario`, `id_receta`) VALUES
 -- Estructura de tabla para la tabla `grupos_plato`
 --
 
-DROP TABLE IF EXISTS `grupos_plato`;
 CREATE TABLE `grupos_plato` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(50) NOT NULL,
@@ -247,7 +240,6 @@ INSERT INTO `grupos_plato` (`id_grupo`, `nombre_grupo`, `foto_grupo`) VALUES
 -- Estructura de tabla para la tabla `ingredientes`
 --
 
-DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE `ingredientes` (
   `id_ingrediente` int(11) NOT NULL,
   `nombre_ingrediente` varchar(80) NOT NULL,
@@ -422,7 +414,9 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (173, 'Crema Baileys', 1),
 (174, 'Azúcar glas', 1),
 (175, 'Melaza', 1),
-(176, 'Yogurt natural', 1);
+(176, 'Yogurt natural', 1),
+(177, 'Pescado', 1),
+(178, 'Bouquet garni', 1);
 
 -- --------------------------------------------------------
 
@@ -430,7 +424,6 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 -- Estructura de tabla para la tabla `ingredientes_alergenos`
 --
 
-DROP TABLE IF EXISTS `ingredientes_alergenos`;
 CREATE TABLE `ingredientes_alergenos` (
   `id_ing_ale` int(11) NOT NULL,
   `id_ingrediente` int(11) NOT NULL,
@@ -512,7 +505,8 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 (81, 167, 2),
 (86, 168, 3),
 (87, 168, 12),
-(88, 176, 2);
+(88, 176, 2),
+(89, 177, 5);
 
 -- --------------------------------------------------------
 
@@ -520,7 +514,6 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 -- Estructura de tabla para la tabla `paises`
 --
 
-DROP TABLE IF EXISTS `paises`;
 CREATE TABLE `paises` (
   `id_pais` int(11) NOT NULL,
   `esp_pais` varchar(50) NOT NULL,
@@ -796,7 +789,6 @@ INSERT INTO `paises` (`id_pais`, `esp_pais`, `eng_pais`, `fra_pais`, `iso2_pais`
 -- Estructura de tabla para la tabla `propias`
 --
 
-DROP TABLE IF EXISTS `propias`;
 CREATE TABLE `propias` (
   `id_propias` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -814,7 +806,6 @@ TRUNCATE TABLE `propias`;
 -- Estructura de tabla para la tabla `recetas`
 --
 
-DROP TABLE IF EXISTS `recetas`;
 CREATE TABLE `recetas` (
   `id_receta` int(11) NOT NULL,
   `nombre_receta` varchar(255) NOT NULL,
@@ -870,7 +861,7 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (66, 'Picantones rellenos de manzana', 'La versatilidad de esta carne nos permite acompañarla con infinidad de guarniciones, desde el clásico puré de patata o patata panadera, hasta una ensalada, que le va a dar frescor sin llenar demasiado.', 23, 1, 2, '01:30:00', NULL, 0, 0, 1, 3, '*Relleno: Cortamos el pan en dados que tostaremos en 15 gr. de mantequilla en una sartén. Escurrimos en papel y reservamos.\r\nPelamos las manzanas y las cortamos en brunoise, las depositamos en un bol donde las mezclamos con las pasas, el licor, el vino y el caldo y el almíbar. Dejamos macerar unos 30 minutos.\r\nAl pan frito le añadimos ajo en brunoise frito, la yema de huevo en crudo, la nata y el perejil. Añadimos esta mezcla a la marinada. Condimentamos.\r\n\r\n    *Picantones: Los deshuesamos y salpimentamos. Separamos la piel de las pechugas y comenzamos a rellenar debajo, dándole forma.\r\nDamos la vuelta al pollo y rellenamos la cavidad abdominal con el relleno que nos queda.\r\nBridamos dándole una bonita forma y metemos al horno durante 40-45 minutos a 165ºC. Hidratar de vez en cuando con almíbar mezclado con aceite o mantequilla.\r\n\r\nDoramos unas rodajas de piña a la plancha como guarnición.', 'En un plato, acompañado de la piña a la plancha colocamos el picantón con la piel hacia arriba y lo braseamos con sus jugos.\r\nAdemás le podemos poner otra  guarnción a mayores como,  patata panadera, puré de patata, ensalada, ....', 'Picantones_202511160819295636.jpg', 1, '2025-11-17 20:16:34', '2025-11-17 20:16:34', 1),
 (67, 'Flan de castaña', 'Evoca los sabores de otoño con una textura cremosa y un sabor delicadamente dulce.', 23, 6, 8, '01:00:00', NULL, 13, 64, 1, 3, '*Puré de castaña: Cocer las castañas, pelar y triturar con parte de la leche.\r\nAñadir el resto de la leche y calentar el conjunto.\r\n\r\nPor otro lado mezclar los huevos con 200 gr. de azúcar, sobre esta mezcla, añadir la  leche de castaña, .\r\n\r\nCon los 200gr restantes de azúcar, caramelizar los moldes con un caramelo rubio (128ºC).\r\n\r\nLlenar los moldes hasta 3/4 con la mezcla de flan. Hornear a 180ºC en baño maría, 20 minutos para flanes individuales.\r\n\r\nEnfriar antes de desmoldar.', 'Se puede acompañar de cigarrillos, tejas, figura de caramelo o chocolate, crumble, nata montada etc..', 'Flan_202511160839378170.jpg', 1, '2025-11-17 20:05:50', '2025-11-17 20:05:50', 1),
 (68, 'Naked cake de calabaza vegano (sin huevos, sin lactosa)', 'Un cake libre de ingredientes de origen animal, siendo una deliciosa opción para quienes siguen una dieta vegana o les apetece probar algo nuevo.', 23, 6, 8, '01:00:00', NULL, 0, 0, 1, 2, 'Asar la calabaza y triturarla hasta obtener un puré.\r\nAñadir al puré el aceite de oliva y el azúcar, triturar de nuevo.\r\nSobre esta mezcla, ir incorporando suavemente la harina con la canela molida y el bicarbonato y la sal.\r\nIncorporamos las nueces troceadas.\r\nHornear  a 180ºC aproximadamente unos 40 minutos. en pequeños moldes\r\nDesmoldar una vez frío. Es delicado.', 'Montamos varios discos en un aro estilo naked cake, rellenar de nata vegetal montada con fresas naturales en daditos y puntos de coulis de calabaza.', 'Naked_202511160857516651.jpg', 1, '2025-11-18 12:17:37', '2025-11-18 12:17:37', 1),
-(69, 'Platito de pruebas', 'Descripción descrita muy descritamente', 19, 15, 3, '05:11:00', NULL, 13, 64, 1, 1, 'Elaboración muy elaborada y elaboradita', 'Emplatadito bien emplatado', 'Platito_202511170712064815.jpg', 1, '2025-11-17 18:26:02', '2025-11-17 18:26:02', 0),
+(69, 'Platito de pruebas', 'Descripción descrita muy descritamente', 19, 15, 3, '05:00:00', NULL, 13, 64, 1, 1, 'Tempora aspernatur doloribus: possimus necessitatibus exercitationem velit temporibus esse Velit labore tenetur at molestias delectus assumenda cum cumque quidem, quibusdam, totam culpa eligendi veritatis ex dolorem corrupti, excepturi tempore. Voluptatum.\r\nOptio libero est, culpa labore nesciunt iusto ea perferendis deserunt error autem eius amet voluptatibus ut possimus sunt tempora voluptatum exercitationem qui dolores Tempora officiis hic sequi voluptates atque aut.\r\nVoluptatum esse ipsa sequi natus totam nam non veniam maiores suscipit Eius delectus debitis sequi, nesciunt expedita iusto molestias aspernatur impedit. Vero veniam suscipit eos ullam cumque. In, voluptatem magnam\r\nRem magnam, sunt ad eius: sequi recusandae similique quo ipsa id error deleniti doloribus nobis voluptatem ipsum dolorum inventore maxime eos velit incidunt eveniet possimus quaerat reiciendis provident. Quibusdam, distinctio.\r\nAnimi: perferendis. Odit corporis id labore libero omnis aperiam ut, minima odio dolorum dolores porro debitis ad numquam fugit earum quos blanditiis voluptate aliquam soluta sint perspiciatis. Debitis, exercitationem sapiente.', 'Tempora: aspernatur doloribus possimus necessitatibus exercitationem velit temporibus esse Velit labore tenetur at molestias delectus assumenda cum cumque quidem, quibusdam, totam culpa eligendi veritatis ex dolorem corrupti, excepturi tempore. Voluptatum.\r\nOptio libero est, culpa labore nesciunt iusto ea perferendis deserunt error autem eius amet voluptatibus ut possimus sunt tempora voluptatum exercitationem qui dolores Tempora officiis hic sequi voluptates atque aut.\r\nVoluptatum esse ipsa sequi natus totam nam non veniam maiores suscipit Eius delectus debitis sequi, nesciunt expedita iusto molestias aspernatur impedit. Vero veniam suscipit eos ullam cumque. In, voluptatem magnam\r\nRem magnam, sunt ad eius, sequi recusandae similique quo ipsa id error deleniti doloribus nobis voluptatem ipsum dolorum inventore maxime eos velit incidunt eveniet possimus quaerat reiciendis provident. Quibusdam, distinctio.\r\nAnimi, perferendis. Odit corporis id labore libero omnis aperiam ut, minima odio dolorum dolores porro debitis ad numquam fugit earum quos blanditiis voluptate aliquam soluta sint perspiciatis. Debitis, exercitationem sapiente.Tempora aspernatur doloribus possimus necessitatibus exercitationem velit temporibus esse Velit labore tenetur at molestias delectus assumenda cum cumque quidem, quibusdam, totam culpa eligendi veritatis ex dolorem corrupti, excepturi tempore. Voluptatum.\r\nOptio libero est, culpa labore: nesciunt iusto ea perferendis deserunt error autem eius amet voluptatibus ut possimus sunt tempora voluptatum exercitationem qui dolores Tempora officiis hic sequi voluptates atque aut.\r\nVoluptatum esse ipsa sequi natus totam nam non veniam maiores suscipit Eius delectus debitis sequi, nesciunt expedita iusto molestias aspernatur impedit. Vero veniam suscipit eos ullam cumque. In, voluptatem magnam\r\nRem magnam, sunt ad eius, sequi recusandae similique quo ipsa id error deleniti doloribus nobis voluptatem ipsum dolorum inventore maxime eos velit incidunt eveniet possimus quaerat reiciendis provident. Quibusdam, distinctio.\r\nAnimi, perferendis. Odit corporis id labore libero: omnis aperiam ut, minima odio dolorum dolores porro debitis ad numquam fugit earum quos blanditiis voluptate aliquam soluta sint perspiciatis. Debitis, exercitationem sapiente.Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat placeat vel non facere nobis quos aliquid, voluptate doloribus atque neque quia architecto, iste debitis maxime obcaecati odit. Vitae, aliquam fuga.\r\nFacilis quidem architecto ducimus Porro quo beatae placeat. Quo modi itaque doloremque et. Dicta ex sit ipsam, quia corporis nobis vitae facilis earum, sequi officia nemo inventore deleniti quibusdam fugit.\r\nAccusamus sint odit deleniti minima obcaecati. Laborum aliquid nostrum numquam repellat ratione itaque sit vitae, natus sed voluptatem placeat aut aliquam deserunt tempore nam ducimus rem atque eveniet magni tenetur.\r\nNisi iure voluptatem, harum aperiam deserunt esse earum illum asperiores laboriosam eius magni veritatis fuga cumque tenetur eaque ipsam vero. At nam voluptas earum. Earum iusto ipsa commodi rem nam\r\nArchitecto ipsam temporibus accusantium maiores omnis enim modi earum assumenda voluptas minima, veniam officia ea deleniti, mollitia quidem eius aperiam. Officiis officia harum voluptate beatae, non fugit eveniet rerum totam.\r\nTempora aspernatur doloribus possimus necessitatibus exercitationem velit temporibus esse Velit labore tenetur at molestias delectus assumenda cum cumque quidem, quibusdam, totam culpa eligendi veritatis ex dolorem corrupti, excepturi tempore. Voluptatum.\r\nOptio libero est, culpa labore nesciunt iusto ea perferendis deserunt error autem eius amet voluptatibus ut possimus sunt tempora voluptatum exercitationem qui dolores Tempora officiis hic sequi voluptates atque aut.\r\nVoluptatum esse ipsa sequi natus totam nam non veniam maiores suscipit Eius delectus debitis sequi, nesciunt expedita iusto molestias aspernatur impedit. Vero veniam suscipit eos ullam cumque. In, voluptatem magnam\r\nRem magnam, sunt ad eius, sequi recusandae similique quo ipsa id error deleniti doloribus nobis voluptatem ipsum dolorum inventore maxime eos velit incidunt eveniet possimus quaerat reiciendis provident. Quibusdam, distinctio.\r\nAnimi, perferendis. Odit corporis id labore libero omnis aperiam ut, minima odio dolorum dolores porro debitis ad numquam fugit earum quos blanditiis voluptate aliquam soluta sint perspiciatis. Debitis, exercitationem sapiente.', 'Platito_202511170712064815.jpg', 1, '2025-11-17 18:26:02', '2025-11-27 19:10:57', 1),
 (70, 'Buñuelosde  bacalao', 'Su origen se remonta a la cuaresma, cuando se evitava el consumo de carne,  una alternativa rica y fácil de conservar.  Son unas bolitas fritas y esponjosas con un sabor saldo delicioso.', 2, 2, 4, '02:30:00', NULL, 0, 64, 1, 3, 'Preparar la masa de los buñuelos: Poner en un cuenco la harina formando un volcán y verter en el centro el aceite de oliva, la cerveza, la levadura, el ajo en polvo, una pizca de sal y pimienta negra molida la yema de huevo y el agua (la que necesita.) \r\nAmasar hasta conseguir una masa densa. Tapar y dejar reposar 1-2 horas.\r\nAparte, escaldamos el bacalao, desmigamos y desmenuzamos.\r\nUna vez reposada la masa de los buñuelos, montar la clara a punto de nieve.\r\nIncorporar el bacalao a la masa y a continuación la clara, con cuidado.\r\nFreír en abundante aceite caliente.', '', 'Buuelosde_20251119065416671.jpg', 1, '2025-11-19 17:54:16', '2025-11-19 18:28:20', 1),
 (71, 'Arroz pilaf', 'Receta de arroz largo de origen oriental, que admite infinidad de ingredientes.  Ideal para guarnición de carnes, aves,  pescados e incluso parrillada de verduras', 13, 15, 4, '00:45:00', NULL, 0, 0, 2, 1, 'Estos son los ingredientes de la receta básica, pero se le pueden añadir pasas, almendras o pistachos para darle dulzura o vegetales como zanahoria, guisantes, pimientos para hacerlo más nutritivo y colorido. Además en algunos paises de medio oriente lo enriquecen con comino, canela, clavo y cardamomo\r\n\r\nPasamos el arroz bajo el grifo de agua fria para quitarle el almidón.\r\nCortamos el ajo y la cebolla en brunoise y, opcionalmente los vegetales . Los pochamos en 1 cucharada mantequilla, hasta que estén transparentes,(es el momento de añadir hierbas, y frutos secos que hayas elegido),  incorporamos el arroz y rehogamos todo junto. Dejamos que tome los sabores y añadimos el caldo de pollo, también le va bien  de verduras. Dejamos a fuego lento 15 minutos y terminamos en horno con el arroz tapado a 160ºC. 10 minutos más.', 'Servir en plato decorado con hierbas frescas', 'Arroz_202511190849446374.jpg', 1, '2025-11-19 19:49:44', '2025-11-19 19:51:39', 1),
 (74, 'Pecado picante de ternera', 'Receta rescatada del Gran libro de recetas Afrodisiacas para esa ocasión especial.', 14, 1, 2, '01:00:00', NULL, 0, 0, 0, 3, 'Pelar la cebolla, los dientes de ajo y un trozo de 2cm de jengibre, los troceamos y trituramos junto a la piel de medio limón y la mitad de la leche de coco. Obtenemos una crema\r\n\r\nTriturar los cacahuetes, un chile y 7 hojas de espinacas.\r\n\r\nVerter la leche de coco restante en una cazuela. Cuando empiece a hervir, añadir el triturado de cacahuetes+chile+ espinacas, junto a la salsa de soja y el azúcar. Dejar que cueza 20 min.\r\n\r\nPasado este tiempo, agregar la crema a la cazuela y cocer 20 minutos más.\r\n\r\nMientras, en una sartén, pasar la el solomillo, en rodajas, al punto que más nos guste en un poco de aceite. Salar.', 'Hacemos una cama con la salsa para poner la carne encima, un poco de rúcula y un chile, le dan vistosidad.', 'Pecado_202511210844208306.jpg', 1, '2025-11-21 19:44:20', '2025-11-22 10:14:46', 1),
@@ -883,15 +874,17 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (81, 'Torrija de brioche', 'Postre tradicional español, que se caracteriza por su textura suave y el crujiente del caramelizado', 13, 6, 4, '00:30:00', NULL, 0, 64, 1, 2, 'Aromas (canela, piel de limón y/o naranja)\r\n\r\nEn un cazo infusionar la leche entera, la nata líquida con el azúcar y los aromas elegidos. Dejar enfriar y colar.\r\n\r\nRemojar en esta mezcla las 4 rebanadas de brioche. Girar para mojar bien el pan por ambos lados. Hacer esto en una fuente amplia, para poder girar las rebanadas sin que se toquen. Dejar en la leche 10 minutos por cada lado. Mucho cuidado al girar porque se vuelven quebradizas. \r\nCalentar una sartén, poner un trozo de papel de horno del tamaño de la torrija, fundir en el una pizca de mantequilla y colocar la torrija escurrida. Dejar que se dore bien por ese lado y girar, con ayuda de una espátula y colocando otro papel de horno en la parte superior.\r\nDejamos que caramelice bien por ambos lados. Servir de inmediato.', 'Acompañada de crema pastelera de naranja o mandarina, por encima de la torrija  quemada-caramelizada.\r\n\r\nEn sopa ligera de vainilla y carmelizada la torriza.', 'Torrija_202511220936102951.png', 1, '2025-11-22 20:36:10', '2025-11-22 20:36:10', 1),
 (82, 'Mantequilla de ajo', 'Mantequilla saborizada con ajo, que tanto podemos utilizar como acompañamiento. o bien añadir en un plato como guarnición potenciando el sabor de un asado.', 2, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla.\r\n\r\nEn mortero majar el ajo, perejil y pimienta, una vez machacados mezclar con la mantequilla.\r\n\r\nPoner en modes pequeñitos como de bombones o hielo para bolitas, o hacer un cilindro con toda la mantequilla que filmaremos y guardamos en frio hasta que endurezca.', 'En un plato aparte, junto con tosta de pan, o picos, también puede acompañar una tabla de quesos y embutidos.', 'Mantequilla_202511230958049188.jpg', 1, '2025-11-23 20:58:04', '2025-11-24 11:37:44', 1),
 (83, 'Mantequilla de anchoas', 'Mantequilla saborizada con anchoas idela como acompañamiento, canapés o la podemos añadir como guarición en pescados a la parrilla.', 14, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla.\r\nTrituramos la mantequilla junto a  los filetes de anchoa bien escurrido y la pimienta, podemos colarlo si es necesario.\r\n\r\nLa guardamos en moldes pequeños para hacer bolitas o filmamos en cilindro,  en frio, si queremos tomarla mas compacta', 'En platito hondo para poder untarla en tostas o tomarla con picos de pan. O como una quenelle  en el mismo plato que un pescado a la parrilla.', 'Mantequilla_202511231009428921.jpg', 1, '2025-11-23 21:09:42', '2025-11-24 11:38:06', 1),
-(84, 'Mantequilla maitre de hotel', 'Mantequilla compuesta muy versátil por su composición que tanto nos sirve de acompañamiento al inicio de una comida  como de guarnición para cualquier plato, tanto de pescado, marisco, carne, arroz, etc.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla\r\nMezclar la mantequilla, el perejil picado, el zumo de limón, la pimienta y la sal.\r\n\r\nDisponer en molde como para hacer bolitas o filmar con forma de cilindro, y guardar en frio.', 'En platitos para untar tostas, canapés, etc.. O en el mismo plato principal como guarnición en caliente.', 'Mantequilla_202511231023251818.jpg', 1, '2025-11-23 21:23:25', '2025-11-24 11:39:15', 0),
+(84, 'Mantequilla maitre de hotel', 'Mantequilla compuesta muy versátil por su composición que tanto nos sirve de acompañamiento al inicio de una comida  como de guarnición para cualquier plato, tanto de pescado, marisco, carne, arroz, etc.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomar la mantequilla\r\nMezclar la mantequilla, el perejil picado, el zumo de limón, la pimienta y la sal.\r\n\r\nDisponer en molde como para hacer bolitas o filmar con forma de cilindro, y guardar en frio.', 'En platitos para untar tostas, canapés, etc.. O en el mismo plato principal como guarnición en caliente.', 'Mantequilla_202511231023251818.jpg', 1, '2025-11-23 21:23:25', '2025-11-24 11:39:15', 1),
 (85, 'Mantequilla de salmón', 'Una opción elegante y deliciosa de sabor sofisticado como complemento para una ocasión especial.', 13, 19, 4, '00:30:00', NULL, 0, 71, 1, 1, 'Empomamos la mantequilla y mezclamos con  el salmón ahumado triturado.\r\n\r\nLa cantidad de salmón es orientativa.', 'En canapé, como complemento al empezar un cena, también queda muy bien en una tabla de quesos y embutidos o en una ensalada de aguacates y cítricos.', 'Mantequilla_202511231035482410.jpg', 1, '2025-11-23 21:35:48', '2025-11-25 12:40:00', 1),
 (86, 'Totopos caseros', 'Triangulos de tortilla fritas o tostadas muy populares en méxico.', 13, 13, 4, '01:00:00', NULL, 0, 141, 4, 2, 'Mezclar bien las harinas con la sal y pimienta, añadir el aceite de oliva, mezclar.\r\nIr añadiendo el agua caliente poco a poco, según pida la masa, hasta que quede lisa y manejable, seguimos amasando un poco.\r\n\r\nFilmamos y llevamos a  frio por media hora.\r\n\r\nExtendemos la masa entre dos papeles de horno, y estiramos lo más fino posible.\r\n\r\nCortamos en triángulos y freimos en abundante aceite, 2 minutos. Depositamos en papel absorvente.', 'Ideales para acompañar guacamole, pico de gallo....', 'Totopos_202511240112589106.jpg', 1, '2025-11-24 12:12:58', '2025-11-24 12:12:58', 1),
 (87, 'Sangre de muerto', 'Combinación perfecta de un rojo intenso imitando la sangre  con sabor  afrutado.', 14, 16, 1, '00:05:00', NULL, 0, 0, 0, 1, 'En la misma copa donde se va a servir, disponemos unas gotitas de granadina, para dar intensidad, y mezclamos el resto de los ingredientes con delicadeza para conseguir el efecto de la sangre.\r\n\r\nSi queremos hacer más cantidad, podemos mezclarlo en una jarra y  repartirlo posteriormene en copas, chupitos.. a los que les echamos las gotitas de grandina con anterioridad al reparto.', 'Adornamos la copa con unas pieles de naranja para intensificar el sabor y una guinda. También podemos presentarlo en una jeringuilla.', 'Sangre_202511240156262851.jpg', 1, '2025-11-24 12:56:26', '2025-11-25 19:27:12', 1),
-(88, 'Tortitas de avena sin lactosa', 'Esta receta de  tortitas contiene gluten, pero están hechas con leche de avena, por lo que no llevan lactosa, quedan esponjosas y resultan deliciosas.', 2, 13, 4, '00:40:00', NULL, 0, 0, 0, 1, 'Mezclar huevo y leche de avena, e ir incorporando poco a poco los sólidos (ya mezclados previamente)\r\nDejamos reposar la mezcla 30 minutos.\r\n\r\nCocinar por ambos lados en sartén antihadherente hasta que haga burbujitas. ( Si usamos mantequilla, que sea sin lactosa) pero no haría falta,.', 'Podemos acompañarla con una compota de pera, o plátanos, o fresa.., y adornarla con un coulis, sirope, salsa dulce.....', 'Tortitas_202511240805568160.jpg', 1, '2025-11-24 19:05:56', '2025-11-24 19:05:56', 0),
+(88, 'Tortitas de avena sin lactosa', 'Esta receta de  tortitas contiene gluten, pero están hechas con leche de avena, por lo que no llevan lactosa, quedan esponjosas y resultan deliciosas.', 2, 13, 4, '00:40:00', NULL, 0, 0, 0, 1, 'Mezclar huevo y leche de avena, e ir incorporando poco a poco los sólidos (ya mezclados previamente)\r\nDejamos reposar la mezcla 30 minutos.\r\n\r\nCocinar por ambos lados en sartén antihadherente hasta que haga burbujitas. ( Si usamos mantequilla, que sea sin lactosa) pero no haría falta,.', 'Podemos acompañarla con una compota de pera, o plátanos, o fresa.., y adornarla con un coulis, sirope, salsa dulce.....', 'Tortitas_202511240805568160.jpg', 1, '2025-11-24 19:05:56', '2025-11-24 19:05:56', 1),
 (89, 'Escondidinho', 'El escondidinho es un plato delicioso que combina un puré cremoso con un relleno de sardinas, gratinado, fácil de hacer e ideal para cocinar con antelación e incluso congelar.', 2, 2, 1, '00:50:00', NULL, 0, 31, 4, 2, '*Puré de patata: Cocer la patata y cuando esté blandita, ligar con aceite de oliva y leche.\r\n\r\n    *Relleno: Escurrir la sardina y picarla muy fina, la cebolla picada en brunoise\r\n\r\nEn un ramequín un poco alto, disponer la mitad del puré, enima una capa de sardina+cebolla, y una última capa con la otra mitad de puré de patata.  \r\nEspolvorear con el queso rallado y gratinar a 200ºC unos 20 minutos, hasta que la superficie esté dorada.', 'En el propio ramequín, encima de un plato', 'Escondidinho_202511240845348788.png', 1, '2025-11-24 19:45:34', '2025-11-25 19:25:55', 1),
 (90, 'Pastel de chocolate con Guinness y Baileys', 'Este postre combina la deliciosa cerveza negra Guinness con la suave crema Baileys para crear un sabor único y refrescante.', 14, 6, 8, '01:00:00', NULL, 0, 0, 0, 3, 'Precalentar el horno a 195ºC, Engrasar 8 moldes pequeños y encamisarlos con papel sulfurizado y que sobresalga 2cm del borde.\r\n\r\n    *Bizcocho: Poner en un cazo a fuego medio la guinness y 120gr. de mantequilla. Remover hasta que se haya derretido, procurando que no llegue a hervir. Incorporar el cacao en polvo y 200gr. de azúcar tamizados, batir la mezcla y pasarla a un recipiente mediano.\r\nEn otro bol, batir la crema agria, el huevo y la vainilla, añadir la mezcla de la cerveza, sin dejar de remover. Tamizar la harina, sal y bicarbonato en un recipiente y añadir a  la mezcla anterior, batiendo hasta que los ingredientes estén incorporados y no se vean grumos. Introducir la mezcla en los moldes y hornear los pasteles unos 20 minutos o hasta que al pinchar el centro con un palillo, éste salga limpio.\r\nSacar los moldes del horno, dejar que se enfríen unos 10 minutos y desmoldarlos. Dejar enfriar.\r\n\r\n    *Crema Baileys: Batir el mascarpone con el Baileys,  utilizando la kitchen ( o batidora de varillas eléctrica). Añadir los 40 gr. de azúcar glass restante y seguir batiendo a baja velocidad para mezclar los ingredientes. Aumenta la velocidad a media-alta y sigue batiendo hasta obtener textura de buttercream. Reservar hasta el momento de servir.\r\n\r\n    *Ganache de chocolate: Trocear muy fino 100 gr de chocolate (mejor si es 70%), Calentar la nata y la melaza a fuego medio-alto. En cuanto empiece a burbujear, retirar del fuego. Añadir el chocolate troceado y batir enérgicamente hasta que se disuelva, incorporar la mantequilla restante y seguir batiendo hasta que la mezcla se vuelva homogénea y brillante.\r\n\r\nCon el resto de chocolate, hacemos unas virutas y decoramos.', 'Cortar a la mitad los bizcochos y rellenar con un poco crema baileys. con el resto de crema envolvemos los bizcochos ya montados.\r\nCubrimos la parte superior  con la ganache y decoramos con las virutas de chocolate.', 'Pastel_202511251003205302.jpg', 1, '2025-11-25 21:03:20', '2025-11-25 21:07:15', 1),
-(91, 'Bizcocho marmolado', 'Mezcla de chocolate y vainilla en un bizcocho marmolado, que resulta esponjoso y algo húmedo.', 13, 6, 8, '01:30:00', NULL, 0, 0, 1, 2, 'Blanquear  huevos y azúcar. Cuando estén bien esponjados, ir añadiendo el aceite a chorro fino y después la vainilla, mientras seguimos batiendo. Añadir el yogurt.\r\nA continuación, ya a mano, incorporar suavemente con movimientos envolventes la harina tamizada con el impulsor.\r\nDebe quedar una mezcla homogénea sin grumos.\r\nEn otro recipiente, ponemos el cacao con la leche  lo disolvemos completamente.\r\nAhora, dividiremos la masa del bizcocho, 2/3  en un bol y 1/2 en otro bol. En este último, agregaremos el cacao disuelto en la leche.\r\nPreparamos una capa de masa sin cacao y después un poco de masa con cacao, con movimientos zigzageantes, y cubriendo después con la masa sin cacao restante.\r\nHornear a 170º aproximadamente 45 minutos o hasta que la brocheta salga limpia.\r\nEnfriar sobre una rejilla.', 'Desmoldar una vez frío\r\nDecorar con sucedáneo de chocolate fundido y una hilera de rosetas de trufa fresca de chocolate negro.', 'Bizcocho_202511260902023449.jpg', 1, '2025-11-26 20:02:02', '2025-11-26 20:02:02', 0),
-(92, 'Tortilla de patatas deconstruida', 'Receta de Ferrán Adriá. Sabor similar a la clásica tortilla de patatas tradicional, pero con una presentacion y técnica de preparación innovadora.', 13, 17, 1, '01:30:00', NULL, 0, 64, 1, 4, '*Para el sabayón de huevo: Disponer la yema en un bol, batirla con unas varilla de mano, e ir incorporando 80 ml  agua hirviendo en forma de hilo.\r\nBatir enérgicamente hasta que emulsione y poner a punto de sal.\r\n\r\n    *Para la cebolla: Pelar las cebollas, partir en cuartos y cortar en juliana bien fina.\r\nRehogar la cebolla en aceite de oliva 0,4º, y remover continuamente hasta que coja un color dorado.\r\nEscurrir el exceso de aceite y desgrasar con un poco de agua. Cocer hasta evaporar.\r\nRepetir la operación hasta conseguir una textura y un color de confitura caramelizada.\r\nPoner a punto de sal y reservar.\r\n\r\n    *Para la espuma de patata: Pelar, cortar y hervir las patatas en el litro de agua restante con sal partiendo de líquido frío durante unos 30 minutos.\r\nUna vez terminada la cocción, se escurren y se reserva el agua de cocerlas.\r\nDisponer la patata cocida y 100g de agua de cocción  en Thermomix a 60º.\r\nTrturar e ir añadiendo poco a poco la nata, siguiendo el mismo prodecimiento con el aceite de oliva 0,4º hasta emulsionar finamente y de manera homogénea. Poner punto de sal.\r\nColar el puré y rellenar con él el sifón, con ayuda de un embudo.\r\nCargar el sifón  y mantener en baño maría a 70ºC aproximadamente.', 'En la parte inferior de una copa de cóctel, disponer un poco de cebolla caramelizada muy caliente.\r\nEncima, una capa de sabayón de huevo, espuma de patata. Decorar con un cordón de aceite de oliva virgen.', 'Tortilla_202511260948046335.jpg', 1, '2025-11-26 20:48:04', '2025-11-26 20:48:04', 0);
+(91, 'Bizcocho marmolado', 'Mezcla de chocolate y vainilla en un bizcocho marmolado, que resulta esponjoso y algo húmedo.', 13, 6, 8, '01:30:00', NULL, 0, 0, 1, 2, 'Blanquear  huevos y azúcar. Cuando estén bien esponjados, ir añadiendo el aceite a chorro fino y después la vainilla, mientras seguimos batiendo. Añadir el yogurt.\r\nA continuación, ya a mano, incorporar suavemente con movimientos envolventes la harina tamizada con el impulsor.\r\nDebe quedar una mezcla homogénea sin grumos.\r\nEn otro recipiente, ponemos el cacao con la leche  lo disolvemos completamente.\r\nAhora, dividiremos la masa del bizcocho, 2/3  en un bol y 1/2 en otro bol. En este último, agregaremos el cacao disuelto en la leche.\r\nPreparamos una capa de masa sin cacao y después un poco de masa con cacao, con movimientos zigzageantes, y cubriendo después con la masa sin cacao restante.\r\nHornear a 170º aproximadamente 45 minutos o hasta que la brocheta salga limpia.\r\nEnfriar sobre una rejilla.', 'Desmoldar una vez frío\r\nDecorar con sucedáneo de chocolate fundido y una hilera de rosetas de trufa fresca de chocolate negro.', 'Bizcocho_202511260902023449.jpg', 1, '2025-11-26 20:02:02', '2025-11-26 20:02:02', 1),
+(92, 'Tortilla de patatas deconstruida', 'Receta de Ferrán Adriá. Sabor similar a la clásica tortilla de patatas tradicional, pero con una presentacion y técnica de preparación innovadora.', 13, 17, 1, '01:30:00', NULL, 0, 64, 1, 4, '*Para el sabayón de huevo: Disponer la yema en un bol, batirla con unas varilla de mano, e ir incorporando 80 ml  agua hirviendo en forma de hilo.\r\nBatir enérgicamente hasta que emulsione y poner a punto de sal.\r\n\r\n    *Para la cebolla: Pelar las cebollas, partir en cuartos y cortar en juliana bien fina.\r\nRehogar la cebolla en aceite de oliva 0,4º, y remover continuamente hasta que coja un color dorado.\r\nEscurrir el exceso de aceite y desgrasar con un poco de agua. Cocer hasta evaporar.\r\nRepetir la operación hasta conseguir una textura y un color de confitura caramelizada.\r\nPoner a punto de sal y reservar.\r\n\r\n    *Para la espuma de patata: Pelar, cortar y hervir las patatas en el litro de agua restante con sal partiendo de líquido frío durante unos 30 minutos.\r\nUna vez terminada la cocción, se escurren y se reserva el agua de cocerlas.\r\nDisponer la patata cocida y 100g de agua de cocción  en Thermomix a 60º.\r\nTrturar e ir añadiendo poco a poco la nata, siguiendo el mismo prodecimiento con el aceite de oliva 0,4º hasta emulsionar finamente y de manera homogénea. Poner punto de sal.\r\nColar el puré y rellenar con él el sifón, con ayuda de un embudo.\r\nCargar el sifón  y mantener en baño maría a 70ºC aproximadamente.', 'En la parte inferior de una copa de cóctel, disponer un poco de cebolla caramelizada muy caliente.\r\nEncima, una capa de sabayón de huevo, espuma de patata. Decorar con un cordón de aceite de oliva virgen.', 'Tortilla_202511260948046335.jpg', 1, '2025-11-26 20:48:04', '2025-11-26 20:48:04', 1),
+(93, 'Fumet', 'Caldo concentrado de pescado que se utiliza como base para potenciar el sabor de numerosos platos.', 23, 2, 8, '01:00:00', NULL, 0, 0, 0, 1, 'Aromas: Laurel, perejil, limón....\r\n\r\nPescado: Espinas y recortes de pescado blanco.\r\n\r\nSe parte de líquido frio, poniendo todos los elementos dede el principio en la marmita.\r\nSe desespuma continuamente hasta dejar el caldo clarificado.\r\nSe cuece durante unos 30 minutos.\r\nSe cuela, se vuelve a hervir y enfriar rápidamente.', 'Según la receta en la que la vamos a utilizar.', 'Fumet_202511270927372502.jpg', 1, '2025-11-27 20:27:37', '2025-11-27 20:27:37', 1),
+(94, 'Mahonesa', 'Esta salsa se caracteriza por su textura cremosa y capacidad para realzar el sabor de diversos platos. También sirve como base para hacer salsa con distintos ingredientes.', 23, 3, 8, '00:20:00', NULL, 3, 64, 1, 2, 'Batimos los huevos en el recipiente de la batidora, añadimos el aceite a chorro muy fino, sin dejar de batir. Sazonamos y acidulamos, con vinagre o con zumo de limón.\r\n\r\nSi la hacemos con batidora manual, utilizaremos solo las yemas de huevo, siguiendo el mismo procedimiento.\r\n\r\nEl resultado vendrá marcado por la calidad del aceite y los huevos. Debe resultar espesa y de un bonito color amarillo.', 'Como acompañamiento de platos frios,  ensaladillas, huevos duros, pescados, etc...\r\n\r\nTambién para elaborar salsas y derivadas.', 'Mahonesa_202511270951327161.png', 1, '2025-11-27 20:51:32', '2025-11-27 20:51:32', 1);
 
 -- --------------------------------------------------------
 
@@ -899,7 +892,6 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 -- Estructura de tabla para la tabla `recetas_alergenos`
 --
 
-DROP TABLE IF EXISTS `recetas_alergenos`;
 CREATE TABLE `recetas_alergenos` (
   `id_recetas_alergenos` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -917,7 +909,6 @@ TRUNCATE TABLE `recetas_alergenos`;
 -- Estructura de tabla para la tabla `recetas_estilos`
 --
 
-DROP TABLE IF EXISTS `recetas_estilos`;
 CREATE TABLE `recetas_estilos` (
   `id_recetas_estilos` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -935,7 +926,6 @@ TRUNCATE TABLE `recetas_estilos`;
 
 INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) VALUES
 (35, 52, 8),
-(63, 69, 8),
 (77, 67, 14),
 (78, 66, 17),
 (79, 66, 14),
@@ -998,7 +988,11 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (228, 87, 19),
 (230, 90, 16),
 (235, 49, 14),
-(236, 92, 8);
+(236, 92, 8),
+(252, 69, 8),
+(253, 93, 1),
+(254, 93, 14),
+(255, 94, 1);
 
 -- --------------------------------------------------------
 
@@ -1006,7 +1000,6 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 -- Estructura de tabla para la tabla `recetas_ingredientes`
 --
 
-DROP TABLE IF EXISTS `recetas_ingredientes`;
 CREATE TABLE `recetas_ingredientes` (
   `id_recetas_ingredientes` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1093,9 +1086,6 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (147, 52, 101, 1.00, 6),
 (148, 52, 9, 20.00, 2),
 (149, 52, 102, 5.00, 2),
-(253, 69, 43, 2.00, 3),
-(254, 69, 71, 1.00, 9),
-(255, 69, 97, 3.75, 3),
 (304, 67, 126, 300.00, 2),
 (305, 67, 41, 12.00, 9),
 (306, 67, 9, 400.00, 2),
@@ -1401,7 +1391,22 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (848, 92, 47, 250.00, 4),
 (849, 92, 52, 1.00, 5),
 (850, 92, 117, 1.00, 1),
-(851, 92, 35, 1.00, 6);
+(851, 92, 35, 1.00, 6),
+(897, 69, 43, 2.00, 3),
+(898, 69, 71, 1.00, 9),
+(899, 69, 97, 3.75, 3),
+(900, 93, 177, 2.00, 1),
+(901, 93, 148, 100.00, 2),
+(902, 93, 30, 100.00, 2),
+(903, 93, 54, 100.00, 2),
+(904, 93, 73, 100.00, 2),
+(905, 93, 178, 1.00, 9),
+(906, 93, 43, 5.00, 3),
+(907, 93, 79, 1.00, 6),
+(908, 94, 52, 1.00, 3),
+(909, 94, 41, 4.00, 9),
+(910, 94, 28, 1.00, 6),
+(911, 94, 86, 1.00, 8);
 
 -- --------------------------------------------------------
 
@@ -1409,7 +1414,6 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 -- Estructura de tabla para la tabla `recetas_tecnicas`
 --
 
-DROP TABLE IF EXISTS `recetas_tecnicas`;
 CREATE TABLE `recetas_tecnicas` (
   `id_recetas_tecnicas` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1457,7 +1461,7 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (67, 66, 25),
 (66, 67, 18),
 (90, 68, 25),
-(58, 69, 20),
+(184, 69, 20),
 (94, 70, 12),
 (98, 71, 21),
 (97, 71, 25),
@@ -1478,7 +1482,8 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (150, 90, 25),
 (166, 91, 25),
 (167, 92, 13),
-(168, 92, 21);
+(168, 92, 21),
+(185, 93, 13);
 
 -- --------------------------------------------------------
 
@@ -1486,7 +1491,6 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 -- Estructura de tabla para la tabla `recetas_tiposplato`
 --
 
-DROP TABLE IF EXISTS `recetas_tiposplato`;
 CREATE TABLE `recetas_tiposplato` (
   `id_recetas_tiposplato` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1532,7 +1536,7 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (72, 66, 7),
 (71, 67, 4),
 (92, 68, 4),
-(64, 69, 12),
+(269, 69, 10),
 (96, 70, 1),
 (98, 71, 11),
 (143, 74, 3),
@@ -1564,7 +1568,9 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (238, 89, 3),
 (241, 90, 4),
 (252, 91, 10),
-(253, 92, 3);
+(253, 92, 3),
+(270, 93, 12),
+(271, 94, 12);
 
 -- --------------------------------------------------------
 
@@ -1572,7 +1578,6 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 -- Estructura de tabla para la tabla `recetas_utensilios`
 --
 
-DROP TABLE IF EXISTS `recetas_utensilios`;
 CREATE TABLE `recetas_utensilios` (
   `id_recetas_utensilios` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1662,7 +1667,13 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (130, 67, 195),
 (177, 68, 168),
 (178, 68, 185),
-(108, 69, 175),
+(447, 69, 171),
+(448, 69, 172),
+(449, 69, 175),
+(450, 69, 176),
+(451, 69, 181),
+(452, 69, 185),
+(453, 69, 188),
 (186, 70, 166),
 (187, 70, 175),
 (190, 71, 164),
@@ -1721,7 +1732,10 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (336, 92, 177),
 (337, 92, 181),
 (339, 92, 203),
-(341, 92, 204);
+(341, 92, 204),
+(454, 93, 179),
+(455, 93, 205),
+(456, 94, 185);
 
 -- --------------------------------------------------------
 
@@ -1729,7 +1743,6 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 -- Estructura de tabla para la tabla `redactores`
 --
 
-DROP TABLE IF EXISTS `redactores`;
 CREATE TABLE `redactores` (
   `id_redactor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -1759,7 +1772,6 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `regiones`
 --
 
-DROP TABLE IF EXISTS `regiones`;
 CREATE TABLE `regiones` (
   `id_region` int(11) NOT NULL,
   `id_pais` int(11) NOT NULL,
@@ -1822,7 +1834,6 @@ INSERT INTO `regiones` (`id_region`, `id_pais`, `nombre_region`, `activo_region`
 -- Estructura de tabla para la tabla `revisores`
 --
 
-DROP TABLE IF EXISTS `revisores`;
 CREATE TABLE `revisores` (
   `id_revisor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -1850,7 +1861,6 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `tecnicas`
 --
 
-DROP TABLE IF EXISTS `tecnicas`;
 CREATE TABLE `tecnicas` (
   `id_tecnica` int(11) NOT NULL,
   `nombre_tecnica` varchar(50) NOT NULL,
@@ -1889,7 +1899,6 @@ INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `foto_tecnica`) VALUES
 -- Estructura de tabla para la tabla `tipos_plato`
 --
 
-DROP TABLE IF EXISTS `tipos_plato`;
 CREATE TABLE `tipos_plato` (
   `id_tipo` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -1912,7 +1921,7 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 (7, 'Segundos platos', 'Segundos_platos_2673.jpg'),
 (10, 'Desayunos y meriendas', 'Desayunos_y_meriendas_149.jpg'),
 (11, 'Guarniciones', 'Guarniciones_7773.png'),
-(12, 'Acompañamientos', 'Acompaamientos_65.jpg');
+(12, 'Complementos', 'Acompaamientos_65.jpg');
 
 -- --------------------------------------------------------
 
@@ -1920,7 +1929,6 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 -- Estructura de tabla para la tabla `unidades_medida`
 --
 
-DROP TABLE IF EXISTS `unidades_medida`;
 CREATE TABLE `unidades_medida` (
   `id_unidad` int(11) NOT NULL,
   `nombre_unidad` varchar(20) NOT NULL
@@ -1954,7 +1962,6 @@ INSERT INTO `unidades_medida` (`id_unidad`, `nombre_unidad`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
@@ -1997,7 +2004,6 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 -- Estructura de tabla para la tabla `utensilios`
 --
 
-DROP TABLE IF EXISTS `utensilios`;
 CREATE TABLE `utensilios` (
   `id_utensilio` int(11) NOT NULL,
   `nombre_utensilio` varchar(80) NOT NULL,
@@ -2061,8 +2067,9 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 (200, 'Tiburón', 'Tiburn_2027.jpg', 1),
 (201, 'Copa cocktail', 'Copa_cocktail_8719.jpg', 1),
 (202, 'Ramequín', 'Ramequn_5740.jpg', 1),
-(203, 'Sifón', 'Sifn_1502.jpg', 0),
-(204, 'Embudo', 'Embudo_6467.jpg', 0);
+(203, 'Sifón', 'Sifn_1502.jpg', 1),
+(204, 'Embudo', 'Embudo_6467.jpg', 1),
+(205, 'Espumadera', 'Espumadera_9573.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -2070,7 +2077,6 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 -- Estructura de tabla para la tabla `zonas`
 --
 
-DROP TABLE IF EXISTS `zonas`;
 CREATE TABLE `zonas` (
   `id_zona` int(11) NOT NULL,
   `nombre_zona` varchar(50) NOT NULL
@@ -2358,13 +2364,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -2382,7 +2388,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -2394,31 +2400,31 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=852;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=912;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=457;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
@@ -2466,7 +2472,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `utensilios`
 --
 ALTER TABLE `utensilios`
-  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+  MODIFY `id_utensilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`

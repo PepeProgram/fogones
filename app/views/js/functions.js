@@ -922,28 +922,181 @@ function calcularIngredientes(numeroPersonasNuevo){
     if (numeroPersonasFloat >= 1 && Number.isInteger(numeroPersonasFloat)) {
         
         cantidadIngredientes.forEach(cantidad => {
-    
-            /* Convierte a float la cantidad original */
-            let cantidadOriginal = parseFloat(cantidad.dataset.original);
-    
-            /* Calcula la cantidad nueva */
-            let cantidadNew = parseFloat(((cantidadOriginal/personasOriginal)*numeroPersonasFloat).toFixed(2));
-    
-            /* Redondea las cantidades dependiendo de las unidades */
-            console.log('La unidad es: '+cantidad.dataset.unidad);
-            if (["2", "4", "7", "8", "9", "10"].includes(cantidad.dataset.unidad)) {
-                console.log('La unidad dentro del if es: '+cantidad.dataset.unidad)
-                cantidadNew = Math.round(cantidadNew * 4) / 4;
+
+            if (cantidad.dataset.original !== "") {
+                /* Convierte a float la cantidad original */
+                let cantidadOriginal = parseFloat(cantidad.dataset.original);
+        
+                /* Calcula la cantidad nueva */
+                let cantidadNew = parseFloat(((cantidadOriginal/personasOriginal)*numeroPersonasFloat).toFixed(2));
+        
+                /* Redondea las cantidades dependiendo de las unidades */
+                if (["2", "4", "7", "8", "9", "10"].includes(cantidad.dataset.unidad)) {
+                    cantidadNew = Math.round(cantidadNew * 4) / 4;
+                }
+        
+                cantidad.value = cantidadNew;
+                
             }
     
-    
-            cantidad.value = cantidadNew;
-            
         });
     }
 
 
 }
+
+/* Procesa un bloque de texto con párrafos largos para paginarlos si es necesario y poner negrita al principio
+si un párrafo empieza con una frase terminada en : */
+function procesarBloqueTexto({
+    doc,
+    titulo,
+    selectorParrafos,
+    inicioY,
+    anchoTexto = 180,
+    margenX = 14,
+    margenInferior = 10
+}) {
+    /* Estilos del título */
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(12);
+
+    /* Posición del título del bloque */
+    const tituloY = inicioY;
+    doc.text(titulo, 12, tituloY);
+
+    /* Parámetros de texto */
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+
+    /* Recupera todos los párrafos del texto */
+    const parrafos = document.querySelectorAll(selectorParrafos);
+
+    /* Recupera la altura de página del documento */
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    /* Recupera el tamaño de fuente y calcula el alto de línea */
+    const fontSizePt = doc.internal.getFontSize();
+    const ptToMm = 0.3528;
+    const lineHeight = fontSizePt * ptToMm * 1.15;
+
+    /* Posición inicial del texto que no es título */
+    let actualY = tituloY + 6;
+
+    /* Inicio del rectántulo */
+    let inicioRectY = actualY - 9;
+
+    /* *************************************************************** */
+    /* Función auxiliar para dibujar el rectángulo final */
+    /* *************************************************************** */
+    function dibujarRect() {
+        const altoRect = actualY - inicioRectY + 2;
+        doc.rect(10, inicioRectY - 2, 190, altoRect);
+    }
+    /* *************************************************************** */
+
+    /* *************************************************************** */
+    /* Función auxiliar que verifica si se llega al final de la página
+    para añadir una nueva página y resetear la posición vertical */
+    /* *************************************************************** */
+    function verificarPaginado(alto) {
+
+        /* Comprueba si el párrafo cabe en lo que queda de página */
+        if (actualY + alto > pageHeight - margenInferior) {
+
+            /* Dibuja el rectángulo alrededor de lo que hay escrito */
+            dibujarRect();
+
+            /* Añade una nueva página */
+            doc.addPage();
+
+            /* Restablece la posición vertical del texto y el rectángulo */
+            actualY = 20;
+            inicioRectY = actualY - 5;
+        }
+    }
+    /* *************************************************************** */
+
+
+    /* Pone el flag de primer párrafo a true */
+    let esPrimerParrafo = true;
+    
+    /* Recorre los párrafos */
+    parrafos.forEach((p, index) => {
+
+        /* Detecta si el párrafo está vacío */
+        let texto = p.textContent.trim();
+        if (texto === "") return;
+
+        /* Detecta si hay : en el párrafo */
+        let encabezado = "";
+        let resto = texto;
+        let tieneEncabezado = false;
+
+        const idx = texto.indexOf(":");
+
+        /* Si hay : divice el texto en dos partes */
+        if (idx !== -1) {
+            encabezado = texto.substring(0, idx + 1);
+            resto = texto.substring(idx + 1).trim();
+            tieneEncabezado = true;
+        }
+
+        /* Si no tiene encabezado pone el texto controlando si hay salto de página y vuelve arriba */
+        if (!tieneEncabezado) {
+
+            const lineas = doc.splitTextToSize("     " + texto, anchoTexto);
+            const altoParrafo = lineas.length * lineHeight;
+
+            verificarPaginado(altoParrafo);
+
+            doc.setFont("helvetica", "normal");
+            doc.text(lineas, margenX, actualY);
+            actualY += altoParrafo;
+
+            return;
+        }
+
+        /* Comprueba si el párrafo tiene encabezado en negrita para poner un salto de línea si NO es el primer párrafo */
+        if (tieneEncabezado && !esPrimerParrafo) {
+
+            const espacioExtra = lineHeight;
+            verificarPaginado(espacioExtra);
+            actualY += espacioExtra;
+        }
+
+        /* Coloca el encabezado en negrita verificando si cabe en la página */
+        doc.setFont("helvetica", "bold");
+        const lineasEnc = doc.splitTextToSize(encabezado, anchoTexto);
+        const altoEnc = lineasEnc.length * lineHeight;
+
+        verificarPaginado(altoEnc);
+        doc.text(lineasEnc, margenX, actualY);
+        actualY += altoEnc;
+
+        /* Coloca el resto del texto si no está vacío verificando si cabe en la página */
+        doc.setFont("helvetica", "normal");
+        if (resto !== "") {
+            const lineasTxt = doc.splitTextToSize("     " + resto, anchoTexto);
+            const altoTxt = lineasTxt.length * lineHeight;
+
+            verificarPaginado(altoTxt);
+            doc.text(lineasTxt, margenX, actualY);
+            actualY += altoTxt;
+        }
+
+        /* Cambia el flag de primer párrafo porque el siguiente ya no lo es */
+        esPrimerParrafo = false;
+    });
+
+    /* Dibuja el rectángulo del párrafo */
+    dibujarRect();
+
+    /* Devuelve la posición actual del texto */
+    return actualY;
+}
+
+
+
 
 /* Genera el pdf de la receta */
 async function generarPDFReceta(){
@@ -997,7 +1150,7 @@ async function generarPDFReceta(){
     textoEstilo = '';
     let estilos = document.querySelectorAll('.estilos_cocina');
     estilos.forEach(estilo => {
-        textoEstilo += estilo.innerText + ' / ';
+        textoEstilo += estilo.innerText.trim() + ' / ';
         
     });
 
@@ -1006,7 +1159,8 @@ async function generarPDFReceta(){
         doc.rect(10, 61, 190, 8);
         doc.text('Estilo de cocina: ', 12, 67);
         doc.setFont('helvetica', 'normal');
-        doc.text(textoEstilo, 48, 67);
+        doc.setFontSize(10);
+        doc.text(textoEstilo, 47, 67);
     }
 
     /* Tipo y grupo de plato */
@@ -1014,13 +1168,13 @@ async function generarPDFReceta(){
 
     let grupo_plato = document.querySelector('.grupos_plato').innerText;
     if (grupo_plato != "") {
-        textoEtiquetas += grupo_plato + ' / ';
+        textoEtiquetas += grupo_plato.trim() + ' / ';
     }
     
     
     let tipos_plato = document.querySelectorAll('.tipos_plato');
     tipos_plato.forEach(tipo => {
-        textoEtiquetas += tipo.innerText + ' / ';
+        textoEtiquetas += tipo.innerText.trim() + ' / ';
         
     });
 
@@ -1032,7 +1186,7 @@ async function generarPDFReceta(){
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
-    doc.text(textoEtiquetas, 42, 75);
+    doc.text(textoEtiquetas, 38, 75);
     
     /* Número de personas */
     const nPersonas = document.querySelector('#nPersonas').value;
@@ -1063,16 +1217,15 @@ async function generarPDFReceta(){
         posicion += 4;
         
     });
-    doc.rect(10, 77, 120, posicion - 76);
-
+    
     /* Utensilios */
     doc.setFont('helvetica', 'bolditalic');
     doc.setFontSize(12);
     doc.text('Utensilios:', 132, 81);
-
+    
     let listaUtensilios = document.querySelectorAll('.liListaUtensilios');
     let posicionUtensilios = 88;
-
+    
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     listaUtensilios.forEach(utensilio => {
@@ -1080,70 +1233,39 @@ async function generarPDFReceta(){
         doc.text(nombreUtensilio, 134, posicionUtensilios);
         posicionUtensilios += 4;
     });
-
-
-    /* CALCULAR SI ES MAYOR LA POSICION DE LOS UTENSILIOS O LA DE LOS INGREDIENTES PARA CALCULAR LA ALTURA DEL RECTÁNGULO
-    SI LA DE LOS UTENSILIOS EL MAYOR, MEJOR REASIGNAR EL VALOR DE posicion PARA NO ROMPER EL RESTO DEL CÓDIGO */
+    
+    
+    /* Comprueba cual de los rectángulos de utensilios o ingredientes es mayor */
+    if (posicionUtensilios > posicion) {
+        posicion = posicionUtensilios;
+    }
+    
+    doc.rect(10, 77, 120, posicion - 76);
     doc.rect(130, 77, 70, posicion - 76);
 
     /* Elaboración */
-    doc.setFont('helvetica', 'bolditalic');
-    doc.setFontSize(12);
-    const tituloY = posicion + 6;
-    doc.text('Elaboración: ', 12, tituloY);
-
-    const parrafos = document.querySelectorAll('#elaboracionReceta p');
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-
-    /* Parámetros del texto */
-    const anchoTexto = 180;
-    const margenX = 14;
-    const inicioY = tituloY + 6;
-    let actualY = inicioY;
-
-
-    /* Factor de conversión de puntos a mm */
-    const fontSizePt = doc.internal.getFontSize();
-    const ptToMm = 0.3528;
-    const lineHeightProporcional = 1.15;
-    const lineHeight = fontSizePt * ptToMm * lineHeightProporcional;
-
-    /* Guarda la posicion Y inicial para el rectángulo */
-    const inicioRectY = actualY - 9;
-
-
-    /* Recorre los párrafos */
-    parrafos.forEach(p => {
-        const texto = p.textContent.trim();
-        if (texto !== "") {
-            const lineas = doc.splitTextToSize(texto, anchoTexto);
-            doc.text(lineas, margenX, actualY);
-            actualY += lineas.length * lineHeight;
-            
-        }
+    
+    actualY = procesarBloqueTexto({
+        doc,
+        titulo: "Elaboración:",
+        selectorParrafos: "#elaboracionReceta p",
+        inicioY: posicion + 6
     });
 
-    /* Calcula el alto del rectángulo */
-    const altoRect = actualY - inicioRectY + 2;
-
-    /* Dibuja el rectángulo */
-    doc.rect(10, inicioRectY - 2, 190, altoRect);
 
     /* Presentación */
-    /* doc.setFont('helvetica', 'bolditalic');
-    doc.setFontSize(12);
-    tituloY = actualY + 6;
-    doc.text('Presentación: ', 12, tituloY); */
+    actualY = procesarBloqueTexto({
+        doc,
+        titulo: "Presentación:",
+        selectorParrafos: "#emplatadoReceta p",
+        inicioY: actualY + 5
+    });
 
+    const pdfBlob = doc.output('blob');
 
+    const pdfUrl = URL.createObjectURL(pdfBlob);
 
-
-    doc.rect(10, actualY, 190, 30);
-
-    
-
-    doc.output('dataurl');
+    window.open(pdfUrl, '_blank');
 
 
 }

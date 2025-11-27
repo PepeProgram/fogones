@@ -221,7 +221,9 @@
         <div id="ingredientesUtensilios" class="ingredientesUtensilios col-33 medio vertical top">
             <div class="col-100 horizontal centrar static">
                 <p>Para&nbsp;</p>
+                <i class="fa-solid fa-minus"></i>
                 <input type="number" name="nPersonas" id="nPersonas" step="1" class="input col-20 static" value="<?php echo $receta_ver->getPersonas() ?>" min="1" oninput="calcularIngredientes(this.value);">
+                <i class="fa-solid fa-plus"></i>
                 <label for="nPersonas">&nbsp;Personas</label>
 
                 <input type="hidden" name="personasOld" id="personasOld" value="<?php echo $receta_ver->getPersonas(); ?>">
@@ -268,9 +270,33 @@
                 <h3>Elaboración</h3>
                 <p class="textoLargo"><?php echo $elaboracion; ?></p>
             </div>
+
+            <?php 
+                
+                /* Inicializa la variable para añadir los párrafos */
+                $emplatado = "";
+                
+                /* Crea un array con cada uno de los párrafos */
+                $parrafosEmplatado = explode("\n", $receta_ver->getEmplatado());
+                
+                /* Recorre el array de párrafos para comprobar lo que hay hasta el primer : */
+                foreach ($parrafosEmplatado as $parrafo) {
+
+                    /* Escapar la línea completa (evita XSS) */
+                    $parrafo_seguro = htmlspecialchars($parrafo, ENT_QUOTES, 'UTF-8');
+
+                    /* Negrita solo hasta el primer ":" si existe */
+                    $parrafo_procesado = preg_replace('/^([^:]+):/','<strong>$1</strong>:', $parrafo_seguro);
+
+                    /* Añade el párrafo a la variable */
+                    $emplatado .= "<p class='textoLargo'>{$parrafo_procesado}</p>";
+                }
+            ?>
+
+
             <div id="emplatadoReceta" class="emplatadoReceta col-100 vertical">
                 <h3>Sugerencia de presentación</h3>
-                <p class="textoLargo"><?php echo $receta_ver->getEmplatado(); ?></p>
+                <p class="textoLargo"><?php echo $emplatado ?></p>
             </div>
 
         </div>

@@ -2174,7 +2174,7 @@
             }
 
             /* Elaboración */
-            if ($this->verificarDatos("(?!.*\\\\)[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;:\(\)\r\n\*\/\-_ ]*", $_POST['emplatadoEnviarReceta'])) {
+            if ($this->verificarDatos("(?!.*\\\\)[()%a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;:\(\)\r\n\*\/\-_ ]*", $_POST['elaboracionEnviarReceta'])) {
                 /* Establece los valores de la ventana de alerta y los retorna al ajax.js */
                     $alerta = [
                         "tipo" => "simple",
@@ -2196,7 +2196,7 @@
                     $alerta = [
                         "tipo" => "simple",
                         "titulo" => "Error en el formulario",
-                        "texto" => "El emplatado sólo puede contener lletras, números, *, :, ,, ;, ., /, (, ), %, -, _, retornos de línea y espacios",
+                        "texto" => "El emplatado sólo puede contener letras, números, *, :, ,, ;, ., /, (, ), %, -, _, retornos de línea y espacios",
                         "icono" => "error"
                     ];
 
