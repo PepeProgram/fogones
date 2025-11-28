@@ -1181,6 +1181,18 @@ a{
     color: var(--fondoClaro);
 }
 
+/* Fade cuando cargan las fotos de las tarjetas al hacer scroll */
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnim 2s ease forwards;
+}
+
+@keyframes fadeInAnim {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
 @media screen and (min-width:768px) {
     .listasEnviarReceta{
         margin: 0px;

@@ -6,3 +6,7 @@
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/peticiones.js"></script>
 <!-- Carga las librería para generar pdf -->
 <script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/jspdf.debug.js"></script>
+<!-- Carga el script para renderizar las tarjetas de las recetas -->
+<script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/renderTarjetas.js"></script>
+<!-- Carga el script para realizar el scroll infinito -->
+<script type="text/javascript" src="<?php echo APP_URL ?>app/views/js/scroll-recetas.js"></script>

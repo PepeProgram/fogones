@@ -1095,9 +1095,6 @@ function procesarBloqueTexto({
     return actualY;
 }
 
-
-
-
 /* Genera el pdf de la receta */
 async function generarPDFReceta(){
 

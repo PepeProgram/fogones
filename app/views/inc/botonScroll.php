@@ -1,26 +1,38 @@
-<button id="botonScroll" title="Volver arriba" aria-label="Volver arriba" onclick="topFunction();">
+<button id="botonScroll" title="Volver arriba" aria-label="Volver arriba" onclick="botonScrollHandler();">
     <i class="fa-solid fa-chevron-up"></i>
 </button>
 
 <script>
-    /* Obtiene el botón y el div principal */
     let botonScroll = document.querySelector('#botonScroll');
     let mainContainer = document.querySelector('#main-container');
 
-    /* Ejecuta la función que controla la posición del scroll para mostrar u ocultar el botón */
-    mainContainer.onscroll = function(){scrollFunction();};
+    mainContainer.onscroll = function(){ scrollFunction(); };
 
     function scrollFunction(){
-        if(mainContainer.scrollTop >20){
+        if (mainContainer.scrollTop > 20){
             botonScroll.style.display = "block";
-        }
-        else {
+        } else {
             botonScroll.style.display = "none";
         }
     }
 
-    /* Envía el scroll del div principal a cero */
+    // --- FUNCIÓN COMPATIBLE ---
+    function botonScrollHandler() {
+
+        // 1) Si estamos en la página de recetas (hay tarjetas)
+        if (document.querySelector('.tarjetaReceta')) {
+
+            if (typeof restaurarListadoInicial === 'function') {
+                restaurarListadoInicial();
+                return;
+            }
+        }
+
+        // 2) Si NO estamos en la página de recetas → comportamiento normal
+        topFunction();
+    }
+
     function topFunction(){
-        mainContainer.scrollTo({top: 0, behavior: 'smooth'});
+        mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>

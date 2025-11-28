@@ -6,10 +6,10 @@
     use app\models\alergenoModel;
 
     /* Carga el modelo de ingredientes para poder usarlo */
-use JsonSerializable;
+    use JsonSerializable;
 
     class recetaModel extends mainModel implements JsonSerializable{
-        private $id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo, $estilos, $tipos_plato, $metodos, $utensilios, $ingredientes, $alergenos;
+        private $id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo, $estilos, $tipos_plato, $metodos, $utensilios, $ingredientes, $alergenos, $favorito;
 
         function __construct($id, $nombre, $descripcion, $id_usuario, $id_grupo, $personas, $tiempo, $id_autor, $id_region, $id_pais, $id_zona, $dificultad, $elaboracion, $emplatado, $foto, $visualizaciones, $creado, $actualizado, $activo) {
             $this->id = $id;
@@ -37,6 +37,7 @@ use JsonSerializable;
             $this->utensilios = $this->checkUtensilios();
             $this->ingredientes = $this->checkIngredientes();
             $this->alergenos = $this->checkAlergenos();
+            $this->favorito = $this->checkFavoritos();
             
         }
 
@@ -66,7 +67,8 @@ use JsonSerializable;
                         'metodos'                 => $this->metodos,
                         'utensilios'              => $this->utensilios,
                         'ingredientes'            => $this->ingredientes,
-                        'alergenos'               => $this->alergenos
+                        'alergenos'               => $this->alergenos,
+                        'favorito'                => $this->favorito
 
                 ];
         }
