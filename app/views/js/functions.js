@@ -636,7 +636,21 @@ function rellenarDificultad(elemento, dif){
     }
 
     document.querySelector('#'+elemento).innerHTML = texto;
+}
 
+/* Rellena la dificultad de una tarjeta con estrellas */
+function obtenerEstrellasDificultad(dif){
+    let estrellas = "";
+    for (let i = 1; i <= 5; i++) {
+        if (i <= dif) {
+            estrellas += '<i class="fa-solid fa-star"></i>';
+        } else {
+            estrellas += '<i class="fa-regular fa-star"></i>';
+        }
+        
+    }
+
+    return estrellas;
 }
 
 /* Aprueba una receta cambiando el estado de activo_receta */
@@ -1276,5 +1290,24 @@ async function cargarImagenBase64(url) {
         reader.onload = () => resolve(reader.result);
         reader.readAsDataURL(blob);
     });
+}
+
+/* Cambia el valor de un input number sumando o restando al pulsar + - según el step */
+function cambiarNumero(boton){
+    
+    /* Comprueba si es para sumar o restar */
+    if (boton.classList.contains('fa-plus')) {
+        const cantidad = parseFloat(boton.previousElementSibling.value);
+        const step = parseFloat(boton.previousElementSibling.step);
+        boton.previousElementSibling.value = cantidad + step;
+        calcularIngredientes(cantidad+step);
+    }
+    if (boton.classList.contains('fa-minus') && boton.nextElementSibling.value > 1) {
+        const cantidad = parseFloat(boton.nextElementSibling.value);
+        const step = parseFloat(boton.nextElementSibling.step);
+        boton.nextElementSibling.value = cantidad - step;
+        calcularIngredientes(cantidad-step);
+    }
+    
 }
 

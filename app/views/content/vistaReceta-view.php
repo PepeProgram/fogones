@@ -154,7 +154,7 @@
                     <!-- Nombre -->
                     <?php echo $receta_ver->getNombre(); ?>
                 </h2>
-                <button class="btnIcon iconVerReceta" title="Ficha de coste"><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                <button class="btnIcon iconVerReceta oculto" title="Ficha de coste"><i class="fa-solid fa-file-invoice-dollar"></i></button>
                 <button type="submit" class="btnIcon iconVerReceta" title="Descargar ficha técnica en pdf" onclick="generarPDFReceta();"><i class="fa-solid fa-file-pdf"></i></button>
              </div>
     
@@ -221,9 +221,9 @@
         <div id="ingredientesUtensilios" class="ingredientesUtensilios col-33 medio vertical top">
             <div class="col-100 horizontal centrar static">
                 <p>Para&nbsp;</p>
-                <i class="fa-solid fa-minus"></i>
-                <input type="number" name="nPersonas" id="nPersonas" step="1" class="input col-20 static" value="<?php echo $receta_ver->getPersonas() ?>" min="1" oninput="calcularIngredientes(this.value);">
-                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-minus sumarRestar" onclick="cambiarNumero(this);"></i>
+                <input type="number" name="nPersonas" id="nPersonas" step="1" class="input sinFlechas col-20 static" value="<?php echo $receta_ver->getPersonas() ?>" min="1" oninput="calcularIngredientes(this.value);">
+                <i class="fa-solid fa-plus sumarRestar" onclick="cambiarNumero(this);"></i>
                 <label for="nPersonas">&nbsp;Personas</label>
 
                 <input type="hidden" name="personasOld" id="personasOld" value="<?php echo $receta_ver->getPersonas(); ?>">

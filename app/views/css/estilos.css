@@ -7,7 +7,7 @@
     --fondoClaro: #f8e9ca;
     --claro: #ECC26F;
     --medio: #DA9B1D;
-    --oscuro: #7E5A10;
+    --oscuro: #4e2900;
     --fondoOscuro: #2D220D;
     
 }
@@ -31,6 +31,7 @@ body{
     margin: auto;
     background-color: var(--fondoClaro);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,1);
+    scroll-behavior: smooth;
 }
 .content{
     padding: 1rem;
@@ -1083,6 +1084,12 @@ li > span{
 .inputCantidad{
     appearance: none;
 }
+.sinFlechas{
+    appearance: none;
+}
+.sinFlechas[type=number]{
+    -moz-appearance: textfield;
+}
 
 .filtrarSelect{
     margin-bottom: 0.3rem;
@@ -1137,6 +1144,7 @@ a{
     hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
+    font-weight: normal;
 }
 .etiquetasTarjeta{
     margin-top: auto;
@@ -1295,6 +1303,15 @@ p.btnOpcionesRecetas{
     position: relative;
     padding-left: 1.2em;
 }
+.sumarRestar{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+.sumarRestar:hover{
+    cursor: pointer;
+    background-color: var(--oscuro);
+    color: var(--fondoClaro);
+}
 
 .liListaIngredientes::before {
     content: "•";
@@ -1422,6 +1439,10 @@ p.btnOpcionesRecetas{
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+.fotoTarjetaReceta img:hover{
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
 }
 .btnsFotoReceta{
     display: flex;

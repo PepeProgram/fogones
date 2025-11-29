@@ -17,90 +17,94 @@ const Ventana = Swal.mixin({
     focusCancel: true
 });
 
-const formularios_ajax = document.querySelectorAll(".FormularioAjax");
 
-formularios_ajax.forEach(formularios => {
-    /* Añade el evento submit de los formularios y ejecuta preventDefault para impedir el funcionamiento del submit por defecto */
-    formularios.addEventListener("submit", function(e){
-        e.preventDefault();
-        
-        /* Obtiene el nombre del formulario para ponerlo en el título */
-        let form_name = this.getAttribute("name");
-        
-        /* Ventana de alerta creada por sweetAlert2 */
-        Ventana.fire({
-            title: form_name,
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Aceptar",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                /* Crea un array de datos para recibir los datos del formulario */
-                let data = new FormData(this);
+/* Añade el evento submit de los formularios y ejecuta preventDefault para impedir el funcionamiento del submit por defecto */
+document.body.addEventListener("submit", function(e){
 
-                /* añade el tipo de búsqueda al data del formulario según el id del botón */
-                if (e.submitter.id != "") {
-                    data.append("tipobusqueda", e.submitter.id);
-                }
+    const form = e.target;
 
-                /* Obtiene el método del formulario recibido */
-                let method = this.getAttribute("method");
+    if (!form.classList.contains('FormularioAjax')) {
+        return;
+    }
 
-                /* Obtiene la ruta a donde van a ir los datos del formulario */
-                let action = this.getAttribute("action");
+    e.preventDefault();
+    
+    /* Obtiene el nombre del formulario para ponerlo en el título */
+    let form_name = form.getAttribute("name");
+    
+    /* Ventana de alerta creada por sweetAlert2 */
+    Ventana.fire({
+        title: form_name,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            /* Crea un array de datos para recibir los datos del formulario */
+            let data = new FormData(form);
 
-                /* Crea las cabeceras para enviar la peticion */
-                let encabezados = new Headers();
+            /* añade el tipo de búsqueda al data del formulario según el id del botón */
+            if (e.submitter.id != "") {
+                data.append("tipobusqueda", e.submitter.id);
+            }
 
-                /* Configuraciones en formato JSON de los datos de la petición */
-                let config ={
-                    "method": method,
-                    "headers": encabezados,
-                    "mode": "cors",
-                    "cache": "no-cache",
-                    "body": data
-                };
+            /* Obtiene el método del formulario recibido */
+            let method = form.getAttribute("method");
 
-                /* Realiza la petición al action del formulario */
-                fetch(action, config)
+            /* Obtiene la ruta a donde van a ir los datos del formulario */
+            let action = form.getAttribute("action");
 
-                /* Convierte la respuesta a json */
-                .then(respuesta => {
-                    return respuesta.json()
+            /* Crea las cabeceras para enviar la peticion */
+            let encabezados = new Headers();
+
+            /* Configuraciones en formato JSON de los datos de la petición */
+            let config ={
+                "method": method,
+                "headers": encabezados,
+                "mode": "cors",
+                "cache": "no-cache",
+                "body": data
+            };
+
+            /* Realiza la petición al action del formulario */
+            fetch(action, config)
+
+            /* Convierte la respuesta a json */
+            .then(respuesta => {
+                return respuesta.json()
+                
+                .then(respuestaJson =>{
                     
-                    .then(respuestaJson =>{
-                        
-                        /* Comprueba si es un formulario pequeño del módulo receta y desactiva el formulario sin recargar la página y ejecuta la función nuevoElementoEnLista para añadir una opción nueva en el select y un elemento nuevo en la lista */
-                        if (data.has('subform_modulo_receta')) {
+                    /* Comprueba si es un formulario pequeño del módulo receta y desactiva el formulario sin recargar la página y ejecuta la función nuevoElementoEnLista para añadir una opción nueva en el select y un elemento nuevo en la lista */
+                    if (data.has('subform_modulo_receta')) {
 
-                            /* Oculta y resetea el formulario que da de alta nuevos elementos */
-                            ocultarFormulario(this.parentNode.getAttribute('id'));
+                        /* Oculta y resetea el formulario que da de alta nuevos elementos */
+                        ocultarFormulario(form.parentNode.getAttribute('id'));
 
-                            /* Obtiene el array donde se guardan los elementos de la lista */
-                            let idArrayElementos = this.parentNode.firstElementChild.getAttribute('id');
+                        /* Obtiene el array donde se guardan los elementos de la lista */
+                        let idArrayElementos = form.parentNode.firstElementChild.getAttribute('id');
 
-                            /* Comprueba si ha guardado un nuevo elemento o ha habido un error mirando si existe el id en la respuesta */
-                            if (respuestaJson.id !== undefined) {
-                                
-                                /* Pone el nuevo elemento en el select de elementos y en la lista de elementos */
-                                nuevoElementoEnLista(data.get('selectForm'), data.get('listaForm'), respuestaJson.id, respuestaJson.nombre, idArrayElementos);
-                            }
-
+                        /* Comprueba si ha guardado un nuevo elemento o ha habido un error mirando si existe el id en la respuesta */
+                        if (respuestaJson.id !== undefined) {
+                            
+                            /* Pone el nuevo elemento en el select de elementos y en la lista de elementos */
+                            nuevoElementoEnLista(data.get('selectForm'), data.get('listaForm'), respuestaJson.id, respuestaJson.nombre, idArrayElementos);
                         }
 
-                        return respuestaJson;
-                    })
+                    }
+
+                    return respuestaJson;
                 })
+            })
 
-                /* Devuelve la respuesta */
-                .then(respuesta => {
-                    return alertas_ajax(respuesta);
-                });
-            }
-        });
-
+            /* Devuelve la respuesta */
+            .then(respuesta => {
+                return alertas_ajax(respuesta);
+            });
+        }
     });
+
 });
 
 /* Función que se encarga de enviar los datos a las alertas para mostrar los distintos tipos de ventanas de alerta */

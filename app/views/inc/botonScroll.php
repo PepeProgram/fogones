@@ -1,38 +1,33 @@
-<button id="botonScroll" title="Volver arriba" aria-label="Volver arriba" onclick="botonScrollHandler();">
+<button id="botonScroll" title="Volver arriba" aria-label="Volver arriba" onclick="topFunction();">
     <i class="fa-solid fa-chevron-up"></i>
 </button>
 
 <script>
+
     let botonScroll = document.querySelector('#botonScroll');
     let mainContainer = document.querySelector('#main-container');
 
-    mainContainer.onscroll = function(){ scrollFunction(); };
+    const haySection = document.querySelector('#ultimasAgregadas');
 
-    function scrollFunction(){
+    mainContainer.addEventListener('scroll', () => {
+
+        /* Muestra el botón scroll cuando se ha desplazado más de 20 de la parte superior */
         if (mainContainer.scrollTop > 20){
             botonScroll.style.display = "block";
         } else {
             botonScroll.style.display = "none";
         }
-    }
+    });
 
-    // --- FUNCIÓN COMPATIBLE ---
-    function botonScrollHandler() {
-
-        // 1) Si estamos en la página de recetas (hay tarjetas)
-        if (document.querySelector('.tarjetaReceta')) {
-
-            if (typeof restaurarListadoInicial === 'function') {
-                restaurarListadoInicial();
-                return;
-            }
-        }
-
-        // 2) Si NO estamos en la página de recetas → comportamiento normal
-        topFunction();
-    }
 
     function topFunction(){
-        mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        if (haySection) {
+            window.mostrarIniciales();
+            setTimeout(() => {
+                mainContainer.scrollTop = 0;
+            }, 50);
+        } else {
+            mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 </script>
