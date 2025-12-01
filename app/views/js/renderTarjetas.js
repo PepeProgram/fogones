@@ -68,7 +68,7 @@ function renderTarjetas(){
         alergenos.forEach(alergeno => {
             htmlAlergenos += `
                 <div class="foto pointer">
-                    <img class="alergenoTarjeta" src="${icon_dir}${alergeno.foto_alergeno}" alt="${alergeno.nombre_alergeno}" title="${alergeno.nombre_alergeno}"</img>
+                    <img class="alergenoTarjeta" src="${icon_dir}${alergeno.foto_alergeno}" alt="${alergeno.nombre_alergeno}" title="Alérgeno: ${alergeno.nombre_alergeno}"</img>
                 </div>
             `;
         });
@@ -78,8 +78,8 @@ function renderTarjetas(){
         if ((revisor && revisor == true) || id_usuario_ver == receta.id_usuario) {
             htmlIconoEditar += `
                 <div class="opcionesAutores brnRecetaUpdate">
-                    <a href="${APP_URL}recetaUpdate/${receta.id}">
-                        <button class="fa-regular fa-pen-to-square" title="Editar receta ${receta.nombre}"></button>
+                    <a href="${APP_URL}recetaUpdate/${receta.id}" alt="Editar receta ${receta.nombre}" aria-label="Editar ${receta.nombre}">
+                        <button class="fa-regular fa-pen-to-square" alt="Editar receta ${receta.nombre}" aria-label="Editar ${receta.nombre}"></button>
                     </a>
                 </div>
             `;
@@ -89,25 +89,25 @@ function renderTarjetas(){
             <div class="column tarjetaReceta col-100 vertical top">
                 <a href="${APP_URL}vistaReceta/${receta.id}">
                     <div class="fotoTarjetaReceta col-100 static">
-                        <img class="lazy-img" data-src="${img_dir}${foto}" alt="Foto de ${receta.nombre}" title="Foto de ${receta.nombre}" src="${img_dir}${foto}">
+                        <img class="lazy-img" data-src="${img_dir}${foto}" alt="Foto de ${receta.nombre}" title="Fotografía de ${receta.nombre}" src="${img_dir}${foto}">
                     </div>
-                </a>
-                <div class="col-100 static total vertical">
-                    <h3>
+                    <h3 class="medio">
                         <form class="FormularioAjax formFavoritos" action="${APP_URL}app/ajax/recetaAjax.php" method="POST" autocomplete="off" name="${legend}">
                             <input type="hidden" name="modulo_receta" value="cambiarFavorito">
                             <input type="hidden" name="id_usuario" value="${id_usuario_ver}">
                             <input type="hidden" name="id_receta" value="${receta.id}">
                             <input type="hidden" name="nombre_receta" value="${receta.nombre}">
-
+    
                             <button type="submit" class="btnIcon" aria-label="${legend}" title="${legend}">
                                 ${heart}
                             </button>
                         </form>
-                        <a href="${APP_URL}vistaReceta/${receta.id}">
+                        <span>
                             ${receta.nombre}
-                        </a>
+                        </span>
                     </h3>
+                </a>
+                <div class="col-100 static total vertical">
                     <div id="dif-${receta.id}" class="iconoDificultad horizontal static pointer" title="Dificultad ${receta.dificultad} de 5">
                         ${estrellas}
                     </div>

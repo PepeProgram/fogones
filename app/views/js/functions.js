@@ -8,6 +8,49 @@ function menuHamburguesa(menu){
     }
 }
 
+/* Despliega o repliega el menú de usuario */
+function toggleMenu(){
+    const desplegarMenu = document.querySelector('#subMenuSupNav');
+    if (desplegarMenu.classList.contains('oculto')) {
+        desplegarMenu.classList.remove('oculto');
+        desplegarMenu.classList.add('visibleFlex');
+    } else {
+        desplegarMenu.classList.remove('visibleFlex');
+        desplegarMenu.classList.add('oculto');
+    }
+}
+
+function scrollMenuFotos(boton){
+    
+    if (boton.classList.contains('left')) {
+        boton.nextElementSibling.scrollBy({ left: -150, behavior: 'smooth' });
+    }
+    if (boton.classList.contains('right')) {
+        boton.previousElementSibling.scrollBy({ left: 150, behavior: 'smooth' });
+    }
+    
+
+}
+
+/* Escucha si hacemos click fuera del menú de usuario para cerrarlo */
+document.addEventListener('click', function(e){
+    const menu = document.querySelector('#subMenuSupNav');
+    const boton = document.querySelector('#btnMenu');
+
+    if (!menu) {
+        return;
+    }
+
+    const abierto = menu.classList.contains('visibleFlex');
+
+    const clickFuera = !menu.contains(e.target) && !boton.contains(e.target);
+
+    if (abierto && clickFuera) {
+        menu.classList.remove('visibleFlex');
+        menu.classList.add('oculto');
+    }
+});
+
 /* Muestra el texto de la contraseña */
 function verPass(ojo){
     let input = ojo.previousElementSibling; 
@@ -1116,7 +1159,7 @@ async function generarPDFReceta(){
     const doc = new window.jspdf.jsPDF();
 
     /* Imagen de la cabecera: Obtiene el logo, lo convierte a base64 y lo coloca */
-    const bannerSuperior = await cargarImagenBase64("http://192.168.1.53/fogones/app/views/img/BannerAlargado.jpg");
+    const bannerSuperior = await cargarImagenBase64(APP_URL + "app/views/img/BannerAlargado.png");
 
     doc.addImage(bannerSuperior, "JPEG", 10, 5, 190, 28.75);
 

@@ -66,8 +66,8 @@
 
         echo '<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total horizontal static" method="POST">
                 <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
-                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input inputBuscarRecetas" placeholder="Buscar en esta sección ...">
-                <button type="submit" class="btnBuscarRecetas"><i class="fa fa-search"></i></button>
+                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input inputBuscarRecetas" placeholder="Buscar en esta sección ..." alt="Buscar en la sección" aria-label="Buscar en esta sección">
+                <button type="submit" class="btnBuscarRecetas" aria-label="Buscar" alt="Buscar"><i class="fa fa-search"></i></button>
                 <input type="hidden" name="modulo_receta" value="buscar">
                 <input type="hidden" name="id_tipo" value="'.$idTipo.'">
              </form>';
