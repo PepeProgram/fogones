@@ -9,7 +9,7 @@
     <a href=<?php echo APP_URL."utensilios" ?>>Utensilios</a>
     <a href=<?php echo APP_URL."ingredientes" ?>>Ingredientes</a>
     <a href=<?php echo APP_URL."alergenos" ?>>Alérgenos</a>
-    <a href=<?php echo APP_URL."areasGeograficas" ?>>Áreas Geográficas</a>
+    <!-- <a href=<?php echo APP_URL."areasGeograficas" ?>>Áreas Geográficas</a> -->
     <a class="icon" onclick="menuHamburguesa('subNav')">
         <i class="fa fa-bars" aria-label="Desplegar Menú"></i>
     </a>

@@ -5,7 +5,7 @@ RewriteEngine On
 Options All -Indexes
 
 
-# Utiliza RewriteRule para eliminar todo lo que venga después de la carpeta recetas y así asegurar que la aplicación siempre se ejecuta en el index.php. 
+# Utiliza RewriteRule para eliminar todo lo que venga después de la carpeta fogones y así asegurar que la aplicación siempre se ejecuta en el index.php. 
 # Todo lo que venga en la url después de la carpeta recetas va a ser una variable que se llama views de forma que todo lo que reciba será $1
 
 # Permite todos los caracteres entre a y z, entre A y Z, del 0 al 9 y "/", ñ y Ñ en la url, que se almacena en la variable, mediante la regex. 

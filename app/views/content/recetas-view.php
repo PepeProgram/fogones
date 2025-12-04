@@ -68,15 +68,15 @@
                 <!-- Fila para cada receta -->
                 <div class="listaRecetasFila col-100 medio horizontal static">
                     <div class="fotoListaRecetas foto col-20 medio static">
-                        <img src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto; ?>" alt="Foto de <?php echo $receta->getNombre(); ?>" title="Foto de <?php echo $receta->getNombre(); ?>">
+                        <img src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto; ?>" alt="Foto de <?php echo $receta->getNombre(); ?>">
                     </div>
                     <div class="col-80 medio vertical">
-                        <h4><?php echo $receta->getNombre(); ?></h4>
+                        <h3><?php echo $receta->getNombre(); ?></h3>
                         <p class="textoLargo"><?php echo $receta->getDescripcion(); ?></p>
                     </div>
                     <div class="opcionesRecetas col-20 medio static">
-                        <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>" title="Revisar <?php echo $receta->getNombre(); ?>">
-                            <button class="fa-regular fa-pen-to-square btnOpcionesRecetas"></button>
+                        <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>" title="Revisar <?php echo $receta->getNombre(); ?>" >
+                            <button class="fa-regular fa-pen-to-square btnOpcionesRecetas" title="Editar <?php echo $receta->getNombre(); ?>"></button>
                         </a>
                         <button class="fa-solid fa-square-xmark userDel btnOpcionesRecetas" title="Eliminar <?php echo $receta->getNombre(); ?>"></button>
                     </div>

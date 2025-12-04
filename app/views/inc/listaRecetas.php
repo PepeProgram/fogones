@@ -89,6 +89,9 @@
 
 </section>
 
+<div class="col-100 centrar">
+    <button id="btnVerMas" class="btn btnVerMas centrar">Mostrar más...</button>
+</div>
 <script type="text/javascript">
     // Reemplaza el historial para que la página actual aparezca como GET
     window.history.replaceState(null, '', window.location.href);

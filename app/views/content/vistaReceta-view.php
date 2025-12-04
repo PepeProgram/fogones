@@ -71,6 +71,43 @@
             $legend = "Añadir ".$receta_ver->getNombre()." a mis recetas favoritas";
         }
 
+        /* Obtiene el origen de la receta */
+        $origen = [];
+        /* Obtiene el continente de la receta */
+        if ($receta_ver->getId_zona() != 0) {
+            $continente = $insLogin->seleccionarDatos('Unico', 'zonas', 'id_zona', $receta_ver->getId_zona());
+            if ($continente->rowCount() > 0) {
+                $continente = $continente->fetch();
+                array_push($origen, $continente['nombre_zona']);
+            }
+        }
+        
+        /* Obtiene el país de la receta */
+        if ($receta_ver->getId_pais() != 0) {
+            $pais = $insLogin->seleccionarDatos('Unico', 'paises', 'id_pais', $receta_ver->getId_pais());
+            if ($pais->rowCount() > 0) {
+                $pais = $pais->fetch();
+                array_push($origen, $pais['esp_pais']);
+            }
+        }
+
+        /* Obtiene la región de la receta */
+        if ($receta_ver->getId_region() != 0) {
+            $region = $insLogin->seleccionarDatos('Unico', 'regiones', 'id_region', $receta_ver->getId_region());
+            if ($region->rowCount() > 0) {
+                $region = $region->fetch();
+                array_push($origen, $region['nombre_region']);
+            }
+        }
+
+        if (count($origen) > 0) {
+            $origen = implode(" - ", $origen);
+        } else {
+            $origen = 'Sin determinar';
+        }
+        
+        
+
     }
 
 
@@ -159,7 +196,8 @@
              </div>
     
             <!-- Fecha de creación -->
-            <p class="notas"><?php echo "Creado el ".strftime('%a. %d de %b. de %Y', strtotime($receta_ver->getCreado())) ?></p>
+            <p id="origen" class="notas"><?php echo 'Origen: '.$origen; ?></p>
+            <p class="notas"><?php echo "Enviada el ".strftime('%a. %d de %b. de %Y', strtotime($receta_ver->getCreado())) ?></p>
 
             <div id="descripcionReceta" class="descripcionReceta col-100 izquierda horizontal">
                 <p class="textoLargo"><?php echo $receta_ver->getDescripcion(); ?></p>

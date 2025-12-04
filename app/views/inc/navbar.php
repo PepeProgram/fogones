@@ -1,17 +1,17 @@
 <div class="supnavWrapper">
 
     <nav class="supnav" id="supnav">
-        <div class="logoMenu">
-            <a href="<?php echo APP_URL; ?>principal" class="">
-                <img class="bannerPequeClaro" src="<?php echo APP_URL ?>app/views/img/BannerPequeClaro.png" alt="Página principal">
-            </a>
+        <a href="<?php echo APP_URL; ?>principal" class="">
+        <div class="logoMenu" title="Página principal">
+            <img class="bannerPequeClaro" src="<?php echo APP_URL ?>app/views/img/BannerPequeClaro.png" alt="Página principal">
         </div>
+        </a>
         <?php 
         /* Comprueba si hay sesión iniciada */
         if (isset($_SESSION['id'])) {        
         
             ?>
-        <div class="opcionMenu" onclick="toggleMenu();">
+        <div class="opcionMenu" onclick="toggleMenu();" title="Mi cuenta">
             <button id="btnMenu" class="btnMenu">
                 <div class="divFotoNav">
                     <figure class="foto">

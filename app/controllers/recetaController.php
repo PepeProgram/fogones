@@ -1324,55 +1324,49 @@
                         case 'principal':
                             $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
                             break;
-                        case 'aperitivos':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=1 AND activo = 1";
-                            break;
-                        case 'primerosPlatos':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=3 AND activo = 1";
-                            break;
-                        case 'segundosPlatos':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=7 AND activo = 1";
-                            break;
-                        case 'postres':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=4 AND activo = 1";
-                            break;
-                        case 'guarniciones':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=11 AND activo = 1";
-                            break;
-                        case 'desayunos':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=10 AND activo = 1";
-                            break;
-                        case 'complementos':
-                            $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=12 AND activo = 1";
+                        case 'listaFiltrada':
+                            if (isset($_POST['id_tipo']) && $_POST['id_tipo'] != "") {
+                                $id_tipo = $this->limpiarCadena($_POST['id_tipo']);
+                                $consulta = "SELECT * FROM recetas_tiposplato INNER JOIN recetas ON recetas_tiposplato.id_receta = recetas.id_receta WHERE id_tipo=$id_tipo AND activo = 1 ORDER BY recetas.id_receta DESC";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo = 1 ORDER BY nombre_receta";
+                            }
                             break;
                         case 'misRecetas':
-                            $id = $_SESSION['id'];
-                            $consulta = "SELECT * FROM recetas WHERE id_usuario=$id";
+                            if (isset($_SESSION['id'])) {
+                                $id = $_SESSION['id'];
+                                $consulta = "SELECT * FROM recetas WHERE id_usuario=$id ORDER BY recetas.id_receta DESC";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
+                            }
                             break;
                         case 'paraRevisar':
-                            /* consulta las recetas sin activar */
-                            $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY nombre_receta";
+                            if ((isset(($_SESSION['revisor'])) && $_SESSION['revisor'] == true) || (isset(($_SESSION['administrador'])) && $_SESSION['administrador'] == true)) {
+                                $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY recetas.id_receta DESC";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
+                            }
                             break;
                         case 'recetasDe':
                             /* Comprueba si hay algún id de usuario */
                             if (isset($vista_actual[3]) && $vista_actual[3] != "") {
-                                $consulta = "SELECT * FROM recetas WHERE activo = 1 AND id_usuario = $vista_actual[3]";
+                                $consulta = "SELECT * FROM recetas WHERE activo = 1 AND id_usuario = $vista_actual[3] ORDER BY recetas.id_receta DESC";
                             } else {
-                                $consulta = "SELECT * FROM recetas WHERE activo = 33";
+                                $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
                             }
                             break;# code...
                         case 'recetasFavoritas':
                             /* Comprueba si hay sesión iniciada */
                             if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
                                 $id = $_SESSION['id'];
-                                $consulta = "SELECT * FROM recetas INNER JOIN  favoritas ON recetas.id_receta = favoritas.id_receta WHERE favoritas.id_usuario = $id";
+                                $consulta = "SELECT * FROM recetas INNER JOIN  favoritas ON recetas.id_receta = favoritas.id_receta WHERE favoritas.id_usuario = $id  ORDER BY favoritas.id_favoritas DESC";
                             } else {
-                                $consulta = "SELECT * FROM recetas WHERE activo = 33";
+                                $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
                             }
-                            break;# code...
+                            break;
                         
                         default:
-                            $consulta = "SELECT * FROM recetas ORDER BY nombre_receta";
+                            $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
                             break;
                     }
                     
@@ -2848,9 +2842,9 @@
             if (!isset($_SESSION['id'])) {
                 $alerta=[
                     "tipo"=>"simple",
-                    "titulo"=>"ERROR",
+                    "titulo"=>"Usuario no Identificado",
                     "texto"=>"Regístrese o inicie sesión para añadir recetas a favoritos",
-                    "icono"=>"error"
+                    "icono"=>"info"
                 ];
                 return json_encode($alerta);
                 exit();
@@ -2862,9 +2856,9 @@
                 if ($check_user->rowCount()<=0) {
                     $alerta=[
                         "tipo"=>"simple",
-                        "titulo"=>"ERROR",
+                        "titulo"=>"Usuario no Identificado",
                         "texto"=>"Regístrese o inicie sesión con su NOMBRE DE USUARIO y CONTRASEÑA para añadir recetas a favoritos",
-                        "icono"=>"error"
+                        "icono"=>"info"
                     ];
                     return json_encode($alerta);
                     exit();
@@ -2920,7 +2914,6 @@
                 $idFavoritos = $estado->fetch()['id_favoritas'];
                 $eliminarFavoritos = $this->eliminarRegistro("favoritas", "id_favoritas", $idFavoritos);
 
-                /* Comprueba que se ha eliminado correctamente */
                 /* Comprueba que se ha guardado correctamente */
                 if ($eliminarFavoritos->rowCount()==1) {
                     $alerta = [
@@ -2939,18 +2932,6 @@
                 }
                 return json_encode($alerta);
             }
-            
-
-
-
-            /* Comprobar que el controlador va funcionando */
-            $alerta=[
-                "tipo"=>"simple",
-                "titulo"=>"Funciona",
-                "texto"=>"Vas a añadir la receta a favoritos. IdUsuario: ".$idUsuario." IdReceta: ".$idReceta." Nombre: ".$nombreReceta." Estado: "
-            ];
-            return json_encode($alerta);
-            exit();
 
         /* Fin agregarFavoritosControlador */
         }

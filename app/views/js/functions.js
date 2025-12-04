@@ -1187,6 +1187,14 @@ async function generarPDFReceta(){
     doc.setFont('helvetica', 'italic');
     doc.text(redactor, 30, 59);
 
+    /* Origen */
+    const origen = document.querySelector('#origen').innerText.split(":")[1].trim();
+    doc.rect(65, 55 , 75, 6);
+    doc.setFont('helvetica', 'bolditalic');
+    doc.text('Origen: ', 67, 59);
+    doc.setFont('helvetica', 'italic');
+    doc.text(origen, 78, 59);
+
     /* Tiempo de elaboracion */
     const tiempo = document.querySelector('#textoTiempoElaboracion').innerText;
 

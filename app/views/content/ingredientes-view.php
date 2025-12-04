@@ -48,7 +48,7 @@
                 <input type="hidden" id="alergenos" name="alergenos" value="agregarAlergeno">
                 <div class="autor">
                     <div class="tituloAutor">
-                        <label for="agregarAlergeno" class="labelForm">Seleccione un alérgeno</label>
+                        <label for="alergeno" class="labelForm">Seleccione un alérgeno</label>
                         <select name="agregarAlergeno" id="alergeno" size="5" required>
 
                             <!-- Crea una instancia del controlador de alérgenos para obtener la lista -->
@@ -171,7 +171,7 @@
                                             $nombreAlergeno = $datos_alergeno['nombre_alergeno'];
                                     ?>
                                     <div class="iconoAlergenoLista">
-                                        <img src="<?php echo $fotoAlergeno?>" alt="<?php echo $nombreAlergeno ?>" title="<?php echo $nombreAlergeno ?>">
+                                        <img src="<?php echo $fotoAlergeno?>" alt="<?php echo $nombreAlergeno ?>">
 
                                         <!-- Botón para eliminar un alérgeno de un ingrediente -->
                                         <form class="FormularioAjax" action="<?php echo APP_URL ?>app/ajax/ingredienteAjax.php" method="POST" autocomplete="off" name="Quitar <?php echo $datos_alergeno['nombre_alergeno']?> a <?php echo $ingrediente->getNombre_ingrediente()?>">
@@ -193,7 +193,7 @@
 
                                     <!-- Botón para agregar alérgenos a un ingrediente -->
                                     <button class="btnAlergenoLista" title='Actualizar datos de ' onclick='activarFormulario("modulo_ingrediente", "selectAgregarAlergeno", "actualizar", <?php echo json_encode($ingrediente); ?>);'>
-                                        <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>" title="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>">  
+                                        <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>">  
                                     </button>
                                 </div>
                             </td>

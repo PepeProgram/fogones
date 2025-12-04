@@ -14,7 +14,7 @@
         public function listarTiposPlatoControlador(){
 
             /* Ejecuta la búsqueda de tipos de plato */
-            $tipos = $this->ejecutarConsulta("SELECT * FROM tipos_plato ORDER BY nombre_tipo");
+            $tipos = $this->ejecutarConsulta("SELECT * FROM tipos_plato ORDER BY id_tipo");
 
             /* Convierte el resultado a array */
             if ($tipos->rowCount()>0) {
