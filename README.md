@@ -1,5 +1,5 @@
 INSTALACIÓN
-	Para instalar la aplicación en nuestro servidor, basta con subir los archivos que se encuentran en la carpeta “fogones” al directorio raíz del servidor e importar la base de datos al servidor mysql.
+	Para instalar la aplicación en nuestro servidor, basta con subir los archivos que se encuentran en la carpeta “fogones” al directorio raíz del servidor e importar la base de datos que se encuentra en el directorio bd al servidor mysql.
 	Deberemos crear un usuario y asignarle los privilegios necesarios para la base de datos “fogones”, como mínimo SELECT, INSERT, UPDATE, DELETE.
 Una vez hecho esto, procederemos a la modificación de los archivos de configuración.
 
