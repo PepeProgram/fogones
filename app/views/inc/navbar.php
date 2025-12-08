@@ -11,7 +11,7 @@
         if (isset($_SESSION['id'])) {        
         
             ?>
-        <div class="opcionMenu" onclick="toggleMenu();" title="Mi cuenta">
+        <div id="menuMiCuenta" class="opcionMenu" title="Mi cuenta">
             <button id="btnMenu" class="btnMenu">
                 <div class="divFotoNav">
                     <figure class="foto">

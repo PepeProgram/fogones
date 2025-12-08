@@ -20,6 +20,17 @@ function toggleMenu(){
     }
 }
 
+/* Despliega o repliega el menú de usuario al pulsar enter o espacio o hacer click con el ratón */
+if (document.querySelector('#menuMiCuenta')) {
+    document.querySelector('#menuMiCuenta').addEventListener('click', toggleMenu);
+
+    document.querySelector('#menuMiCuenta').addEventListener('keydown', function(e){
+        e.preventDefault();
+        toggleMenu();
+    });
+}
+
+
 function scrollMenuFotos(boton){
     
     if (boton.classList.contains('left')) {
@@ -998,8 +1009,6 @@ function calcularIngredientes(numeroPersonasNuevo){
     
         });
     }
-
-
 }
 
 /* Procesa un bloque de texto con párrafos largos para paginarlos si es necesario y poner negrita al principio
@@ -1013,15 +1022,16 @@ function procesarBloqueTexto({
     margenX = 14,
     margenInferior = 10
 }) {
+
     /* Estilos del título */
     doc.setFont('helvetica', 'bolditalic');
     doc.setFontSize(12);
-
+    
     /* Posición del título del bloque */
     const tituloY = inicioY;
     doc.text(titulo, 12, tituloY);
 
-    /* Parámetros de texto */
+    /* Estilos del párrafo */
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
 

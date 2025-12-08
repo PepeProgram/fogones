@@ -24,6 +24,7 @@
                 echo '
                     <form action="listaFiltrada" method="POST">
                         <input type="hidden" name="id_tipo" value="'.$tipoPlato->getId_tipo().'">
+                        <input type="hidden" name="titulo_pagina" value="'.$tipoPlato->getNombre_tipo().'">
                             <button class="opcionMenuFotos">
                                 <div class="divFotoMenu">
                                     <img src="'.APP_URL.'app/views/photos/tipos_photos/'.$tipoPlato->getFoto_tipo().'" alt="'.$tipoPlato->getNombre_tipo().'" class="fotoMenu">

@@ -1135,13 +1135,21 @@ th.headerUserTitle{
 .footer{
     background-color: var(--oscuro);
     color: var(--fondoClaro);
-    position: sticky;
-    bottom: 0;
     text-align: center;
     width: 100%;
     min-width: 300px;
     max-width: 1200px;
     margin: auto;
+}
+.footer a{
+    color: var(--fondoClaro);
+    text-decoration: none;
+}
+@media screen and (min-width: 576px) {
+    .footer{
+        position: sticky;
+        bottom: 0;
+    }
 }
 @media screen and (min-width: 1800px) {
     .footer{
@@ -1600,6 +1608,15 @@ p.btnOpcionesRecetas{
     width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+.fotoFichaReceta{
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+.fotoFichaReceta img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .fotoTarjetaReceta{
     aspect-ratio: 16/9;

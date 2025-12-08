@@ -15,6 +15,15 @@
     <header class="tituloPagina">
         <h2>Recetas pendientes de revisión</h2>
     </header>
+    <form name="Buscar Recetas" action="" class="filtrarTablas">
+        <label for="busquedaRecetas">Buscar Receta</label>
+        <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, 'listaRecetasFila');">
+    </form>
+    <div class="botonesLista total">
+        <a href=<?php echo APP_URL."principal" ?>>
+            <button class="btn">Volver</button>
+        </a>
+    </div>
     
     <div id="listaRecetas" class="listaRecetasContainer col-80 total vertical">
         <div id="listaRecetasCabecera" class="listaRecetasCabecera col-100 total horizontal static">
@@ -43,8 +52,8 @@
                         <p class="textoLargo"><?php echo $receta->getDescripcion(); ?></p>
                     </div>
                     <div class="opcionesRecetas medio static">
-                        <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>">
-                            <button class="fa-regular fa-pen-to-square btnOpcionesRecetas" title="Revisar <?php echo $receta->getNombre() ?>"></button>
+                        <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>" title="Revisar <?php echo $receta->getNombre(); ?>">
+                            <button class="fa-regular fa-pen-to-square btnOpcionesRecetas" title="Revisar <?php echo $receta->getNombre(); ?> para aprobar"></button>
                         </a>
                     </div>
                 </div>

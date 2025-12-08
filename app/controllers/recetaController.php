@@ -1340,6 +1340,13 @@
                                 $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
                             }
                             break;
+                        case 'recetas':
+                            if ((isset(($_SESSION['administrador'])) && $_SESSION['administrador'] == true)) {
+                                $consulta = "SELECT * FROM recetas ORDER BY recetas.id_receta DESC";
+                            } else {
+                                $consulta = "SELECT * FROM recetas WHERE activo=1 ORDER BY id_receta DESC";
+                            }
+                            break;
                         case 'paraRevisar':
                             if ((isset(($_SESSION['revisor'])) && $_SESSION['revisor'] == true) || (isset(($_SESSION['administrador'])) && $_SESSION['administrador'] == true)) {
                                 $consulta = "SELECT * FROM recetas WHERE activo = 0 ORDER BY recetas.id_receta DESC";
@@ -2773,6 +2780,93 @@
             return json_encode($alerta);
 
         /* Fin aprobarRecetaControlador */
+        }
+
+        /* ELIMINAR UNA RECETA */
+        public function eliminarRecetaControlador(){
+
+            /* Verifica que el usuario ha iniciado sesión, es administrador y existe */
+            if (!isset($_SESSION['id'])) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR",
+                    "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder eliminar utensilios",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            } else {
+                $check_user = $this->ejecutarConsulta("SELECT * FROM usuarios WHERE login_usuario='".$_SESSION['login']."' AND id_usuario='".$_SESSION['id']."'");
+
+                if ($check_user->rowCount()<=0) {
+                    $alerta=[
+                        "tipo"=>"simple",
+                        "titulo"=>"ERROR",
+                        "texto"=>"Debe iniciar sesión en su cuenta con su NOMBRE DE USUARIO y CONTRASEÑA para poder eliminar utensilios",
+                        "icono"=>"error"
+                    ];
+                    return json_encode($alerta);
+                    exit();
+                } else {
+                    if (!$_SESSION['administrador']) {
+                        $alerta=[
+                            "tipo"=>"simple",
+                            "titulo"=>"ERROR",
+                            "texto"=>"No puede eliminar utensilios si no es administrador del sistema",
+                            "icono"=>"error"
+                        ];
+                        return json_encode($alerta);
+                        exit();
+                    }
+                }
+                
+            }
+
+            /* Obtener el id que viene en el camp oculto del botón */
+            $id = $this->limpiarCadena($_POST['id_receta']);
+
+            /* Verifeca que la receta existe */
+            $datos = $this->ejecutarConsulta("SELECT * FROM recetas WHERE id_receta='$id'");
+
+            if ($datos->rowCount()<=0) {
+                $alerta=[
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR GRAVE",
+                    "texto"=>"No existe la receta en el sistema",
+                    "icono"=>"error"
+                ];
+                return json_encode($alerta);
+                exit();
+            } else {
+                $datos = $datos->fetch();
+            }
+
+            /* Elimina la receta del sistema */
+            $eliminarReceta = $this->eliminarRegistro("recetas", "id_receta", $id);
+
+            if ($eliminarReceta->rowCount()==1) {
+                if (is_file("../views/photos/recetas_photos/".$datos['foto_receta'])) {
+                    echo "../views/photos/recetas_photos/".$datos['foto_receta'];
+                    chmod("../views/photos/recetas_photos/".$datos['foto_receta'], 0777);
+                    unlink("../views/photos/recetas_photos/".$datos['foto_receta']);
+                }
+                $alerta = $alerta = [
+                    "tipo"=>"recargar",
+                    "titulo"=>"Receta eliminada",
+                    "texto"=>"La receta ".$datos['nombre_receta']." ha sido eliminada",
+                    "icono"=>"success"
+                ];
+            } else {
+                $alerta = [
+                    "tipo"=>"simple",
+                    "titulo"=>"ERROR",
+                    "texto"=>"La receta ".$datos['nombre_receta']." no ha podido ser eliminada",
+                    "icono"=>"error"
+                ];
+            }
+            return json_encode($alerta);
+
+        /* Fin eliminarRecetaControlador */
         }
 
         /* DESACTIVAR UNA RECETA */

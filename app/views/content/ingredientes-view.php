@@ -192,8 +192,8 @@
                                     ?>
 
                                     <!-- Botón para agregar alérgenos a un ingrediente -->
-                                    <button class="btnAlergenoLista" title='Actualizar datos de ' onclick='activarFormulario("modulo_ingrediente", "selectAgregarAlergeno", "actualizar", <?php echo json_encode($ingrediente); ?>);'>
-                                        <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>">  
+                                    <button class="btnAlergenoLista" title='Añadir alérgeno a <?php echo $ingrediente->getNombre_ingrediente() ?>' onclick='activarFormulario("modulo_ingrediente", "selectAgregarAlergeno", "actualizar", <?php echo json_encode($ingrediente); ?>);'>
+                                        <img src="<?php echo APP_URL."app/views/photos/alergen_photos/sinfoto.png" ?>" alt="Añadir alérgeno">  
                                     </button>
                                 </div>
                             </td>

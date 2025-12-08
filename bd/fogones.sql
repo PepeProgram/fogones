@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-12-2025 a las 09:31:22
+-- Tiempo de generación: 08-12-2025 a las 22:29:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,7 +29,6 @@ USE `fogones`;
 -- Estructura de tabla para la tabla `administradores`
 --
 
-DROP TABLE IF EXISTS `administradores`;
 CREATE TABLE `administradores` (
   `id_administrador` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -49,7 +48,8 @@ INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
 (17, 3),
 (13, 8),
 (16, 14),
-(15, 23);
+(15, 23),
+(19, 25);
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,6 @@ INSERT INTO `administradores` (`id_administrador`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `alergenos`
 --
 
-DROP TABLE IF EXISTS `alergenos`;
 CREATE TABLE `alergenos` (
   `id_alergeno` int(11) NOT NULL,
   `nombre_alergeno` varchar(200) NOT NULL,
@@ -95,7 +94,6 @@ INSERT INTO `alergenos` (`id_alergeno`, `nombre_alergeno`, `foto_alergeno`) VALU
 -- Estructura de tabla para la tabla `autores`
 --
 
-DROP TABLE IF EXISTS `autores`;
 CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL,
   `nombre_autor` varchar(80) NOT NULL,
@@ -126,7 +124,6 @@ INSERT INTO `autores` (`id_autor`, `nombre_autor`, `foto_autor`, `id_pais`, `des
 -- Estructura de tabla para la tabla `editores`
 --
 
-DROP TABLE IF EXISTS `editores`;
 CREATE TABLE `editores` (
   `id_editor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -143,7 +140,6 @@ TRUNCATE TABLE `editores`;
 -- Estructura de tabla para la tabla `estilos_cocina`
 --
 
-DROP TABLE IF EXISTS `estilos_cocina`;
 CREATE TABLE `estilos_cocina` (
   `id_estilo` int(11) NOT NULL,
   `nombre_estilo` varchar(50) NOT NULL,
@@ -183,7 +179,6 @@ INSERT INTO `estilos_cocina` (`id_estilo`, `nombre_estilo`, `foto_estilo`) VALUE
 -- Estructura de tabla para la tabla `favoritas`
 --
 
-DROP TABLE IF EXISTS `favoritas`;
 CREATE TABLE `favoritas` (
   `id_favoritas` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -205,7 +200,6 @@ INSERT INTO `favoritas` (`id_favoritas`, `id_usuario`, `id_receta`) VALUES
 (12, 1, 69),
 (10, 1, 74),
 (11, 1, 79),
-(6, 1, 81),
 (16, 1, 84),
 (14, 1, 86),
 (19, 1, 98),
@@ -224,7 +218,6 @@ INSERT INTO `favoritas` (`id_favoritas`, `id_usuario`, `id_receta`) VALUES
 -- Estructura de tabla para la tabla `grupos_plato`
 --
 
-DROP TABLE IF EXISTS `grupos_plato`;
 CREATE TABLE `grupos_plato` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(50) NOT NULL,
@@ -260,7 +253,6 @@ INSERT INTO `grupos_plato` (`id_grupo`, `nombre_grupo`, `foto_grupo`) VALUES
 -- Estructura de tabla para la tabla `ingredientes`
 --
 
-DROP TABLE IF EXISTS `ingredientes`;
 CREATE TABLE `ingredientes` (
   `id_ingrediente` int(11) NOT NULL,
   `nombre_ingrediente` varchar(80) NOT NULL,
@@ -449,7 +441,8 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 (187, 'Marisco', 1),
 (188, 'Pulpo', 1),
 (189, 'Pimentón picante', 1),
-(190, 'Bogavante', 1);
+(190, 'Bogavante', 1),
+(192, 'Uno cualquiera', 1);
 
 -- --------------------------------------------------------
 
@@ -457,7 +450,6 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nombre_ingrediente`, `activo`) VA
 -- Estructura de tabla para la tabla `ingredientes_alergenos`
 --
 
-DROP TABLE IF EXISTS `ingredientes_alergenos`;
 CREATE TABLE `ingredientes_alergenos` (
   `id_ing_ale` int(11) NOT NULL,
   `id_ingrediente` int(11) NOT NULL,
@@ -552,7 +544,6 @@ INSERT INTO `ingredientes_alergenos` (`id_ing_ale`, `id_ingrediente`, `id_alerge
 -- Estructura de tabla para la tabla `paises`
 --
 
-DROP TABLE IF EXISTS `paises`;
 CREATE TABLE `paises` (
   `id_pais` int(11) NOT NULL,
   `esp_pais` varchar(50) NOT NULL,
@@ -828,7 +819,6 @@ INSERT INTO `paises` (`id_pais`, `esp_pais`, `eng_pais`, `fra_pais`, `iso2_pais`
 -- Estructura de tabla para la tabla `propias`
 --
 
-DROP TABLE IF EXISTS `propias`;
 CREATE TABLE `propias` (
   `id_propias` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -846,7 +836,6 @@ TRUNCATE TABLE `propias`;
 -- Estructura de tabla para la tabla `recetas`
 --
 
-DROP TABLE IF EXISTS `recetas`;
 CREATE TABLE `recetas` (
   `id_receta` int(11) NOT NULL,
   `nombre_receta` varchar(255) NOT NULL,
@@ -879,7 +868,7 @@ TRUNCATE TABLE `recetas`;
 --
 
 INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_usuario`, `id_grupo`, `n_personas`, `tiempo_receta`, `id_autor`, `id_region`, `id_pais`, `id_zona`, `dificultad`, `elaboracion`, `emplatado`, `foto_receta`, `visualizaciones`, `creado_receta`, `actualizado_receta`, `activo`) VALUES
-(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 1, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopita colombiana de la buena.', 'Bolovanes_202511290134483817.jpg', 1, '2025-11-10 19:09:49', '2025-12-02 17:31:12', 0),
+(36, 'Bolovanes rellenos', 'Bolovanes salados rellenos de sardinas, atún, paté, etc.', 1, 1, 4, '00:45:00', NULL, 0, 160, 3, 2, 'Juntamos todo excepto las sardinas en la kitchen aid:\r\nMezclamos hasta que quede todo como una pasta asquerosa.\r\nFreimos las sardinas en abundante aceite caliente.\r\nEstiramos la masa y la moldeamos formando vasitos, que hornearemos hasta que aparezcan churruscaditos.\r\nColocamos cada sardina en un vasito, dejando asomar la cola por arriba para que parezca que se están ahogando.', 'Todos juntitos en una bandeja cuadrada y los espolvoreamos con abundante farlopita colombiana de la buena.', 'Bolovanes_202511290134483817.jpg', 1, '2025-11-10 19:09:49', '2025-12-06 17:50:15', 0),
 (37, 'Pechuga de pato con verduras', 'Es un plato perfecto para ocasiones especiales, equilibra la intensidad de la carne  con la frescura de las verduaras y la salsa agridulce.', 1, 1, 4, '01:20:00', NULL, 0, 0, 1, 3, '* Para el puré de zanahoria caramelizada:\r\n    1.- Pelamos las zanahorias, las cortamos longitudinalmente y retiramos la parte central, que es menos dulce.\r\n    2.- Troceamos en piezas pequeñas y las añadimos a un cazo con la mantequilla deretida.\r\n    3.- Incorporamos un chorrito de agua y cocinamos a fuego suave durante unos 20 minutos, hasta que estén tiernas y ligeramente caramelizadas.\r\n    4.- Trituramos hasta obtener un puré fino y lo pasamos por un colador para lograr una textura más lisa y sedosa.\r\n\r\n* Para la salsa de naranja:\r\n    5.- En un cazo ponemos el zumo de naranja, la soja, el vinagre, la miel y una pizca de sal. Calentamos a fuego medio, removiendo de vez en cuando hasta que reduzca.\r\n    6.- Añadimos la maicena disuelta y cocinamos 2-3 minutos más hasta espesar.\r\n\r\n* Para la guarnición:\r\n    7.- Cortamos los brócolis en pequeños trozos y las zanahorias en trozos medianos.\r\n    8.- En una sartén con aceite de oliva, rehogamos las verduras con una pizca de sal, tomillo y romero. Cocinamos a fuego medio-bajo hasta que estén tiernas pero ligeramente al dente.\r\n    9.- Por otro lado salteamos las setas en una sartén. Reservamos para usarlas como base de nuestro pato.\r\n    10.- Reservamos las verduras calientes para emplatar.\r\n\r\n* Para la carne:\r\n    11.- Limpiamos los magrets retirando restos de grasa o plumas.\r\n    12.- Hacemos cortes superficiales en la piel en forma de rombos sin llegar a la carne. Sazonamos con sal y pimienta.\r\n    13.- Cocinamos en una sartén sin aceite, primero por el lado de la piel hasta que suelte la grasa y quede dorada, luego damos la vuelta y cocinamos 2-3 minutos más.\r\n    14.- Retiramos, dejamos reposar 2 minutos y cortamos en rodajas.', 'En una bandeja ovalada, colocamos las rodajas de pato un poco montadas, con  salsa en un lado y unas verduras salteadas al otro.', 'Pechuga_202511110141257051.png', 1, '2025-11-18 12:14:33', '2025-11-19 21:02:05', 1),
 (38, 'Doriyakis', 'Tortitas muy esponjosas japonesas emparejadas a modo de sandwich con algún relleno en medio de mermelada, crema,  dulce de leche, etc...', 23, 6, 6, '00:45:00', NULL, 0, 124, 2, 2, 'Abizcochar los huevos con el azúcar, añadir la miel y continuar batiendo.\r\nDiluir el bicarbonato en el agua e incorporarlo a la masa. Mezclarlo bien.\r\nTamizar la harina con la levadura y añadir poco a poco a la masa, sin dejar de mezclar para que no queden grumos.\r\nPintar una sartén con aceite de girasol y, cuando esté bien caliente, añadir 2-3 cucharadas soperas de masa en el centro. Cocinar unos minutos, hasta que la superficie se llene de burbujas. La parte inferior debería estar bien dorada. Dar la vuelta con cuidado  y esperar a que se dore por la otra cara. Sacar a una bandeja con papel de horno para que no se pegue.\r\nCuando estén frias, emparejar las tortas de dos en dos, poniendo juntas las que más se parezcan por su forma. Untar con el relleno elegido la mitad y cierra con sus respectivas parejas, formando sandwiches.', 'En platitos individuales, acompañada de nata montada, fruta fresca, sirope....', 'Doriyakis_202511170743548061.jpg', 1, '2025-11-18 11:48:08', '2025-11-18 11:48:08', 1),
 (39, 'Biersuppe', 'Reconfortante sopa cremosa elaborada con cerveza originaria de Baviera', 23, 19, 6, '00:30:00', NULL, 0, 3, 1, 2, '*Croutons: Cortar las rebanadas de pan, si son del día anterior mejor, en cuadraditos de uno o dos centímetros y freír en abundante aceite de oliva suave. \r\n\r\n    *Sopa: Fundir la mantequilla en una olla a fuego suave. Cuando esté líquida se incorpora la harina y se remueve hasta que se haya tostado ligeramente incorporar la cerveza. Se deja hervir a fuego lento, sin dejar de remover durante unos 20 min. y, a continuación, se salpimenta y, opcionalmente, se añade la canela. Se retira del fuego, se baten las yemas con la nata líquida y se incorporan a la sopa caliente cuando ya no esté hirviendo. Se vuelve a poner el conjunto a fuego bajo durante unos cinco minutos.', 'Se sirve bien caliente en plato hondo con unos poquitos croutons adornando', 'Biersuppe_202511120955296304.jpg', 1, '2025-11-18 11:43:04', '2025-11-18 11:43:04', 1),
@@ -932,8 +921,8 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 (98, 'Carne ó caldeiro', 'Este plato se caracteriza por su sencillez y capacidad para sorprender por su sabor. La clave está en la calidad de la carne y la cocción lenta.', 23, 1, 10, '01:30:00', NULL, 13, 64, 1, 1, 'Poner la falda de tenera, el unto y las hortalizas en mirepoix, cubiertos de agua a cocer, a fuego suave hasta que esté totalmente cocida la carne.\r\n\r\nTrocear la carne y colocarla en bandejas.\r\n\r\nEspolvorear con el pimentón sazonar y rociar con el aceite de oliva.\r\n\r\nServir rápidamente.', 'En la propia bandeja, acompañada de  patata cocida, grelos.', 'Carne_202511290755176163.jpg', 1, '2025-11-29 18:55:17', '2025-11-29 19:35:00', 1),
 (99, 'Zarzuela pescado y marisco', 'Guiso marinero, un plato de lujo con puro sabor a mar.', 23, 2, 4, '00:45:00', NULL, 8, 64, 1, 2, 'Pescado blanco como rape, merluza....\r\nMarisco como mejillones, gambas o gambones, langostinos, almeja....\r\n\r\nLimpiar el pescado, retirarle la piel y las espinas. Lavar, secar y cortarlo en trozos pequeños, salpimentar y pasarlo por harina. Freírlo y escurrir en un papel de cocina.\r\n\r\nPelar y picar la cebolla y los ajos en brunoise, rehogarlos en un fondo de aceite hasta que tomen color. Añadir el pimentón y regar con  brandy. Cocer unos minutos hasta que reduzca y añadir el fumet. Pelar los tomates y añadirlos también, cortados en paisana fina.\r\n\r\nAromatizar el guiso con azafrán machacado y dejar cocer todo junto durante 15 min. Sazonar y añadir una pizca de azúcar añadir el pescado y el marisco y dejar cocer 3 min', 'Procurar disponer en cada plato un trozo de cada pescado y marisco, al menos, y  regarlo con un poco de la salsa.', 'Zarzuela_202512010727151385.jpg', 1, '2025-12-01 18:27:15', '2025-12-01 18:58:25', 0),
 (100, 'Salsa de tomate', 'Salsa de sabor complejo, se caracteriza por su dulzura natural y profundidad de sabor.', 23, 3, 8, '01:15:00', NULL, 0, 64, 1, 1, 'Rehogar en el aceite la cebolla y los ajos cortados en brunoise.\r\n\r\nAñadir la harina y el pimentón, rehogar.\r\n\r\nAñadir el tomate pelado y sin semillas, el laurel, sazonar.\r\n\r\nDejar estofar una hora a fuego muy lento y pasar por el chino y la estameña.', 'Para acompañar, pasta, carne...', 'Salsa_202512010756579025.jpg', 1, '2025-12-01 18:56:57', '2025-12-01 18:57:33', 0),
-(101, 'Pulpo á feira', 'Una auténtica joya de la gastronomía gallega, fácil de elaborar e ideal para compartir.', 23, 2, 8, '00:30:00', NULL, 13, 64, 1, 2, 'Nos fijaremos en que desde la fecha de envasado (no la fecha de caducidad) hayan pasado 40 dias, asi las fibras estarán perfectas para la cocción.\r\n\r\nHay varias formas de cocer el pulpo, y de ello dependerá su merma.\r\n\r\nPara un pulpo de 2 kg.\r\nAl modo tradicional, sería poner agua en la marmita, llevarla a 100ºC y meter el pulpo contando 22 minutos con lo que nos mermará de 45 al 50%.\r\n\r\nAl vacío, en la mima marmita, en una bolsa cerrada al vacío a 95ºC, durante 20 minutos,  llegará a una merma del 38-45%\r\n\r\nSi lo cocemos al vapor, sin agua, en 18 minutos, la merma será de 35-38%.\r\n\r\nEs aconsejable cocelo sin cabeza, cuidando de no cortar de más hacia el interior de los tentáculos para  que no entre el agua.\r\n\r\nUna vez cocido, cortaremos los tentáculos con unas tijeras en rodajitas de 1cm, más o menos, los depositamos en un plato de madera, regamos con aceite de oliva virgen, echamos pimentón dulce y picante al gusto, y sal gruesa\r\n\r\nDiferenciamos el pulpo de roca, o sea el gallego porque suele pesar de 2 a 3 kg, y tiene unas manchas rojizas, del pulpo de arena que es marroquí ,  más blancuzco y pesa de 1kg a 1,5kg , este necesitará 1 minuto menos de cocción', 'En el mismo  plato de madera, típico para este manjar, así ya está exquisito, pero podemos acompañar de unos cachelos (patatas con piel) que habremos cocido durante 15 mintos en la misma agua de cocción del pulpo, si lo hiciesemos al modo tradicional.', 'Pulpo_202512020850283766.jpg', 1, '2025-12-02 19:50:28', '2025-12-02 19:50:28', 0),
-(102, 'Arroz con bogavante', 'El bogavante aporta un sabor porfundo ligeramente dulce y muy característico, cocido junto al arroz forma un fondo marino intenso.', 23, 15, 4, '00:45:00', NULL, 0, 64, 1, 2, 'Se calienta un chorro de aceite en la cazuela, entretanto cortamos el bogavante, la cabeza a la mitad, pinzas, la cola en trozos. Aprovechamos todo su jugo. Se rehoga unos minutos y se reserva.\r\n\r\nEn el mismo aceite sofreímos los dientes de ajo, la cebolla y el pimiento cortado en brunoise, cuando la cebolla tenga color, se añade el tomate en concassé. Dejamos 5 minutos a cocer y añadimos el chorro de brandy para flambear.\r\n\r\nRehogamos el arroz en el sofrito y añadimos el fumet caliente, junto con las hebras de azafrán, el pimentón y el bogavante.\r\nDejamos cocer unos 15 minutos más, lo retiramos para que repose otros 10 minutos tapado.', 'En cada plato ponemos un poco de arroz y añadimos trozos de bogavante. espolvoreamos con hierba aromática al gusto fresca muy picadita.', 'Arroz_202512020927469961.jpg', 1, '2025-12-02 20:27:46', '2025-12-02 20:34:16', 0),
+(101, 'Pulpo á feira', 'Una auténtica joya de la gastronomía gallega, fácil de elaborar e ideal para compartir.', 23, 2, 8, '00:30:00', NULL, 13, 64, 1, 2, 'Nos fijaremos en que desde la fecha de envasado (no la fecha de caducidad) hayan pasado 40 dias, asi las fibras estarán perfectas para la cocción.\r\n\r\nHay varias formas de cocer el pulpo, y de ello dependerá su merma.\r\n\r\nPara un pulpo de 2 kg.\r\nAl modo tradicional, sería poner agua en la marmita, llevarla a 100 grados C y meter el pulpo contando 22 minutos con lo que nos mermará de 45 al 50%.\r\n\r\nAl vacío, en la mima marmita, en una bolsa cerrada al vacío a 95 grados C, durante 20 minutos,  llegará a una merma del 38-45%\r\n\r\nSi lo cocemos al vapor, sin agua, en 18 minutos, la merma será de 35-38%.\r\n\r\nEs aconsejable cocelo sin cabeza, cuidando de no cortar de más hacia el interior de los tentáculos para  que no entre el agua.\r\n\r\nUna vez cocido, cortaremos los tentáculos con unas tijeras en rodajitas de 1cm, más o menos, los depositamos en un plato de madera, regamos con aceite de oliva virgen, echamos pimentón dulce y picante al gusto, y sal gruesa\r\n\r\nDiferenciamos el pulpo de roca, o sea el gallego porque suele pesar de 2 a 3 kg, y tiene unas manchas rojizas, del pulpo de arena que es marroquí ,  más blancuzco y pesa de 1kg a 1,5kg , este necesitará 1 minuto menos de cocción', 'En el mismo  plato de madera, típico para este manjar, así ya está exquisito, pero podemos acompañar de unos cachelos (patatas con piel) que habremos cocido durante 15 mintos en la misma agua de cocción del pulpo, si lo hiciesemos al modo tradicional.', 'Pulpo_202512020850283766.jpg', 1, '2025-12-02 19:50:28', '2025-12-08 17:47:47', 0),
+(102, 'Arroz con bogavante', 'El bogavante aporta un sabor porfundo ligeramente dulce y muy característico, cocido junto al arroz forma un fondo marino intenso.', 23, 15, 4, '00:45:00', NULL, 0, 64, 1, 3, 'Se calienta un chorro de aceite en la cazuela, entretanto cortamos el bogavante, la cabeza a la mitad, pinzas, la cola en trozos. Aprovechamos todo su jugo. Se rehoga unos minutos y se reserva.\r\n\r\nEn el mismo aceite sofreímos los dientes de ajo, la cebolla y el pimiento cortado en brunoise, cuando la cebolla tenga color, se añade el tomate en concassé. Dejamos 5 minutos a cocer y añadimos el chorro de brandy para flambear.\r\n\r\nRehogamos el arroz en el sofrito y añadimos el fumet caliente, junto con las hebras de azafrán, el pimentón y el bogavante.\r\nDejamos cocer unos 15 minutos más, lo retiramos para que repose otros 10 minutos tapado.', 'En cada plato ponemos un poco de arroz y añadimos trozos de bogavante. espolvoreamos con hierba aromática al gusto fresca muy picadita.', 'Arroz_202512020927469961.jpg', 1, '2025-12-02 20:27:46', '2025-12-08 18:40:36', 1),
 (103, 'Ali Oli', 'Alioli o ajo aceite es una salsa muy versátil que se elabora tan solo con estos dos ingredientes y sal.', 23, 3, 10, '00:30:00', NULL, 11, 64, 1, 3, 'Pelamos los dientes de ajo, les quitamos el germen para que no repita la salsa y los troceamos en dados pequeños.\r\n\r\nLos introducimos en el mortero junto una pizca de sal y  machacamos con la maza, movimientos ascendentes/descendentes continuamente hasta conseguir una pasta cremosa.\r\nEs el momento de  integrar el aceite muy poquito a poco en forma de hilo, realizando movimientos circulares con la maza, es importante que sean siempre en el mismo sentido, para que emulsione bien y no se corte. \r\n\r\nAl final conseguiremos una salsa de consistencia espesa y  un tono de color amarillo pálido. \r\n\r\n\r\nEn algunas ocasiones, se puede hacer una falsa alioli añadiéndole ajos triturados y emulsionados en aceite durante 1 hora a la mahonesa.\r\n\r\nTambién se le pueden añadir otros ingredientes como leche, queso, nueces, almendras, tomillo...', 'Acompaña a platos como arroces, carnes, pescados e incluso verduras.', 'Ali_20251202100915881.jpg', 1, '2025-12-02 21:09:15', '2025-12-02 21:09:15', 1);
 
 -- --------------------------------------------------------
@@ -942,7 +931,6 @@ INSERT INTO `recetas` (`id_receta`, `nombre_receta`, `descripcion_receta`, `id_u
 -- Estructura de tabla para la tabla `recetas_alergenos`
 --
 
-DROP TABLE IF EXISTS `recetas_alergenos`;
 CREATE TABLE `recetas_alergenos` (
   `id_recetas_alergenos` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -960,7 +948,6 @@ TRUNCATE TABLE `recetas_alergenos`;
 -- Estructura de tabla para la tabla `recetas_estilos`
 --
 
-DROP TABLE IF EXISTS `recetas_estilos`;
 CREATE TABLE `recetas_estilos` (
   `id_recetas_estilos` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1055,13 +1042,13 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 (336, 100, 14),
 (337, 100, 9),
 (338, 100, 13),
-(339, 36, 20),
-(340, 36, 16),
-(341, 101, 14),
-(346, 102, 1),
-(347, 102, 14),
 (348, 103, 1),
-(349, 103, 14);
+(349, 103, 14),
+(350, 36, 20),
+(351, 36, 16),
+(357, 101, 14),
+(361, 102, 1),
+(362, 102, 14);
 
 -- --------------------------------------------------------
 
@@ -1069,7 +1056,6 @@ INSERT INTO `recetas_estilos` (`id_recetas_estilos`, `id_receta`, `id_estilo`) V
 -- Estructura de tabla para la tabla `recetas_ingredientes`
 --
 
-DROP TABLE IF EXISTS `recetas_ingredientes`;
 CREATE TABLE `recetas_ingredientes` (
   `id_recetas_ingredientes` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1529,32 +1515,32 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 (1195, 99, 52, 1.00, 5),
 (1196, 99, 28, 1.00, 6),
 (1197, 99, 51, 1.00, 6),
-(1198, 36, 9, 10.00, 2),
-(1199, 36, 2, 1.00, 1),
-(1200, 36, 8, 50.00, 2),
-(1201, 36, 7, 1.00, 3),
-(1202, 36, 4, 4.00, 9),
-(1203, 36, 6, 5.00, 2),
-(1204, 36, 23, 100.00, 1),
-(1205, 101, 188, 2.00, 1),
-(1206, 101, 35, 1.00, 6),
-(1207, 101, 81, 1.00, 6),
-(1208, 101, 189, 1.00, 6),
-(1209, 101, 184, 1.00, 6),
-(1232, 102, 190, 1.00, 1),
-(1233, 102, 78, 300.00, 2),
-(1234, 102, 52, 1.00, 6),
-(1235, 102, 54, 1.00, 9),
-(1236, 102, 87, 2.00, 9),
-(1237, 102, 83, 1.00, 9),
-(1238, 102, 53, 2.00, 9),
-(1239, 102, 74, 1.00, 5),
-(1240, 102, 81, 1.00, 10),
-(1241, 102, 112, 100.00, 4),
-(1242, 102, 88, 1.00, 6),
 (1243, 103, 35, 170.00, 4),
 (1244, 103, 87, 3.00, 9),
-(1245, 103, 28, 1.00, 11);
+(1245, 103, 28, 1.00, 11),
+(1246, 36, 9, 10.00, 2),
+(1247, 36, 2, 1.00, 1),
+(1248, 36, 8, 50.00, 2),
+(1249, 36, 7, 1.00, 3),
+(1250, 36, 4, 4.00, 9),
+(1251, 36, 6, 5.00, 2),
+(1252, 36, 23, 100.00, 1),
+(1270, 101, 188, 2.00, 1),
+(1271, 101, 35, 1.00, 6),
+(1272, 101, 81, 1.00, 6),
+(1273, 101, 189, 1.00, 6),
+(1274, 101, 184, 1.00, 6),
+(1277, 102, 190, 1.00, 1),
+(1278, 102, 78, 300.00, 2),
+(1279, 102, 52, 1.00, 6),
+(1280, 102, 54, 1.00, 9),
+(1281, 102, 87, 2.00, 9),
+(1282, 102, 83, 1.00, 9),
+(1283, 102, 53, 2.00, 9),
+(1284, 102, 74, 1.00, 5),
+(1285, 102, 81, 1.00, 10),
+(1286, 102, 112, 100.00, 4),
+(1287, 102, 88, 1.00, 6);
 
 -- --------------------------------------------------------
 
@@ -1562,7 +1548,6 @@ INSERT INTO `recetas_ingredientes` (`id_recetas_ingredientes`, `id_receta`, `id_
 -- Estructura de tabla para la tabla `recetas_tecnicas`
 --
 
-DROP TABLE IF EXISTS `recetas_tecnicas`;
 CREATE TABLE `recetas_tecnicas` (
   `id_recetas_tecnicas` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1579,8 +1564,8 @@ TRUNCATE TABLE `recetas_tecnicas`;
 --
 
 INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`) VALUES
-(227, 36, 12),
-(226, 36, 28),
+(234, 36, 12),
+(233, 36, 28),
 (100, 37, 12),
 (12, 38, 21),
 (86, 39, 13),
@@ -1640,9 +1625,9 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 (225, 99, 21),
 (224, 99, 26),
 (223, 100, 27),
-(229, 101, 13),
-(228, 101, 18),
-(232, 102, 21);
+(238, 101, 13),
+(237, 101, 18),
+(239, 102, 21);
 
 -- --------------------------------------------------------
 
@@ -1650,7 +1635,6 @@ INSERT INTO `recetas_tecnicas` (`id_recetas_tecnicas`, `id_receta`, `id_tecnica`
 -- Estructura de tabla para la tabla `recetas_tiposplato`
 --
 
-DROP TABLE IF EXISTS `recetas_tiposplato`;
 CREATE TABLE `recetas_tiposplato` (
   `id_recetas_tiposplato` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1667,10 +1651,10 @@ TRUNCATE TABLE `recetas_tiposplato`;
 --
 
 INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo`) VALUES
-(305, 36, 1),
-(303, 36, 10),
-(304, 36, 11),
-(302, 36, 12),
+(315, 36, 1),
+(313, 36, 10),
+(314, 36, 11),
+(312, 36, 12),
 (100, 37, 7),
 (24, 38, 10),
 (87, 39, 3),
@@ -1737,9 +1721,9 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 (297, 98, 7),
 (301, 99, 7),
 (300, 100, 11),
-(306, 101, 1),
-(307, 101, 3),
-(310, 102, 3),
+(321, 101, 1),
+(322, 101, 3),
+(324, 102, 3),
 (311, 103, 11);
 
 -- --------------------------------------------------------
@@ -1748,7 +1732,6 @@ INSERT INTO `recetas_tiposplato` (`id_recetas_tiposplato`, `id_receta`, `id_tipo
 -- Estructura de tabla para la tabla `recetas_utensilios`
 --
 
-DROP TABLE IF EXISTS `recetas_utensilios`;
 CREATE TABLE `recetas_utensilios` (
   `id_recetas_utensilios` int(11) NOT NULL,
   `id_receta` int(11) NOT NULL,
@@ -1765,8 +1748,8 @@ TRUNCATE TABLE `recetas_utensilios`;
 --
 
 INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_utensilio`) VALUES
-(528, 36, 1),
-(529, 36, 4),
+(535, 36, 1),
+(536, 36, 4),
 (14, 38, 163),
 (15, 38, 164),
 (16, 38, 165),
@@ -1924,8 +1907,8 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 (523, 100, 178),
 (524, 100, 206),
 (525, 100, 207),
-(530, 101, 179),
-(533, 102, 208),
+(542, 101, 179),
+(545, 102, 208),
 (534, 103, 183);
 
 -- --------------------------------------------------------
@@ -1934,7 +1917,6 @@ INSERT INTO `recetas_utensilios` (`id_recetas_utensilios`, `id_receta`, `id_uten
 -- Estructura de tabla para la tabla `redactores`
 --
 
-DROP TABLE IF EXISTS `redactores`;
 CREATE TABLE `redactores` (
   `id_redactor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -1954,7 +1936,8 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 (4, 2),
 (28, 13),
 (29, 14),
-(27, 23);
+(27, 23),
+(30, 25);
 
 -- --------------------------------------------------------
 
@@ -1962,7 +1945,6 @@ INSERT INTO `redactores` (`id_redactor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `regiones`
 --
 
-DROP TABLE IF EXISTS `regiones`;
 CREATE TABLE `regiones` (
   `id_region` int(11) NOT NULL,
   `id_pais` int(11) NOT NULL,
@@ -2025,7 +2007,6 @@ INSERT INTO `regiones` (`id_region`, `id_pais`, `nombre_region`, `activo_region`
 -- Estructura de tabla para la tabla `revisores`
 --
 
-DROP TABLE IF EXISTS `revisores`;
 CREATE TABLE `revisores` (
   `id_revisor` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
@@ -2046,7 +2027,8 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 (12, 8),
 (9, 13),
 (11, 19),
-(10, 23);
+(10, 23),
+(13, 25);
 
 -- --------------------------------------------------------
 
@@ -2054,7 +2036,6 @@ INSERT INTO `revisores` (`id_revisor`, `id_usuario`) VALUES
 -- Estructura de tabla para la tabla `tecnicas`
 --
 
-DROP TABLE IF EXISTS `tecnicas`;
 CREATE TABLE `tecnicas` (
   `id_tecnica` int(11) NOT NULL,
   `nombre_tecnica` varchar(50) NOT NULL,
@@ -2093,7 +2074,6 @@ INSERT INTO `tecnicas` (`id_tecnica`, `nombre_tecnica`, `foto_tecnica`) VALUES
 -- Estructura de tabla para la tabla `tipos_plato`
 --
 
-DROP TABLE IF EXISTS `tipos_plato`;
 CREATE TABLE `tipos_plato` (
   `id_tipo` int(11) NOT NULL,
   `nombre_tipo` varchar(50) NOT NULL,
@@ -2124,7 +2104,6 @@ INSERT INTO `tipos_plato` (`id_tipo`, `nombre_tipo`, `foto_tipo`) VALUES
 -- Estructura de tabla para la tabla `unidades_medida`
 --
 
-DROP TABLE IF EXISTS `unidades_medida`;
 CREATE TABLE `unidades_medida` (
   `id_unidad` int(11) NOT NULL,
   `nombre_unidad` varchar(20) NOT NULL
@@ -2158,7 +2137,6 @@ INSERT INTO `unidades_medida` (`id_unidad`, `nombre_unidad`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
@@ -2193,7 +2171,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 (14, 'Golfo', 'Apandador', '', 'golfo', '$2y$10$m/s/mNVa6T75INJFoRIElu5Fsa.gexrvFf9kWv3vkf8.ox2LMwoJ2', 'golfo@apandadores.es', 'golfo_92.png', '', '2025-10-09 18:08:24', '2025-10-19 10:06:43'),
 (19, 'Wile E', 'Coyote', 'Express', 'coyote', '$2y$10$gHukJqNU3UJTmGM0PkKvYOIU/z9cjyiCKFMvu9V2VEGmo9ZAY80U6', 'wile.e.coyote@coyote.es', 'coyote_8514.jpg', 'Persigo al correcaminos pero siempre se me escapa', '2025-10-16 20:08:56', '2025-10-18 18:23:18'),
 (21, 'Road', 'Runner', '', 'correcaminos', '$2y$10$AE5HvOZV8ZuY5J8Y.KLnDuNo1u.qzEZ.IUUT/RgRfB4uL7R3CMpgi', 'roadrunner@correcaminos.es', 'correcaminos_6221.jpg', 'El coyote me quiere pillar, pero corro más que él.', '2025-10-20 17:57:19', '2025-10-20 17:57:19'),
-(23, 'Loly', 'soto', 'Roca', 'Soto', '$2y$10$cPl1jtqs0dccTjzIjulxnu6Plt/Zs8lFcwefSKKDlk2kuhQlHEq3i', 'lolysotor@gmail.com', 'Soto_34.jpg', '', '2025-10-26 10:50:55', '2025-10-26 20:44:03');
+(23, 'Loly', 'soto', 'Roca', 'Soto', '$2y$10$cPl1jtqs0dccTjzIjulxnu6Plt/Zs8lFcwefSKKDlk2kuhQlHEq3i', 'lolysotor@gmail.com', 'Soto_34.jpg', '', '2025-10-26 10:50:55', '2025-10-26 20:44:03'),
+(25, 'Admin', 'Admin', 'Admin', 'admin', '$2y$10$xQ5ru8UuAVS6SzCAwCQ9husIZj3/kNAObaWTFHQSSwIPQe/mRzoRu', 'admin@admin.es', '', '', '2025-12-07 09:19:06', '2025-12-07 09:19:06');
 
 -- --------------------------------------------------------
 
@@ -2201,7 +2180,6 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `ap1_usuario`, `ap2_usua
 -- Estructura de tabla para la tabla `utensilios`
 --
 
-DROP TABLE IF EXISTS `utensilios`;
 CREATE TABLE `utensilios` (
   `id_utensilio` int(11) NOT NULL,
   `nombre_utensilio` varchar(80) NOT NULL,
@@ -2278,7 +2256,6 @@ INSERT INTO `utensilios` (`id_utensilio`, `nombre_utensilio`, `foto_utensilio`, 
 -- Estructura de tabla para la tabla `zonas`
 --
 
-DROP TABLE IF EXISTS `zonas`;
 CREATE TABLE `zonas` (
   `id_zona` int(11) NOT NULL,
   `nombre_zona` varchar(50) NOT NULL
@@ -2524,7 +2501,7 @@ ALTER TABLE `zonas` ADD FULLTEXT KEY `zonasFulltext` (`nombre_zona`);
 -- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
-  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `alergenos`
@@ -2554,7 +2531,7 @@ ALTER TABLE `estilos_cocina`
 -- AUTO_INCREMENT de la tabla `favoritas`
 --
 ALTER TABLE `favoritas`
-  MODIFY `id_favoritas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_favoritas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos_plato`
@@ -2566,13 +2543,13 @@ ALTER TABLE `grupos_plato`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_alergenos`
 --
 ALTER TABLE `ingredientes_alergenos`
-  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id_ing_ale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -2590,7 +2567,7 @@ ALTER TABLE `propias`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id_receta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_alergenos`
@@ -2602,37 +2579,37 @@ ALTER TABLE `recetas_alergenos`
 -- AUTO_INCREMENT de la tabla `recetas_estilos`
 --
 ALTER TABLE `recetas_estilos`
-  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
+  MODIFY `id_recetas_estilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=369;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_ingredientes`
 --
 ALTER TABLE `recetas_ingredientes`
-  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1246;
+  MODIFY `id_recetas_ingredientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1294;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tecnicas`
 --
 ALTER TABLE `recetas_tecnicas`
-  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id_recetas_tecnicas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_tiposplato`
 --
 ALTER TABLE `recetas_tiposplato`
-  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
+  MODIFY `id_recetas_tiposplato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas_utensilios`
 --
 ALTER TABLE `recetas_utensilios`
-  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=535;
+  MODIFY `id_recetas_utensilios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=554;
 
 --
 -- AUTO_INCREMENT de la tabla `redactores`
 --
 ALTER TABLE `redactores`
-  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_redactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `regiones`
@@ -2644,7 +2621,7 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `revisores`
 --
 ALTER TABLE `revisores`
-  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_revisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tecnicas`
@@ -2668,7 +2645,7 @@ ALTER TABLE `unidades_medida`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `utensilios`
@@ -2708,7 +2685,7 @@ ALTER TABLE `editores`
 -- Filtros para la tabla `favoritas`
 --
 ALTER TABLE `favoritas`
-  ADD CONSTRAINT `favoritas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `favoritas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favoritas_ibfk_2` FOREIGN KEY (`id_receta`) REFERENCES `recetas` (`id_receta`) ON UPDATE CASCADE;
 
 --

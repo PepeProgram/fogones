@@ -60,7 +60,7 @@
         
         echo '<form name="Buscar Recetas" action="" class="filtrarTablas col-80 total">
                 <label for="busquedaRecetas" class="oculto">Buscar Receta</label>
-                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, `tarjetaReceta`);" placeholder="Buscar en título y descripción ...">
+                <input name="busquedaRecetas" id="busquedaRecetas" type="text" autocomplete="off" class="input" onkeyup="filtrarRecetas(this.id, `tarjetaReceta`);" placeholder="Buscar en título y descripción ..." alt="Buscar en la sección" aria-label="Buscar en esta sección">
              </form>';
     } else{
 

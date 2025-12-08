@@ -127,13 +127,7 @@
         rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getTipos_plato()); ?>, 'tipos_plato');
         rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getId_grupo()); ?>, 'grupos_plato');
         rellenarEtiquetasReceta('pieReceta',<?php echo json_encode($receta_ver->getMetodos()); ?>, 'tecnicas');
-
-
     });
-
-
-
-
 </script>
 
 
@@ -153,7 +147,7 @@
             /* Comprueba si la receta tiene foto o no y la recupera */
             if ($receta_ver->getFoto() != "") {
                 $foto_receta = $receta_ver->getFoto();
-                $alt_foto = "Foto de ";
+                $alt_foto = $receta_ver->getNombre();
             } else {
                 $foto_receta = 'default.png';
                 $alt_foto = "Receta sin foto";
@@ -167,8 +161,8 @@
         ?>
     
         <!-- Foto de la receta -->
-        <div id="fotoCabeceraReceta" class="fotoTarjetaReceta col-50">
-            <img id="fotoReceta" src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto_receta ?>" alt="<?php echo $alt_foto.$receta_ver->getNombre(); ?>" title="<?php echo $alt_foto.$receta_ver->getNombre(); ?>">
+        <div id="fotoCabeceraReceta" class="fotoFichaReceta col-50">
+            <img id="fotoReceta" src="<?php echo APP_URL.'app/views/photos/recetas_photos/'.$foto_receta ?>" alt="<?php echo $alt_foto; ?>" title="<?php echo "Fotografía de ".$alt_foto; ?>">
         </div>
     
         <!-- Resto de datos principales -->

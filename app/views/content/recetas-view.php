@@ -75,10 +75,19 @@
                         <p class="textoLargo"><?php echo $receta->getDescripcion(); ?></p>
                     </div>
                     <div class="opcionesRecetas col-20 medio static">
+                        
+                        <!-- Botón para editar una receta -->
                         <a href="<?php echo APP_URL.'recetaUpdate/'.$receta->getId(); ?>" title="Revisar <?php echo $receta->getNombre(); ?>" >
                             <button class="fa-regular fa-pen-to-square btnOpcionesRecetas" title="Editar <?php echo $receta->getNombre(); ?>"></button>
                         </a>
-                        <button class="fa-solid fa-square-xmark userDel btnOpcionesRecetas" title="Eliminar <?php echo $receta->getNombre(); ?>"></button>
+                        
+                        <!-- Botón para eliminar una receta -->
+                        <form class="FormularioAjax" action="<?php echo APP_URL ?>app/ajax/recetaAjax.php" method="POST" autocomplete="off" name="Eliminar <?php echo $receta->getNombre(); ?>">
+                            <input type="hidden" name="modulo_receta" value="eliminar">
+                            <input type="hidden" name="id_receta" value="<?php echo $receta->getId(); ?>">
+                            
+                            <button class="fa-solid fa-square-xmark userDel btnOpcionesRecetas" title="Eliminar <?php echo $receta->getNombre(); ?>"></button>
+                        </form>
                     </div>
                     <div class="opcionesRecetas col-10 medio static">
                         <?php if ($receta->getActivo()) {?>

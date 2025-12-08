@@ -29,7 +29,7 @@
                 break;
             
             case 'eliminar':
-                # code...
+                echo $insReceta->eliminarRecetaControlador();
                 break;
             
             case 'aprobar':

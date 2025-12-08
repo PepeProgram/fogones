@@ -125,7 +125,7 @@
                                     <!-- Botón para eliminar un utensilio -->
                                     <form class="FormularioAjax" action="<?php echo APP_URL ?>app/ajax/utensilioAjax.php" method="POST" autocomplete="off" name="Eliminar <?php echo $utensilio->getNombre_utensilio()?>">
                                         <input type="hidden" name="modulo_utensilio" value="eliminar">
-                                        <input type="hidden" name="id_utensilio" value="<?php echo $utensilio->getId_utensilio() ?>">
+                                        <input type="hidden" name="id_utensilio" value="<?php echo $utensilio->getId_utensilio(); ?>">
 
                                         <button class='fa-solid fa-square-xmark userDel' title='Eliminar <?php echo $utensilio->getNombre_utensilio(); ?>' type="submit"></button>
                                     </form>

@@ -178,7 +178,7 @@ function generarHTMLTarjeta(receta, img_dir, icon_dir, id_usuario_ver, revisor) 
             <img class="alergenoTarjeta"
                  src="${icon_dir}${alergeno.foto_alergeno}"
                  alt="${alergeno.nombre_alergeno}"
-                 title="${alergeno.nombre_alergeno}">
+                 title="Contiene: ${alergeno.nombre_alergeno}">
         </div>
     `).join('');
 
@@ -186,8 +186,8 @@ function generarHTMLTarjeta(receta, img_dir, icon_dir, id_usuario_ver, revisor) 
     if (id_usuario_ver == receta.id_usuario) {
         htmlIconoEditar = `
             <div class="opcionesAutores brnRecetaUpdate">
-                <a href="${APP_URL}recetaUpdate/${receta.id}">
-                    <button class="fa-regular fa-pen-to-square"></button>
+                <a href="${APP_URL}recetaUpdate/${receta.id}" title="Editar ${receta.nombre}">
+                    <button class="fa-regular fa-pen-to-square" title="Cambiar datos de ${receta.nombre}"></button>
                 </a>
             </div>
         `;

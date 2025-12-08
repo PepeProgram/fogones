@@ -90,23 +90,22 @@
                     exit();
                 } else {
                     /* Comprobar que el usuario es administrador, revisor o redactor */
-                        if (!$_SESSION['administrador']) {
-                            if (!$_SESSION['revisor']) {
-                                if (!$_SESSION['redactor']) {
-                                    # code...
-                                    $alerta=[
-                                        "tipo"=>"simple",
-                                        "titulo"=>"ERROR GRAVE",
-                                        "texto"=>"No puedes añadir ingredientes. No eres administrador, revisor ni redactor",
-                                        "icono"=>"error"
-                                    ];
-                                    return json_encode($alerta);
-                                    exit();
-                                }
+                    if (!$_SESSION['administrador']) {
+                        if (!$_SESSION['revisor']) {
+                            if (!$_SESSION['redactor']) {
+                                # code...
+                                $alerta=[
+                                    "tipo"=>"simple",
+                                    "titulo"=>"ERROR GRAVE",
+                                    "texto"=>"No puedes añadir ingredientes. No eres administrador, revisor ni redactor",
+                                    "icono"=>"error"
+                                ];
+                                return json_encode($alerta);
+                                exit();
                             }
                         }
+                    }
                 }
-                
             }
 
             /* Recupera el nombre del ingrediente */
