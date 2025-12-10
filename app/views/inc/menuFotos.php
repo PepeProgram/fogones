@@ -22,7 +22,7 @@
             foreach ($tiposPlato as $tipoPlato) {
 
                 echo '
-                    <form action="listaFiltrada" method="POST">
+                    <form action="'.APP_URL.'listaFiltrada" method="POST">
                         <input type="hidden" name="id_tipo" value="'.$tipoPlato->getId_tipo().'">
                         <input type="hidden" name="titulo_pagina" value="'.$tipoPlato->getNombre_tipo().'">
                             <button class="opcionMenuFotos">
