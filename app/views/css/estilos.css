@@ -24,7 +24,7 @@ body{
 }
 .main-container{
     width: 100%;
-    height: calc(100vh - 1.2rem);
+    height: calc(100vh - 2.2rem);
     min-width: 300px;
     max-width: 1200px;
     overflow: auto;

@@ -19,38 +19,8 @@
     /* Obtiene la vista actual para poner el id_tipo en el formulario */
     $vista_actual = explode("/", $_SERVER['REQUEST_URI']);
 
-    if (isset($vista_actual[2]) && $vista_actual[2] != "") {
-
-        $pagina_actual = $buscaRecetas->limpiarCadena($vista_actual[2]);
-        switch ($pagina_actual) {
-            case 'principal':
-                $idTipo = "";
-                break;
-            case 'aperitivos':
-                $idTipo = 1;
-                break;
-            case 'primerosPlatos':
-                $idTipo = 3;
-                break;
-            case 'segundosPlatos':
-                $idTipo = 7;
-                break;
-            case 'postres':
-                $idTipo = 4;
-                break;
-            case 'guarniciones':
-                $idTipo = 11;
-                break;
-            case 'desayunos':
-                $idTipo = 10;
-            case 'complementos':
-                $idTipo = 12;
-                break;
-            
-            default:
-                $idTipo = "";
-                break;
-        }
+    if (isset($_POST['id_tipo']) && $_POST['id_tipo'] != "") {
+        $idTipo = $buscaRecetas->limpiarCadena($_POST['id_tipo']);
     } else {
         $idTipo = "";
     }
